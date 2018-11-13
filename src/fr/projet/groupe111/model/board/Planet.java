@@ -11,7 +11,6 @@ public class Planet extends Sprite {
 	private int troups;
 	
 	private Ship ships_type;
-	private User ruler;
 	
 	
 	private boolean selected;
@@ -19,12 +18,10 @@ public class Planet extends Sprite {
 	public Planet(Sprite s) {
 		super(s);
 		generate();
-		ruler = s.getRuler();
 	}
 	public Planet(Sprite s, double x, double y) {
 		super(s);
 		generate();
-		ruler = s.getRuler();
 		setX(x);
 		setY(y);
 	}
@@ -62,18 +59,21 @@ public class Planet extends Sprite {
 	}
 
 	
-	public void clickedOnPlanet(double x, double y) {
+	public boolean clickedOnPlanet(double x, double y) {
 		if(isInside(x, y)) {
-			System.out.println("Vous avez cliqué sur une planète avec "+this.troups);
-			System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
-			System.out.println("et de type: "+ this.getRuler().getFaction());
-			
+			if(Constantes.DEBUG) {
+				System.out.println("Vous avez cliqué sur une planète avec "+this.troups);
+				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
+				System.out.println("et de type: "+ this.getRuler().getFaction());
+			}
+			return true;
 		}
+		return false;
 			
 	}
 	
 	public void updateGarrison() {
-    	if(ruler.getFaction() != Constantes.neutral) {
+    	if(getRuler().getFaction() != Constantes.neutral) {
     		if(troups < Constantes.max_troups) {
     			
     			troups = troups + produce_rate;	
@@ -83,6 +83,15 @@ public class Planet extends Sprite {
     		
     		}
     	}
+	}
+	
+	public Squad sendFleet(Planet destination) {
+		int fleet_size = (getRuler().getPercent_of_troups_to_send()/100) * troups;
+		troups -= fleet_size;
+		Sprite sprite = new Sprite(getImg_path(), getRuler(), false);
+		Squad s = new Squad(sprite, fleet_size, destination, ships_type);
+		
+		return s;
 	}
 	
 	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
@@ -166,13 +175,6 @@ public class Planet extends Sprite {
 		return 0;
 	}
 
-	public User getRuler() {
-		return ruler;
-	}
-
-	public void setRuler(User ruler) {
-		this.ruler = ruler;
-	}
 
 	public int getProduce_rate() {
 		return produce_rate;

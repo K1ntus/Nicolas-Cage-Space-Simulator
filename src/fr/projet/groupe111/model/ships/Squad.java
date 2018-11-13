@@ -23,6 +23,16 @@ public class Squad extends Sprite{
 		setReached(false);
 	}
 
+	public Squad(Sprite s, int nb_of_ships, Planet destination, Ship type) {
+		super(s);
+		this.setNb_of_ships(nb_of_ships);
+		this.destination = destination;
+		this.type = type;
+		// TODO Auto-generated constructor stub
+
+		setReached(false);
+	}
+
 	public void setPosition(double x, double y) {
 		setX(x);
 		setY(y);		

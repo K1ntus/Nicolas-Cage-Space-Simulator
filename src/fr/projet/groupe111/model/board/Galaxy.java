@@ -16,8 +16,8 @@ import javafx.scene.text.TextAlignment;
 
 
 public class Galaxy extends Thread{
-	//private final static Sprite ai = new Sprite(Constantes.path_img_planets, new User(Constantes.ai1_user), true);
-	//private final static Sprite player = new Sprite(Constantes.path_img_planets, new User(Constantes.player1_user), true);
+	private final static Sprite ai = new Sprite(Constantes.path_img_planets, new User(Constantes.ai1_user), true);
+	private final static Sprite player = new Sprite(Constantes.path_img_planets, new User(Constantes.player1_user), true);
 	private final static Sprite neutral = new Sprite(Constantes.path_img_planets, new User(Constantes.neutral_user), true);
 	
 	
@@ -32,9 +32,10 @@ public class Galaxy extends Thread{
 		squads = new ArrayList<Squad>();
 		planets = new ArrayList<Planet>();
 
+		initUsers();
 		generatePlanets();
 		
-		if(Constantes.DEBUG)
+		if(Constantes.DEBUG && Constantes.DEBUG_TROUPS)
 			generateRandomSquads();
 
 		background = new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true);
@@ -67,12 +68,33 @@ public class Galaxy extends Thread{
 		renderPlanets(gc);
 		renderSquads(gc);	
 		renderGarrison(gc);
+		renderPercentageSelected(gc);
 	}
 	
 
 	public void update() {
-		for(Squad s : squads) {
-			s.updatePosition();
+
+		Iterator<Squad> it = getSquads().iterator();
+		while (it.hasNext()) {
+			Squad ss = it.next();
+			if(ss.isReached()) {
+				it.remove();
+			}else {
+				ss.updatePosition();				
+			}
+		}
+	}
+	
+	public void clientScrollHandler(int action) {
+		for(User u : users) {
+			if(u.getFaction() == Constantes.player) {
+				switch(action) {
+				case 0://lower
+					u.setPercent_of_troups_to_send(u.getPercent_of_troups_to_send() - 5); break;
+				case -1://greater
+					u.setPercent_of_troups_to_send(u.getPercent_of_troups_to_send() + 5); break;
+				}
+			}
 		}
 	}
 
@@ -98,10 +120,16 @@ public class Galaxy extends Thread{
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planètes, une a l'ia, une au joueur
 			planets.get(0).setRuler(Constantes.player1_user);
-			//planets.get(1).setRuler(ai);
+			planets.get(1).setRuler(Constantes.ai1_user);
 		}
 		
 		
+	}
+	
+	private void initUsers() {
+		users.add(Constantes.ai1_user);
+		users.add(Constantes.neutral_user);
+		users.add(Constantes.player1_user);
 	}
 	
 	private boolean testPlacement(Planet p) {
@@ -154,8 +182,6 @@ public class Galaxy extends Thread{
 		for (Planet p : planets) {
 			String txt = Integer.toString(p.getTroups());
 			gc.setTextAlign(TextAlignment.CENTER);	
-			
-			
 			gc.setStroke(Color.BLACK);
 			
 			switch(p.getRuler().getFaction()) {
@@ -166,10 +192,27 @@ public class Galaxy extends Thread{
 				case Constantes.neutral:
 					gc.setFill(Constantes.color_neutral); break;
 				default:
-					gc.setStroke(Constantes.color_default); break;
+					gc.setFill(Constantes.color_default); break;
 			}
 			gc.fillText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
 			gc.strokeText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
+		}
+	}
+	
+	public void renderPercentageSelected(GraphicsContext gc) {
+		for(User u : users) {
+			if (u.getFaction() == Constantes.player) {
+				gc.setFill(Constantes.color_default);
+				gc.setStroke(Color.RED);
+				gc.setTextAlign(TextAlignment.CENTER);	
+				
+				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
+				
+				gc.fillText(txt, Constantes.width/7, 50);
+				gc.strokeText(txt, Constantes.width/7, 50);
+				
+				break;				
+			}
 		}
 	}
 	

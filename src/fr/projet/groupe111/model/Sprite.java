@@ -18,7 +18,7 @@ public class Sprite {
 	private User ruler;
 
 	public Sprite(String path, User ruler, boolean isPlanet) {
-		img_path = path;
+		setImg_path(path);
 		
 		width = Constantes.size_squads;
 		maxX = Constantes.width - width;
@@ -52,7 +52,7 @@ public class Sprite {
 
 	public void updateImage() {
 		try {
-			image = new Image(img_path, width, height, false, false);
+			image = new Image(getImg_path(), width, height, false, false);
 		} catch(NullPointerException e) {
 			//No image
 		}
@@ -212,6 +212,20 @@ public class Sprite {
 	 */
 	public void setHeight(double height) {
 		this.height = height;
+	}
+
+	/**
+	 * @return the img_path
+	 */
+	public String getImg_path() {
+		return img_path;
+	}
+
+	/**
+	 * @param img_path the img_path to set
+	 */
+	public void setImg_path(String img_path) {
+		this.img_path = img_path;
 	}
 
 }

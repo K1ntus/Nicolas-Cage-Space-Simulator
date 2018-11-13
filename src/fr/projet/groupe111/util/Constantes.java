@@ -35,9 +35,9 @@ public final class Constantes {
 	public static final int max_troups = 100;	//minimal troups in a planet
 		
 	/**	Graphics	**/
-	public static final double size_squads = 30.0;	//size in pixels of a "squad"
-	public static final double size_minimal_planets = 4*30.0;	//minimal size of a planet in pixel ((4*size squad)
-	public static final double size_maximal_planets = 6*30.0;
+	public static final double size_squads = 15.0;	//size in pixels of a "squad"
+	public static final double size_minimal_planets = 4*15.0;	//minimal size of a planet in pixel ((4*size squad)
+	public static final double size_maximal_planets = 6*15.0;
 	
 	//4 ship types, attributed to a specific amount of ships
 	/**	Type of Squads **/
@@ -70,6 +70,7 @@ public final class Constantes {
 	public static final int error_lower_y = -2;
 
 	public static final boolean DEBUG = true;
+	public static final boolean DEBUG_TROUPS = false;
 	public static final int nb_squads = 2;
 	
 	
