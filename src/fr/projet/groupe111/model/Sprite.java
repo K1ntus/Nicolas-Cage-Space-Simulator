@@ -1,44 +1,66 @@
 package fr.projet.groupe111.model;
 
-import fr.projet.groupe111.model.client.User;
+import fr.projet.groupe111.client.User;
+import fr.projet.groupe111.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
 public class Sprite {
 	private Image image;
-	private double x;
-	private double y;
-	private double xSpeed;
-	private double ySpeed;
-	private double width;
-	private double height;
-	private double maxX;
-	private double maxY;
+	private String img_path;
+	
+	private double width, height;
+	private double x, y;
+	private double xSpeed, ySpeed;
+	private double maxX, maxY;
 
 	private User ruler;
 
-	public Sprite(String path, double width, double height, double maxX, double maxY, User ruler) {
-		image = new Image(path, width, height, false, false);
-		this.width = width;
-		this.height = height;
-		this.maxX = maxX;
-		this.maxY = maxY;
+	public Sprite(String path, User ruler, boolean isPlanet) {
+		img_path = path;
+		
+		width = Constantes.size_squads;
+		maxX = Constantes.width - width;
+		maxY = Constantes.height - height;
+
 		this.ruler = ruler;
+		
+		if(isPlanet) {
+			width = Math.random() * Constantes.size_maximal_planets  + Constantes.size_minimal_planets;
+			if(width > Constantes.size_maximal_planets)
+				width = Constantes.size_maximal_planets;
+			
+			maxX = Constantes.width - width*1.25;
+			maxY = Constantes.height - height*1.25;
+		}
+		height = width;			
+		
+		updateImage();
 	}
 
 	public Sprite(Sprite s) {
 		image = s.image;
-		width = s.width;
-		height = s.height;
-		maxX = s.maxX;
-		maxY = s.maxY;
+		this.x = s.x;
+		this.y = s.y;
+		this.width = s.width;
+		this.height = s.height;
+		this.ruler = s.ruler;
+		maxX = Constantes.width - width*1.25;
+		maxY = Constantes.height - height*1.25;
 	}
 
-
+	public void updateImage() {
+		try {
+			image = new Image(img_path, width, height, false, false);
+		} catch(NullPointerException e) {
+			//No image
+		}
+	}
+	
 	public double distance(double x, double y) {
-		double center_x = x + width/2;
-		double center_y = y + height/2;
+		double center_x = x + width()/2;
+		double center_y = y + height()/2;
 		return distance(x,y, center_x, center_y);
 	}
 	public double distance(double x1, double y1, double x2, double y2) {
@@ -49,25 +71,17 @@ public class Sprite {
 		return distance(p.x, p.y);
 	}
 	
-	public double width() {
-		return width;
-	}
-
-	public double height() {
-		return height;
-	}
-
 	public void validatePosition() {
-		if (x + width >= maxX) {
-			x = maxX - width;
+		if (x + width() >= maxX) {
+			x = maxX - width();
 			xSpeed *= -1;
 		} else if (x < 0) {
 			x = 0;
 			xSpeed *= -1;
 		}
 
-		if (y + height >= maxY) {
-			y = maxY - height;
+		if (y + height() >= maxY) {
+			y = maxY - height();
 			ySpeed *= -1;
 		} else if (y < 0) {
 			y = 0;
@@ -118,8 +132,20 @@ public class Sprite {
 	}
 
 	public boolean intersects(Sprite s) {
-		return ((x >= s.x && x <= s.x + s.width) || (s.x >= x && s.x <= x + width))
-				&& ((y >= s.y && y <= s.y + s.height) || (s.y >= y && s.y <= y + height));
+		return ((x >= s.x && x <= s.x + s.width()) || (s.x >= x && s.x <= x + width()))
+				&& ((y >= s.y && y <= s.y + s.height()) || (s.y >= y && s.y <= y + height()));
+	}
+		
+	/** Conflict Area **/
+	
+	
+	/** Getter & Setter **/
+	public double width() {
+		return width;
+	}
+
+	public double height() {
+		return height;
 	}
 
 	public String toString() {
@@ -172,6 +198,20 @@ public class Sprite {
 
 	public void setySpeed(double ySpeed) {
 		this.ySpeed = ySpeed;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(double height) {
+		this.height = height;
 	}
 
 }

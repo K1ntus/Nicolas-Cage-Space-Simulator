@@ -20,9 +20,9 @@ public class Ship{
 	
 
 	private void generate() {
-		power = (int) (Math.random() * (Constantes.max_shipPower - Constantes.min_shipPower));
-		speed =  (int) (Math.random() * (Constantes.max_shipSpeed - Constantes.min_shipSpeed));
-		production_time =  (int) (Math.random() * (Constantes.max_shipProduce - Constantes.min_shipProduce));
+		power = (int) (Math.random() * (Constantes.max_ship_power - Constantes.min_ship_power)+1);
+		speed =  (int) (Math.random() * (Constantes.max_ship_speed - Constantes.min_ship_speed)+1);
+		production_time =  (int) (Math.random() * (Constantes.max_ship_produce - Constantes.min_ship_produce)+1);
 	}
 	
 	public int getSpeed() {
