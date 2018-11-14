@@ -1,6 +1,6 @@
-package fr.projet.groupe111.util;
+package fr.projet.groupe40.util;
 
-import fr.projet.groupe111.client.User;
+import fr.projet.groupe40.client.User;
 import javafx.scene.paint.Color;
 
 public final class Constantes {
@@ -47,7 +47,7 @@ public final class Constantes {
 	public static final int size_typeShips4 = 50;
 	
 	/**	Generation parameters **/
-	public static final int nb_planets_tentatives = 5;
+	public static final int nb_planets_tentatives = 3;
 	public static final int minimal_distance_between_planets = 150;
 	
 	/**	Color	**/
@@ -69,7 +69,7 @@ public final class Constantes {
 	public static final int error_lower_x = -1;
 	public static final int error_lower_y = -2;
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	public static final boolean DEBUG_TROUPS = false;
 	public static final int nb_squads = 2;
 	

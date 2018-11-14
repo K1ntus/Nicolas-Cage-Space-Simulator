@@ -1,9 +1,11 @@
-package fr.projet.groupe111.model.ships;
+package fr.projet.groupe40.model.ships;
 
-import fr.projet.groupe111.util.Constantes;
+import java.io.Serializable;
+
+import fr.projet.groupe40.util.Constantes;
 
 
-public class Ship{
+public class Ship implements Serializable{
 	private int speed, power, production_time;
 
 

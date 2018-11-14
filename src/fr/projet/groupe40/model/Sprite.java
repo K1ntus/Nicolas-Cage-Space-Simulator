@@ -1,13 +1,20 @@
-package fr.projet.groupe111.model;
+package fr.projet.groupe40.model;
 
-import fr.projet.groupe111.client.User;
-import fr.projet.groupe111.util.Constantes;
+import java.io.Serializable;
+
+import fr.projet.groupe40.client.User;
+import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
-public class Sprite {
-	private Image image;
+public class Sprite implements Serializable {
+	private static final long serialVersionUID = 361050239890707789L;
+	/**
+	 * 
+	 */
+	
+	private transient Image image;	//unserializable
 	private String img_path;
 	
 	private double width, height;
@@ -56,6 +63,10 @@ public class Sprite {
 		} catch(NullPointerException e) {
 			//No image
 		}
+	}
+	public void setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public double distance(double x, double y) {
@@ -134,6 +145,10 @@ public class Sprite {
 	public boolean intersects(Sprite s) {
 		return ((x >= s.x && x <= s.x + s.width()) || (s.x >= x && s.x <= x + width()))
 				&& ((y >= s.y && y <= s.y + s.height()) || (s.y >= y && s.y <= y + height()));
+	}
+	public boolean intersects(double x2, double y2, double width, double height) {
+		return ((x >= x2 && x <= x2 + width) || (x2 >= x && x2 <= x + width))
+				&& ((y >= y2 && y <= y2 + height) || (y2 >= y && y2 <= y + height));
 	}
 		
 	/** Conflict Area **/

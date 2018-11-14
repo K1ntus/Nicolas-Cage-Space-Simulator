@@ -1,10 +1,17 @@
-package fr.projet.groupe111.client;
+package fr.projet.groupe40.client;
 
-import fr.projet.groupe111.model.board.Planet;
-import fr.projet.groupe111.util.Constantes;
+import java.io.Serializable;
+
+import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 
-public class User {
+public class User implements Serializable{
+	private static final long serialVersionUID = 8499986523207461968L;
+	/**
+	 * 
+	 */
+	
 	private int faction;
 	private int id;
 	
@@ -83,6 +90,30 @@ public class User {
 		if(this.percent_of_troups_to_send <0) {
 			this.percent_of_troups_to_send = 0;
 		}
+	}
+	/**
+	 * @return the destination
+	 */
+	public Planet getDestination() {
+		return destination;
+	}
+	/**
+	 * @param destination the destination to set
+	 */
+	public void setDestination(Planet destination) {
+		this.destination = destination;
+	}
+	/**
+	 * @return the source
+	 */
+	public Planet getSource() {
+		return source;
+	}
+	/**
+	 * @param source the source to set
+	 */
+	public void setSource(Planet source) {
+		this.source = source;
 	}
 
 }

@@ -1,12 +1,16 @@
-package fr.projet.groupe111.model.board;
+package fr.projet.groupe40.model.board;
 
-import fr.projet.groupe111.client.User;
-import fr.projet.groupe111.model.Sprite;
-import fr.projet.groupe111.model.ships.Ship;
-import fr.projet.groupe111.model.ships.Squad;
-import fr.projet.groupe111.util.Constantes;
+import fr.projet.groupe40.model.Sprite;
+import fr.projet.groupe40.model.ships.Ship;
+import fr.projet.groupe40.model.ships.Squad;
+import fr.projet.groupe40.util.Constantes;
 
 public class Planet extends Sprite {
+	private static final long serialVersionUID = 260148039781013750L;
+	/**
+	 * 
+	 */
+	
 	private int produce_rate;
 	private int troups;
 	
@@ -86,12 +90,23 @@ public class Planet extends Sprite {
 	}
 	
 	public Squad sendFleet(Planet destination) {
-		int fleet_size = (getRuler().getPercent_of_troups_to_send()/100) * troups;
-		troups -= fleet_size;
-		Sprite sprite = new Sprite(getImg_path(), getRuler(), false);
-		Squad s = new Squad(sprite, fleet_size, destination, ships_type);
-		
-		return s;
+		if(troups > Constantes.min_troups+1) {
+			int fleet_size = troups - (Constantes.min_troups);
+			fleet_size *= (getRuler().getPercent_of_troups_to_send() /100.0);
+			System.out.println("fleet size: " + fleet_size);
+			if(fleet_size < 1) {
+				return null;
+			}
+			troups -= fleet_size;
+			Sprite sprite = new Sprite(Constantes.path_img_ships, getRuler(), false);
+			sprite.setPosition(getX()+width()/2,getY()+height()/2);
+			
+			Squad s = new Squad(sprite, (int)fleet_size, destination, ships_type);
+			s.setSource(this);
+			
+			return s;			
+		}
+		return null;
 	}
 	
 	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
@@ -173,6 +188,11 @@ public class Planet extends Sprite {
 				return 0;
 		}
 		return 0;
+	}
+
+
+	public String toString() {
+		return "Planet <" + getX() + ", " + getY() + ">";
 	}
 
 

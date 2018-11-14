@@ -1,11 +1,19 @@
-package fr.projet.groupe111.model.ships;
+package fr.projet.groupe40.model.ships;
 
-import fr.projet.groupe111.model.Sprite;
-import fr.projet.groupe111.model.board.Planet;
-import fr.projet.groupe111.util.Constantes;
+import java.io.Serializable;
 
-public class Squad extends Sprite{
+import fr.projet.groupe40.model.Sprite;
+import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.util.Constantes;
+
+public class Squad extends Sprite  implements Serializable{
+	private static final long serialVersionUID = 7720386286912131175L;
+	/**
+	 * 
+	 */
+	
 	private Planet destination;
+	private Planet source;
 	private Ship type;
 	private int nb_of_ships;
 
@@ -16,7 +24,7 @@ public class Squad extends Sprite{
 		super(s);
 		this.setNb_of_ships(nb_of_ships);
 		this.destination = destination;
-		type = new Ship();
+		setType(new Ship());
 		setPosition(Constantes.width/2, Constantes.height/2);
 		// TODO Auto-generated constructor stub
 
@@ -27,7 +35,7 @@ public class Squad extends Sprite{
 		super(s);
 		this.setNb_of_ships(nb_of_ships);
 		this.destination = destination;
-		this.type = type;
+		this.setType(type);
 		// TODO Auto-generated constructor stub
 
 		setReached(false);
@@ -54,7 +62,7 @@ public class Squad extends Sprite{
 				int difference = destination.getTroups() - nb_of_ships;
 				
 				if(difference >=1) {	//Difference > 1 => kamikaze
-					destination.setTroups(difference +1);					
+					destination.setTroups(difference);					
 				} else {				//Else, negative or 0 => new leader
 					destination.setRuler(this.getRuler());
 					
@@ -67,11 +75,10 @@ public class Squad extends Sprite{
 				}
 			}else if(this.getRuler().getFaction() == destination.getRuler().getFaction()) {	//Same faction
 				int sum = nb_of_ships + destination.getTroups();	//Sum of defense + squad
-				System.out.println("Somme: "+sum);
 				if(sum >= Constantes.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-					destination.setTroups(Constantes.max_troups -1);					
+					destination.setTroups(Constantes.max_troups);					
 				} else {	//Else, renforcement
-					destination.setTroups(sum - nb_of_ships/5);
+					destination.setTroups(sum);
 				}
 			}
 			remove();	//Remove the squads of the galaxy
@@ -82,15 +89,15 @@ public class Squad extends Sprite{
 		double centre_y = destination.getY() + destination.height()/2;
 		double x = this.getX(); double y = this.getY();
 		if(x < centre_x) {
-			setX(x+type.getSpeed());
+			setX(x+getType().getSpeed());
 		} else {
-			setX(x-type.getSpeed());
+			setX(x-getType().getSpeed());
 		}
 		
 		if(y < centre_y) {
-			setY(y+type.getSpeed());
+			setY(y+getType().getSpeed());
 		} else {
-			setY(y-type.getSpeed());
+			setY(y-getType().getSpeed());
 		}
 		
 		validatePosition();
@@ -110,6 +117,47 @@ public class Squad extends Sprite{
 
 	public void setReached(boolean reached) {
 		this.reached = reached;
+	}
+
+	public Planet getDestination() {
+		return destination;
+	}
+
+	public void setDestination(Planet destination) {
+		this.destination = destination;
+	}
+
+	public String toString() {
+		return "Squad <" + getX() + ", " + getY() + ">";
+	}
+
+
+	/**
+	 * @return the source
+	 */
+	public Planet getSource() {
+		return source;
+	}
+
+	/**
+	 * @param source the source to set
+	 */
+	public void setSource(Planet source) {
+		this.source = source;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public Ship getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(Ship type) {
+		this.type = type;
 	}
 
 }

@@ -1,21 +1,26 @@
-package fr.projet.groupe111.model.board;
+package fr.projet.groupe40.model.board;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.projet.groupe111.client.User;
-import fr.projet.groupe111.model.Sprite;
-import fr.projet.groupe111.model.ships.Squad;
-import fr.projet.groupe111.util.Constantes;
+import fr.projet.groupe40.client.User;
+import fr.projet.groupe40.model.Sprite;
+import fr.projet.groupe40.model.ships.Squad;
+import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 
+@SuppressWarnings("unused")
 public class Galaxy extends Thread{
+	private volatile transient Thread blinker;
+	
 	private final static Sprite ai = new Sprite(Constantes.path_img_planets, new User(Constantes.ai1_user), true);
 	private final static Sprite player = new Sprite(Constantes.path_img_planets, new User(Constantes.player1_user), true);
 	private final static Sprite neutral = new Sprite(Constantes.path_img_planets, new User(Constantes.neutral_user), true);
@@ -25,7 +30,7 @@ public class Galaxy extends Thread{
 	private ArrayList<Squad> squads;
 	private ArrayList<User> users;
 	
-	Image background;
+	private transient Image background;
 	
 	public Galaxy() {
 		users = new ArrayList<User>();
@@ -38,19 +43,30 @@ public class Galaxy extends Thread{
 		if(Constantes.DEBUG && Constantes.DEBUG_TROUPS)
 			generateRandomSquads();
 
-		background = new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true);
+		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
-		
 	}
 	
+	public Galaxy(Galaxy g) {
+		// TODO Auto-generated constructor stub
+		planets = g.planets;
+		squads = g.squads;
+		users = g.users;
+		
+		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
+		setDaemon(true);	//Thread will close if game window has been closed
+		start();			//Run the thread which is generating troups
+	}
+
 	/**	Thread	**/
 	@Override
 	public void run() {
+		Thread thisThread = Thread.currentThread();
+		//while(blinker == thisThread) {
 		while(true) {
 			for(Planet p : planets)
-				
 				p.updateGarrison();			
 			try {
 				sleep(1000);
@@ -61,6 +77,10 @@ public class Galaxy extends Thread{
 			
 		}
 	}
+
+	public void stopThread() {
+        blinker = null;
+    }
 	
 	/** Render & Game Update **/
 	public void render(GraphicsContext gc) {
@@ -77,10 +97,15 @@ public class Galaxy extends Thread{
 		Iterator<Squad> it = getSquads().iterator();
 		while (it.hasNext()) {
 			Squad ss = it.next();
-			if(ss.isReached()) {
+			try {
+				if(ss.isReached()) {
+					it.remove();
+				}else {
+					//if(!isCollision(ss))
+						ss.updatePosition();
+				}
+			} catch(NullPointerException e) {
 				it.remove();
-			}else {
-				ss.updatePosition();				
 			}
 		}
 	}
@@ -98,6 +123,52 @@ public class Galaxy extends Thread{
 		}
 	}
 
+	public boolean isCollision(Squad s) {
+		double x = s.getX(), y = s.getY();
+		double speed = s.getType().getSpeed();
+		boolean collision = false;
+		
+		for(Planet p : planets) {
+			if(p != s.getDestination() && p != s.getSource()) {
+				if(p.isInside(x+speed, y)) {
+					s.setX(x - speed);
+					double distance = p.distance(x, y, p.getX(), p.getY());
+					if(distance > p.height()/2) {
+						System.out.println("augmente y");
+						s.setY(y+speed);				
+					}else {
+						System.out.println("diminue y");
+						s.setY(y-speed);
+					}
+					System.out.println("squad inside a planet on his way1");
+					collision = true;
+				}else if(p.isInside(x, y+speed)) {
+					//s.setY(y)
+					double distance = p.distance(x, y, p.getX(), p.getY());	
+					s.setY(y-speed);
+					if(distance > p.width()/2) {
+						System.out.println("augmente x");
+						s.setX(x+speed);	
+					}else {
+						System.out.println("diminue x");
+						s.setX(x-speed);
+					}
+					System.out.println("squad inside a planet on his way2");
+					collision = true;
+				}
+				
+				if(collision) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public void collisionHandler(Sprite s1, Sprite s2) {
+		
+	}
 	/** Generation utilities **/
 	public void generatePlanets() {
 		double width = Math.random() * Constantes.size_maximal_planets *0.25 + Constantes.size_minimal_planets;
@@ -123,6 +194,11 @@ public class Galaxy extends Thread{
 			planets.get(1).setRuler(Constantes.ai1_user);
 		}
 		
+
+		for(Planet p : planets) {
+			p.setImg_path(Constantes.path_img_planets);
+			p.updateImage();
+		}
 		
 	}
 	
@@ -250,7 +326,7 @@ public class Galaxy extends Thread{
 	}
 	
 	public void renderBackground(GraphicsContext gc) {
-		gc.drawImage(background, 0, 0);
+		gc.drawImage(getBackground(), 0, 0);
 	}
 	
 	public void renderPlanets(GraphicsContext gc) {
@@ -258,6 +334,20 @@ public class Galaxy extends Thread{
 			if(p != null)
 				p.render(gc);					
 		}
+	}
+
+	/**
+	 * @return the background
+	 */
+	public Image getBackground() {
+		return background;
+	}
+
+	/**
+	 * @param background the background to set
+	 */
+	public void setBackground(Image background) {
+		this.background = background;
 	}
 	
 }
