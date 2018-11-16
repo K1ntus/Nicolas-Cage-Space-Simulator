@@ -9,28 +9,37 @@ public final class Constantes {
 	public static final double PI = 3.1415926535898;
 	
 	/**	Window Parameters	**/
+	//Window height & width
 	public static final int height = 600;
 	public static final int width = 800;
+	
+	//Four margins
 	public static final double top_margin_size = 50;
 	public static final double left_margin_size = 50;
+	public static final double bottom_margin_size = 50;
+	public static final double right_margin_size = 50;
 
 	/**	Generation parameters **/
-	public static final int nb_planets_tentatives = 3;
-	public static final int minimal_distance_between_planets = 150;
-	public static final int nb_squads = 5;
+	public static final int nb_planets_tentatives = 6;	//<-> max planets available
+	public static final int min_numbers_of_planets = 2;
+	public static final int minimal_distance_between_planets = 150;	//Distance in pixels required between each planets
+	
+	//Nb of ai squads generated from the beginning
+	//Currently for debugging
+	public static final int nb_squads = 0;
 	
 	/**	Graphics	**/
 	public static final double size_squads = 15.0;	//size in pixels of a "squad"
 	public static final double size_minimal_planets = 4*15.0;	//minimal size of a planet in pixel ((4*size squad)
-	public static final double size_maximal_planets = 6*15.0;
+	public static final double size_maximal_planets = 5*15.0;
 	public static final String message_game_over = "Vous avez perdu !";
 		
 	/**	Ships Options **/
-	public static final double min_ship_speed = 1;
+	public static final double min_ship_speed = 3;
 	public static final double min_ship_power = 3;
 	public static final double min_ship_produce = 1;
 	
-	public static final double max_ship_speed = 2;
+	public static final double max_ship_speed = 5;
 	public static final double max_ship_power = 7;
 	public static final double max_ship_produce = 4;
 		

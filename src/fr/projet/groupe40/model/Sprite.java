@@ -39,12 +39,12 @@ public class Sprite implements Serializable {
 			if(width > Constantes.size_maximal_planets)
 				width = Constantes.size_maximal_planets;
 
-			maxX = Constantes.width - width*1.25;
-			maxY = Constantes.height - height*1.25;
+			maxX = Constantes.width - width - Constantes.right_margin_size;
+			maxY = Constantes.height - height - Constantes.bottom_margin_size;
 		}
 
-		minY = Constantes.top_margin_size;
-		minX = Constantes.left_margin_size;
+		minY = Constantes.top_margin_size - height;
+		minX = Constantes.left_margin_size - width;
 		height = width;			
 		
 		updateImage();
@@ -57,9 +57,9 @@ public class Sprite implements Serializable {
 		this.width = s.width;
 		this.height = s.height;
 		this.ruler = s.ruler;
-		
-		maxX = Constantes.width - width*1.25;
-		maxY = Constantes.height - height*1.25;
+
+		maxX = Constantes.width - width - Constantes.right_margin_size;
+		maxY = Constantes.height - height - Constantes.bottom_margin_size;
 		minY = Constantes.top_margin_size;
 		minX = Constantes.left_margin_size;
 	}
@@ -90,7 +90,7 @@ public class Sprite implements Serializable {
 	}
 	
 	public void validatePosition() {
-		if (x + width() >= maxX) {
+		if (x + width >= maxX) {
 			x = maxX - width();
 			xSpeed *= -1;
 		} else if (x <= minX) {
@@ -102,8 +102,8 @@ public class Sprite implements Serializable {
 			xSpeed *= -1;
 		}
 
-		if (y + height() >= maxY) {
-			y = maxY - height();
+		if (y + height >= maxY) {
+			y = maxY - height - Constantes.bottom_margin_size;
 			ySpeed *= -1;
 		} else if (y <= minY) {
 			y = minY;
@@ -112,6 +112,63 @@ public class Sprite implements Serializable {
 			y = 0;
 			ySpeed *= -1;
 		}
+	}
+	
+
+	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
+		//(x - center_x)^2 + (y - center_y)^2 < radius^2
+		double radius = this.width()/2 + Constantes.minimal_distance_between_planets;
+		double circle_x = this.getX() + this.width()/2;
+		double circle_y = this.getY() + this.height()/2;
+		double circle_left = circle_x - radius;
+		double circle_top = circle_y - radius;
+		double circle_right = circle_x + radius;
+		double circle_bottom = circle_y + radius;
+		
+		//Reject if corner are clearly out of the circle
+		if(x_right < circle_left && x_left > circle_right || y_bottom < circle_top && y_top > circle_bottom) {
+			return true;
+		}
+		//check if center of circle is inside rectangle
+		if(x_left <= circle_x && circle_x <= x_right && y_top <= circle_y && circle_y <= y_bottom) {
+			//System.out.println("**Circle is inside rectangle");
+			return true;
+		}
+		        		
+		//Check every point of the rectangle
+		for(double x1 = x_left; x1 < x_right; x1++) {
+			for(double y1 = y_top; y1 < y_bottom; y1++) {
+				if(Math.hypot(x1 - circle_x, y1 - circle_y) <= radius) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	public boolean intersectCircle(Sprite p) {
+		return intersectCircle(
+				p.getX(),
+				p.getY(),
+				p.getX()+p.width(), 
+				p.getY()+p.height()
+			);
+	}
+
+	public boolean isInside(double x, double y, double width, double height) {
+		if(x > getX()+width() || x+width < getX()) {
+			return false;
+		}
+		
+		if(y > getY()+height() || y+height < getY()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean isInside(Sprite s) {
+		return this.intersects(s);
+		//return isInside(s.getX(), s.getY());
 	}
 
 	public void setPosition(double x, double y) {

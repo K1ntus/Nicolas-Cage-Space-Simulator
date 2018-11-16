@@ -19,11 +19,14 @@ import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 
 public class Game extends Application {
+	private Galaxy galaxy = new Galaxy();
+    private double orgSceneX, orgSceneY;
+	private Planet source = null; private Planet destination = null;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	private Galaxy galaxy = new Galaxy();
 	public void start(Stage stage) {
 		
 		/** Window and game kernel creation **/
@@ -44,53 +47,124 @@ public class Game extends Application {
 		stage.show();
 
 		/** Mouse interaction **/
+		//Obsolete
 		EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
-			Planet source = null; Planet destination = null;
-
 			@Override
 			public void handle(MouseEvent event) {
-					for(Planet p : galaxy.getPlanets()) {
+				for(Planet p : galaxy.getPlanets()) {
 						
-						try {
-							if(event.isPrimaryButtonDown()) {	//usually left button
-								if(p.clickedOnPlanet(event.getX(), event.getY())) {
-									source = p;
-									if(source == null) {	break;	}
-									if(source.getRuler().getFaction() == Constantes.player) {
-										source.getRuler().setSource(p);
-										break;
-									}else {
-										if(Constantes.DEBUG) {
-											System.out.println("Vous n'etes pas le dirigeant de cette colonie");
-										}
-									}
-								}							
-							}
-							
-							if(event.isSecondaryButtonDown()) {	//usually right button
-								if(p.clickedOnPlanet(event.getX(), event.getY())) {
-									if(!source.intersects(p)) {
-										destination = p;
-										source.getRuler().setDestination(p);
-									}
+					try {
+						if(event.isPrimaryButtonDown()) {	//usually left button
+							if(p.clickedOnPlanet(event.getX(), event.getY())) {
+								source = p;
+								if(source == null) {	break;	}
+								if(source.getRuler().getFaction() == Constantes.player) {
+									source.getRuler().setSource(p);
 									break;
+								}else {
+									if(Constantes.DEBUG) {
+										System.out.println("Vous n'etes pas le dirigeant de cette colonie");
+									}
 								}
-								
-							}
-	
-						} catch(NullPointerException e) {
-						//Nothing
+							}							
 						}
+							
+						if(event.isSecondaryButtonDown()) {	//usually right button
+							if(p.clickedOnPlanet(event.getX(), event.getY())) {
+								if(!source.intersects(p)) {
+									destination = p;
+									source.getRuler().setDestination(p);
+								}
+								break;
+							}
+								
+						}
+	
+					} catch(NullPointerException e) {
+						//Nothing
 					}
+				}
 					
 				
-					System.out.println(source + " -> " + destination);
 				}
 		};
 
-		scene.setOnMouseDragged(mouseHandler);
-		scene.setOnMousePressed(mouseHandler);
-		scene.setOnMouseReleased(mouseHandler);
+		
+		/** Drag & Drop **/
+	    EventHandler<MouseEvent> canvasOnMousePressedEventHandler = new EventHandler<MouseEvent>()
+	    {
+	        @Override
+	        public void handle(MouseEvent mouseEvent) {
+		        //System.out.println("Event on Source: mouse pressed");
+		        mouseEvent.setDragDetect(true);
+		        
+	            orgSceneX = mouseEvent.getSceneX();
+	            orgSceneY = mouseEvent.getSceneY();
+
+				for(Planet p : galaxy.getPlanets()) {
+					
+		            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
+						source = p;
+						if(source == null) {	break;	}
+						if(source.getRuler().getFaction() == Constantes.player) {
+							source.getRuler().setSource(p);
+							break;
+						}else {
+							if(Constantes.DEBUG) {
+								System.out.println("Vous n'etes pas le dirigeant de cette colonie");
+							}
+						}
+					}
+				}
+	            
+	        }
+	    };
+
+	    EventHandler<MouseEvent> canvasOnMouseDraggedEventHandler = new EventHandler<MouseEvent>()
+	    {
+	        @Override
+	        public void handle(MouseEvent mouseEvent){
+	        	mouseEvent.setDragDetect(false);
+	        	//System.out.println("Drag detected - Source: " + source.toString());
+	        	if(source == null) {	return;	}
+	        	
+	            double offsetX = mouseEvent.getSceneX();
+	            double offsetY = mouseEvent.getSceneY();
+
+
+				for(Planet p : galaxy.getPlanets()) {
+					try {						
+							if(p.clickedOnPlanet(offsetX, offsetY)) {
+								if(!source.intersects(p)) {
+									destination = p;
+									source.getRuler().setDestination(p);
+								}
+								break;
+							
+						}
+
+					} catch(NullPointerException e) {
+					//Nothing
+						return;
+					}
+				}
+				if(source.getRuler() != Constantes.human_user) {
+					return;
+				}
+
+	        	if(source == null || destination == null) {	
+	        		return;
+	        	}else {
+					Squad s = source.sendFleet(destination);
+					galaxy.getSquads().add(s);	
+					source = null;
+					destination = null;
+	        	}
+				//System.out.println(source.toString() + " -> " + destination.toString());
+				//((Canvas) (mouseEvent.getSource())).setTranslateX(newTranslateX);  //transform the object
+	            //((Canvas) (mouseEvent.getSource())).setTranslateY(newTranslateY);
+	        }
+	    };
 
 		/** Mouse Scrolling interaction */
 		EventHandler<ScrollEvent> scrollEventHandler = new EventHandler<ScrollEvent>() {
@@ -106,7 +180,6 @@ public class Game extends Application {
 				
 			}
 		};
-		scene.setOnScroll(scrollEventHandler);
 		
 		/** Keyboard interaction **/
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -127,7 +200,6 @@ public class Game extends Application {
 							if(destination != null && source != null) {
 								Squad s = source.sendFleet(destination);
 								System.out.println("**** fleet sent");
-								System.out.println("******************");
 								galaxy.getSquads().add(s);
 								
 								
@@ -152,6 +224,13 @@ public class Game extends Application {
 				
 			}
 		});
+
+		//scene.setOnMouseDragged(mouseHandler);
+		//scene.setOnMousePressed(mouseHandler);
+		//scene.setOnMouseReleased(mouseHandler);
+		scene.setOnScroll(scrollEventHandler);
+        canvas.setOnMousePressed(canvasOnMousePressedEventHandler);
+        canvas.setOnMouseDragged(canvasOnMouseDraggedEventHandler);
 		
 		/**	Rendering **/
 		new AnimationTimer() {

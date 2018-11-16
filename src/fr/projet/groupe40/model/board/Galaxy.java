@@ -41,9 +41,8 @@ public class Galaxy extends Thread implements Serializable{
 		planets = new ArrayList<Planet>();
 
 		generatePlanets();
-		generateRandomSquads();
+		//generateRandomSquads();
 		
-
 		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		
 		setDaemon(true);	//Thread will close if game window has been closed
@@ -66,13 +65,13 @@ public class Galaxy extends Thread implements Serializable{
 		Thread thisThread = Thread.currentThread();
 		while(true) {
 			for(Planet p : planets)
-				p.updateGarrison();			
+				p.updateGarrison();	
+				generateRandomSquads();		
 			try {
 				sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			generateRandomSquads();
 			
 		}
 	}
@@ -128,71 +127,54 @@ public class Galaxy extends Thread implements Serializable{
 	
 	public void collisionHandler(Squad s, Planet p) {
 		System.out.println("Collision handler");
+		double deltaY = 0, deltaX = 0;
 		double x = s.getX(), y = s.getY();
+		double width = s.width(), height = s.height();
 		double speed = s.getType().getSpeed();
 		double distance = p.distance(x, y, p.getX(), p.getY());
 		Planet source = s.getSource();
 		Planet destination = s.getDestination();
-		//double distanceBetween2Planets = source.distance(destination);
-		double yDestination = destination.getX() + destination.height()/2;
-		double xDestination = destination.getY() + destination.width()/2;
 		
-		if(p.isInside(x-2*speed, y)) {
-			
-			//s.setX(x+speed);
-			
-			if(yDestination > y) {
-				s.setY(y+speed);	
-				s.setX(x);			
+		double xCenter = p.getX() +p.width()/2;
+		double yCenter = p.getY()+p.height()/2;
+		//double distanceBetween2Planets = source.distance(destination);
+		
+		if(p.isInside(x-2*speed, y, width, height)) {	
+			if(yCenter > y) {
+				deltaY -= speed;		
 			} else {
-				s.setY(y-speed);
-				s.setX(x);
+				deltaY += speed;
 			}
 			
 			//System.out.println("squad inside a planet on his way1");
-		} 
-		if(p.isInside(x+2*speed, y)) {
-			
-			//s.setX(x-speed);
-
-			if(yDestination > y) {
-				s.setY(y+speed);	
-				s.setX(x);
+		} else if(p.isInside(x+2*speed, y, width, height)) {
+			if(yCenter > y) {
+				deltaY -= speed;		
 			} else {
-				s.setY(y-speed);
-				s.setX(x);
+				deltaY += speed;
 			}
 			
 			//System.out.println("squad inside a planet on his way2");
-		} 
-		if(p.isInside(x, y-2*speed)) {
-			
-			//s.setY(y+speed);
-
-			if(xDestination > x) {
-				s.setX(x+speed);	
-				s.setY(y);	
+		}
+		if(p.isInside(x, y-2*speed, width, height)) {
+			if(xCenter > x) {
+				deltaX += speed;
 			} else {
-				s.setX(x-speed);	
-				s.setY(y);	
+				deltaX -= speed;	
 			}
 			
 			//System.out.println("squad inside a planet on his way3");
-		} 
-		if(p.isInside(x, y+2*speed)) {
-			
-			//s.setY(y-speed);
-
-			if(xDestination > x) {
-				s.setX(x+speed);	
-				s.setY(y);		
+		} else if(p.isInside(x, y+2*speed, width, height)) {
+			if(xCenter > x) {	
+				deltaX += speed;
 			} else {
-				s.setX(x-speed);	
-				s.setY(y);	
+				deltaX -= speed;	
 			}
-			
 			//System.out.println("squad inside a planet on his way4");
 		}
+		if(p.isInside(x+deltaX,y+deltaY,width,height))
+			return;
+		s.setPosition(x+deltaX, y+deltaY);
 			
 	}
 
@@ -210,7 +192,7 @@ public class Galaxy extends Thread implements Serializable{
 	}
 
 	
-	/** Generation utilities **/
+	/** Planets Generation **/
 	public void generatePlanets() {
 		double width = Math.random() * Constantes.size_maximal_planets *0.25 + Constantes.size_minimal_planets;
 		double height = width;
@@ -219,7 +201,7 @@ public class Galaxy extends Thread implements Serializable{
 		
 		for(int i = 0; i < Constantes.nb_planets_tentatives; i++) {
 			double y = (Math.random() * (Constantes.height - height));
-			Planet p = new Planet(neutral,0,0);
+			Planet p = new Planet(neutral,50,50);
 			p.setY(y);
 			p.validatePosition();
 			
@@ -228,8 +210,8 @@ public class Galaxy extends Thread implements Serializable{
 			}
 		}
 		
-		if(planets.size() < 2) {	//si moins de 2 planetes
-			System.out.println("Impossible de g�n�rer un terrain correct");
+		if(planets.size() < Constantes.min_numbers_of_planets) {	//si moins de 2 planetes
+			System.out.println("Impossible de generer un terrain minimal");
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 plan�tes, une a l'ia, une au joueur
 			planets.get(0).setRuler(Constantes.human_user);
@@ -254,7 +236,6 @@ public class Galaxy extends Thread implements Serializable{
 
 			if(p_already_placed.intersects(p) || p_already_placed.intersectCircle(p)) {
 				if(p.updatePlanetePosition() == -1) {
-					sum += 1;
 					if(Constantes.DEBUG)
 						return false;
 				}
@@ -268,21 +249,22 @@ public class Galaxy extends Thread implements Serializable{
 		return true;
 	}
 
-
+	/** Others Generations **/
 	//mainly for debugging for the moment, mb using it has pirate ?
 	public void generateRandomSquads() {
-		for(int i = 0; i < Constantes.nb_squads; i++) {
+		for(int i = 0, j=0; i < Constantes.nb_squads; i++) {
 			for(Planet p : planets) {
-				Squad s = new Squad(new Sprite(Constantes.path_img_ships, new User(Constantes.ai), false), Constantes.max_troups, planets.get(0));
+				Squad s = new Squad(new Sprite(Constantes.path_img_ships, new User(Constantes.ai), false), Constantes.max_troups, planets.get(2));
 				s.setPosition(Constantes.width * Math.random() - Constantes.size_squads, Constantes.height * Math.random() - Constantes.size_squads);
-				
+				j += 1;
+				if(j == Constantes.nb_squads) {
+					return;
+				}
 				if (p.isInside(s))
 					continue;
 				squads.add(s);
 
 			}
-			//Squad s = new Squad(getRessourcePathByName("resources/images/alien.png"), 100, getPlanets().get((int) (Math.random() * (getPlanets().size() - 0))));
-			//Squad s = new Squad(getRessourcePathByName("resources/images/alien.png"), i, planets.get((int) (Math.random() * (planets.size() - 0))));
 		}
 	}
 	
@@ -312,7 +294,6 @@ public class Galaxy extends Thread implements Serializable{
 			}
 			if(ss == null) {	continue;	}
 			if(ss.isReached()) {
-				//System.out.println("Ship "+ss.getNb_of_ships()+" has reached's destination");
 				squads.remove(ss);
 				it = squads.iterator();
 			}else {
@@ -378,7 +359,6 @@ public class Galaxy extends Thread implements Serializable{
 		gc.setLineWidth(1);		
 	}
 	
-
 	/** Getter & Setter **/
 	public ArrayList<Squad> getSquads() {
 		return squads;
@@ -388,7 +368,6 @@ public class Galaxy extends Thread implements Serializable{
 		this.squads = squads;
 	}
 
-
 	public void setPlanets(ArrayList<Planet> planets) {
 		this.planets = planets;
 	}
@@ -396,17 +375,10 @@ public class Galaxy extends Thread implements Serializable{
 		return planets;
 	}
 	
-
-	/**
-	 * @return the background
-	 */
 	public Image getBackground() {
 		return background;
 	}
 
-	/**
-	 * @param background the background to set
-	 */
 	public void setBackground(Image background) {
 		this.background = background;
 	}
