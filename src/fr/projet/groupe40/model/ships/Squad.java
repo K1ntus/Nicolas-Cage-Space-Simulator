@@ -6,7 +6,7 @@ import fr.projet.groupe40.model.Sprite;
 import fr.projet.groupe40.model.board.Planet;
 import fr.projet.groupe40.util.Constantes;
 
-public class Squad extends Sprite  implements Serializable{
+public class Squad extends Sprite implements Serializable{
 	private static final long serialVersionUID = 7720386286912131175L;
 	/**
 	 * 

@@ -36,7 +36,9 @@ public class User implements Serializable{
 			id = Constantes.player; break;
 		}
 		setPercent_of_troups_to_send(100);
-
+		
+		source = null;
+		destination = null;
 	}
 
 	public User(User user) {

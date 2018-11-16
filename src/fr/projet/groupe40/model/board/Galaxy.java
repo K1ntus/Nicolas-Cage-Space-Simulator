@@ -2,6 +2,7 @@ package fr.projet.groupe40.model.board;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 import fr.projet.groupe40.client.User;
@@ -10,7 +11,6 @@ import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,42 +18,42 @@ import javafx.scene.text.TextAlignment;
 
 
 @SuppressWarnings("unused")
-public class Galaxy extends Thread{
+public class Galaxy extends Thread implements Serializable{
+	private static final long serialVersionUID = 3668540725184418675L;
+	/**
+	 * 
+	 */
+
 	private volatile transient Thread blinker;
 	
-	private final static Sprite ai = new Sprite(Constantes.path_img_planets, new User(Constantes.ai1_user), true);
-	private final static Sprite player = new Sprite(Constantes.path_img_planets, new User(Constantes.player1_user), true);
+	private final static Sprite ai = new Sprite(Constantes.path_img_planets, new User(Constantes.ai_user), true);
+	private final static Sprite player = new Sprite(Constantes.path_img_planets, new User(Constantes.human_user), true);
 	private final static Sprite neutral = new Sprite(Constantes.path_img_planets, new User(Constantes.neutral_user), true);
 	
 	
 	private ArrayList<Planet> planets;
 	private ArrayList<Squad> squads;
-	private ArrayList<User> users;
 	
 	private transient Image background;
 	
 	public Galaxy() {
-		users = new ArrayList<User>();
 		squads = new ArrayList<Squad>();
 		planets = new ArrayList<Planet>();
 
-		initUsers();
 		generatePlanets();
+		generateRandomSquads();
 		
-		if(Constantes.DEBUG && Constantes.DEBUG_TROUPS)
-			generateRandomSquads();
 
 		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
 	}
+
 	
 	public Galaxy(Galaxy g) {
-		// TODO Auto-generated constructor stub
 		planets = g.planets;
 		squads = g.squads;
-		users = g.users;
 		
 		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		setDaemon(true);	//Thread will close if game window has been closed
@@ -64,16 +64,15 @@ public class Galaxy extends Thread{
 	@Override
 	public void run() {
 		Thread thisThread = Thread.currentThread();
-		//while(blinker == thisThread) {
 		while(true) {
 			for(Planet p : planets)
 				p.updateGarrison();			
 			try {
 				sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			generateRandomSquads();
 			
 		}
 	}
@@ -93,16 +92,15 @@ public class Galaxy extends Thread{
 	
 
 	public void update() {
-
 		Iterator<Squad> it = getSquads().iterator();
+		
 		while (it.hasNext()) {
 			Squad ss = it.next();
 			try {
 				if(ss.isReached()) {
 					it.remove();
-				}else {
-					//if(!isCollision(ss))
-						ss.updatePosition();
+				} else {
+					ss.updatePosition();
 				}
 			} catch(NullPointerException e) {
 				it.remove();
@@ -110,8 +108,11 @@ public class Galaxy extends Thread{
 		}
 	}
 	
+	/** Client handler **/
+	
 	public void clientScrollHandler(int action) {
-		for(User u : users) {
+		for(Planet p : planets) {
+			User u = p.getRuler();
 			if(u.getFaction() == Constantes.player) {
 				switch(action) {
 				case 0://lower
@@ -122,53 +123,93 @@ public class Galaxy extends Thread{
 			}
 		}
 	}
-
-	public boolean isCollision(Squad s) {
+	
+	/** Squad Path-way **/
+	
+	public void collisionHandler(Squad s, Planet p) {
+		System.out.println("Collision handler");
 		double x = s.getX(), y = s.getY();
 		double speed = s.getType().getSpeed();
-		boolean collision = false;
+		double distance = p.distance(x, y, p.getX(), p.getY());
+		Planet source = s.getSource();
+		Planet destination = s.getDestination();
+		//double distanceBetween2Planets = source.distance(destination);
+		double yDestination = destination.getX() + destination.height()/2;
+		double xDestination = destination.getY() + destination.width()/2;
+		
+		if(p.isInside(x-2*speed, y)) {
+			
+			//s.setX(x+speed);
+			
+			if(yDestination > y) {
+				s.setY(y+speed);	
+				s.setX(x);			
+			} else {
+				s.setY(y-speed);
+				s.setX(x);
+			}
+			
+			//System.out.println("squad inside a planet on his way1");
+		} 
+		if(p.isInside(x+2*speed, y)) {
+			
+			//s.setX(x-speed);
+
+			if(yDestination > y) {
+				s.setY(y+speed);	
+				s.setX(x);
+			} else {
+				s.setY(y-speed);
+				s.setX(x);
+			}
+			
+			//System.out.println("squad inside a planet on his way2");
+		} 
+		if(p.isInside(x, y-2*speed)) {
+			
+			//s.setY(y+speed);
+
+			if(xDestination > x) {
+				s.setX(x+speed);	
+				s.setY(y);	
+			} else {
+				s.setX(x-speed);	
+				s.setY(y);	
+			}
+			
+			//System.out.println("squad inside a planet on his way3");
+		} 
+		if(p.isInside(x, y+2*speed)) {
+			
+			//s.setY(y-speed);
+
+			if(xDestination > x) {
+				s.setX(x+speed);	
+				s.setY(y);		
+			} else {
+				s.setX(x-speed);	
+				s.setY(y);	
+			}
+			
+			//System.out.println("squad inside a planet on his way4");
+		}
+			
+	}
+
+	public boolean isCollision(Squad s) {
 		
 		for(Planet p : planets) {
 			if(p != s.getDestination() && p != s.getSource()) {
-				if(p.isInside(x+speed, y)) {
-					s.setX(x - speed);
-					double distance = p.distance(x, y, p.getX(), p.getY());
-					if(distance > p.height()/2) {
-						System.out.println("augmente y");
-						s.setY(y+speed);				
-					}else {
-						System.out.println("diminue y");
-						s.setY(y-speed);
-					}
-					System.out.println("squad inside a planet on his way1");
-					collision = true;
-				}else if(p.isInside(x, y+speed)) {
-					//s.setY(y)
-					double distance = p.distance(x, y, p.getX(), p.getY());	
-					s.setY(y-speed);
-					if(distance > p.width()/2) {
-						System.out.println("augmente x");
-						s.setX(x+speed);	
-					}else {
-						System.out.println("diminue x");
-						s.setX(x-speed);
-					}
-					System.out.println("squad inside a planet on his way2");
-					collision = true;
-				}
-				
-				if(collision) {
-					return true;
-				}
+				collisionHandler(s, p);
+				return true;
 			}
 		}
 
+		s.updatePosition();
 		return false;
 	}
 
-	public void collisionHandler(Sprite s1, Sprite s2) {
-		
-	}
+	
 	/** Generation utilities **/
 	public void generatePlanets() {
 		double width = Math.random() * Constantes.size_maximal_planets *0.25 + Constantes.size_minimal_planets;
@@ -180,6 +221,7 @@ public class Galaxy extends Thread{
 			double y = (Math.random() * (Constantes.height - height));
 			Planet p = new Planet(neutral,0,0);
 			p.setY(y);
+			p.validatePosition();
 			
 			if(testPlacement(p)) {
 				planets.add(p);							
@@ -187,11 +229,11 @@ public class Galaxy extends Thread{
 		}
 		
 		if(planets.size() < 2) {	//si moins de 2 planetes
-			System.out.println("Impossible de générer un terrain correct");
+			System.out.println("Impossible de gï¿½nï¿½rer un terrain correct");
 			System.exit(-1);		//quitte le prgm
-		}else {		//On attribue 2 planètes, une a l'ia, une au joueur
-			planets.get(0).setRuler(Constantes.player1_user);
-			planets.get(1).setRuler(Constantes.ai1_user);
+		}else {		//On attribue 2 planï¿½tes, une a l'ia, une au joueur
+			planets.get(0).setRuler(Constantes.human_user);
+			planets.get(1).setRuler(Constantes.ai_user);
 		}
 		
 
@@ -201,28 +243,28 @@ public class Galaxy extends Thread{
 		}
 		
 	}
-	
-	private void initUsers() {
-		users.add(Constantes.ai1_user);
-		users.add(Constantes.neutral_user);
-		users.add(Constantes.player1_user);
-	}
+
 	
 	private boolean testPlacement(Planet p) {
 		Iterator<Planet> it = planets.iterator();
+		int sum = 0;
+		
 		while (it.hasNext()) {
 			Planet p_already_placed = it.next();
 
 			if(p_already_placed.intersects(p) || p_already_placed.intersectCircle(p)) {
 				if(p.updatePlanetePosition() == -1) {
+					sum += 1;
 					if(Constantes.DEBUG)
-						System.out.println(" Unable to generate this planet");
-					return false;
+						return false;
 				}
 				
 				it = planets.iterator();
 			}
 		}
+		if(sum > 0)
+			System.out.println(" Unable to generate "+ sum +" planets");
+		
 		return true;
 	}
 
@@ -230,25 +272,51 @@ public class Galaxy extends Thread{
 	//mainly for debugging for the moment, mb using it has pirate ?
 	public void generateRandomSquads() {
 		for(int i = 0; i < Constantes.nb_squads; i++) {
-			Squad s = new Squad(new Sprite(Constantes.path_img_ships, new User(Constantes.ai), false), Constantes.max_troups, planets.get(0));
+			for(Planet p : planets) {
+				Squad s = new Squad(new Sprite(Constantes.path_img_ships, new User(Constantes.ai), false), Constantes.max_troups, planets.get(0));
+				s.setPosition(Constantes.width * Math.random() - Constantes.size_squads, Constantes.height * Math.random() - Constantes.size_squads);
+				
+				if (p.isInside(s))
+					continue;
+				squads.add(s);
+
+			}
 			//Squad s = new Squad(getRessourcePathByName("resources/images/alien.png"), 100, getPlanets().get((int) (Math.random() * (getPlanets().size() - 0))));
 			//Squad s = new Squad(getRessourcePathByName("resources/images/alien.png"), i, planets.get((int) (Math.random() * (planets.size() - 0))));
-			s.setPosition(Constantes.width * Math.random() - Constantes.size_squads, Constantes.height * Math.random() - Constantes.size_squads);
-			squads.add(s);
 		}
 	}
-
+	
+	/** Sound Rendering Subfonction **/
 	
 	/** Rendering subfunction **/
+
+	public void renderBackground(GraphicsContext gc) {
+		gc.drawImage(getBackground(), 0, 0);
+	}
+	public void renderPlanets(GraphicsContext gc) {
+		for(Planet p : planets) {
+			if(p != null)
+				p.render(gc);					
+		}
+	}
+	
 	public void renderSquads(GraphicsContext gc) {
 		Iterator<Squad> it = squads.iterator();
 		while (it.hasNext()) {
-			Squad ss = it.next();
+			Squad ss = null;
+			try {
+				ss = it.next();				
+			}catch(ConcurrentModificationException e) {
+				it = squads.iterator();
+				continue;
+			}
+			if(ss == null) {	continue;	}
 			if(ss.isReached()) {
-				System.out.println("Ship "+ss.getNb_of_ships()+" has reached's destination");
-				it.remove();
+				//System.out.println("Ship "+ss.getNb_of_ships()+" has reached's destination");
+				squads.remove(ss);
+				it = squads.iterator();
 			}else {
-				ss.updatePosition();
+				isCollision(ss);
 				ss.render(gc);							
 			}
 		}
@@ -274,22 +342,32 @@ public class Galaxy extends Thread{
 			gc.strokeText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
 		}
 	}
+
 	
 	public void renderPercentageSelected(GraphicsContext gc) {
-		for(User u : users) {
+		gc.setFill(Constantes.color_default);
+		gc.setStroke(Color.RED);
+		gc.setTextAlign(TextAlignment.CENTER);	
+		
+		for(Planet p :planets) {
+			User u = p.getRuler();
 			if (u.getFaction() == Constantes.player) {
-				gc.setFill(Constantes.color_default);
-				gc.setStroke(Color.RED);
-				gc.setTextAlign(TextAlignment.CENTER);	
-				
 				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
 				
-				gc.fillText(txt, Constantes.width/7, 50);
-				gc.strokeText(txt, Constantes.width/7, 50);
+				gc.fillText(txt, Constantes.width/7, 25);
+				gc.strokeText(txt, Constantes.width/7, 25);
 				
-				break;				
+				return;				
 			}
 		}
+		String txt = Constantes.message_game_over;
+		gc.fillText(txt, Constantes.width/5, 25);
+		gc.strokeText(txt, Constantes.width/5, 25);
+		
+	}
+	
+	public void renderExplosion(GraphicsContext gc) {
+		
 	}
 	
 	/** init the font type **/
@@ -310,13 +388,6 @@ public class Galaxy extends Thread{
 		this.squads = squads;
 	}
 
-	public ArrayList<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(ArrayList<User> users) {
-		this.users = users;
-	}
 
 	public void setPlanets(ArrayList<Planet> planets) {
 		this.planets = planets;
@@ -325,16 +396,6 @@ public class Galaxy extends Thread{
 		return planets;
 	}
 	
-	public void renderBackground(GraphicsContext gc) {
-		gc.drawImage(getBackground(), 0, 0);
-	}
-	
-	public void renderPlanets(GraphicsContext gc) {
-		for(Planet p : planets) {
-			if(p != null)
-				p.render(gc);					
-		}
-	}
 
 	/**
 	 * @return the background

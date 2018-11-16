@@ -32,9 +32,11 @@ public class DataSerializer {
 			final FileOutputStream file = new FileOutputStream(name + ".save");
 			oos = new ObjectOutputStream(file);
 			
-			oos.writeObject(data.getPlanets());
-			oos.writeObject(data.getSquads());
-			oos.writeObject(data.getUsers());
+			//oos.writeObject(data.getPlanets());
+			//oos.writeObject(data.getSquads());
+			//oos.writeObject(data.getUsers());
+			
+			oos.writeObject(data);
 			
 			oos.flush();
 		} catch (FileNotFoundException e) {
@@ -59,18 +61,17 @@ public class DataSerializer {
 		
 	}
 	
-	public boolean load_game(Galaxy g) {
+	public Galaxy load_game(Galaxy g) {
 		FileInputStream file;
+		Galaxy loaded = new Galaxy();
 		try {
 			file = new FileInputStream(name + ".save");
 			ObjectInputStream ois = new ObjectInputStream(file);
 			
-			ArrayList<Planet> planet =  (ArrayList<Planet>) ois.readObject();
-			ArrayList<Squad> squad =  (ArrayList<Squad>) ois.readObject();
-			ArrayList<User> user =  (ArrayList<User>) ois.readObject();
-			g.setPlanets(planet);
-			g.setSquads(squad);
-			g.setUsers(user);
+			loaded = (Galaxy) ois.readObject();
+			
+			ois.close();
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("Unable to load game");
 			e.printStackTrace();
@@ -81,15 +82,39 @@ public class DataSerializer {
 			System.out.println("Unable to load game");
 			e.printStackTrace();
 		}	
-		return true;
+		Galaxy res = new Galaxy(loaded);
+		return res;
 	}
 	
 	public void reload_image(Galaxy g) {
 		for(Planet p : g.getPlanets()) {
+			
+			User u = p.getRuler();
+			if (u.getFaction() == Constantes.ai) {
+				p.setRuler(Constantes.ai_user);
+			}else if (u.getFaction() == Constantes.player) {
+				p.setRuler(Constantes.human_user);
+			}else {
+				p.setRuler(Constantes.neutral_user);
+			}
+
+			p.getRuler().setDestination(null);
+			p.getRuler().setSource(null);
+			
 			p.setImg_path(Constantes.path_img_planets);
 			p.updateImage();
 		}
+		
 		for(Squad s : g.getSquads()) {
+			User u = s.getRuler();
+			if (u.getFaction() == Constantes.ai) {
+				s.setRuler(Constantes.ai_user);
+			}else if (u.getFaction() == Constantes.player) {
+				s.setRuler(Constantes.human_user);
+			}else {
+				s.setRuler(Constantes.neutral_user);
+			}
+			
 			s.setImg_path(Constantes.path_img_ships);
 			s.updateImage();
 		}

@@ -23,8 +23,8 @@ public class Game extends Application {
 		launch(args);
 	}
 
+	private Galaxy galaxy = new Galaxy();
 	public void start(Stage stage) {
-		Galaxy galaxy = new Galaxy();
 		
 		/** Window and game kernel creation **/
 		stage.setTitle("Surgeon Simulator 2");
@@ -91,7 +91,6 @@ public class Game extends Application {
 		scene.setOnMouseDragged(mouseHandler);
 		scene.setOnMousePressed(mouseHandler);
 		scene.setOnMouseReleased(mouseHandler);
-		scene.setOnMouseReleased(mouseHandler);
 
 		/** Mouse Scrolling interaction */
 		EventHandler<ScrollEvent> scrollEventHandler = new EventHandler<ScrollEvent>() {
@@ -112,21 +111,29 @@ public class Game extends Application {
 		/** Keyboard interaction **/
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent e) {
+				
 				if(e.getCode() == KeyCode.SPACE) {
-					System.out.println("buttn space");
+					System.out.println("* button space pressed");
+					
 					for(Planet p : galaxy.getPlanets()) {
-						System.out.println("planer for:" +p.toString());
-						if(p.getRuler() == Constantes.player1_user) {
-							System.out.println("ruler well selected");
+						System.out.println("*planet boucle:" +p.toString());
+						System.out.println("** ruler: " + p.getRuler().toString());
+						
+						if(p.getRuler() == Constantes.human_user) {
+							System.out.println("*** ruler well selected");
 							Planet source = p.getRuler().getSource();
 							Planet destination = p.getRuler().getDestination();
+							
 							if(destination != null && source != null) {
 								Squad s = source.sendFleet(destination);
-								System.out.println("sent fleet");
+								System.out.println("**** fleet sent");
+								System.out.println("******************");
 								galaxy.getSquads().add(s);
 								
 								
 							}
+						} else {
+							p.getRuler().setDestination(null);
 						}
 					}
 
@@ -136,11 +143,13 @@ public class Game extends Application {
 					System.out.println("Saving game ...");
 					saver.save_game();
 				}
+				
 				if (e.getCode() == KeyCode.F6) {
 					System.out.println("Loading game ...");
-					saver.load_game(galaxy);
+					galaxy = saver.load_game(galaxy);
 					saver.reload_image(galaxy);
 				}
+				
 			}
 		});
 		
@@ -148,8 +157,7 @@ public class Game extends Application {
 		new AnimationTimer() {
 			public void handle(long arg0) {
 				galaxy.update();
-				galaxy.render(gc);
-				
+				galaxy.render(gc);				
 			}
 		}.start();
 	}

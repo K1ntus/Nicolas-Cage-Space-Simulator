@@ -35,7 +35,13 @@ public class Planet extends Sprite {
 		
 		setWidth(Math.random() * Constantes.size_minimal_planets + Constantes.size_minimal_planets);
 		setHeight(width());
-		setX((Math.random() * (Constantes.width - width())));
+		double x = (Math.random() * (Constantes.width - width()));
+		
+		if (x <= Constantes.left_margin_size)
+			setX(Constantes.left_margin_size);
+		else
+			setX(x);
+		
 		setY((Math.random() * (Constantes.height - height())));
 		troups = (int) (Math.random() * (Constantes.max_initDefense - Constantes.min_troups) +1);
 		produce_rate =  (int) (Math.random() * (Constantes.max_ship_produce - Constantes.min_ship_produce) +1);
@@ -59,14 +65,15 @@ public class Planet extends Sprite {
 	}
 	
 	public boolean isInside(Squad s) {
-		return isInside(s.getX(), s.getY());
+		return this.intersects(s);
+		//return isInside(s.getX(), s.getY());
 	}
 
 	
 	public boolean clickedOnPlanet(double x, double y) {
 		if(isInside(x, y)) {
 			if(Constantes.DEBUG) {
-				System.out.println("Vous avez cliqué sur une planète avec "+this.troups);
+				System.out.println("Vous avez cliquï¿½ sur une planï¿½te avec "+this.troups);
 				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
 				System.out.println("et de type: "+ this.getRuler().getFaction());
 			}
@@ -121,13 +128,11 @@ public class Planet extends Sprite {
 		
 		//Reject if corner are clearly out of the circle
 		if(x_right < circle_left && x_left > circle_right || y_bottom < circle_top && y_top > circle_bottom) {
-			//System.out.println("out 1");
 			return true;
 		}
 		//check if center of circle is inside rectangle
 		if(x_left <= circle_x && circle_x <= x_right && y_top <= circle_y && circle_y <= y_bottom) {
 			//System.out.println("**Circle is inside rectangle");
-			//System.out.println("out 2");
 			return true;
 		}
 		        		
@@ -135,7 +140,6 @@ public class Planet extends Sprite {
 		for(double x1 = x_left; x1 < x_right; x1++) {
 			for(double y1 = y_top; y1 < y_bottom; y1++) {
 				if(Math.hypot(x1 - circle_x, y1 - circle_y) <= radius) {
-					//System.out.println("out 3");
 					return true;
 				}
 			}

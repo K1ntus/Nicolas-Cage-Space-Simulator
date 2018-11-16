@@ -21,6 +21,7 @@ public class Sprite implements Serializable {
 	private double x, y;
 	private double xSpeed, ySpeed;
 	private double maxX, maxY;
+	private double minX, minY;
 
 	private User ruler;
 
@@ -37,10 +38,13 @@ public class Sprite implements Serializable {
 			width = Math.random() * Constantes.size_maximal_planets  + Constantes.size_minimal_planets;
 			if(width > Constantes.size_maximal_planets)
 				width = Constantes.size_maximal_planets;
-			
+
 			maxX = Constantes.width - width*1.25;
 			maxY = Constantes.height - height*1.25;
 		}
+
+		minY = Constantes.top_margin_size;
+		minX = Constantes.left_margin_size;
 		height = width;			
 		
 		updateImage();
@@ -53,8 +57,11 @@ public class Sprite implements Serializable {
 		this.width = s.width;
 		this.height = s.height;
 		this.ruler = s.ruler;
+		
 		maxX = Constantes.width - width*1.25;
 		maxY = Constantes.height - height*1.25;
+		minY = Constantes.top_margin_size;
+		minX = Constantes.left_margin_size;
 	}
 
 	public void updateImage() {
@@ -86,7 +93,11 @@ public class Sprite implements Serializable {
 		if (x + width() >= maxX) {
 			x = maxX - width();
 			xSpeed *= -1;
-		} else if (x < 0) {
+		} else if (x <= minX) {
+			x = minX;
+			xSpeed *= -1;
+		}
+		else if (x < 0) {
 			x = 0;
 			xSpeed *= -1;
 		}
@@ -94,7 +105,10 @@ public class Sprite implements Serializable {
 		if (y + height() >= maxY) {
 			y = maxY - height();
 			ySpeed *= -1;
-		} else if (y < 0) {
+		} else if (y <= minY) {
+			y = minY;
+			ySpeed *= -1;
+		}else if (y < 0) {
 			y = 0;
 			ySpeed *= -1;
 		}
@@ -146,6 +160,8 @@ public class Sprite implements Serializable {
 		return ((x >= s.x && x <= s.x + s.width()) || (s.x >= x && s.x <= x + width()))
 				&& ((y >= s.y && y <= s.y + s.height()) || (s.y >= y && s.y <= y + height()));
 	}
+
+
 	public boolean intersects(double x2, double y2, double width, double height) {
 		return ((x >= x2 && x <= x2 + width) || (x2 >= x && x2 <= x + width))
 				&& ((y >= y2 && y <= y2 + height) || (y2 >= y && y2 <= y + height));

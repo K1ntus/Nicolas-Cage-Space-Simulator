@@ -6,6 +6,10 @@ import fr.projet.groupe40.util.Constantes;
 
 
 public class Ship implements Serializable{
+	private static final long serialVersionUID = 5784847797502383928L;
+	/**
+	 * 
+	 */
 	private int speed, power, production_time;
 
 
