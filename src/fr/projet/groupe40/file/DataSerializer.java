@@ -29,7 +29,7 @@ public class DataSerializer {
 	
 	public boolean save_game() {
 		try {
-			final FileOutputStream file = new FileOutputStream(name + ".save");
+			final FileOutputStream file = new FileOutputStream(Constantes.path_save + name + ".save");
 			oos = new ObjectOutputStream(file);
 			
 			//oos.writeObject(data.getPlanets());
@@ -65,7 +65,7 @@ public class DataSerializer {
 		FileInputStream file;
 		Galaxy loaded = new Galaxy();
 		try {
-			file = new FileInputStream(name + ".save");
+			file = new FileInputStream(Constantes.path_save + name + ".save");
 			ObjectInputStream ois = new ObjectInputStream(file);
 			
 			loaded = (Galaxy) ois.readObject();

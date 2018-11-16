@@ -179,7 +179,6 @@ public class Galaxy extends Thread implements Serializable{
 	}
 
 	public boolean isCollision(Squad s) {
-		
 		for(Planet p : planets) {
 			if(p != s.getDestination() && p != s.getSource()) {
 				collisionHandler(s, p);
@@ -201,7 +200,7 @@ public class Galaxy extends Thread implements Serializable{
 		
 		for(int i = 0; i < Constantes.nb_planets_tentatives; i++) {
 			double y = (Math.random() * (Constantes.height - height));
-			Planet p = new Planet(neutral,50,50);
+			Planet p = new Planet(neutral,0,0);
 			p.setY(y);
 			p.validatePosition();
 			
@@ -218,16 +217,17 @@ public class Galaxy extends Thread implements Serializable{
 			planets.get(1).setRuler(Constantes.ai_user);
 		}
 		
-
 		for(Planet p : planets) {
 			p.setImg_path(Constantes.path_img_planets);
 			p.updateImage();
 		}
-		
 	}
 
 	
 	private boolean testPlacement(Planet p) {
+		if(p.getY() > Constantes.height - p.height()/2 - Constantes.bottom_margin_size) {
+			return false;
+		}
 		Iterator<Planet> it = planets.iterator();
 		int sum = 0;
 		

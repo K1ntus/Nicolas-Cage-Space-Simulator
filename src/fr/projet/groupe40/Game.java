@@ -47,52 +47,19 @@ public class Game extends Application {
 		stage.show();
 
 		/** Mouse interaction **/
-		//Obsolete
+		//Deprecated
+		/*
 		EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				for(Planet p : galaxy.getPlanets()) {
-						
-					try {
-						if(event.isPrimaryButtonDown()) {	//usually left button
-							if(p.clickedOnPlanet(event.getX(), event.getY())) {
-								source = p;
-								if(source == null) {	break;	}
-								if(source.getRuler().getFaction() == Constantes.player) {
-									source.getRuler().setSource(p);
-									break;
-								}else {
-									if(Constantes.DEBUG) {
-										System.out.println("Vous n'etes pas le dirigeant de cette colonie");
-									}
-								}
-							}							
-						}
-							
-						if(event.isSecondaryButtonDown()) {	//usually right button
-							if(p.clickedOnPlanet(event.getX(), event.getY())) {
-								if(!source.intersects(p)) {
-									destination = p;
-									source.getRuler().setDestination(p);
-								}
-								break;
-							}
-								
-						}
-	
-					} catch(NullPointerException e) {
-						//Nothing
-					}
-				}
-					
-				
-				}
+				//TODO
+			}
 		};
+		*/
 
 		
 		/** Drag & Drop **/
-	    EventHandler<MouseEvent> canvasOnMousePressedEventHandler = new EventHandler<MouseEvent>()
-	    {
+	    EventHandler<MouseEvent> canvasOnMousePressedEventHandler = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent) {
 		        //System.out.println("Event on Source: mouse pressed");
@@ -120,8 +87,7 @@ public class Game extends Application {
 	        }
 	    };
 
-	    EventHandler<MouseEvent> canvasOnMouseDraggedEventHandler = new EventHandler<MouseEvent>()
-	    {
+	    EventHandler<MouseEvent> canvasOnMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent){
 	        	mouseEvent.setDragDetect(false);
@@ -160,6 +126,7 @@ public class Game extends Application {
 					source = null;
 					destination = null;
 	        	}
+	        	
 				//System.out.println(source.toString() + " -> " + destination.toString());
 				//((Canvas) (mouseEvent.getSource())).setTranslateX(newTranslateX);  //transform the object
 	            //((Canvas) (mouseEvent.getSource())).setTranslateY(newTranslateY);
@@ -213,7 +180,21 @@ public class Game extends Application {
 				
 				if (e.getCode() == KeyCode.F5) {
 					System.out.println("Saving game ...");
+					//Open popup window
+					/*
+						Stage newStage = new Stage();
+						VBox comp = new VBox();
+						TextField nameField = new TextField("Name");
+						TextField phoneNumber = new TextField("Phone Number");
+						comp.getChildren().add(nameField);
+						comp.getChildren().add(phoneNumber);
+
+						Scene stageScene = new Scene(comp, 300, 300);
+						newStage.setScene(stageScene);
+						newStage.show();
+						*/
 					saver.save_game();
+							
 				}
 				
 				if (e.getCode() == KeyCode.F6) {

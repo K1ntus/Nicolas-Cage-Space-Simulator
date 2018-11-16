@@ -70,7 +70,10 @@ public final class Constantes {
 	public static final Color color_ai = Color.RED;
 	public static final Color color_default = Color.WHITE;
 
-	/**	file	**/
+	/**	file **/
+	//public static final String path_save = "/saves/";
+	public static final String path_save = "";
+	
 	public static final String path_img_planets = "/resources/images/square.png";
 	public static final String path_img_ships = "/resources/images/alien.png";
 	public static final String path_img_background = "/resources/images/background.jpg";
