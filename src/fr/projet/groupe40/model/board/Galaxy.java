@@ -154,7 +154,6 @@ public class Galaxy extends Thread implements Serializable{
 	
 	
 	/** Defeat handler **/
-
 	public boolean userHasLost(User u) {	//S il existe au moins une planete lui appartenant -> pas perdu
 		if(u.hasLost()) {	//if user already registered has loser
 			return true;
@@ -182,7 +181,6 @@ public class Galaxy extends Thread implements Serializable{
 	
 	
 	/** Client handler **/
-	
 	public void clientScrollHandler(int action) {
 		for(Planet p : planets) {
 			User u = p.getRuler();
@@ -198,7 +196,6 @@ public class Galaxy extends Thread implements Serializable{
 	}
 	
 	/** Planets & Ships Collisions **/
-	
 	public void collisionHandler(Squad s, Planet p) {
 		double deltaY = 0, deltaX = 0;
 		double x = s.getX(), y = s.getY();
@@ -272,13 +269,14 @@ public class Galaxy extends Thread implements Serializable{
 		
 		
 		for(int i = 0; i < Constantes.nb_planets_tentatives; i++) {
-			double y = (Math.random() * (Constantes.height - height));
+			double y = (Math.random() * (Constantes.height - (height + Constantes.bottom_margin_size)));
 			Planet p = new Planet(neutral,0,0);
 			p.setY(y);
 			p.validatePosition();
 			
 			if(testPlacement(p)) {
-				planets.add(p);							
+				if(!(p.getY() >= Constantes.height - Constantes.bottom_margin_size - p.height()))
+					planets.add(p);							
 			}
 		}
 		

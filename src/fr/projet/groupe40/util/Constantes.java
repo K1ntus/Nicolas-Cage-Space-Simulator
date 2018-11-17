@@ -91,7 +91,7 @@ public final class Constantes {
 	
 	/**	AI Config **/
 	public static final boolean limit_ai_squads_number = true;	//If ai should have a limited number of squads at the same time
-	public static final int max_squads_for_ai = 5;	//max number of squads from an ai player at the same time. -1 to disable this limit
+	public static final int max_squads_for_ai = 2;	//max number of squads from an ai player at the same time. -1 to disable this limit
 	
 	
 }
