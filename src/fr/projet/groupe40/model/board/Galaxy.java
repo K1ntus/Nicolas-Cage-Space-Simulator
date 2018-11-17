@@ -93,6 +93,7 @@ public class Galaxy extends Thread implements Serializable{
 	public void update() {
 		updateAI();
 		updateSquad();
+		userHasLost(Constantes.ai_user);
 	}
 	
 	public void updateSquad() {
@@ -111,29 +112,74 @@ public class Galaxy extends Thread implements Serializable{
 			}
 		}		
 	}
+	
 	/**	AI	**/
 	public void updateAI() {
+		Planet source, destination;
+		
 		for(Planet p : planets) {
 			User ruler = p.getRuler();
+			
 			if(ruler.getId() < 0) {	//0 = neutral, >0 human, <0 bot
-				sendFleetAI(ruler, p);
+				source = p;
+				
+				//Check if the ai have reach the max numbers of squads at the same time
+				if(Constantes.limit_ai_squads_number) {
+					int sum = 0;
+					for(Squad s : squads) {
+						try {
+							if(s.getRuler().getId() == ruler.getId()) {
+								sum += 1;
+							}							
+						} catch (NullPointerException e) {		}
+					}
+					if (sum > Constantes.max_squads_for_ai) {
+						break;
+					}
+					
+				}
+				
+				for(Planet p2 : planets) {	//Check again the planets list
+					destination = p2;
+					if(p2.getTroups() < source.getTroups()) {
+						Squad s = ruler.sendFleetAI(source, destination);
+						squads.add(s);
+						break;
+					}
+				}
 			}
 		}
+
 	}
 	
-	public void sendFleetAI(User u, Planet source) {
-		for(Planet destination : planets) {
-			if(destination.getRuler().getId() == u.getId()) {
-				continue;				
-			}
-			if(destination.getTroups() < source.getTroups()) {
-				Squad s = source.sendFleet(destination);
-				squads.add(s);
-				break;
+	
+	/** Defeat handler **/
+
+	public boolean userHasLost(User u) {	//S il existe au moins une planete lui appartenant -> pas perdu
+		if(u.hasLost()) {	//if user already registered has loser
+			return true;
+		}
+		
+		int id = u.getId();
+		
+		for(Planet p : planets) {
+			int ruler_id = p.getRuler().getId();
+			if(ruler_id == id) {
+				return false;
 			}
 		}
 		
+		for(Squad s : squads) {
+			int ruler_id = s.getRuler().getId();
+			if(ruler_id == id) {
+				return false;
+			}
+		}
+		
+		u.setLost(false);
+		return true;
 	}
+	
 	
 	/** Client handler **/
 	

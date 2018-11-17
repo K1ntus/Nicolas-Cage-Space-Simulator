@@ -3,6 +3,7 @@ package fr.projet.groupe40.client;
 import java.io.Serializable;
 
 import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -18,11 +19,14 @@ public class User implements Serializable{
 	private int percent_of_troups_to_send;
 	
 	private Planet source,destination;
+	
+	private boolean lost;
 
 	public User(int faction, int id) {
 		this.faction = faction;
 		this.id = id;
-		setPercent_of_troups_to_send(100);
+		setLost(false);
+		percent_of_troups_to_send = 100;
 	}
 	public User(int faction) {
 		this.faction = faction;
@@ -35,8 +39,9 @@ public class User implements Serializable{
 		case Constantes.player:
 			id = Constantes.player; break;
 		}
-		setPercent_of_troups_to_send(100);
-		
+		percent_of_troups_to_send = 100;
+
+		setLost(false);
 		source = null;
 		destination = null;
 	}
@@ -44,9 +49,26 @@ public class User implements Serializable{
 	public User(User user) {
 		this.id = user.id;
 		this.faction = user.faction;
-		setPercent_of_troups_to_send(100);
+		setLost(false);
+		percent_of_troups_to_send = 100;
 	}
+	/** AI handler **/
 
+	public Squad sendFleetAI(Planet source, Planet destination) {
+		User u_dest = destination.getRuler();
+		int troups_destination = destination.getTroups();
+		
+		if(u_dest.id == id) {
+			return null;
+		}
+		if(troups_destination < source.getTroups()) {
+			Squad s = source.sendFleet(destination, 50);	//Ai will send 50% of his troups
+			return s;
+		}
+		
+		return null;
+	}
+	
 	public boolean hasLost() {
 		//TODO
 		return false;
@@ -116,6 +138,12 @@ public class User implements Serializable{
 	 */
 	public void setSource(Planet source) {
 		this.source = source;
+	}
+	public boolean isLost() {
+		return lost;
+	}
+	public void setLost(boolean lost) {
+		this.lost = lost;
 	}
 
 }

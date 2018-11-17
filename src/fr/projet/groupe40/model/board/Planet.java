@@ -61,13 +61,17 @@ public class Planet extends Sprite {
 	
 	/**	Interactions **/
 	public Squad sendFleet(Planet destination) {
+		return sendFleet(destination, getRuler().getPercent_of_troups_to_send());
+	}
+
+	public Squad sendFleet(Planet destination, double percent) {
 		if(troups > Constantes.min_troups+1) {
 			int fleet_size = troups - (Constantes.min_troups);
 			
 			//IF Percent >Constantes, then ...
 			//TODO
 			
-			fleet_size *= (getRuler().getPercent_of_troups_to_send() /100.0);
+			fleet_size *= (percent /100.0);
 			if(fleet_size < 1) {
 				return null;
 			}
