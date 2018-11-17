@@ -63,10 +63,11 @@ public class Planet extends Sprite {
 	public Squad sendFleet(Planet destination) {
 		if(troups > Constantes.min_troups+1) {
 			int fleet_size = troups - (Constantes.min_troups);
+			
 			//IF Percent >Constantes, then ...
 			//TODO
+			
 			fleet_size *= (getRuler().getPercent_of_troups_to_send() /100.0);
-			System.out.println("fleet size: " + fleet_size);
 			if(fleet_size < 1) {
 				return null;
 			}
@@ -90,13 +91,20 @@ public class Planet extends Sprite {
 		setWidth(Math.random() * Constantes.size_minimal_planets + Constantes.size_minimal_planets);
 		setHeight(width());
 		double x = (Math.random() * (Constantes.width - width()));
-		
+		double y = (Math.random() * (Constantes.height - height()));
+
 		if (x <= Constantes.left_margin_size)
-			setX(Constantes.left_margin_size);
-		else
-			setX(x);
+			x = Constantes.left_margin_size;
+		else if( x >= getMaxX())
+			x = getMaxX();
 		
-		setY((Math.random() * (Constantes.height - height())));
+		if (getY() <= Constantes.top_margin_size)
+			y = Constantes.top_margin_size;
+		else if( getY()+height() >= getMaxY())
+			y = getMaxY();
+		
+		setX(x);
+		setY(y);
 		troups = (int) (Math.random() * (Constantes.max_initDefense - Constantes.min_troups) +1);
 		produce_rate =  (int) (Math.random() * (Constantes.max_ship_produce - Constantes.min_ship_produce) +1);
 		

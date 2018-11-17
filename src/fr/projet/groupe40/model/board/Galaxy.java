@@ -91,6 +91,11 @@ public class Galaxy extends Thread implements Serializable{
 	
 
 	public void update() {
+		updateAI();
+		updateSquad();
+	}
+	
+	public void updateSquad() {
 		Iterator<Squad> it = getSquads().iterator();
 		
 		while (it.hasNext()) {
@@ -104,7 +109,30 @@ public class Galaxy extends Thread implements Serializable{
 			} catch(NullPointerException e) {
 				it.remove();
 			}
+		}		
+	}
+	/**	AI	**/
+	public void updateAI() {
+		for(Planet p : planets) {
+			User ruler = p.getRuler();
+			if(ruler.getId() < 0) {	//0 = neutral, >0 human, <0 bot
+				sendFleetAI(ruler, p);
+			}
 		}
+	}
+	
+	public void sendFleetAI(User u, Planet source) {
+		for(Planet destination : planets) {
+			if(destination.getRuler().getId() == u.getId()) {
+				continue;				
+			}
+			if(destination.getTroups() < source.getTroups()) {
+				Squad s = source.sendFleet(destination);
+				squads.add(s);
+				break;
+			}
+		}
+		
 	}
 	
 	/** Client handler **/
@@ -123,10 +151,9 @@ public class Galaxy extends Thread implements Serializable{
 		}
 	}
 	
-	/** Squad Path-way **/
+	/** Planets & Ships Collisions **/
 	
 	public void collisionHandler(Squad s, Planet p) {
-		System.out.println("Collision handler");
 		double deltaY = 0, deltaX = 0;
 		double x = s.getX(), y = s.getY();
 		double width = s.width(), height = s.height();
@@ -181,7 +208,7 @@ public class Galaxy extends Thread implements Serializable{
 	public boolean isCollision(Squad s) {
 		for(Planet p : planets) {
 			if(p != s.getDestination() && p != s.getSource()) {
-				collisionHandler(s, p);
+				//collisionHandler(s, p);
 				return true;
 			}
 		}

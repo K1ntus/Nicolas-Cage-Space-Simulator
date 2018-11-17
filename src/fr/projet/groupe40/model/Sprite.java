@@ -29,8 +29,8 @@ public class Sprite implements Serializable {
 		setImg_path(path);
 		
 		width = Constantes.size_squads;
-		maxX = Constantes.width - width;
-		maxY = Constantes.height - height;
+		setMaxX(Constantes.width - width);
+		setMaxY(Constantes.height - height);
 
 		this.ruler = ruler;
 		
@@ -39,8 +39,8 @@ public class Sprite implements Serializable {
 			if(width > Constantes.size_maximal_planets)
 				width = Constantes.size_maximal_planets;
 
-			maxX = Constantes.width - width - Constantes.right_margin_size;
-			maxY = Constantes.height - height - Constantes.bottom_margin_size;
+			setMaxX(Constantes.width - width - Constantes.right_margin_size);
+			setMaxY(Constantes.height - height - Constantes.bottom_margin_size);
 		}
 
 		minY = Constantes.top_margin_size - height;
@@ -58,8 +58,8 @@ public class Sprite implements Serializable {
 		this.height = s.height;
 		this.ruler = s.ruler;
 
-		maxX = Constantes.width - width - Constantes.right_margin_size;
-		maxY = Constantes.height - height - Constantes.bottom_margin_size;
+		setMaxX(Constantes.width - width - Constantes.right_margin_size);
+		setMaxY(Constantes.height - height - Constantes.bottom_margin_size);
 		minY = Constantes.top_margin_size;
 		minX = Constantes.left_margin_size;
 	}
@@ -90,8 +90,8 @@ public class Sprite implements Serializable {
 	}
 	
 	public void validatePosition() {
-		if (x + width >= maxX) {
-			x = maxX - width();
+		if (x + width >= getMaxX()) {
+			x = getMaxX() - width();
 			xSpeed *= -1;
 		} else if (x <= minX) {
 			x = minX;
@@ -102,8 +102,8 @@ public class Sprite implements Serializable {
 			xSpeed *= -1;
 		}
 
-		if (y + height >= maxY) {
-			y = maxY - height - Constantes.bottom_margin_size;
+		if (y + height >= getMaxY()) {
+			y = getMaxY() - height - Constantes.bottom_margin_size;
 			ySpeed *= -1;
 		} else if (y <= minY) {
 			y = minY;
@@ -314,6 +314,22 @@ public class Sprite implements Serializable {
 	 */
 	public void setImg_path(String img_path) {
 		this.img_path = img_path;
+	}
+
+	public double getMaxY() {
+		return maxY;
+	}
+
+	public void setMaxY(double maxY) {
+		this.maxY = maxY;
+	}
+
+	public double getMaxX() {
+		return maxX;
+	}
+
+	public void setMaxX(double maxX) {
+		this.maxX = maxX;
 	}
 
 }
