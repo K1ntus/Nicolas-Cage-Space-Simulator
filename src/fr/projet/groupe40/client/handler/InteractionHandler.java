@@ -12,16 +12,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
 public class InteractionHandler {
-	public InteractionHandler(Galaxy galaxy, DataSerializer saver) {
-		this.galaxy = galaxy;
-		this.saver = saver;
-	}
 
 	private Galaxy galaxy;
 	private DataSerializer saver;
 
     private double orgSceneX, orgSceneY;
 	private Planet source = null; private Planet destination = null;
+	private Squad selected = null;
+	
+	public InteractionHandler(Galaxy galaxy, DataSerializer saver) {
+		this.galaxy = galaxy;
+		this.saver = saver;
+	}
 	
 	private EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
         @Override
@@ -32,8 +34,21 @@ public class InteractionHandler {
             orgSceneX = mouseEvent.getSceneX();
             orgSceneY = mouseEvent.getSceneY();
 
+			for(Squad s : galaxy.getSquads()) {
+	            if(s.isInside(orgSceneX, orgSceneY, Constantes.size_squads, Constantes.size_squads)) {
+					if(s.getRuler().getFaction() == Constantes.player) {
+						selected = s;
+						System.out.println("selected: "+s.toString());
+						return;
+					}else {
+						if(Constantes.DEBUG) {
+							System.out.println("Vous n'etes pas le dirigeant de cette colonie");
+						}
+					}
+				}
+			}
+			
 			for(Planet p : galaxy.getPlanets()) {
-				
 	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
 					source = p;
 					if(source == null) {	break;	}
@@ -56,12 +71,29 @@ public class InteractionHandler {
         public void handle(MouseEvent mouseEvent){
         	mouseEvent.setDragDetect(false);
         	//System.out.println("Drag detected - Source: " + source.toString());
-        	if(source == null) {	return;	}
         	
             double offsetX = mouseEvent.getSceneX();
             double offsetY = mouseEvent.getSceneY();
 
 
+        	if(selected != null) {	
+    			for(Planet p : galaxy.getPlanets()) {
+    				try {						
+    					if(p.clickedOnPlanet(offsetX, offsetY)) {
+    						if(!selected.intersects(p)) {
+    							destination = p;
+    							selected.getRuler().setDestination(p);
+    						}
+    						return;
+    					}
+
+    				} catch(NullPointerException e) {
+    				//Nothing
+    					return;
+    				}
+    			}     		
+        	}
+        	
 			for(Planet p : galaxy.getPlanets()) {
 				try {						
 					if(p.clickedOnPlanet(offsetX, offsetY)) {
@@ -145,19 +177,19 @@ public class InteractionHandler {
 				
 			if (e.getCode() == KeyCode.F5) {
 				System.out.println("Saving game ...");
-					//Open popup window
-					/*
-						Stage newStage = new Stage();
-						VBox comp = new VBox();
-						TextField nameField = new TextField("Name");
-						TextField phoneNumber = new TextField("Phone Number");
-						comp.getChildren().add(nameField);
-						comp.getChildren().add(phoneNumber);
+				//Open popup window
+				/*
+					Stage newStage = new Stage();
+					VBox comp = new VBox();
+					TextField nameField = new TextField("Name");
+					TextField phoneNumber = new TextField("Phone Number");
+					comp.getChildren().add(nameField);
+					comp.getChildren().add(phoneNumber);
 
-						Scene stageScene = new Scene(comp, 300, 300);
-						newStage.setScene(stageScene);
-						newStage.show();
-						*/
+					Scene stageScene = new Scene(comp, 300, 300);
+					newStage.setScene(stageScene);
+					newStage.show();
+				*/
 				saver.save_game();
 							
 			}
@@ -165,7 +197,7 @@ public class InteractionHandler {
 			if (e.getCode() == KeyCode.F6) {
 				System.out.println("Loading game ...");
 				galaxy = saver.load_game(galaxy);
-				saver.reload_image(galaxy);
+				saver.reload_image_and_data(galaxy);
 			}
 			
 		}

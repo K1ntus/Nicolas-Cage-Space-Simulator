@@ -1,6 +1,7 @@
 Bugs to fix:
 
 18/11|	* Planet Generation	//Fixed
+		* Game loading/save
 
 
 **********************************************************************

@@ -83,10 +83,11 @@ public class DataSerializer {
 			e.printStackTrace();
 		}	
 		Galaxy res = new Galaxy(loaded);
+		
 		return res;
 	}
 	
-	public void reload_image(Galaxy g) {
+	public void reload_image_and_data(Galaxy g) {
 		for(Planet p : g.getPlanets()) {
 			User u = p.getRuler();
 			
