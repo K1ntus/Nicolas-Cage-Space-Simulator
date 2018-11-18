@@ -276,8 +276,7 @@ public class Galaxy extends Thread implements Serializable{
 			p.validatePosition();
 			
 			if(testPlacement(p)) {
-				if(!(p.getY() >= Constantes.height - Constantes.bottom_margin_size - p.height()))
-					planets.add(p);							
+				planets.add(p);
 			}
 		}
 		
@@ -286,18 +285,30 @@ public class Galaxy extends Thread implements Serializable{
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
 			planets.get(0).setRuler(Constantes.human_user);
-			planets.get(1).setRuler(Constantes.ai_user);
 		}
 		
+		int nb_ia = 0;
 		for(Planet p : planets) {
+			if(p.getRuler() == Constantes.neutral_user) {
+				if(nb_ia < Constantes.max_number_of_ai) {
+					p.setRuler(Constantes.ai_user);
+				}
+			}
+			
 			p.setImg_path(Constantes.path_img_planets);
 			p.updateImage();
 		}
+		
 	}
 
 
 	private boolean testPlacement(Planet p) {
-		if(p.getY() > Constantes.height - p.height()/2 - Constantes.bottom_margin_size) {
+		//if(!(p.getY() >= Constantes.height - Constantes.bottom_margin_size - p.height()))
+			
+		if(p.getX() > Constantes.width - Constantes.left_margin_size - Constantes.size_squads) {
+			return false;
+		}
+		if(p.getY() > Constantes.height - p.height() - Constantes.bottom_margin_size-Constantes.size_squads) {
 			return false;
 		}
 		Iterator<Planet> it = planets.iterator();

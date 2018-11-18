@@ -11,12 +11,11 @@ public class Planet extends Sprite {
 	/**
 	 * 
 	 */
-	
+	double summonX = 1, summonY = 1;
 	private int produce_rate;
 	private int troups;
 	
 	private Ship ships_type;
-	
 	
 	private boolean selected;
 
@@ -26,11 +25,11 @@ public class Planet extends Sprite {
 		setX(x);
 		setY(y);
 	}
-	/**	Utils **/
+	/**	Utilities **/
 	public boolean clickedOnPlanet(double x, double y) {
 		if(isInside(x, y,0,0)) {
 			if(Constantes.DEBUG) {
-				System.out.println("Vous avez cliqu� sur une plan�te avec "+this.troups);
+				System.out.println("Vous avez clique sur une planete avec "+this.troups);
 				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
 				System.out.println("et de type: "+ this.getRuler().getFaction());
 			}
@@ -55,6 +54,21 @@ public class Planet extends Sprite {
 	}
 	
 	/**	Interactions **/
+	public void sendFleet_position(Squad s) {
+		System.out.println(summonX + " | " + summonY);
+		if(summonX*s.width() + getX() < getX()+width())
+			summonX += 1;
+		else if (summonX*s.width() + getX() >= getX()+width())
+			summonX = 1;
+
+		s.setX(summonX*Constantes.size_squads + (this.getX() - Constantes.size_squads));
+		if(Math.random()>= 0.5)
+			s.setY(this.getY() - Constantes.size_squads);
+		else
+			s.setY(width() + getY() + Constantes.size_squads);
+			
+	}
+	
 	public Squad sendFleet(Planet destination) {
 		return sendFleet(destination, getRuler().getPercent_of_troups_to_send());
 	}
@@ -63,7 +77,7 @@ public class Planet extends Sprite {
 		if(troups > Constantes.min_troups+1) {
 			int fleet_size = troups - (Constantes.min_troups);
 			
-			//IF Percent >Constantes, then ...
+			//IF Percent >Constantes, then ... type of the ship
 			//TODO
 			
 			fleet_size *= (percent /100.0);
@@ -75,7 +89,8 @@ public class Planet extends Sprite {
 			//sprite.setPosition(getX()+width()/2,getY()+height()/2);
 			
 			Squad s = new Squad(Constantes.path_img_ships, getRuler(), false, (int)fleet_size, destination, ships_type);
-			s.setPosition(getX()+width()/2,getY()+height()/2);
+			sendFleet_position(s);
+			
 			s.setSource(this);
 			
 			return s;			
@@ -93,8 +108,8 @@ public class Planet extends Sprite {
 		double x = (Math.random() * (Constantes.width - width()));
 		double y = (Math.random() * (Constantes.height - height()));
 
-		if (x <= Constantes.left_margin_size)
-			x = Constantes.left_margin_size;
+		if (x <= Constantes.left_margin_size + Constantes.size_squads)
+			x = Constantes.left_margin_size + Constantes.size_squads;
 		else if( x >= getMaxX())
 			x = getMaxX();
 		
@@ -113,7 +128,7 @@ public class Planet extends Sprite {
 		updateImage();
 	}
 	
-	//find is place in the universe
+	//find his place in the universe
 	public int calculateNextPosition() {
 		
 		if (this.getX() + this.width() >= Constantes.width) {
