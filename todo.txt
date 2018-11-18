@@ -1,9 +1,45 @@
-* Décollage des vaisseaux:
-	** L'envoi de vaisseaux doit être fait par diffusion autour de la planète émettrice, c'est-à-dire que les vaisseaux ne doivent pas se recouvrir au décollage. 
-	** Par conséquent, le décollage d'un grand nombre de vaisseaux d'une petite planète peut nécessiter plusieurs vagues de décollage. 
-	** Les vaisseaux envoyés par un unique ordre compose un escadron. 
-	** Il doit être possible de changer facilement la destination d'un escadron qui n'a pas encore atteint sa destination. 
+**********************************************************************
+
+
+Minimal Version:
+	* Décollage des vaisseaux:
+		** L'envoi de vaisseaux doit être fait par diffusion autour de la planète émettrice, c'est-à-dire que les vaisseaux ne doivent pas se recouvrir au décollage. 
+		** Par conséquent, le décollage d'un grand nombre de vaisseaux d'une petite planète peut nécessiter plusieurs vagues de décollage. 
+		** Les vaisseaux envoyés par un unique ordre compose un escadron. 
+		** Il doit être possible de changer facilement la destination d'un escadron qui n'a pas encore atteint sa destination. 
+		
+	* Collisions Vaisseaux/Planètes
+		** Par contre, un vaisseau devant atteindre une planète donnée ne devra ni survoler, ni rentrer en collision avec une autre planète. 
+		** Pour ce faire, vous devrez mettre en place un algorithme de déplacement permettant le contournement des planètes non visées.
+		
+		
+**********************************************************************
+
+
+	* Documenter les fonctions
+	* Corriger l'implémentation
 	
-* Collisions Vaisseaux/Planètes
-	** Par contre, un vaisseau devant atteindre une planète donnée ne devra ni survoler, ni rentrer en collision avec une autre planète. 
-	** Pour ce faire, vous devrez mettre en place un algorithme de déplacement permettant le contournement des planètes non visées.
+	-> Rendu version minimale
+
+
+**********************************************************************
+
+
+To go further:
+	* Evènements:
+		** Génération aléatoire de pirates (Trou de ver)
+		** Forme des planètes
+		** Sprite aléatoire pour les planètes
+		** Taille des vaisseaux en fonction de leurs troupes
+		
+		
+**********************************************************************
+
+
+	* Documenter les fonctions
+	* Corriger l'implémentation
+	
+	-> Rendu version améliorée
+
+
+**********************************************************************
