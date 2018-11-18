@@ -271,7 +271,7 @@ public class Galaxy extends Thread implements Serializable{
 		
 		for(int i = 0; i < Constantes.nb_planets_tentatives; i++) {
 			double y = (Math.random() * (Constantes.height - (height + Constantes.bottom_margin_size)));
-			Planet p = new Planet(Constantes.path_img_planets, new User(Constantes.neutral_user), true, 0, 0);
+			Planet p = new Planet(Constantes.path_img_planets, new User(Constantes.neutral_user), true, (int) (Constantes.left_margin_size + Constantes.size_squads), 0);
 			p.setY(y);
 			p.validatePosition();
 			
@@ -304,11 +304,13 @@ public class Galaxy extends Thread implements Serializable{
 
 	private boolean testPlacement(Planet p) {
 		//if(!(p.getY() >= Constantes.height - Constantes.bottom_margin_size - p.height()))
-			
-		if(p.getX() > Constantes.width - Constantes.left_margin_size - Constantes.size_squads) {
-			return false;
-		}
-		if(p.getY() > Constantes.height - p.height() - Constantes.bottom_margin_size-Constantes.size_squads) {
+
+		//if(p.getX() < Constantes.left_margin_size + Constantes.size_squads) {
+		//	return false;
+		//}else if(p.getX() >= Constantes.width -  Constantes.right_margin_size + Constantes.size_squads) {
+		//	return false;
+		//}
+		if(p.getY() > Constantes.height - 2*p.height() - Constantes.bottom_margin_size-Constantes.size_squads) {
 			return false;
 		}
 		Iterator<Planet> it = planets.iterator();

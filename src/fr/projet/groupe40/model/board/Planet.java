@@ -133,13 +133,13 @@ public class Planet extends Sprite {
 		
 		if (this.getX() + this.width() >= Constantes.width) {
 			return Constantes.error_greater_x;
-		} else if (this.getX() < 0) {
+		} else if (this.getX() < Constantes.left_margin_size  + Constantes.size_squads ) {
 			return Constantes.error_lower_x;
 		}
 
 		if (this.getY() + this.height() >= Constantes.height) {
 			return Constantes.error_greater_y;
-		} else if (this.getY() < 0) {
+		} else if (this.getY() < Constantes.top_margin_size  + Constantes.size_squads) {
 			return Constantes.error_lower_y;
 		}
 		
@@ -151,15 +151,15 @@ public class Planet extends Sprite {
 		switch(calculateNextPosition()) {
 			case Constantes.error_greater_x:
 				setY(getY() + Constantes.height / 10);
-				setX(5);
+				setX(Constantes.left_margin_size  + Constantes.size_squads);
 				break;
 			case Constantes.error_lower_x:
-				setX(5);
+				setX(Constantes.left_margin_size  + Constantes.size_squads);
 				break;
 			case Constantes.error_greater_y:
 				return -1;
 			case Constantes.error_lower_y:
-				setY(5);
+				setX(Constantes.top_margin_size  + Constantes.size_squads);
 				break;
 			default:
 				return 0;
