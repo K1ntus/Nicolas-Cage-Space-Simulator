@@ -1,51 +1,54 @@
 Bugs to fix:
 
-	18/11| * Planet Generation	//Fixed
+18/11|	* Planet Generation	//Fixed
 
 
 **********************************************************************
 
 
 Minimal Version:
-	* Décollage des vaisseaux:
-		** L'envoi de vaisseaux doit être fait par diffusion autour de la planète émettrice, c'est-à-dire que les vaisseaux ne doivent pas se recouvrir au décollage. 
-		** Par conséquent, le décollage d'un grand nombre de vaisseaux d'une petite planète peut nécessiter plusieurs vagues de décollage. 
-		** Les vaisseaux envoyés par un unique ordre compose un escadron. 
-		** Il doit être possible de changer facilement la destination d'un escadron qui n'a pas encore atteint sa destination. 
+18/11|	* Décollage des vaisseaux:	//Should be ok
+			** L'envoi de vaisseaux doit être fait par diffusion autour de la planète émettrice, c'est-à-dire que les vaisseaux ne doivent pas se recouvrir au décollage. 
+			** Par conséquent, le décollage d'un grand nombre de vaisseaux d'une petite planète peut nécessiter plusieurs vagues de décollage. 
+			** Les vaisseaux envoyés par un unique ordre compose un escadron. 
+	
+		* Changement direction d'un escadron (squad) déjà lancé
 		
-	* Collisions Vaisseaux/Planètes
-		** Par contre, un vaisseau devant atteindre une planète donnée ne devra ni survoler, ni rentrer en collision avec une autre planète. 
-		** Pour ce faire, vous devrez mettre en place un algorithme de déplacement permettant le contournement des planètes non visées.
+		* Collisions Vaisseaux/Planètes
+			** Par contre, un vaisseau devant atteindre une planète donnée ne devra ni survoler, ni rentrer en collision avec une autre planète. 
+			** Pour ce faire, vous devrez mettre en place un algorithme de déplacement permettant le contournement des planètes non visées.
 		
-	18/11|* Redirections des vaisseaux lancés	//To check, normalement OK
+		* Rédiger un README.md
+		
 		
 **********************************************************************
 
-
-	* Documenter les fonctions
-	* Corriger l'implémentation
+		* Mise en place JUnit
+		* Documenter les fonctions (format Doxygen)
+		* Corriger l'implémentation
 	
-	-> Rendu version minimale
+			-> Rendu version minimale
 
 
 **********************************************************************
 
 
 To go further:
-	* Evènements:
-		** Génération aléatoire de pirates (Trou de ver)
-		** Forme des planètes
-		** Sprite aléatoire pour les planètes
-		** Taille des vaisseaux en fonction de leurs troupes
+		* Evènements:
+			** Génération aléatoire de pirates (Trou de ver)
+			** Forme des planètes
+			** Sprite aléatoire pour les planètes
+			** Taille des vaisseaux en fonction de leurs troupes
 		
 		
 **********************************************************************
 
 
-	* Documenter les fonctions
-	* Corriger l'implémentation
+		* Update JUnit
+		* Documenter les fonctions
+		* Corriger l'implémentation
 	
-	-> Rendu version améliorée
+		-> Rendu version améliorée
 
 
 **********************************************************************

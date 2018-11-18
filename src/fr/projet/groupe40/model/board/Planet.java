@@ -55,7 +55,7 @@ public class Planet extends Sprite {
 	
 	/**	Interactions **/
 	public void sendFleet_position(Squad s) {
-		System.out.println(summonX + " | " + summonY);
+		
 		if(summonX*s.width() + getX() < getX()+width())
 			summonX += 1;
 		else if (summonX*s.width() + getX() >= getX()+width())

@@ -64,13 +64,12 @@ public class InteractionHandler {
 
 			for(Planet p : galaxy.getPlanets()) {
 				try {						
-						if(p.clickedOnPlanet(offsetX, offsetY)) {
-							if(!source.intersects(p)) {
-								destination = p;
-								source.getRuler().setDestination(p);
-							}
-							break;
-						
+					if(p.clickedOnPlanet(offsetX, offsetY)) {
+						if(!source.intersects(p)) {
+							destination = p;
+							source.getRuler().setDestination(p);
+						}
+						break;
 					}
 
 				} catch(NullPointerException e) {
