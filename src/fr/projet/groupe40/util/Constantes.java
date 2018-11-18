@@ -48,6 +48,7 @@ public final class Constantes {
 	public static final int neutral = 0, player = 1, ai = -1;//Type of a planet
 	public static final User neutral_user = new User(neutral, 0);
 	public static final User ai_user = new User(ai, -1);
+	public static final User pirates_users = new User(ai, -2);
 	public static final User human_user = new User(player, 1);
 		
 	/**	Defense & Production **/

@@ -8,7 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
-public class Sprite implements Serializable {
+public abstract class Sprite implements Serializable {
 	private static final long serialVersionUID = 361050239890707789L;
 	/**
 	 * 
@@ -50,19 +50,6 @@ public class Sprite implements Serializable {
 		updateImage();
 	}
 
-	public Sprite(Sprite s) {
-		image = s.image;
-		this.x = s.x;
-		this.y = s.y;
-		this.width = s.width;
-		this.height = s.height;
-		this.ruler = s.ruler;
-
-		setMaxX(Constantes.width - width - Constantes.right_margin_size);
-		setMaxY(Constantes.height - height - Constantes.bottom_margin_size);
-		minY = Constantes.top_margin_size;
-		minX = Constantes.left_margin_size;
-	}
 
 	public void updateImage() {
 		try {

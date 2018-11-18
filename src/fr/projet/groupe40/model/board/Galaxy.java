@@ -6,6 +6,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 import fr.projet.groupe40.client.User;
+import fr.projet.groupe40.client.handler.InteractionHandler;
 import fr.projet.groupe40.model.Sprite;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
@@ -26,9 +27,9 @@ public class Galaxy extends Thread implements Serializable{
 
 	private volatile transient Thread blinker;
 	
-	private final static Sprite ai = new Sprite(Constantes.path_img_planets, new User(Constantes.ai_user), true);
-	private final static Sprite player = new Sprite(Constantes.path_img_planets, new User(Constantes.human_user), true);
-	private final static Sprite neutral = new Sprite(Constantes.path_img_planets, new User(Constantes.neutral_user), true);
+	//private final static Sprite ai = new Sprite(Constantes.path_img_planets, new User(Constantes.ai_user), true);
+	//private final static Sprite player = new Sprite(Constantes.path_img_planets, new User(Constantes.human_user), true);
+	//private final static Sprite neutral = new Sprite(Constantes.path_img_planets, new User(Constantes.neutral_user), true);
 	
 	
 	private ArrayList<Planet> planets;
@@ -195,7 +196,7 @@ public class Galaxy extends Thread implements Serializable{
 		}
 	}
 	
-	/** Planets & Ships Collisions **/
+	/** Collisions Between Ships & Planets **/
 	public void collisionHandler(Squad s, Planet p) {
 		double deltaY = 0, deltaX = 0;
 		double x = s.getX(), y = s.getY();
@@ -266,11 +267,11 @@ public class Galaxy extends Thread implements Serializable{
 		double width = Math.random() * Constantes.size_maximal_planets *0.25 + Constantes.size_minimal_planets;
 		double height = width;
 		//Sprite(String path, double width, double height, double maxX, double maxY) 
-		
+
 		
 		for(int i = 0; i < Constantes.nb_planets_tentatives; i++) {
 			double y = (Math.random() * (Constantes.height - (height + Constantes.bottom_margin_size)));
-			Planet p = new Planet(neutral,0,0);
+			Planet p = new Planet(Constantes.path_img_planets, new User(Constantes.neutral_user), true, 0, 0);
 			p.setY(y);
 			p.validatePosition();
 			
@@ -283,7 +284,7 @@ public class Galaxy extends Thread implements Serializable{
 		if(planets.size() < Constantes.min_numbers_of_planets) {	//si moins de 2 planetes
 			System.out.println("Impossible de generer un terrain minimal");
 			System.exit(-1);		//quitte le prgm
-		}else {		//On attribue 2 plan�tes, une a l'ia, une au joueur
+		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
 			planets.get(0).setRuler(Constantes.human_user);
 			planets.get(1).setRuler(Constantes.ai_user);
 		}
@@ -294,7 +295,7 @@ public class Galaxy extends Thread implements Serializable{
 		}
 	}
 
-	
+
 	private boolean testPlacement(Planet p) {
 		if(p.getY() > Constantes.height - p.height()/2 - Constantes.bottom_margin_size) {
 			return false;
@@ -325,7 +326,7 @@ public class Galaxy extends Thread implements Serializable{
 	public void generateRandomSquads() {
 		for(int i = 0, j=0; i < Constantes.nb_squads; i++) {
 			for(Planet p : planets) {
-				Squad s = new Squad(new Sprite(Constantes.path_img_ships, new User(Constantes.ai), false), Constantes.max_troups, planets.get(2));
+				Squad s = new Squad(Constantes.path_img_ships, new User(Constantes.ai), false, Constantes.max_troups, planets.get(2));
 				s.setPosition(Constantes.width * Math.random() - Constantes.size_squads, Constantes.height * Math.random() - Constantes.size_squads);
 				j += 1;
 				if(j == Constantes.nb_squads) {

@@ -1,5 +1,6 @@
 package fr.projet.groupe40.model.board;
 
+import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.Sprite;
 import fr.projet.groupe40.model.ships.Ship;
 import fr.projet.groupe40.model.ships.Squad;
@@ -19,18 +20,12 @@ public class Planet extends Sprite {
 	
 	private boolean selected;
 
-	public Planet(Sprite s) {
-		super(s);
-		generate();
-	}
-	public Planet(Sprite s, double x, double y) {
-		super(s);
+	public Planet(String path, User ruler, boolean isPlanet, int x, int y) {
+		super(path, ruler, isPlanet);
 		generate();
 		setX(x);
 		setY(y);
 	}
-
-
 	/**	Utils **/
 	public boolean clickedOnPlanet(double x, double y) {
 		if(isInside(x, y,0,0)) {
@@ -76,10 +71,11 @@ public class Planet extends Sprite {
 				return null;
 			}
 			troups -= fleet_size;
-			Sprite sprite = new Sprite(Constantes.path_img_ships, getRuler(), false);
-			sprite.setPosition(getX()+width()/2,getY()+height()/2);
+			//Sprite sprite = new Sprite(Constantes.path_img_ships, getRuler(), false);
+			//sprite.setPosition(getX()+width()/2,getY()+height()/2);
 			
-			Squad s = new Squad(sprite, (int)fleet_size, destination, ships_type);
+			Squad s = new Squad(Constantes.path_img_ships, getRuler(), false, (int)fleet_size, destination, ships_type);
+			s.setPosition(getX()+width()/2,getY()+height()/2);
 			s.setSource(this);
 			
 			return s;			

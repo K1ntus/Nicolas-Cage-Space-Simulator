@@ -2,6 +2,7 @@ package fr.projet.groupe40.model.ships;
 
 import java.io.Serializable;
 
+import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.Sprite;
 import fr.projet.groupe40.model.board.Planet;
 import fr.projet.groupe40.util.Constantes;
@@ -19,26 +20,21 @@ public class Squad extends Sprite implements Serializable{
 
 	private boolean reached;
 	
-
-	public Squad(Sprite s, int nb_of_ships, Planet destination) {
-		super(s);
+	
+	public Squad(String path, User user, boolean b, int nb_of_ships, Planet destination) {
+		super(path, user, b);
 		this.setNb_of_ships(nb_of_ships);
 		this.destination = destination;
 		setType(new Ship());
 		setPosition(Constantes.width/2, Constantes.height/2);
-		// TODO Auto-generated constructor stub
-
-		setReached(false);
 	}
 
-	public Squad(Sprite s, int nb_of_ships, Planet destination, Ship type) {
-		super(s);
+	public Squad(String path, User user, boolean b, int nb_of_ships, Planet destination, Ship ships_type) {
+		super(path, user, b);
 		this.setNb_of_ships(nb_of_ships);
 		this.destination = destination;
-		this.setType(type);
-		// TODO Auto-generated constructor stub
-
-		setReached(false);
+		this.type = ships_type;
+		setPosition(Constantes.width/2, Constantes.height/2);
 	}
 
 	public void setPosition(double x, double y) {

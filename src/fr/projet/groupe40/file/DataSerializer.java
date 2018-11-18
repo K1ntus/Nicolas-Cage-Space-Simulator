@@ -88,8 +88,8 @@ public class DataSerializer {
 	
 	public void reload_image(Galaxy g) {
 		for(Planet p : g.getPlanets()) {
-			
 			User u = p.getRuler();
+			
 			if (u.getFaction() == Constantes.ai) {
 				p.setRuler(Constantes.ai_user);
 			}else if (u.getFaction() == Constantes.player) {
@@ -107,6 +107,7 @@ public class DataSerializer {
 		
 		for(Squad s : g.getSquads()) {
 			User u = s.getRuler();
+			
 			if (u.getFaction() == Constantes.ai) {
 				s.setRuler(Constantes.ai_user);
 			}else if (u.getFaction() == Constantes.player) {
