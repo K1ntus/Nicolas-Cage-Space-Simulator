@@ -84,14 +84,17 @@ public class InteractionHandler {
     							destination = p;
     							selected.getRuler().setDestination(p);
     						}
+    		    			selected = null;
     						return;
     					}
 
     				} catch(NullPointerException e) {
     				//Nothing
+    	    			selected = null;
     					return;
     				}
-    			}     		
+    			}
+    			return;
         	}
         	
 			for(Planet p : galaxy.getPlanets()) {
