@@ -1,6 +1,6 @@
 Bugs to fix:
 
-	* Planet Generation
+	18/11| * Planet Generation	//Fixed
 
 
 **********************************************************************
@@ -17,7 +17,7 @@ Minimal Version:
 		** Par contre, un vaisseau devant atteindre une planète donnée ne devra ni survoler, ni rentrer en collision avec une autre planète. 
 		** Pour ce faire, vous devrez mettre en place un algorithme de déplacement permettant le contournement des planètes non visées.
 		
-	* Redirections des vaisseaux lancés	//To check, normalement OK
+	18/11|* Redirections des vaisseaux lancés	//To check, normalement OK
 		
 **********************************************************************
 
