@@ -33,7 +33,7 @@ public class InteractionHandler {
 	        
             orgSceneX = mouseEvent.getSceneX();
             orgSceneY = mouseEvent.getSceneY();
-
+/*
 			for(Squad s : galaxy.getSquads()) {
 	            if(s.isInside(orgSceneX, orgSceneY, Constantes.size_squads, Constantes.size_squads)) {
 					if(s.getRuler().getFaction() == Constantes.player) {
@@ -46,7 +46,7 @@ public class InteractionHandler {
 						}
 					}
 				}
-			}
+			}*/
 			
 			for(Planet p : galaxy.getPlanets()) {
 	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
@@ -75,7 +75,7 @@ public class InteractionHandler {
             double offsetX = mouseEvent.getSceneX();
             double offsetY = mouseEvent.getSceneY();
 
-
+/*
         	if(selected != null) {	
     			for(Planet p : galaxy.getPlanets()) {
     				try {						
@@ -96,7 +96,7 @@ public class InteractionHandler {
     			}
     			return;
         	}
-        	
+        	*/
 			for(Planet p : galaxy.getPlanets()) {
 				try {						
 					if(p.clickedOnPlanet(offsetX, offsetY)) {
@@ -112,11 +112,7 @@ public class InteractionHandler {
 					return;
 				}
 			}
-			if(source.getRuler() != Constantes.human_user) {
-				return;
-			}
-
-        	if(source == null || destination == null) {	
+        	if(source == null || destination == null || source.getRuler() != Constantes.human_user) {	
         		return;
         	}else {
 				Squad s = source.sendFleet(destination);

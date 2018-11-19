@@ -37,10 +37,11 @@ Minimal Version:
 To go further:
 		* Evènements:
 			** Génération aléatoire de pirates (Trou de ver)
+		* Gameplay:
+			** Nombre d'ennemis
 			** Forme des planètes
 			** Sprite aléatoire pour les planètes
 			** Taille des vaisseaux en fonction de leurs troupes
-		
 		
 **********************************************************************
 
