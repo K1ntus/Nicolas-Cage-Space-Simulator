@@ -44,7 +44,7 @@ public final class Constantes {
 	public static final double max_ship_produce = 4;
 		
 	/**	PLAYERS	**/
-	public static final int max_number_of_ai = 0;//Type of a planet
+	//public static final int max_number_of_ai = 1;
 	public static final int neutral = 0, player = 1, ai = -1;//Type of a planet
 	public static final User neutral_user = new User(neutral, 0);
 	public static final User ai_user = new User(ai, -1);

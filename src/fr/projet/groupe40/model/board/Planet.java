@@ -131,20 +131,25 @@ public class Planet extends Sprite {
 	//find his place in the universe
 	public int calculateNextPosition() {
 		
-		if (this.getX() + this.width() >= Constantes.width) {
+		if (this.getX() + this.width() >= Constantes.width -  Constantes.right_margin_size + Constantes.size_squads) {
+			//System.out.println("[INFO] Greater x case for planet generation");
 			return Constantes.error_greater_x;
 		} else if (this.getX() < Constantes.left_margin_size  + Constantes.size_squads ) {
+			//System.out.println("[INFO] Lower x case for planet generation");
 			return Constantes.error_lower_x;
 		}
 
 		if (this.getY() + this.height() >= Constantes.height) {
+			//System.out.println("[INFO] Higher y case for planet generation. Skip this one.");
 			return Constantes.error_greater_y;
 		} else if (this.getY() < Constantes.top_margin_size  + Constantes.size_squads) {
+			//System.out.println("[INFO] Lower y case for planet generation");
 			return Constantes.error_lower_y;
 		}
 		
 		return 0;
 	}
+	
 	
 	public int updatePlanetePosition() {
 		setX(this.getX() + this.width()/5);
@@ -160,6 +165,7 @@ public class Planet extends Sprite {
 				return -1;
 			case Constantes.error_lower_y:
 				setX(Constantes.top_margin_size  + Constantes.size_squads);
+				setY(Constantes.top_margin_size  + Constantes.size_squads + 1);
 				break;
 			default:
 				return 0;
