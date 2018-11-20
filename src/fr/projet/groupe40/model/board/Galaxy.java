@@ -284,8 +284,8 @@ public class Galaxy extends Thread implements Serializable{
 			System.out.println("Impossible de generer un terrain minimal");
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
-			planets.get(0).setRuler(Constantes.human_user);
-			planets.get(1).setRuler(Constantes.ai_user);
+			planets.get(1).setRuler(Constantes.human_user);
+			planets.get(2).setRuler(Constantes.ai_user);
 		}
 		
 		

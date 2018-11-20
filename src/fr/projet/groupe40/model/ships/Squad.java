@@ -55,7 +55,7 @@ public class Squad extends Sprite implements Serializable{
 		
 		if(destination.isInside(this)) {	//Case if the squads reach the destination			
 			if(this.getRuler().getFaction() != destination.getRuler().getFaction()) {	//If the faction are differents, then BOOM
-				int difference = destination.getTroups() - nb_of_ships;
+				int difference = destination.getTroups() - nb_of_ships*type.getPower();
 				
 				if(difference >=1) {	//Difference > 1 => kamikaze
 					destination.setTroups(difference);					
@@ -70,7 +70,7 @@ public class Squad extends Sprite implements Serializable{
 					}
 				}
 			}else if(this.getRuler().getFaction() == destination.getRuler().getFaction()) {	//Same faction
-				int sum = nb_of_ships + destination.getTroups();	//Sum of defense + squad
+				int sum = nb_of_ships*type.getPower() + destination.getTroups();	//Sum of defense + squad
 				if(sum >= Constantes.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
 					destination.setTroups(Constantes.max_troups);					
 				} else {	//Else, renforcement
