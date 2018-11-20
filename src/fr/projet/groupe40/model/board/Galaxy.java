@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.projet.groupe40.client.User;
-import fr.projet.groupe40.client.handler.InteractionHandler;
-import fr.projet.groupe40.model.Sprite;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
@@ -32,8 +31,8 @@ public class Galaxy extends Thread implements Serializable{
 	//private final static Sprite neutral = new Sprite(Constantes.path_img_planets, new User(Constantes.neutral_user), true);
 	
 	
-	private ArrayList<Planet> planets;
-	private ArrayList<Squad> squads;
+	private ArrayList <Planet> planets;
+	private ArrayList <Squad> squads;
 	
 	private transient Image background;
 	
@@ -50,11 +49,20 @@ public class Galaxy extends Thread implements Serializable{
 		start();			//Run the thread which is generating troups
 	}
 
-	
+
 	public Galaxy(Galaxy g) {
 		planets = g.planets;
 		squads = g.squads;
 		
+		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
+		setDaemon(true);	//Thread will close if game window has been closed
+		start();			//Run the thread which is generating troups
+	}
+	public Galaxy(List<Planet> planets, List<Squad> squads) {
+		this.planets = (ArrayList<Planet>) planets;
+		this.squads = (ArrayList<Squad>) squads;
+
+		generatePlanets();
 		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups

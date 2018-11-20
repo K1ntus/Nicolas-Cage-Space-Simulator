@@ -145,5 +145,13 @@ public class User implements Serializable{
 	public void setLost(boolean lost) {
 		this.lost = lost;
 	}
+	
+	public boolean equals(User u) {
+		if (u.faction == this.faction && u.id == this.id) {
+			System.out.println("equals");
+			return true;
+		}
+		return false;
+	}
 
 }

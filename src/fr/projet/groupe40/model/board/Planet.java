@@ -85,8 +85,6 @@ public class Planet extends Sprite {
 				return null;
 			}
 			troups -= fleet_size;
-			//Sprite sprite = new Sprite(Constantes.path_img_ships, getRuler(), false);
-			//sprite.setPosition(getX()+width()/2,getY()+height()/2);
 			
 			Squad s = new Squad(Constantes.path_img_ships, getRuler(), false, (int)fleet_size, destination, ships_type);
 			sendFleet_position(s);

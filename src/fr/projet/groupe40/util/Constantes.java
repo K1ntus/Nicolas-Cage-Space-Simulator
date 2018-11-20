@@ -87,7 +87,7 @@ public final class Constantes {
 	public static final int error_lower_x = -1;
 	public static final int error_lower_y = -2;
 
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	public static final boolean DEBUG_TROUPS = false;
 	
 	/**	AI Config **/

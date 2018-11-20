@@ -60,6 +60,7 @@ public class Squad extends Sprite implements Serializable{
 				if(difference >=1) {	//Difference > 1 => kamikaze
 					destination.setTroups(difference);					
 				} else {				//Else, negative or 0 => new leader
+					System.out.println("New ruler: "+this.getRuler());
 					destination.setRuler(this.getRuler());
 					
 					difference = Math.abs(difference);

@@ -13,7 +13,7 @@ import javafx.scene.input.ScrollEvent;
 
 public class InteractionHandler {
 
-	private Galaxy galaxy;
+	protected Galaxy galaxy;	//To be accessed by handler
 	private DataSerializer saver;
 
     private double orgSceneX, orgSceneY;
@@ -52,7 +52,7 @@ public class InteractionHandler {
 	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
 					source = p;
 					if(source == null) {	break;	}
-					if(source.getRuler().getFaction() == Constantes.player) {
+					if(p.getRuler().equals(Constantes.human_user)){
 						source.getRuler().setSource(p);
 						break;
 					}else {
@@ -154,8 +154,8 @@ public class InteractionHandler {
 				for(Planet p : galaxy.getPlanets()) {
 					System.out.println("*planet boucle:" +p.toString());
 					System.out.println("** ruler: " + p.getRuler().toString());
-						
-					if(p.getRuler() == Constantes.human_user) {
+
+					if(p.getRuler().equals(Constantes.human_user)){
 						System.out.println("*** ruler well selected");
 						Planet source = p.getRuler().getSource();
 						Planet destination = p.getRuler().getDestination();
@@ -189,7 +189,8 @@ public class InteractionHandler {
 					newStage.setScene(stageScene);
 					newStage.show();
 				*/
-				saver.save_game();
+					saver.save_game();
+				
 							
 			}
 				
@@ -235,6 +236,22 @@ public class InteractionHandler {
 
 	public void setKeyboardEvent(EventHandler<KeyEvent> keyboardEvent) {
 		this.keyboardEvent = keyboardEvent;
+	}
+
+	public Galaxy getGalaxy() {
+		return galaxy;
+	}
+
+	public void setGalaxy(Galaxy galaxy) {
+		this.galaxy = galaxy;
+	}
+
+	public DataSerializer getSaver() {
+		return saver;
+	}
+
+	public void setSaver(DataSerializer saver) {
+		this.saver = saver;
 	}
 
 	

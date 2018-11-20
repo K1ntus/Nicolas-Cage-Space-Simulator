@@ -29,7 +29,7 @@ public class DataSerializer {
 	
 	public boolean save_game() {
 		try {
-			final FileOutputStream file = new FileOutputStream(Constantes.path_save + name + ".save");
+			final FileOutputStream file = new FileOutputStream(name + ".save");
 			oos = new ObjectOutputStream(file);
 			
 			//oos.writeObject(data.getPlanets());
@@ -65,7 +65,7 @@ public class DataSerializer {
 		FileInputStream file;
 		Galaxy loaded = new Galaxy();
 		try {
-			file = new FileInputStream(Constantes.path_save + name + ".save");
+			file = new FileInputStream(name + ".save");
 			ObjectInputStream ois = new ObjectInputStream(file);
 			
 			loaded = (Galaxy) ois.readObject();
@@ -83,18 +83,17 @@ public class DataSerializer {
 			e.printStackTrace();
 		}	
 		Galaxy res = new Galaxy(loaded);
-		
 		return res;
 	}
 	
 	public void reload_image_and_data(Galaxy g) {
 		for(Planet p : g.getPlanets()) {
-			User u = p.getRuler();
 			
+			User u = p.getRuler();
 			if (u.getFaction() == Constantes.ai) {
-				p.setRuler(Constantes.ai_user);
-			}else if (u.getFaction() == Constantes.player) {
-				p.setRuler(Constantes.human_user);
+				p.setRuler(new User(Constantes.ai_user));
+			}else if (u.equals(Constantes.human_user)) {
+				p.setRuler(new User(1,1));
 			}else {
 				p.setRuler(Constantes.neutral_user);
 			}
@@ -108,11 +107,10 @@ public class DataSerializer {
 		
 		for(Squad s : g.getSquads()) {
 			User u = s.getRuler();
-			
 			if (u.getFaction() == Constantes.ai) {
 				s.setRuler(Constantes.ai_user);
-			}else if (u.getFaction() == Constantes.player) {
-				s.setRuler(Constantes.human_user);
+			}else if (u.equals(Constantes.human_user)) {
+				s.setRuler(new User(1,1));
 			}else {
 				s.setRuler(Constantes.neutral_user);
 			}
