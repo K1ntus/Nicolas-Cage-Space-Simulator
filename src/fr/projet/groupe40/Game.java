@@ -28,6 +28,7 @@ public class Game extends Application {
 	//private InteractionHandler interactionHandler;
 	private double orgSceneX, orgSceneY;
 	private Planet source, destination;
+	private Squad selected;
 	
 	public void start(Stage stage) {
 		
@@ -75,7 +76,6 @@ public class Game extends Application {
     							
     						if(destination != null && source != null) {
     							Squad s = source.sendFleet(destination);
-    							System.out.println("**** fleet sent");
     							galaxy.getSquads().add(s);
     								
     								
@@ -109,17 +109,17 @@ public class Game extends Application {
     	EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-    	        //System.out.println("Event on Source: mouse pressed");
     	        mouseEvent.setDragDetect(true);
     	        
                 orgSceneX = mouseEvent.getSceneX();
                 orgSceneY = mouseEvent.getSceneY();
-    /*
+                
+                /*
     			for(Squad s : galaxy.getSquads()) {
     	            if(s.isInside(orgSceneX, orgSceneY, Constantes.size_squads, Constantes.size_squads)) {
     					if(s.getRuler().getFaction() == Constantes.player) {
     						selected = s;
-    						System.out.println("selected: "+s.toString());
+    						System.out.println("squad selected: "+s.toString());
     						return;
     					}else {
     						if(Constantes.DEBUG) {
@@ -127,9 +127,10 @@ public class Game extends Application {
     						}
     					}
     				}
-    			}*/
+    			}
+    			*/
     			
-    			for(Planet p : galaxy.getPlanets()) {
+                for(Planet p : galaxy.getPlanets()) {
     	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
     					source = p;
     					if(source == null) {	break;	}
@@ -161,10 +162,10 @@ public class Game extends Application {
         			for(Planet p : galaxy.getPlanets()) {
         				try {						
         					if(p.clickedOnPlanet(offsetX, offsetY)) {
-        						if(!selected.intersects(p)) {
-        							destination = p;
-        							selected.getRuler().setDestination(p);
-        						}
+        						System.out.print("redirecting planet");
+        						destination = p;
+        						selected.getRuler().setDestination(p);
+        						System.out.println(selected.toString());
         		    			selected = null;
         						return;
         					}
@@ -176,8 +177,8 @@ public class Game extends Application {
         				}
         			}
         			return;
-            	}
-            	*/
+            	}*/
+            	if(source == null) { return; }
     			for(Planet p : galaxy.getPlanets()) {
     				try {						
     					if(p.clickedOnPlanet(offsetX, offsetY)) {
@@ -202,9 +203,6 @@ public class Game extends Application {
     				destination = null;
             	}
             	
-    			//System.out.println(source.toString() + " -> " + destination.toString());
-    			//((Canvas) (mouseEvent.getSource())).setTranslateX(newTranslateX);  //transform the object
-                //((Canvas) (mouseEvent.getSource())).setTranslateY(newTranslateY);
             }
     	};
     	

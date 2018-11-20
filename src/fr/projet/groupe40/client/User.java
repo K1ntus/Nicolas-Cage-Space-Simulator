@@ -148,7 +148,6 @@ public class User implements Serializable{
 	
 	public boolean equals(User u) {
 		if (u.faction == this.faction && u.id == this.id) {
-			System.out.println("equals");
 			return true;
 		}
 		return false;
