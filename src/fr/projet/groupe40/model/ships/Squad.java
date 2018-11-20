@@ -70,7 +70,7 @@ public class Squad extends Sprite implements Serializable{
 					}
 				}
 			}else if(this.getRuler().getFaction() == destination.getRuler().getFaction()) {	//Same faction
-				int sum = nb_of_ships*type.getPower() + destination.getTroups();	//Sum of defense + squad
+				int sum = nb_of_ships + destination.getTroups();	//Sum of defense + squad
 				if(sum >= Constantes.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
 					destination.setTroups(Constantes.max_troups);					
 				} else {	//Else, renforcement
