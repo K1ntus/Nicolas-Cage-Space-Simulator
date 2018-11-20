@@ -1,32 +1,33 @@
+
 Bugs to fix:
 
 18/11|	* Planet Generation	//Fixed
-		* Game loading/save
+20/11|	* Game loading/save
 
 
 **********************************************************************
 
 
 Minimal Version:
-18/11|	* Décollage des vaisseaux:	//Should be ok
-			** L'envoi de vaisseaux doit être fait par diffusion autour de la planète émettrice, c'est-à-dire que les vaisseaux ne doivent pas se recouvrir au décollage. 
-			** Par conséquent, le décollage d'un grand nombre de vaisseaux d'une petite planète peut nécessiter plusieurs vagues de décollage. 
-			** Les vaisseaux envoyés par un unique ordre compose un escadron. 
+18/11|	* Dï¿½collage des vaisseaux:	//Should be ok
+			** L'envoi de vaisseaux doit ï¿½tre fait par diffusion autour de la planï¿½te ï¿½mettrice, c'est-ï¿½-dire que les vaisseaux ne doivent pas se recouvrir au dï¿½collage. 
+			** Par consï¿½quent, le dï¿½collage d'un grand nombre de vaisseaux d'une petite planï¿½te peut nï¿½cessiter plusieurs vagues de dï¿½collage. 
+			** Les vaisseaux envoyï¿½s par un unique ordre compose un escadron. 
 	
-		* Changement direction d'un escadron (squad) déjà lancé
+		* Changement direction d'un escadron (squad) dï¿½jï¿½ lancï¿½
 		
-		* Collisions Vaisseaux/Planètes
-			** Par contre, un vaisseau devant atteindre une planète donnée ne devra ni survoler, ni rentrer en collision avec une autre planète. 
-			** Pour ce faire, vous devrez mettre en place un algorithme de déplacement permettant le contournement des planètes non visées.
+		* Collisions Vaisseaux/Planï¿½tes
+			** Par contre, un vaisseau devant atteindre une planï¿½te donnï¿½e ne devra ni survoler, ni rentrer en collision avec une autre planï¿½te. 
+			** Pour ce faire, vous devrez mettre en place un algorithme de dï¿½placement permettant le contournement des planï¿½tes non visï¿½es.
 		
-		* Rédiger un README.md
+		* Rï¿½diger un README.md
 		
 		
 **********************************************************************
 
 		* Mise en place JUnit
 		* Documenter les fonctions (format Doxygen)
-		* Corriger l'implémentation
+		* Corriger l'implï¿½mentation
 	
 			-> Rendu version minimale
 
@@ -35,12 +36,12 @@ Minimal Version:
 
 
 To go further:
-		* Evènements:
-			** Génération aléatoire de pirates (Trou de ver)
+		* Evï¿½nements:
+			** Gï¿½nï¿½ration alï¿½atoire de pirates (Trou de ver)
 		* Gameplay:
 			** Nombre d'ennemis
-			** Forme des planètes
-			** Sprite aléatoire pour les planètes
+			** Forme des planï¿½tes
+			** Sprite alï¿½atoire pour les planï¿½tes
 			** Taille des vaisseaux en fonction de leurs troupes
 		
 **********************************************************************
@@ -48,9 +49,9 @@ To go further:
 
 		* Update JUnit
 		* Documenter les fonctions
-		* Corriger l'implémentation
+		* Corriger l'implï¿½mentation
 	
-		-> Rendu version améliorée
+		-> Rendu version amï¿½liorï¿½e
 
 
 **********************************************************************

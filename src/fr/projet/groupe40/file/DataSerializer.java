@@ -91,9 +91,9 @@ public class DataSerializer {
 			
 			User u = p.getRuler();
 			if (u.getFaction() == Constantes.ai) {
-				p.setRuler(new User(Constantes.ai_user));
-			}else if (u.equals(Constantes.human_user)) {
-				p.setRuler(new User(1,1));
+				p.setRuler(Constantes.ai_user);
+			}else if (u.getFaction() == Constantes.player) {
+				p.setRuler(Constantes.human_user);
 			}else {
 				p.setRuler(Constantes.neutral_user);
 			}
@@ -109,8 +109,8 @@ public class DataSerializer {
 			User u = s.getRuler();
 			if (u.getFaction() == Constantes.ai) {
 				s.setRuler(Constantes.ai_user);
-			}else if (u.equals(Constantes.human_user)) {
-				s.setRuler(new User(1,1));
+			}else if (u.getFaction() == Constantes.player) {
+				s.setRuler(Constantes.human_user);
 			}else {
 				s.setRuler(Constantes.neutral_user);
 			}

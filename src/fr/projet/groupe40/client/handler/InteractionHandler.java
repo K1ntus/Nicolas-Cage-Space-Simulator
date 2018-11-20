@@ -1,28 +1,22 @@
 package fr.projet.groupe40.client.handler;
 
-import fr.projet.groupe40.file.DataSerializer;
 import fr.projet.groupe40.model.board.Galaxy;
 import fr.projet.groupe40.model.board.Planet;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
 public class InteractionHandler {
 
 	protected Galaxy galaxy;	//To be accessed by handler
-	private DataSerializer saver;
-
     private double orgSceneX, orgSceneY;
 	private Planet source = null; private Planet destination = null;
 	private Squad selected = null;
 	
-	public InteractionHandler(Galaxy galaxy, DataSerializer saver) {
+	public InteractionHandler(Galaxy galaxy) {
 		this.galaxy = galaxy;
-		this.saver = saver;
 	}
 	
 	private EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
@@ -143,65 +137,6 @@ public class InteractionHandler {
 		
 	};
 
-	private EventHandler<KeyEvent> keyboardEvent = new EventHandler<KeyEvent>() {
-
-		@Override
-		public void handle(KeyEvent e) {
-				
-			if(e.getCode() == KeyCode.SPACE) {
-				System.out.println("* button space pressed");
-					
-				for(Planet p : galaxy.getPlanets()) {
-					System.out.println("*planet boucle:" +p.toString());
-					System.out.println("** ruler: " + p.getRuler().toString());
-
-					if(p.getRuler().equals(Constantes.human_user)){
-						System.out.println("*** ruler well selected");
-						Planet source = p.getRuler().getSource();
-						Planet destination = p.getRuler().getDestination();
-							
-						if(destination != null && source != null) {
-							Squad s = source.sendFleet(destination);
-							System.out.println("**** fleet sent");
-							galaxy.getSquads().add(s);
-								
-								
-						}
-					} else {
-						p.getRuler().setDestination(null);
-					}
-				}
-
-			}
-				
-			if (e.getCode() == KeyCode.F5) {
-				System.out.println("Saving game ...");
-				//Open popup window
-				/*
-					Stage newStage = new Stage();
-					VBox comp = new VBox();
-					TextField nameField = new TextField("Name");
-					TextField phoneNumber = new TextField("Phone Number");
-					comp.getChildren().add(nameField);
-					comp.getChildren().add(phoneNumber);
-
-					Scene stageScene = new Scene(comp, 300, 300);
-					newStage.setScene(stageScene);
-					newStage.show();
-				*/
-					saver.save_game();
-				
-							
-			}
-				
-			if (e.getCode() == KeyCode.F6) {
-				System.out.println("Loading game ...");
-				galaxy = saver.load_game(galaxy);
-				saver.reload_image_and_data(galaxy);
-			}
-			
-		}
-	};
 	
 	
 	
@@ -229,15 +164,7 @@ public class InteractionHandler {
 	public void setScrollEvent(EventHandler<ScrollEvent> scrollEvent) {
 		this.scrollEvent = scrollEvent;
 	}
-
-	public EventHandler<KeyEvent> getKeyboardEvent() {
-		return keyboardEvent;
-	}
-
-	public void setKeyboardEvent(EventHandler<KeyEvent> keyboardEvent) {
-		this.keyboardEvent = keyboardEvent;
-	}
-
+	
 	public Galaxy getGalaxy() {
 		return galaxy;
 	}
@@ -245,14 +172,4 @@ public class InteractionHandler {
 	public void setGalaxy(Galaxy galaxy) {
 		this.galaxy = galaxy;
 	}
-
-	public DataSerializer getSaver() {
-		return saver;
-	}
-
-	public void setSaver(DataSerializer saver) {
-		this.saver = saver;
-	}
-
-	
 }
