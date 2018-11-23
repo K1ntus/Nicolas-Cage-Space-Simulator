@@ -3,7 +3,9 @@ Bugs to fix:
 
 18/11|	* Planet Generation	//Fixed
 20/11|	* Game loading/save
-
+23/11|	* Fleets sending
+		* AI
+		* Collision when decollage
 
 **********************************************************************
 

@@ -1,12 +1,8 @@
 package fr.projet.groupe40.model.board;
 
-import java.util.ArrayList;
-
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.Sprite;
-import fr.projet.groupe40.model.ships.Ship;
 import fr.projet.groupe40.model.ships.ShipType;
-import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 
 public class Planet extends Sprite {
