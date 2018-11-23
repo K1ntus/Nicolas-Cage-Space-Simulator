@@ -1,5 +1,6 @@
 package fr.projet.groupe40.model.ships;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -9,7 +10,8 @@ import fr.projet.groupe40.model.board.Planet;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Squad {
+public class Squad implements Serializable {
+	private static final long serialVersionUID = -6736174123976474099L;
 	
 	private ArrayList<Ship> ships = new ArrayList<Ship>();
 	private int summonX = 1, summonY = 1;
@@ -102,17 +104,19 @@ public class Squad {
 			source.setTroups(troups - fleet_size);
 				
 			for(int i = 0; i < fleet_size; i++) {
-					ships.add(
-							new Ship(
-									Constantes.path_img_ships,
-									source.getRuler(),
-									destination,
-									source,
-									this.decollageX(source),
-									this.decollageY(source),
-									source.getShips_type()
-								)
-							);
+				double x = this.decollageX(source);
+				double y = this.decollageY(source);
+				ships.add(
+					new Ship(
+							Constantes.path_img_ships,
+							source.getRuler(),
+							destination,
+							source,
+							x,
+							y,
+							source.getShips_type()
+						)
+				);
 			}	
 		}
 		return null;
@@ -120,20 +124,22 @@ public class Squad {
 
 	private double decollageX(Planet source) {
 		double x = 0;
-		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width())
+		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
-		else if (summonX*Constantes.size_squads + source.getX() >= source.getX()+source.width())
+			
+		} else if (summonX*Constantes.size_squads + source.getX() >= source.getX()+source.width()) {
 			summonX = 1;
+			summonY = -summonY;
+		}
 
 		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
 		
 	}
 	private double decollageY(Planet source) {
-		if(Math.random()>= 0.5)
+		if(summonY >= 1)
 			return (source.getY() - Constantes.size_squads);
 		else
-			return (source.width() + source.getY() + Constantes.size_squads);
-		
+			return (source.width() + source.getY() + Constantes.size_squads);		
 	}
 	
 }

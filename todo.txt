@@ -5,7 +5,7 @@ Bugs to fix:
 20/11|	* Game loading/save
 23/11|	* Fleets sending
 		* AI
-		* Collision when decollage
+		* Collisions au decollage
 
 **********************************************************************
 

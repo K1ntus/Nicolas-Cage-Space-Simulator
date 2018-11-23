@@ -1,8 +1,10 @@
 package fr.projet.groupe40.model.ships;
 
+import java.io.Serializable;
+
 import fr.projet.groupe40.util.Constantes;
 
-public class ShipType {
+public class ShipType implements Serializable {
 
 	protected double speed, power, production_time;
 	public ShipType() {
