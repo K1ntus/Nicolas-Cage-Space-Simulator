@@ -5,7 +5,7 @@ Bugs to fix:
 20/11|	* Game loading/save
 23/11|	* Fleets sending
 23/11|	* AI
-		* Collisions au decollage
+		* Collisions au decollage	//~50% ok, gérer plusieurs vagues de décollage. (Thread avec un delay ?)
 
 **********************************************************************
 
@@ -15,7 +15,6 @@ Minimal Version:
 			** L'envoi de vaisseaux doit ï¿½tre fait par diffusion autour de la planï¿½te ï¿½mettrice, c'est-ï¿½-dire que les vaisseaux ne doivent pas se recouvrir au dï¿½collage. 
 			** Par consï¿½quent, le dï¿½collage d'un grand nombre de vaisseaux d'une petite planï¿½te peut nï¿½cessiter plusieurs vagues de dï¿½collage. 
 			** Les vaisseaux envoyï¿½s par un unique ordre compose un escadron. 
-			//~50% ok, gérer plusieurs vagues de décollage. (Thread avec un delay ?)
 	
 		* Changement direction d'un escadron (squad) dï¿½jï¿½ lancï¿½
 		
