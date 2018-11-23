@@ -78,6 +78,7 @@ public final class Constantes {
 	public static final String path_img_planets = "/resources/images/square.png";
 	public static final String path_img_ships = "/resources/images/alien.png";
 	public static final String path_img_background = "/resources/images/background.jpg";
+	public static final String path_img_round_planets = null;
 	public static final String path_sound_explosion = "/resources/sounds/Engine.mp4";
 	public static final String path_sound_aa = "/resources/sounds/aa.mp4";
 

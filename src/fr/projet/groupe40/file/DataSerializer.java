@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.board.Galaxy;
 import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.model.ships.Ship;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 
@@ -26,7 +27,10 @@ public class DataSerializer {
 		
 		
 	}
-	
+	/**
+	 * \brief Save the current game state in a file
+	 * @return true if the game has been saved, else false
+	 */
 	public boolean save_game() {
 		try {
 			final FileOutputStream file = new FileOutputStream(name + ".save");
@@ -61,7 +65,11 @@ public class DataSerializer {
 		
 	}
 	
-	public Galaxy load_game(Galaxy g) {
+	/**
+	 * \brief Load a game from a save and apply it to the current game start
+	 * @return
+	 */
+	public Galaxy load_game() {
 		FileInputStream file;
 		Galaxy loaded = new Galaxy();
 		try {
@@ -85,7 +93,10 @@ public class DataSerializer {
 		Galaxy res = new Galaxy(loaded);
 		return res;
 	}
-	
+	/**
+	 * \brief Reload the game to apply the loading
+	 * @param g Galaxy to be reloaded
+	 */
 	public void reload_image_and_data(Galaxy g) {
 		for(Planet p : g.getPlanets()) {
 			
@@ -106,16 +117,17 @@ public class DataSerializer {
 		}
 		
 		for(Squad s : g.getSquads()) {
-			User u = s.getRuler();
+			ArrayList<Ship> ships = s.getShips();
+			User u = ships.get(0).getRuler();
+			
 			if (u.getFaction() == Constantes.ai) {
-				s.setRuler(Constantes.ai_user);
+				s.update_ruler(Constantes.ai_user);
 			}else if (u.getFaction() == Constantes.player) {
-				s.setRuler(Constantes.human_user);
+				s.update_ruler(Constantes.human_user);
 			}else {
-				s.setRuler(Constantes.neutral_user);
+				s.update_ruler(Constantes.neutral_user);
 			}
 			
-			s.setImg_path(Constantes.path_img_ships);
 			s.updateImage();
 		}
 	}

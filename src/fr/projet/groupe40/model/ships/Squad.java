@@ -1,159 +1,120 @@
 package fr.projet.groupe40.model.ships;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 import fr.projet.groupe40.client.User;
-import fr.projet.groupe40.model.Sprite;
 import fr.projet.groupe40.model.board.Planet;
 import fr.projet.groupe40.util.Constantes;
+import javafx.scene.canvas.GraphicsContext;
 
-public class Squad extends Sprite implements Serializable{
-	private static final long serialVersionUID = 7720386286912131175L;
-	/**
-	 * 
-	 */
+public class Squad {
 	
-	private Planet destination;
-	private Planet source;
-	private Ship type;
-	private int nb_of_ships;
+	private ArrayList<Ship> ships = new ArrayList<Ship>();
+	private int summonX = 1, summonY = 1;
 
-	private boolean reached;
-	
-	
-	public Squad(String path, User user, boolean b, int nb_of_ships, Planet destination) {
-		super(path, user, b);
-		this.setNb_of_ships(nb_of_ships);
-		this.destination = destination;
-		setType(new Ship());
-		setPosition(Constantes.width/2, Constantes.height/2);
+	public Squad() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public Squad(String path, User user, boolean b, int nb_of_ships, Planet destination, Ship ships_type) {
-		super(path, user, b);
-		this.setNb_of_ships(nb_of_ships);
-		this.destination = destination;
-		this.type = ships_type;
-		setPosition(Constantes.width/2, Constantes.height/2);
-	}
-
-	public void setPosition(double x, double y) {
-		setX(x);
-		setY(y);		
-	}
-
-	public void remove() {
-		nb_of_ships = 0;
-		this.setRuler(Constantes.neutral_user);
-		this.setImage(null);
-		this.reached = true;
-	}
-
-	public void updatePosition() {
-		if(reached)
-			return;
+	public void render_ships(GraphicsContext gc) {
+		for(Ship s : ships) {
+			s.render(gc);
+		}
 		
-		if(destination.isInside(this)) {	//Case if the squads reach the destination			
-			if(this.getRuler().getFaction() != destination.getRuler().getFaction()) {	//If the faction are differents, then BOOM
-				int difference = destination.getTroups() - nb_of_ships*type.getPower();
-				
-				if(difference >=1) {	//Difference > 1 => kamikaze
-					destination.setTroups(difference);					
-				} else {				//Else, negative or 0 => new leader
-					destination.setRuler(this.getRuler());
-					
-					difference = Math.abs(difference);
-					if(difference >= Constantes.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-						destination.setTroups(Constantes.max_troups);					
-					} else {	//Else, renforcement
-						destination.setTroups(difference + 1);
-					}
-				}
-			}else if(this.getRuler().getFaction() == destination.getRuler().getFaction()) {	//Same faction
-				int sum = nb_of_ships + destination.getTroups();	//Sum of defense + squad
-				if(sum >= Constantes.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-					destination.setTroups(Constantes.max_troups);					
-				} else {	//Else, renforcement
-					destination.setTroups(sum);
-				}
+	}
+
+	public void update_destination(Planet destination) {
+		for(Ship ship : ships) {
+			ship.destination = destination;
+		}
+	}
+	
+	public void update_all_positions() {
+		for(Ship ship : ships) {
+			if(ship.isInside(ship.destination)) {
+				ships.remove(ship);
+				continue;
 			}
-			remove();	//Remove the squads of the galaxy
-			return;
-		}
 
-		double centre_x = destination.getX() + destination.width()/2; 
-		double centre_y = destination.getY() + destination.height()/2;
-		double x = this.getX(); double y = this.getY();
-		if(x < centre_x) {
-			setX(x+getType().getSpeed());
-		} else {
-			setX(x-getType().getSpeed());
+			ship.update_position();
+			ship.validatePosition();
 		}
+	}
+
+	public void updateImage() {
+		for(Ship s : ships) {
+			s.setImg_path(Constantes.path_img_ships);
+			s.updateImage();			
+		}		
+	}
+	
+	public void update_ruler(User ruler) {
+		for(Ship ship : ships) {
+			ship.setRuler(ruler);
+		}
+	}
+
+	
+	public ArrayList<Ship> getShips() {
+		return ships;
+	}
+
+	public void setShips(ArrayList<Ship> ships) {
+		this.ships = ships;
+	}
+
+	public User getRuler() {
+		return ships.get(0).getRuler();
+	}
+
+
+	public Squad sendFleet(Planet source, Planet destination, int percent) {
+		int troups = source.getTroups();
 		
-		if(y < centre_y) {
-			setY(y+getType().getSpeed());
-		} else {
-			setY(y-getType().getSpeed());
+		if(troups > Constantes.min_troups+1) {	//Not send more troups than possible
+			System.out.println("...");
+			int fleet_size = troups - (Constantes.min_troups);
+				
+			//IF Percent >Constantes, then ... type of the ship
+			//TODO
+				
+			fleet_size *= (percent /100.0);
+			if(fleet_size < 1) {
+				return null;
+			}
+			source.setTroups(troups - fleet_size);
+				
+			for(int i = 0; i < fleet_size; i++) {
+					ships.add(
+							new Ship(Constantes.path_img_ships, source.getRuler(), source, destination, this.decollageX(source), this.decollageY(source))
+							);
+			}
+				//Squad s = new Squad(ships, (int)fleet_size, destination, ships_type);
+				//sendFleet_position(s);
+				
+				//s.setSource(this);
+				
+				//return s;			
 		}
+		return null;
+	}
+
+	private double decollageX(Planet source) {
+		double x = 0;
+		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width())
+			summonX += 1;
+		else if (summonX*Constantes.size_squads + source.getX() >= source.getX()+source.width())
+			summonX = 1;
+
+		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
 		
-		validatePosition();
 	}
-
-	public int getNb_of_ships() {
-		return nb_of_ships;
+	private double decollageY(Planet source) {
+		if(Math.random()>= 0.5)
+			return (source.getY() - Constantes.size_squads);
+		else
+			return (source.width() + source.getY() + Constantes.size_squads);
+		
 	}
-
-	public void setNb_of_ships(int nb_of_ships) {
-		this.nb_of_ships = nb_of_ships;
-	}
-
-	public boolean isReached() {
-		return reached;
-	}
-
-	public void setReached(boolean reached) {
-		this.reached = reached;
-	}
-
-	public Planet getDestination() {
-		return destination;
-	}
-
-	public void setDestination(Planet destination) {
-		this.destination = destination;
-	}
-
-	public String toString() {
-		return "Squad <" + getX() + ", " + getY() + ">" + "\ndestination"+destination.toString() + "\nsource"+source.toString();
-	}
-
-
-	/**
-	 * @return the source
-	 */
-	public Planet getSource() {
-		return source;
-	}
-
-	/**
-	 * @param source the source to set
-	 */
-	public void setSource(Planet source) {
-		this.source = source;
-	}
-
-	/**
-	 * @return the type
-	 */
-	public Ship getType() {
-		return type;
-	}
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(Ship type) {
-		this.type = type;
-	}
-
+	
 }

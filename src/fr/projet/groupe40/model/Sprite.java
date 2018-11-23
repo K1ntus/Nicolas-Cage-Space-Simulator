@@ -6,13 +6,9 @@ import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 
 public abstract class Sprite implements Serializable {
 	private static final long serialVersionUID = 361050239890707789L;
-	/**
-	 * 
-	 */
 	
 	private transient Image image;	//unserializable
 	private String img_path;
@@ -25,6 +21,12 @@ public abstract class Sprite implements Serializable {
 
 	private User ruler;
 
+	/**
+	 * \brief Create a sprite from an image path, a ruler and if its a planets or not
+	 * @param path Path to the image file
+	 * @param ruler Ruler of this sprite
+	 * @param isPlanet Its a planet or not
+	 */
 	public Sprite(String path, User ruler, boolean isPlanet) {
 		setImg_path(path);
 		
@@ -50,7 +52,9 @@ public abstract class Sprite implements Serializable {
 		updateImage();
 	}
 
-
+	/**
+	 * \brief Update the image linked to a sprite
+	 */
 	public void updateImage() {
 		try {
 			image = new Image(getImg_path(), width, height, false, false);
@@ -58,24 +62,54 @@ public abstract class Sprite implements Serializable {
 			//No image
 		}
 	}
+	
+	/**
+	 * \brief Set the x and y position of a sprite
+	 * @param x New x position
+	 * @param y New y position
+	 */
 	public void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
+	/**
+	 * \brief Return the distance between a sprite and a 2d coord.
+	 * @param x 
+	 * @param y
+	 * @return Distance between those 2 positions
+	 */
 	public double distance(double x, double y) {
-		double center_x = x + width()/2;
-		double center_y = y + height()/2;
+		double center_x = this.x + width()/2;
+		double center_y = this.y + height()/2;
 		return distance(x,y, center_x, center_y);
 	}
+	
+	/**
+	 * \brief Return the distance between 2 dots
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return A distance
+	 */
 	public double distance(double x1, double y1, double x2, double y2) {
 		double res = Math.hypot(x1-x2, y1-y2); 
 		return res;
 	}
+	
+	/**
+	 * \brief Calculate the distance between 2 sprites
+	 * @param p Second sprite to compare with
+	 * @return The distance
+	 */
 	public double distance(Sprite p) {
 		return distance(p.x, p.y);
 	}
 	
+	/**
+	 * \brief Verify if a sprite is not out of bounds
+	 */
 	public void validatePosition() {
 		if (x + width >= getMaxX()) {
 			x = getMaxX() - width();
@@ -101,7 +135,14 @@ public abstract class Sprite implements Serializable {
 		}
 	}
 	
-
+	/**
+	 * \brief Check if a rectangle intersect a circle
+	 * @param x_left
+	 * @param y_top
+	 * @param x_right
+	 * @param y_bottom
+	 * @return true if there s a collision, else false
+	 */
 	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
 		//(x - center_x)^2 + (y - center_y)^2 < radius^2
 		double radius = this.width()/2 + Constantes.minimal_distance_between_planets;
@@ -133,6 +174,12 @@ public abstract class Sprite implements Serializable {
 		
 		return false;
 	}
+	/**
+	 * \brief Check if a sprite intersect another circle from a sprite
+	 * In fact, we're generating a circle around a sprite to check the distance between each others
+	 * @param p
+	 * @return
+	 */
 	public boolean intersectCircle(Sprite p) {
 		return intersectCircle(
 				p.getX(),
@@ -142,79 +189,59 @@ public abstract class Sprite implements Serializable {
 			);
 	}
 
+	/**
+	 * \brief Check if a rectangle is inside another
+	 * @param x	
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	public boolean isInside(double x, double y, double width, double height) {
-		if(x > getX()+width() || x+width < getX()) {
+		if(x > this.getX()+this.width() || x+width < this.getX()) {
 			return false;
 		}
 		
-		if(y > getY()+height() || y+height < getY()) {
+		if(y > this.getY()+this.height() || y+height < this.getY()) {
 			return false;
 		}
 		return true;
 	}
 	
+	/**
+	 * \brief Check if a sprite directly intersect another one
+	 * @param s
+	 * @return
+	 */
 	public boolean isInside(Sprite s) {
-		return this.intersects(s);
+		return ((x >= s.x && x <= s.x + s.width()) || (s.x >= x && s.x <= x + width()))
+				&& ((y >= s.y && y <= s.y + s.height()) || (s.y >= y && s.y <= y + height()));
 		//return isInside(s.getX(), s.getY());
 	}
 
+	/**
+	 * \brief Set the position of a sprite then validate his position
+	 * @param x
+	 * @param y
+	 */
 	public void setPosition(double x, double y) {
 		this.x = x;
 		this.y = y;
 		validatePosition();
 	}
 
-	public void setSpeed(double xSpeed, double ySpeed) {
-		this.xSpeed = xSpeed;
-		this.ySpeed = ySpeed;
-	}
-
-	public void changeSpeed(KeyCode code) {
-		switch (code) {
-		case LEFT:
-			xSpeed--;
-			break;
-		case RIGHT:
-			xSpeed++;
-			break;
-		case UP:
-			ySpeed--;
-			break;
-		case DOWN:
-			ySpeed++;
-			break;
-		case SPACE:
-			ySpeed = xSpeed = 0;
-			break;
-		default:
-		}
-	}
-
-	public void updatePosition() {
-		x += xSpeed;
-		y += ySpeed;
-		validatePosition();
-	}
-
+	/**
+	 * \brief Render the image of this sprite
+	 * @param gc
+	 */
 	public void render(GraphicsContext gc) {
 		gc.drawImage(image, x, y);
 	}
 
-	public boolean intersects(Sprite s) {
-		return ((x >= s.x && x <= s.x + s.width()) || (s.x >= x && s.x <= x + width()))
-				&& ((y >= s.y && y <= s.y + s.height()) || (s.y >= y && s.y <= y + height()));
-	}
-
-
-	public boolean intersects(double x2, double y2, double width, double height) {
-		return ((x >= x2 && x <= x2 + width) || (x2 >= x && x2 <= x + width))
-				&& ((y >= y2 && y <= y2 + height) || (y2 >= y && y2 <= y + height));
-	}
-		
-	/** Conflict Area **/
+	/* Conflict Area */
 	
 	
-	/** Getter & Setter **/
+	/* Getter & Setter */
 	public double width() {
 		return width;
 	}

@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
+@Deprecated
 public class InteractionHandler {
 
 	protected Galaxy galaxy;	//To be accessed by handler
@@ -94,7 +95,7 @@ public class InteractionHandler {
 			for(Planet p : galaxy.getPlanets()) {
 				try {						
 					if(p.clickedOnPlanet(offsetX, offsetY)) {
-						if(!source.intersects(p)) {
+						if(!source.isInside(p)) {
 							destination = p;
 							source.getRuler().setDestination(p);
 						}

@@ -1,8 +1,11 @@
 package fr.projet.groupe40.model.board;
 
+import java.util.ArrayList;
+
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.Sprite;
 import fr.projet.groupe40.model.ships.Ship;
+import fr.projet.groupe40.model.ships.ShipType;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 
@@ -15,7 +18,7 @@ public class Planet extends Sprite {
 	private int produce_rate;
 	private int troups;
 	
-	private Ship ships_type;
+	private ShipType ships_type;
 	
 	private boolean selected;
 
@@ -54,47 +57,6 @@ public class Planet extends Sprite {
 	}
 	
 	/**	Interactions **/
-	public void sendFleet_position(Squad s) {
-		
-		if(summonX*s.width() + getX() < getX()+width())
-			summonX += 1;
-		else if (summonX*s.width() + getX() >= getX()+width())
-			summonX = 1;
-
-		s.setX(summonX*Constantes.size_squads + (this.getX() - Constantes.size_squads));
-		if(Math.random()>= 0.5)
-			s.setY(this.getY() - Constantes.size_squads);
-		else
-			s.setY(width() + getY() + Constantes.size_squads);
-			
-	}
-	
-	public Squad sendFleet(Planet destination) {
-		return sendFleet(destination, getRuler().getPercent_of_troups_to_send());
-	}
-
-	public Squad sendFleet(Planet destination, double percent) {
-		if(troups > Constantes.min_troups+1) {
-			int fleet_size = troups - (Constantes.min_troups);
-			
-			//IF Percent >Constantes, then ... type of the ship
-			//TODO
-			
-			fleet_size *= (percent /100.0);
-			if(fleet_size < 1) {
-				return null;
-			}
-			troups -= fleet_size;
-			
-			Squad s = new Squad(Constantes.path_img_ships, getRuler(), false, (int)fleet_size, destination, ships_type);
-			sendFleet_position(s);
-			
-			s.setSource(this);
-			
-			return s;			
-		}
-		return null;
-	}
 	
 	/**	Planet Generation	**/
 
@@ -121,7 +83,7 @@ public class Planet extends Sprite {
 		troups = (int) (Math.random() * (Constantes.max_initDefense - Constantes.min_troups) +1);
 		produce_rate =  (int) (Math.random() * (Constantes.max_ship_produce - Constantes.min_ship_produce) +1);
 		
-		ships_type = new Ship();
+		ships_type = new ShipType();
 		
 		updateImage();
 	}
@@ -193,11 +155,11 @@ public class Planet extends Sprite {
 		this.troups = troups;
 	}
 
-	public Ship getShips_type() {
+	public ShipType getShips_type() {
 		return ships_type;
 	}
 
-	public void setShips_type(Ship ships_type) {
+	public void setShips_type(ShipType ships_type) {
 		this.ships_type = ships_type;
 	}
 

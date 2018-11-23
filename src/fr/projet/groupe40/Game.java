@@ -1,6 +1,5 @@
 package fr.projet.groupe40;
 
-import fr.projet.groupe40.client.handler.InteractionHandler;
 import fr.projet.groupe40.file.DataSerializer;
 import fr.projet.groupe40.model.board.Galaxy;
 import fr.projet.groupe40.model.board.Planet;
@@ -75,7 +74,9 @@ public class Game extends Application {
     						Planet destination = p.getRuler().getDestination();
     							
     						if(destination != null && source != null) {
-    							Squad s = source.sendFleet(destination);
+    							Squad s = new Squad();
+    							s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
+    							
     							galaxy.getSquads().add(s);
     								
     								
@@ -97,7 +98,7 @@ public class Game extends Application {
     				
     			if (e.getCode() == KeyCode.F6) {
     				System.out.println("Loading game ...");
-    				galaxy = saver.load_game(galaxy);
+    				galaxy = saver.load_game();
     				saver.reload_image_and_data(galaxy);
     				
     				//interactionHandler = new InteractionHandler(galaxy);
@@ -182,7 +183,7 @@ public class Game extends Application {
     			for(Planet p : galaxy.getPlanets()) {
     				try {						
     					if(p.clickedOnPlanet(offsetX, offsetY)) {
-    						if(!source.intersects(p)) {
+    						if(!source.isInside(p)) {
     							destination = p;
     							source.getRuler().setDestination(p);
     						}
@@ -197,8 +198,12 @@ public class Game extends Application {
             	if(source == null || destination == null || source.getRuler() != Constantes.human_user) {	
             		return;
             	}else {
-    				Squad s = source.sendFleet(destination);
-    				galaxy.getSquads().add(s);	
+            		System.out.println("Sending fleet");
+					Squad s = new Squad();
+					s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
+					
+					galaxy.getSquads().add(s);
+
     				source = null;
     				destination = null;
             	}
