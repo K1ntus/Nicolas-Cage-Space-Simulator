@@ -110,8 +110,8 @@ public class InteractionHandler {
         	if(source == null || destination == null || source.getRuler() != Constantes.human_user) {	
         		return;
         	}else {
-				Squad s = source.sendFleet(destination);
-				galaxy.getSquads().add(s);	
+				//Squad s = source.sendFleet(destination);
+				//galaxy.getSquads().add(s);	
 				source = null;
 				destination = null;
         	}

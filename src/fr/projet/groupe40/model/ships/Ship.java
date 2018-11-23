@@ -15,17 +15,52 @@ public class Ship extends Sprite implements Serializable {
 	protected Planet destination, source;
 	protected boolean reached;
 
-	public Ship(String path, User ruler, Planet destination, Planet source, double x_init, double y_init) {
+	public Ship(String path, User ruler, Planet destination, Planet source, double x_init, double y_init, ShipType ship_type) {
 		super(path, ruler, false);
 		this.destination = destination;
 		this.source = source;
 		this.setX(x_init);
 		this.setY(y_init);
+		this.ship_type = ship_type;
 	}
 
 
 	
 	public void update_position() {
+
+		if(reached)
+			return;
+		
+		if(destination.isInside(this)) {	//Case if the squads reach the destination			
+			if(this.getRuler().getFaction() != destination.getRuler().getFaction()) {	//If the faction are differents, then BOOM
+				int difference = destination.getTroups() - 1;
+				
+				if(difference >=1) {	//Difference > 1 => kamikaze
+					destination.setTroups(difference);					
+				} else {				//Else, negative or 0 => new leader
+					destination.setRuler(this.getRuler());
+					
+					difference = Math.abs(difference);
+					if(difference >= Constantes.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
+						destination.setTroups(Constantes.max_troups);					
+					} else {	//Else, renforcement
+						destination.setTroups(difference + 1);
+					}
+				}
+			}else if(this.getRuler().getFaction() == destination.getRuler().getFaction()) {	//Same faction
+				int sum = 1 + destination.getTroups();	//Sum of defense + squad
+				if(sum >= Constantes.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
+					destination.setTroups(Constantes.max_troups);					
+				} else {	//Else, renforcement
+					destination.setTroups(sum);
+				}
+			}
+			remove();	//Remove the squads of the galaxy
+			return;
+		}
+		
+		
+		
 		double speed = ship_type.speed;
 
 		double centre_x = destination.getX() + destination.width()/2; 
@@ -47,7 +82,6 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	public void remove() {
-		System.out.println("removed");
 		this.setRuler(Constantes.neutral_user);
 		this.setImage(null);
 		this.reached = true;

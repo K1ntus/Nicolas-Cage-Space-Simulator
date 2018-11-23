@@ -1,6 +1,8 @@
 package fr.projet.groupe40.model.ships;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.board.Planet;
@@ -30,14 +32,25 @@ public class Squad {
 	}
 	
 	public void update_all_positions() {
-		for(Ship ship : ships) {
-			if(ship.isInside(ship.destination)) {
-				ships.remove(ship);
-				continue;
-			}
+		Iterator<Ship> it = ships.iterator();
+		
+		while (it.hasNext()) {
+			Ship ship = it.next();
+			try {
+				if(ship.isInside(ship.destination)) {
+					ships.remove(ship);
+					it = ships.iterator();
+				}
 
-			ship.update_position();
-			ship.validatePosition();
+				ship.update_position();
+				ship.validatePosition();
+			} catch(NullPointerException e) {
+				it.remove();
+			} catch(ConcurrentModificationException e) {
+				//List getting edited at the same time
+				//Reset the boucle
+				it = ships.iterator();
+			}
 		}
 	}
 
@@ -64,7 +77,12 @@ public class Squad {
 	}
 
 	public User getRuler() {
-		return ships.get(0).getRuler();
+		try {
+			return ships.get(0).getRuler();
+		} catch (IndexOutOfBoundsException e) {
+			//Every squads has reached destination
+			return null;
+		}
 	}
 
 
@@ -72,7 +90,6 @@ public class Squad {
 		int troups = source.getTroups();
 		
 		if(troups > Constantes.min_troups+1) {	//Not send more troups than possible
-			System.out.println("...");
 			int fleet_size = troups - (Constantes.min_troups);
 				
 			//IF Percent >Constantes, then ... type of the ship
@@ -86,15 +103,17 @@ public class Squad {
 				
 			for(int i = 0; i < fleet_size; i++) {
 					ships.add(
-							new Ship(Constantes.path_img_ships, source.getRuler(), source, destination, this.decollageX(source), this.decollageY(source))
+							new Ship(
+									Constantes.path_img_ships,
+									source.getRuler(),
+									destination,
+									source,
+									this.decollageX(source),
+									this.decollageY(source),
+									source.getShips_type()
+								)
 							);
-			}
-				//Squad s = new Squad(ships, (int)fleet_size, destination, ships_type);
-				//sendFleet_position(s);
-				
-				//s.setSource(this);
-				
-				//return s;			
+			}	
 		}
 		return null;
 	}

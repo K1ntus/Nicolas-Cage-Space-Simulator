@@ -198,7 +198,6 @@ public class Game extends Application {
             	if(source == null || destination == null || source.getRuler() != Constantes.human_user) {	
             		return;
             	}else {
-            		System.out.println("Sending fleet");
 					Squad s = new Squad();
 					s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
 					

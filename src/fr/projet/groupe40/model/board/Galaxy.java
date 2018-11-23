@@ -140,7 +140,7 @@ public class Galaxy extends Thread implements Serializable{
 			} catch(NullPointerException e) {
 				it.remove();
 			}
-		}		
+		}
 	}
 	
 	/*	AI	*/
@@ -207,7 +207,13 @@ public class Galaxy extends Thread implements Serializable{
 		}
 		
 		for(Squad s : squads) {
-			int ruler_id = s.getRuler().getId();
+			User ruler = s.getRuler();
+			int ruler_id = 0;
+			if(ruler != null)
+				ruler_id = ruler.getId();
+			else
+				continue;
+			
 			if(ruler_id == id) {
 				return false;
 			}
