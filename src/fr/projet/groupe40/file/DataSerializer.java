@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.board.Galaxy;
-import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.model.planets.Planet;
 import fr.projet.groupe40.model.ships.Ship;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;

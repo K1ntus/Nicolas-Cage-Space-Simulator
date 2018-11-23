@@ -2,11 +2,12 @@ package fr.projet.groupe40.model.board;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
 import fr.projet.groupe40.client.User;
+import fr.projet.groupe40.model.planets.Planet;
+import fr.projet.groupe40.model.planets.RoundPlanet;
 import fr.projet.groupe40.model.ships.Ship;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
@@ -18,14 +19,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 
-@SuppressWarnings("unused")
 public class Galaxy extends Thread implements Serializable{
 	private static final long serialVersionUID = 3668540725184418675L;
 
+	@SuppressWarnings("unused")
 	private volatile transient Thread blinker;
 	
 	private ArrayList <Planet> planets;
 	private ArrayList <Squad> squads;
+	
+	private GalaxyGenerator generator = new GalaxyGenerator();
 	
 	private transient Image background;
 	
@@ -33,16 +36,15 @@ public class Galaxy extends Thread implements Serializable{
 	 * \brief Generate a game board with every parameters randomized
 	 */
 	public Galaxy() {
-		squads = new ArrayList<Squad>();
-		planets = new ArrayList<Planet>();
-
-		generatePlanets();
-		//generateRandomSquads();
+		this.squads = new ArrayList<Squad>();
+		this.planets = generator.getPlanets();
+		this.generator = null;
 		
 		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
+		
 	}
 
 	/**
@@ -50,12 +52,14 @@ public class Galaxy extends Thread implements Serializable{
 	 * @param g The game board to copy from
 	 */
 	public Galaxy(Galaxy g) {
-		planets = g.planets;
-		squads = g.squads;
+		this.planets = g.planets;
+		this.squads = g.squads;
+		this.generator = null;
 		
 		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
+		
 	}
 
 	/**
@@ -64,13 +68,14 @@ public class Galaxy extends Thread implements Serializable{
 	 * @param squads Squads already present
 	 */
 	public Galaxy(List<Planet> planets, List<Squad> squads) {
-		this.planets = (ArrayList<Planet>) planets;
 		this.squads = (ArrayList<Squad>) squads;
-
-		generatePlanets();
+		this.planets = generator.getPlanets();
+		this.generator = null;
+		
 		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
+		
 	}
 
 	/*	Thread	*/
@@ -80,6 +85,7 @@ public class Galaxy extends Thread implements Serializable{
 	 */
 	@Override
 	public void run() {
+		@SuppressWarnings("unused")
 		Thread thisThread = Thread.currentThread();
 		while(true) {
 			for(Planet p : planets)
@@ -321,65 +327,6 @@ public class Galaxy extends Thread implements Serializable{
 	}
 
 	
-	/* Planets Generation */
-	/**
-	 * \brief Generate the planets for the galaxy initialization
-	 */
-	public void generatePlanets() {
-		double width = Math.random() * Constantes.size_maximal_planets *0.25 + Constantes.size_minimal_planets;
-		double height = width;
-		//Sprite(String path, double width, double height, double maxX, double maxY) 
-
-		
-		for(int i = 0; i < Constantes.nb_planets_tentatives; i++) {
-			double y = (Math.random() * (Constantes.height - (height + Constantes.bottom_margin_size)));
-			Planet p = new Planet(Constantes.path_img_planets, new User(Constantes.neutral_user), true, (int) (Constantes.left_margin_size + Constantes.size_squads), 0);
-			p.setY(y);
-			p.validatePosition();
-			
-			if(testPlacement(p)) {
-				planets.add(p);
-			}
-		}
-		
-		if(planets.size() < Constantes.min_numbers_of_planets) {	//si moins de 2 planetes
-			System.out.println("Impossible de generer un terrain minimal");
-			System.exit(-1);		//quitte le prgm
-		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
-			planets.get(1).setRuler(Constantes.human_user);
-			planets.get(2).setRuler(Constantes.ai_user);
-		}
-		
-		
-	}
-
-	/**
-	 * \brief Test the valide position of a planet compare to each others.
-	 * @param p The planet we are trying to generate
-	 * @return false if not able to generate this planet, else true
-	 */
-	private boolean testPlacement(Planet p) {
-		Iterator<Planet> it = planets.iterator();
-		
-		while (it.hasNext()) {
-			if(p.getY() > Constantes.height - Constantes.bottom_margin_size - Constantes.size_squads - p.height()) {
-				return false;
-			}
-			
-			Planet p_already_placed = it.next();
-			
-			if(p_already_placed.isInside(p) || p_already_placed.intersectCircle(p)) {
-				if(p.updatePlanetePosition() == -1) {
-					System.out.println("unable to generate this planet");
-					return false;
-				}
-				
-				it = planets.iterator();
-			}
-		}
-		
-		return true;
-	}
 
 	/* Others Generations */
 	//mainly for debugging for the moment, mb using it has pirate ?

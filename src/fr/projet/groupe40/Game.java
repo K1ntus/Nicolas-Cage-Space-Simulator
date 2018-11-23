@@ -2,7 +2,7 @@ package fr.projet.groupe40;
 
 import fr.projet.groupe40.file.DataSerializer;
 import fr.projet.groupe40.model.board.Galaxy;
-import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.model.planets.Planet;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 import javafx.animation.AnimationTimer;
@@ -27,7 +27,7 @@ public class Game extends Application {
 	//private InteractionHandler interactionHandler;
 	private double orgSceneX, orgSceneY;
 	private Planet source, destination;
-	private Squad selected;
+	//private Squad selected;
 	
 	public void start(Stage stage) {
 		

@@ -1,4 +1,4 @@
-package fr.projet.groupe40.model.board;
+package fr.projet.groupe40.model.planets;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.Sprite;

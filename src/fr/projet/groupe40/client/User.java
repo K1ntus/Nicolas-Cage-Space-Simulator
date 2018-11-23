@@ -2,7 +2,7 @@ package fr.projet.groupe40.client;
 
 import java.io.Serializable;
 
-import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.model.planets.Planet;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;

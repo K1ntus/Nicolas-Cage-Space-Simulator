@@ -1,8 +1,7 @@
 package fr.projet.groupe40.client.handler;
 
 import fr.projet.groupe40.model.board.Galaxy;
-import fr.projet.groupe40.model.board.Planet;
-import fr.projet.groupe40.model.ships.Squad;
+import fr.projet.groupe40.model.planets.Planet;
 import fr.projet.groupe40.util.Constantes;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -14,7 +13,7 @@ public class InteractionHandler {
 	protected Galaxy galaxy;	//To be accessed by handler
     private double orgSceneX, orgSceneY;
 	private Planet source = null; private Planet destination = null;
-	private Squad selected = null;
+	//private Squad selected = null;
 	
 	public InteractionHandler(Galaxy galaxy) {
 		this.galaxy = galaxy;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.Sprite;
-import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.model.planets.Planet;
 import fr.projet.groupe40.util.Constantes;
 
 public class Ship extends Sprite implements Serializable {

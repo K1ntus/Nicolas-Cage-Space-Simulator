@@ -6,7 +6,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 import fr.projet.groupe40.client.User;
-import fr.projet.groupe40.model.board.Planet;
+import fr.projet.groupe40.model.planets.Planet;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 
