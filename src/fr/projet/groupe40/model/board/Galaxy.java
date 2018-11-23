@@ -126,9 +126,10 @@ public class Galaxy extends Thread implements Serializable{
 	 * \brief Main update function, manage AI, squads and hasLost
 	 */
 	public void update() {
-		//updateAI();
+		updateAI();
 
 		for(Squad s : squads) {
+			if(s==null) {	squads.remove(s);	continue;}
 			s.update_all_positions();			
 		}
 
@@ -164,27 +165,12 @@ public class Galaxy extends Thread implements Serializable{
 			if(ruler.getId() < 0) {	//0 = neutral, >0 human, <0 bot
 				source = p;
 				
-				//Check if the ai have reach the max numbers of squads at the same time
-				if(Constantes.limit_ai_squads_number) {
-					int sum = 0;
-					for(Squad s : squads) {
-						try {
-							if(s.getRuler().getId() == ruler.getId()) {
-								sum += 1;
-							}							
-						} catch (NullPointerException e) {		}
-					}
-					if (sum > Constantes.max_squads_for_ai) {
-						break;
-					}
-					
-				}
-				
 				for(Planet p2 : planets) {	//Check again the planets list
 					destination = p2;
 					if(p2.getTroups() < source.getTroups()) {
 						Squad s = ruler.sendFleetAI(source, destination);
-						squads.add(s);
+						if(s != null)
+							squads.add(s);
 						break;
 					}
 				}

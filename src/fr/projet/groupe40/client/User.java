@@ -62,9 +62,9 @@ public class User implements Serializable{
 			return null;
 		}
 		if(troups_destination < source.getTroups()) {
-			//TODO
-			//Squad s = source.sendFleet(destination, 50);	//Ai will send 50% of his troups
-			//return s;
+			Squad s = new Squad();
+			s.sendFleet(source, destination, 50);
+			return s;
 		}
 		
 		return null;
