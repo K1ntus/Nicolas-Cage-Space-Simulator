@@ -20,19 +20,29 @@ public class Squad implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * \brief Render every ships of this squad
+	 * @param gc GraphicsContext
+	 */
 	public void render_ships(GraphicsContext gc) {
 		for(Ship s : ships) {
 			s.render(gc);
 		}
-		
 	}
 
+	/**
+	 * \brief update destination planet of every ships of this squads
+	 * @param destination the new destination
+	 */
 	public void update_destination(Planet destination) {
 		for(Ship ship : ships) {
 			ship.destination = destination;
 		}
 	}
 	
+	/**
+	 * \brief Update the position of every ships of this squad
+	 */
 	public void update_all_positions() {
 		Iterator<Ship> it = ships.iterator();
 		
@@ -56,6 +66,9 @@ public class Squad implements Serializable {
 		}
 	}
 
+	/**
+	 * \brief updateImage of every ships of this squad
+	 */
 	public void updateImage() {
 		for(Ship s : ships) {
 			s.setImg_path(Constantes.path_img_ships);
@@ -63,6 +76,10 @@ public class Squad implements Serializable {
 		}		
 	}
 	
+	/**
+	 * \brief update ruler of every ships of this squads
+	 * @param ruler the new ruler
+	 */
 	public void update_ruler(User ruler) {
 		for(Ship ship : ships) {
 			ship.setRuler(ruler);
@@ -87,7 +104,13 @@ public class Squad implements Serializable {
 		}
 	}
 
-
+	/**
+	 * \brief Send fleets from a source planet to his destination
+	 * @param source Source planet
+	 * @param destination Destination planet
+	 * @param percent The percent of the source planet troups to be sent
+	 * @return
+	 */
 	public Squad sendFleet(Planet source, Planet destination, int percent) {
 		int troups = source.getTroups();
 		
@@ -121,7 +144,12 @@ public class Squad implements Serializable {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * \brief Calculate the x Position for liftoff
+	 * @param source the source planet
+	 * @return abscissa position
+	 */
 	private double decollageX(Planet source) {
 		double x = 0;
 		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width()) {
@@ -135,6 +163,12 @@ public class Squad implements Serializable {
 		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
 		
 	}
+	
+	/**
+	 * \brief Calculate the y Position for liftoff
+	 * @param source the source planet
+	 * @return ordered position
+	 */
 	private double decollageY(Planet source) {
 		if(summonY >= 1)
 			return (source.getY() - Constantes.size_squads);

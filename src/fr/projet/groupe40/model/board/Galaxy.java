@@ -101,6 +101,7 @@ public class Galaxy extends Thread implements Serializable{
         blinker = null;
     }
 	
+	
 	/* Render & Game Update */
 	/**
 	 * Main rendering function
@@ -121,8 +122,9 @@ public class Galaxy extends Thread implements Serializable{
 	public void update() {
 		//updateAI();
 
-		for(Squad s : squads)
-			s.update_all_positions();
+		for(Squad s : squads) {
+			s.update_all_positions();			
+		}
 
 		userHasLost(Constantes.ai_user);
 	}

@@ -25,7 +25,9 @@ public class Ship extends Sprite implements Serializable {
 	}
 
 
-	
+	/**
+	 * \brief Update the position of this ships, also handle collision with his destination
+	 */
 	public void update_position() {
 
 		if(reached)
@@ -81,6 +83,9 @@ public class Ship extends Sprite implements Serializable {
 		
 	}
 	
+	/**
+	 * \brief prepare his removal from the squad list
+	 */
 	public void remove() {
 		this.setRuler(Constantes.neutral_user);
 		this.setImage(null);

@@ -8,10 +8,12 @@ public class ShipType implements Serializable {
 
 	protected double speed, power, production_time;
 	public ShipType() {
-		// TODO Auto-generated constructor stub
 		generate_parameters();
 	}
 
+	/**
+	 * \brief Generate power, speed and production time for a planet/squad
+	 */
 	private void generate_parameters() {
 		this.power = (int) (Math.random() * (Constantes.max_ship_power - Constantes.min_ship_power)+1);
 		this.speed =  (int) (Math.random() * (Constantes.max_ship_speed - Constantes.min_ship_speed)+1);
