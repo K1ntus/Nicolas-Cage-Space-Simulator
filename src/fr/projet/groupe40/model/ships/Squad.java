@@ -20,6 +20,14 @@ public class Squad implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public boolean squad_selected(double x, double y) {
+		for(Ship s : ships) {
+			if(s.isInside(x, y, Constantes.size_squads, Constantes.size_squads)) {
+				return true;
+			}
+		}
+		return false;		
+	}
 	/**
 	 * \brief Render every ships of this squad
 	 * @param gc GraphicsContext

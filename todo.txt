@@ -16,7 +16,7 @@ Minimal Version:
 			** Par cons�quent, le d�collage d'un grand nombre de vaisseaux d'une petite plan�te peut n�cessiter plusieurs vagues de d�collage. 
 			** Les vaisseaux envoy�s par un unique ordre compose un escadron. 
 	
-		* Changement direction d'un escadron (squad) d�j� lanc�
+24/11|	* Changement direction d'un escadron (squad) d�j� lanc�
 		
 		* Collisions Vaisseaux/Plan�tes
 			** Par contre, un vaisseau devant atteindre une plan�te donn�e ne devra ni survoler, ni rentrer en collision avec une autre plan�te. 

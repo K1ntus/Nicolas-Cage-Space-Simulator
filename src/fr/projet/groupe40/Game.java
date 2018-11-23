@@ -27,7 +27,7 @@ public class Game extends Application {
 	//private InteractionHandler interactionHandler;
 	private double orgSceneX, orgSceneY;
 	private Planet source, destination;
-	//private Squad selected;
+	private Squad selected;
 	
 	public void start(Stage stage) {
 		
@@ -115,21 +115,15 @@ public class Game extends Application {
                 orgSceneX = mouseEvent.getSceneX();
                 orgSceneY = mouseEvent.getSceneY();
                 
-                /*
+                
     			for(Squad s : galaxy.getSquads()) {
-    	            if(s.isInside(orgSceneX, orgSceneY, Constantes.size_squads, Constantes.size_squads)) {
+    				if(s.squad_selected(orgSceneX, orgSceneY)) {
     					if(s.getRuler().getFaction() == Constantes.player) {
     						selected = s;
-    						System.out.println("squad selected: "+s.toString());
-    						return;
-    					}else {
-    						if(Constantes.DEBUG) {
-    							System.out.println("Vous n'etes pas le dirigeant de cette colonie");
-    						}
     					}
     				}
+
     			}
-    			*/
     			
                 for(Planet p : galaxy.getPlanets()) {
     	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
@@ -158,15 +152,12 @@ public class Game extends Application {
                 double offsetX = mouseEvent.getSceneX();
                 double offsetY = mouseEvent.getSceneY();
 
-    /*
+    
             	if(selected != null) {	
         			for(Planet p : galaxy.getPlanets()) {
         				try {						
         					if(p.clickedOnPlanet(offsetX, offsetY)) {
-        						System.out.print("redirecting planet");
-        						destination = p;
-        						selected.getRuler().setDestination(p);
-        						System.out.println(selected.toString());
+        						selected.update_destination(p);
         		    			selected = null;
         						return;
         					}
@@ -178,7 +169,8 @@ public class Game extends Application {
         				}
         			}
         			return;
-            	}*/
+            	}
+            	
             	if(source == null) { return; }
     			for(Planet p : galaxy.getPlanets()) {
     				try {						
@@ -200,7 +192,6 @@ public class Game extends Application {
             	}else {
 					Squad s = new Squad();
 					s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
-					
 					galaxy.getSquads().add(s);
 
     				source = null;
