@@ -13,24 +13,24 @@ Bugs to fix:
 
 Minimal Version:
 18/11|	* D�collage des vaisseaux:	//Should be ok
-			** L'envoi de vaisseaux doit �tre fait par diffusion autour de la plan�te �mettrice, c'est-�-dire que les vaisseaux ne doivent pas se recouvrir au d�collage. 
-			** Par cons�quent, le d�collage d'un grand nombre de vaisseaux d'une petite plan�te peut n�cessiter plusieurs vagues de d�collage. 
-			** Les vaisseaux envoy�s par un unique ordre compose un escadron. 
+			** L'envoi de vaisseaux doit etre fait par diffusion autour de la planete emettrice, c'est-a-dire que les vaisseaux ne doivent pas se recouvrir au d�collage. 
+			** Par cons�quent, le decollage d'un grand nombre de vaisseaux d'une petite planete peut necessiter plusieurs vagues de decollage. 
+			** Les vaisseaux envoyes par un unique ordre compose un escadron. 
 	
-24/11|	* Changement direction d'un escadron (squad) d�j� lanc�
+24/11|	* Changement direction d'un escadron (squad) deja lance
 		
-		* Collisions Vaisseaux/Plan�tes
-			** Par contre, un vaisseau devant atteindre une plan�te donn�e ne devra ni survoler, ni rentrer en collision avec une autre plan�te. 
-			** Pour ce faire, vous devrez mettre en place un algorithme de d�placement permettant le contournement des plan�tes non vis�es.
+		* Collisions Vaisseaux/Planetes
+			** Par contre, un vaisseau devant atteindre une planete donnee ne devra ni survoler, ni rentrer en collision avec une autre planete. 
+			** Pour ce faire, vous devrez mettre en place un algorithme de deplacement permettant le contournement des planetes non visees.
 		
-		* R�diger un README.md
+		* Rediger un README.md
 		
 		
 **********************************************************************
 
 		* Mise en place JUnit
 		* Documenter les fonctions (format Doxygen)
-		* Corriger l'impl�mentation
+		* Corriger l'implementation
 	
 			-> Rendu version minimale
 
@@ -46,6 +46,8 @@ To go further:
 			** Forme des plan�tes
 			** Sprite al�atoire pour les plan�tes
 			** Taille des vaisseaux en fonction de leurs troupes
+		* Optimisation:
+			** Squads avec un "nuage de points" au lieu d'un objet par vaisseau
 		
 **********************************************************************
 
