@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['left_5fmargin_5fsize',['left_margin_size',['../classfr_1_1projet_1_1groupe40_1_1util_1_1_constantes.html#af515192a5a938c7cdc7aa1603c343918',1,'fr::projet::groupe40::util::Constantes']]],
-  ['limit_5fai_5fsquads_5fnumber',['limit_ai_squads_number',['../classfr_1_1projet_1_1groupe40_1_1util_1_1_constantes.html#a68d7ea5b02ac2fa94f2edabef7bd7793',1,'fr::projet::groupe40::util::Constantes']]],
-  ['load_5fgame',['load_game',['../classfr_1_1projet_1_1groupe40_1_1file_1_1_data_serializer.html#a1322f0a57e8e2a0269fdf67dab057ec9',1,'fr::projet::groupe40::file::DataSerializer']]],
-  ['loadingscreen',['LoadingScreen',['../classfr_1_1projet_1_1groupe40_1_1window_1_1_loading_screen.html',1,'fr.projet.groupe40.window.LoadingScreen'],['../classfr_1_1projet_1_1groupe40_1_1window_1_1_loading_screen.html#a9cdc0dc8e1f08399b011800bfdb7d0cd',1,'fr.projet.groupe40.window.LoadingScreen.LoadingScreen()']]],
-  ['loadingscreen_2ejava',['LoadingScreen.java',['../_loading_screen_8java.html',1,'']]]
+  ['name_5fplayer2',['name_player2',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_constantes.html#ab635bb52f76d0eca60948b28f369c44a',1,'fr::groupe40::projet::util::Constantes']]],
+  ['nb_5fplanets_5ftentatives',['nb_planets_tentatives',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_constantes.html#a8e2d019fc2eedd9b61a3d82994e35d9f',1,'fr::groupe40::projet::util::Constantes']]],
+  ['neutral',['neutral',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_constantes.html#aea1263e516c6d50bdf88db763ede883f',1,'fr::groupe40::projet::util::Constantes']]],
+  ['no_5fcollision',['NO_COLLISION',['../enumfr_1_1groupe40_1_1projet_1_1util_1_1_collision.html#a007237d39993e1e03b2fde3e8fa91847',1,'fr::groupe40::projet::util::Collision']]]
 ];

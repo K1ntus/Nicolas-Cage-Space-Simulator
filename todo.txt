@@ -8,6 +8,7 @@ Bugs to fix:
 		* Collisions au decollage	//~50% ok, gérer plusieurs vagues de décollage. (Thread avec un delay ?)
 		* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
 
+
 **********************************************************************
 
 
@@ -27,6 +28,7 @@ Minimal Version:
 		
 		
 **********************************************************************
+
 
 		* Mise en place JUnit
 		* Documenter les fonctions (format Doxygen)
@@ -48,6 +50,7 @@ To go further:
 			** Taille des vaisseaux en fonction de leurs troupes
 		* Optimisation:
 			** Squads avec un "nuage de points" au lieu d'un objet par vaisseau
+		
 		
 **********************************************************************
 

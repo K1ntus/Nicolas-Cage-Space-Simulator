@@ -1,0 +1,125 @@
+\hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship}{}\section{fr.\+groupe40.\+projet.\+model.\+ships.\+Ship Class Reference}
+\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship}\index{fr.\+groupe40.\+projet.\+model.\+ships.\+Ship@{fr.\+groupe40.\+projet.\+model.\+ships.\+Ship}}
+Inheritance diagram for fr.\+groupe40.\+projet.\+model.\+ships.\+Ship\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a50b240c8ac54e3944b63208c5df4cb91}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a50b240c8ac54e3944b63208c5df4cb91}} 
+{\bfseries Ship} (String path, \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}} ruler, \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} destination, \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} source, double x\+\_\+init, double y\+\_\+init, \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_type}{Ship\+Type}} ship\+\_\+type)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a4526f55c2d198ce47e0f64b924ec6b43}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a4526f55c2d198ce47e0f64b924ec6b43}} 
+boolean \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a4526f55c2d198ce47e0f64b924ec6b43}{reached\+\_\+destination}} ()
+\begin{DoxyCompactList}\small\item\em Check if the ship has reached his destination, and handle this case. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_adfd10eb0bb2fe81b8612a9da7acc8148}{calc\+\_\+next\+\_\+position}} (List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$ planets)
+\begin{DoxyCompactList}\small\item\em Calculate the next position and provides collision handler. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a61ff5b3481a94b0d495e7552cf0c0761}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a61ff5b3481a94b0d495e7552cf0c0761}} 
+\mbox{\hyperlink{enumfr_1_1groupe40_1_1projet_1_1util_1_1_collision}{Collision}} {\bfseries whereis\+\_\+collision} (double x, double y, double centre\+\_\+x, double centre\+\_\+y, double speed)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_aab898b49dfc4d08d3b8ac7b08d936697}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_aab898b49dfc4d08d3b8ac7b08d936697}} 
+void {\bfseries top\+\_\+collision\+\_\+mover} (double x, double y, double centre\+\_\+x, double centre\+\_\+y, double speed)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a88644a9fdb0c146f6f9ba556326e7122}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a88644a9fdb0c146f6f9ba556326e7122}} 
+void {\bfseries bottom\+\_\+collision\+\_\+mover} (double x, double y, double centre\+\_\+x, double centre\+\_\+y, double speed)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a2908d837a3d3515380ce728f42b43b52}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a2908d837a3d3515380ce728f42b43b52}} 
+void {\bfseries left\+\_\+collision\+\_\+mover} (double x, double y, double centre\+\_\+x, double centre\+\_\+y, double speed)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a1e045760991d3d6594a41348128f6bef}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a1e045760991d3d6594a41348128f6bef}} 
+void {\bfseries right\+\_\+collision\+\_\+mover} (double x, double y, double centre\+\_\+x, double centre\+\_\+y, double speed)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_af506b10fa38eae488d02c08fccb3d7df}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_af506b10fa38eae488d02c08fccb3d7df}} 
+void {\bfseries no\+\_\+collision\+\_\+mover} (double x, double y, double centre\+\_\+x, double centre\+\_\+y, double speed)
+\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_af4fcf4bf2b5fdad442d33491c69b2019}{update\+\_\+position}} (List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$ planets)
+\begin{DoxyCompactList}\small\item\em Update the position of this ship. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a2d132d6ec4b6025f82cf687916bb7f95}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a2d132d6ec4b6025f82cf687916bb7f95}} 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a2d132d6ec4b6025f82cf687916bb7f95}{remove}} ()
+\begin{DoxyCompactList}\small\item\em prepare his removal from the squad list \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_aae0aceeef0cac73a3c384324e9d8b867}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_aae0aceeef0cac73a3c384324e9d8b867}} 
+double {\bfseries get\+Speed} ()
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_af33ee5f9b9eb985811c0a8d73791c476}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_af33ee5f9b9eb985811c0a8d73791c476}} 
+void {\bfseries set\+Speed} (double speed)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a53cb3334f54d9a02f289473d63aff860}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a53cb3334f54d9a02f289473d63aff860}} 
+double {\bfseries get\+Power} ()
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_ac720404725375c935443731640eb38a5}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_ac720404725375c935443731640eb38a5}} 
+void {\bfseries set\+Power} (double power)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a18856221100d3b4c7ea742fe88a63863}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a18856221100d3b4c7ea742fe88a63863}} 
+double {\bfseries get\+Production\+\_\+time} ()
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a4bbaae0c364daad6dc9e8367078b4022}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a4bbaae0c364daad6dc9e8367078b4022}} 
+void {\bfseries set\+Production\+\_\+time} (double production\+\_\+time)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_ac4f24f0b83dfec2b15cf455c79b75e24}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_ac4f24f0b83dfec2b15cf455c79b75e24}} 
+\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} {\bfseries get\+Destination} ()
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_abdc025f4461e7efd9a2ee6af93d9bef3}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_abdc025f4461e7efd9a2ee6af93d9bef3}} 
+void {\bfseries set\+Destination} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} destination)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a0bad8c1701c7a6bee319ae8671228d6f}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a0bad8c1701c7a6bee319ae8671228d6f}} 
+\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} {\bfseries get\+Source} ()
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_aa48b0a9238306da4fcc27a37dfc50829}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_aa48b0a9238306da4fcc27a37dfc50829}} 
+void {\bfseries set\+Source} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} source)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a81d13eda5cf767c710e6d82407172d47}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a81d13eda5cf767c710e6d82407172d47}} 
+boolean {\bfseries is\+Reached} ()
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a5a3e2ba94e01cce27b168365e53e0cde}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a5a3e2ba94e01cce27b168365e53e0cde}} 
+void {\bfseries set\+Reached} (boolean reached)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a19eb504f8a0c0e263aff1e85e5e7557a}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_a19eb504f8a0c0e263aff1e85e5e7557a}} 
+\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} {\bfseries destination}
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_abd5ae4da4bce134894098a111d7378c3}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_abd5ae4da4bce134894098a111d7378c3}} 
+boolean {\bfseries reached}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_adfd10eb0bb2fe81b8612a9da7acc8148}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_adfd10eb0bb2fe81b8612a9da7acc8148}} 
+\index{fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship@{fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship}!calc\+\_\+next\+\_\+position@{calc\+\_\+next\+\_\+position}}
+\index{calc\+\_\+next\+\_\+position@{calc\+\_\+next\+\_\+position}!fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship@{fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship}}
+\subsubsection{\texorpdfstring{calc\+\_\+next\+\_\+position()}{calc\_next\_position()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+ships.\+Ship.\+calc\+\_\+next\+\_\+position (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$}]{planets }\end{DoxyParamCaption})}
+
+
+
+Calculate the next position and provides collision handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em planets} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_af4fcf4bf2b5fdad442d33491c69b2019}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_af4fcf4bf2b5fdad442d33491c69b2019}} 
+\index{fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship@{fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship}!update\+\_\+position@{update\+\_\+position}}
+\index{update\+\_\+position@{update\+\_\+position}!fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship@{fr\+::groupe40\+::projet\+::model\+::ships\+::\+Ship}}
+\subsubsection{\texorpdfstring{update\+\_\+position()}{update\_position()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+ships.\+Ship.\+update\+\_\+position (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$}]{planets }\end{DoxyParamCaption})}
+
+
+
+Update the position of this ship. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em planets} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/fr/groupe40/projet/model/ships/Ship.\+java\end{DoxyCompactItemize}

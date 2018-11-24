@@ -1,0 +1,377 @@
+\hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy}{}\section{fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy Class Reference}
+\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy}\index{fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy@{fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy}}
+Inheritance diagram for fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_acd002a00e4679b804002c05afb3b8308}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_acd002a00e4679b804002c05afb3b8308}} 
+\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_acd002a00e4679b804002c05afb3b8308}{Galaxy}} ()
+\begin{DoxyCompactList}\small\item\em Generate a game board with every parameters randomized. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ae10e23d6a41a5b878123a8b03ec31e5a}{Galaxy}} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy}{Galaxy}} g)
+\begin{DoxyCompactList}\small\item\em Generate a game board from another. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab214654e58ccf7bc40216d177cde0479}{Galaxy}} (List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$ planets, List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}} $>$ squads)
+\begin{DoxyCompactList}\small\item\em Generate a game board from an array of squads and planets. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a272bf97a6e0b4381bacb6fd2f0d8bb05}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a272bf97a6e0b4381bacb6fd2f0d8bb05}} 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a272bf97a6e0b4381bacb6fd2f0d8bb05}{run}} ()
+\begin{DoxyCompactList}\small\item\em Thread updating the garrison value for each planets / 1 second. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ae745fbb5e9d4a2b6a524ca30cd39c53c}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ae745fbb5e9d4a2b6a524ca30cd39c53c}} 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ae745fbb5e9d4a2b6a524ca30cd39c53c}{stop\+Thread}} ()
+\begin{DoxyCompactList}\small\item\em Stop the thread updating the garrison when called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab3b17b740db263c25b80f7b9e6f33d24}{render}} (Graphics\+Context gc)
+\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a1c65b580653742a987f3288b768533c8}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a1c65b580653742a987f3288b768533c8}} 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a1c65b580653742a987f3288b768533c8}{update}} ()
+\begin{DoxyCompactList}\small\item\em Main update function, manage AI, squads and has\+Lost. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a32edba917f025f3ed2ff6d4723401dd1}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a32edba917f025f3ed2ff6d4723401dd1}} 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a32edba917f025f3ed2ff6d4723401dd1}{update\+AI}} ()
+\begin{DoxyCompactList}\small\item\em Manage the AI to send fleets. \end{DoxyCompactList}\item 
+boolean \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ad3ec27b73e7f093df14ca096395d10c2}{user\+Has\+Lost}} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}} u)
+\begin{DoxyCompactList}\small\item\em Check if an user has lost. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_af4b01f22d35d56f0b775c9244eff5acf}{client\+Scroll\+Handler}} (int action)
+\begin{DoxyCompactList}\small\item\em handle the scrolls event to change the percent of a fleet to send \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a707f976a47503d6afab529da6a36a148}{collision\+Handler}} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship}{Ship}} s, \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} p)
+\begin{DoxyCompactList}\small\item\em Manage the collisions between squads \& intermediate planets. \end{DoxyCompactList}\item 
+boolean \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adb71c0d567ad5489d9f0d8890d604400}{is\+Collision}} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship}{Ship}} s)
+\begin{DoxyCompactList}\small\item\em check if there s a collision between a squad and every planet on board \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_aa24392147b91b61606b8e8e859ca3e23}{render\+Background}} (Graphics\+Context gc)
+\begin{DoxyCompactList}\small\item\em Generate random squads on board that are aggressive to the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a8490ed78537afb38bb28d86e4e37c312}{render\+Planets}} (Graphics\+Context gc)
+\begin{DoxyCompactList}\small\item\em Render each planets image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a6fa32ff167eee765c18856e14679b281}{render\+Squads}} (Graphics\+Context gc)
+\begin{DoxyCompactList}\small\item\em Render every squads on board. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adbfc5609c012349d89f33849aa2787b0}{render\+Garrison}} (Graphics\+Context gc)
+\begin{DoxyCompactList}\small\item\em Render the garrison amount of each planets on board. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab7d878b625cbb910e7eb20d0b3b3c260}{render\+Percentage\+Selected}} (Graphics\+Context gc)
+\begin{DoxyCompactList}\small\item\em Render the percentage of troups to send selected by the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_aabdca1530440c8acec7f50c30af1a805}{render\+Explosion}} (Graphics\+Context gc)
+\begin{DoxyCompactList}\small\item\em render a explosion when a ship reach his destination \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_afcc91fd13d372426cae4eca41e115a11}{init\+Font}} (Graphics\+Context gc)
+\begin{DoxyCompactList}\small\item\em Init the default font style of the graphics context. \end{DoxyCompactList}\item 
+Array\+List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}} $>$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a76035e4de1484dfba7daf377127f80c0}{get\+Squads}} ()
+\begin{DoxyCompactList}\small\item\em Set the list containing every squads by another one. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a598d42d4b1e24f23d1e004a2e69c8959}{set\+Squads}} (Array\+List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}} $>$ squads)
+\begin{DoxyCompactList}\small\item\em Return the list containing every squads on board. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a7f400bf11202afef051fccbc9cc727a9}{set\+Planets}} (Array\+List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$ planets)
+\begin{DoxyCompactList}\small\item\em Set the list containing every planet by another one. \end{DoxyCompactList}\item 
+Array\+List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a9e97906db3f8da0d99dfcb0f272d476b}{get\+Planets}} ()
+\begin{DoxyCompactList}\small\item\em Return the list containing every planets on board. \end{DoxyCompactList}\item 
+Image \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adc4718307d1288fe07acabd1f31415c9}{get\+Background}} ()
+\begin{DoxyCompactList}\small\item\em Return the background image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a765e649c1488992dbf1247ae9a1adaf7}{set\+Background}} (Image background)
+\begin{DoxyCompactList}\small\item\em Set the background image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ae10e23d6a41a5b878123a8b03ec31e5a}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ae10e23d6a41a5b878123a8b03ec31e5a}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!Galaxy@{Galaxy}}
+\index{Galaxy@{Galaxy}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{Galaxy()}{Galaxy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+Galaxy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy}{Galaxy}}}]{g }\end{DoxyParamCaption})}
+
+
+
+Generate a game board from another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The game board to copy from \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab214654e58ccf7bc40216d177cde0479}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab214654e58ccf7bc40216d177cde0479}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!Galaxy@{Galaxy}}
+\index{Galaxy@{Galaxy}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{Galaxy()}{Galaxy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+Galaxy (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$}]{planets,  }\item[{List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}} $>$}]{squads }\end{DoxyParamCaption})}
+
+
+
+Generate a game board from an array of squads and planets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em planets} & Planets that we want to have \\
+\hline
+{\em squads} & Squads already present \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_af4b01f22d35d56f0b775c9244eff5acf}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_af4b01f22d35d56f0b775c9244eff5acf}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!client\+Scroll\+Handler@{client\+Scroll\+Handler}}
+\index{client\+Scroll\+Handler@{client\+Scroll\+Handler}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{client\+Scroll\+Handler()}{clientScrollHandler()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+client\+Scroll\+Handler (\begin{DoxyParamCaption}\item[{int}]{action }\end{DoxyParamCaption})}
+
+
+
+handle the scrolls event to change the percent of a fleet to send 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action} & The scroll action (up or down case) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a707f976a47503d6afab529da6a36a148}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a707f976a47503d6afab529da6a36a148}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!collision\+Handler@{collision\+Handler}}
+\index{collision\+Handler@{collision\+Handler}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{collision\+Handler()}{collisionHandler()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+collision\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship}{Ship}}}]{s,  }\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}}]{p }\end{DoxyParamCaption})}
+
+
+
+Manage the collisions between squads \& intermediate planets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The squad to manage \\
+\hline
+{\em p} & The planet to test collision with \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adc4718307d1288fe07acabd1f31415c9}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adc4718307d1288fe07acabd1f31415c9}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!get\+Background@{get\+Background}}
+\index{get\+Background@{get\+Background}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{get\+Background()}{getBackground()}}
+{\footnotesize\ttfamily Image fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+get\+Background (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return the background image. 
+
+\begin{DoxyReturn}{Returns}
+Image 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a9e97906db3f8da0d99dfcb0f272d476b}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a9e97906db3f8da0d99dfcb0f272d476b}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!get\+Planets@{get\+Planets}}
+\index{get\+Planets@{get\+Planets}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{get\+Planets()}{getPlanets()}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}$>$ fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+get\+Planets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return the list containing every planets on board. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a76035e4de1484dfba7daf377127f80c0}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a76035e4de1484dfba7daf377127f80c0}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!get\+Squads@{get\+Squads}}
+\index{get\+Squads@{get\+Squads}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{get\+Squads()}{getSquads()}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}}$>$ fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+get\+Squads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the list containing every squads by another one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em planets} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_afcc91fd13d372426cae4eca41e115a11}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_afcc91fd13d372426cae4eca41e115a11}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!init\+Font@{init\+Font}}
+\index{init\+Font@{init\+Font}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{init\+Font()}{initFont()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+init\+Font (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+
+
+Init the default font style of the graphics context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adb71c0d567ad5489d9f0d8890d604400}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adb71c0d567ad5489d9f0d8890d604400}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!is\+Collision@{is\+Collision}}
+\index{is\+Collision@{is\+Collision}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{is\+Collision()}{isCollision()}}
+{\footnotesize\ttfamily boolean fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+is\+Collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship}{Ship}}}]{s }\end{DoxyParamCaption})}
+
+
+
+check if there s a collision between a squad and every planet on board 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & the squad to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if there s a collision, else false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab3b17b740db263c25b80f7b9e6f33d24}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab3b17b740db263c25b80f7b9e6f33d24}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!render@{render}}
+\index{render@{render}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+render (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+Main rendering function 
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_aa24392147b91b61606b8e8e859ca3e23}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_aa24392147b91b61606b8e8e859ca3e23}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!render\+Background@{render\+Background}}
+\index{render\+Background@{render\+Background}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{render\+Background()}{renderBackground()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+render\+Background (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+
+
+Generate random squads on board that are aggressive to the player. 
+
+Render the background image 
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_aabdca1530440c8acec7f50c30af1a805}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_aabdca1530440c8acec7f50c30af1a805}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!render\+Explosion@{render\+Explosion}}
+\index{render\+Explosion@{render\+Explosion}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{render\+Explosion()}{renderExplosion()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+render\+Explosion (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+
+
+render a explosion when a ship reach his destination 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adbfc5609c012349d89f33849aa2787b0}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_adbfc5609c012349d89f33849aa2787b0}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!render\+Garrison@{render\+Garrison}}
+\index{render\+Garrison@{render\+Garrison}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{render\+Garrison()}{renderGarrison()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+render\+Garrison (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+
+
+Render the garrison amount of each planets on board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab7d878b625cbb910e7eb20d0b3b3c260}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ab7d878b625cbb910e7eb20d0b3b3c260}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!render\+Percentage\+Selected@{render\+Percentage\+Selected}}
+\index{render\+Percentage\+Selected@{render\+Percentage\+Selected}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{render\+Percentage\+Selected()}{renderPercentageSelected()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+render\+Percentage\+Selected (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+
+
+Render the percentage of troups to send selected by the player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a8490ed78537afb38bb28d86e4e37c312}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a8490ed78537afb38bb28d86e4e37c312}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!render\+Planets@{render\+Planets}}
+\index{render\+Planets@{render\+Planets}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{render\+Planets()}{renderPlanets()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+render\+Planets (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+
+
+Render each planets image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a6fa32ff167eee765c18856e14679b281}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a6fa32ff167eee765c18856e14679b281}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!render\+Squads@{render\+Squads}}
+\index{render\+Squads@{render\+Squads}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{render\+Squads()}{renderSquads()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+render\+Squads (\begin{DoxyParamCaption}\item[{Graphics\+Context}]{gc }\end{DoxyParamCaption})}
+
+
+
+Render every squads on board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a765e649c1488992dbf1247ae9a1adaf7}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a765e649c1488992dbf1247ae9a1adaf7}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!set\+Background@{set\+Background}}
+\index{set\+Background@{set\+Background}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{set\+Background()}{setBackground()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+set\+Background (\begin{DoxyParamCaption}\item[{Image}]{background }\end{DoxyParamCaption})}
+
+
+
+Set the background image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em background} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a7f400bf11202afef051fccbc9cc727a9}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a7f400bf11202afef051fccbc9cc727a9}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!set\+Planets@{set\+Planets}}
+\index{set\+Planets@{set\+Planets}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{set\+Planets()}{setPlanets()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+set\+Planets (\begin{DoxyParamCaption}\item[{Array\+List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} $>$}]{planets }\end{DoxyParamCaption})}
+
+
+
+Set the list containing every planet by another one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em planets} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a598d42d4b1e24f23d1e004a2e69c8959}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_a598d42d4b1e24f23d1e004a2e69c8959}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!set\+Squads@{set\+Squads}}
+\index{set\+Squads@{set\+Squads}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{set\+Squads()}{setSquads()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+set\+Squads (\begin{DoxyParamCaption}\item[{Array\+List$<$ \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}} $>$}]{squads }\end{DoxyParamCaption})}
+
+
+
+Return the list containing every squads on board. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ad3ec27b73e7f093df14ca096395d10c2}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy_ad3ec27b73e7f093df14ca096395d10c2}} 
+\index{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}!user\+Has\+Lost@{user\+Has\+Lost}}
+\index{user\+Has\+Lost@{user\+Has\+Lost}!fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy@{fr\+::groupe40\+::projet\+::model\+::board\+::\+Galaxy}}
+\subsubsection{\texorpdfstring{user\+Has\+Lost()}{userHasLost()}}
+{\footnotesize\ttfamily boolean fr.\+groupe40.\+projet.\+model.\+board.\+Galaxy.\+user\+Has\+Lost (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}}}]{u }\end{DoxyParamCaption})}
+
+
+
+Check if an user has lost. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & the user to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if he has last, else false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/fr/groupe40/projet/model/board/Galaxy.\+java\end{DoxyCompactItemize}

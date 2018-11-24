@@ -67,7 +67,7 @@ public class DataSerializer {
 	
 	/**
 	 * \brief Load a game from a save and apply it to the current game start
-	 * @return
+	 * @return the galaxy loaded from the save file
 	 */
 	public Galaxy load_game() {
 		FileInputStream file;
