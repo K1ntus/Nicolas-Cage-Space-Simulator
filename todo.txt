@@ -47,6 +47,7 @@ To go further:
 			** Trop forte attaque -> destruction de la planète
 			** Etoile de la mort -> destruction de planète
 			** Soleil au centre avec BCP de troupes -> tué = reset à 1 de ttes les planetes
+				** Tore de Stanford en protection supplémentaire
 		* Gameplay:
 			** Nombre d'ennemis
 			** Forme des planï¿½tes
