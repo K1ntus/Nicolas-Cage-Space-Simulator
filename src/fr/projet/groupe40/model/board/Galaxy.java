@@ -7,7 +7,6 @@ import java.util.List;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.planets.Planet;
-import fr.projet.groupe40.model.planets.RoundPlanet;
 import fr.projet.groupe40.model.ships.Ship;
 import fr.projet.groupe40.model.ships.Squad;
 import fr.projet.groupe40.util.Constantes;
@@ -130,26 +129,10 @@ public class Galaxy extends Thread implements Serializable{
 
 		for(Squad s : squads) {
 			if(s==null) {	squads.remove(s);	continue;}
-			s.update_all_positions();			
+			s.update_all_positions(planets);			
 		}
 
 		userHasLost(Constantes.ai_user);
-	}
-	
-	/**
-	 * \brief Update every squads position on board
-	 */
-	public void updateSquad() {
-		Iterator<Squad> it = getSquads().iterator();
-		
-		while (it.hasNext()) {
-			Squad ss = it.next();
-			try {
-				ss.update_all_positions();
-			} catch(NullPointerException e) {
-				it.remove();
-			}
-		}
 	}
 	
 	/*	AI	*/
@@ -248,9 +231,11 @@ public class Galaxy extends Thread implements Serializable{
 		double x = s.getX(), y = s.getY();
 		double width = s.width(), height = s.height();
 		double speed = s.getSpeed();
+		/*
 		double distance = p.distance(x, y, p.getX(), p.getY());
 		Planet source = s.getSource();
 		Planet destination = s.getDestination();
+		*/
 		
 		double xCenter = p.getX() +p.width()/2;
 		double yCenter = p.getY()+p.height()/2;
@@ -307,7 +292,7 @@ public class Galaxy extends Thread implements Serializable{
 				return true;
 			}
 		}
-		s.update_position();
+		s.update_position(planets);
 		//s.updateAllShipsPosition();
 		return false;
 	}

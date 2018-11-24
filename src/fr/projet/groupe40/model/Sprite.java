@@ -15,7 +15,6 @@ public abstract class Sprite implements Serializable {
 	
 	private double width, height;
 	private double x, y;
-	private double xSpeed, ySpeed;
 	private double maxX, maxY;
 	private double minX, minY;
 
@@ -80,8 +79,8 @@ public abstract class Sprite implements Serializable {
 	 * @return Distance between those 2 positions
 	 */
 	public double distance(double x, double y) {
-		double center_x = this.x + width()/2;
-		double center_y = this.y + height()/2;
+		double center_x = this.x + width/2;
+		double center_y = this.y + height/2;
 		return distance(x,y, center_x, center_y);
 	}
 	
@@ -112,26 +111,20 @@ public abstract class Sprite implements Serializable {
 	 */
 	public void validatePosition() {
 		if (x + width >= getMaxX()) {
-			x = getMaxX() - width();
-			xSpeed *= -1;
+			x = getMaxX() - width;
 		} else if (x <= minX) {
 			x = minX;
-			xSpeed *= -1;
 		}
 		else if (x < 0) {
 			x = 0;
-			xSpeed *= -1;
 		}
 
 		if (y + height >= getMaxY()) {
 			y = getMaxY() - height - Constantes.bottom_margin_size;
-			ySpeed *= -1;
 		} else if (y <= minY) {
 			y = minY;
-			ySpeed *= -1;
 		}else if (y < 0) {
 			y = 0;
-			ySpeed *= -1;
 		}
 	}
 	
@@ -145,9 +138,9 @@ public abstract class Sprite implements Serializable {
 	 */
 	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
 		//(x - center_x)^2 + (y - center_y)^2 < radius^2
-		double radius = this.width()/2 + Constantes.minimal_distance_between_planets;
-		double circle_x = this.getX() + this.width()/2;
-		double circle_y = this.getY() + this.height()/2;
+		double radius = this.width/2 + Constantes.minimal_distance_between_planets;
+		double circle_x = this.x + this.width/2;
+		double circle_y = this.y + this.height/2;
 		double circle_left = circle_x - radius;
 		double circle_top = circle_y - radius;
 		double circle_right = circle_x + radius;
@@ -184,8 +177,8 @@ public abstract class Sprite implements Serializable {
 		return intersectCircle(
 				p.getX(),
 				p.getY(),
-				p.getX()+p.width(), 
-				p.getY()+p.height()
+				p.getX()+p.width, 
+				p.getY()+p.height
 			);
 	}
 
@@ -198,11 +191,11 @@ public abstract class Sprite implements Serializable {
 	 * @return
 	 */
 	public boolean isInside(double x, double y, double width, double height) {
-		if(x > this.getX()+this.width() || x+width < this.getX()) {
+		if(x > this.x+this.width || x+width < this.x) {
 			return false;
 		}
 		
-		if(y > this.getY()+this.height() || y+height < this.getY()) {
+		if(y > this.y+this.height || y+height < this.y) {
 			return false;
 		}
 		return true;
@@ -214,8 +207,8 @@ public abstract class Sprite implements Serializable {
 	 * @return
 	 */
 	public boolean isInside(Sprite s) {
-		return ((x >= s.x && x <= s.x + s.width()) || (s.x >= x && s.x <= x + width()))
-				&& ((y >= s.y && y <= s.y + s.height()) || (s.y >= y && s.y <= y + height()));
+		return ((x >= s.x && x <= s.x + s.width) || (s.x >= x && s.x <= x + width))
+				&& ((y >= s.y && y <= s.y + s.height) || (s.y >= y && s.y <= y + height));
 		//return isInside(s.getX(), s.getY());
 	}
 
@@ -242,78 +235,23 @@ public abstract class Sprite implements Serializable {
 	
 	
 	/* Getter & Setter */
-	public double width() {
-		return width;
-	}
-
-	public double height() {
-		return height;
-	}
 
 	public String toString() {
 		return "Sprite<" + x + ", " + y + ">";
 	}
 
-	public User getRuler() {
-		return ruler;
-	}
-
-	public void setRuler(User ruler) {
-		this.ruler = ruler;
-	}
-
+	/**
+	 * @return the image
+	 */
 	public Image getImage() {
 		return image;
 	}
 
+	/**
+	 * @param image the image to set
+	 */
 	public void setImage(Image image) {
 		this.image = image;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public double getxSpeed() {
-		return xSpeed;
-	}
-
-	public void setxSpeed(double xSpeed) {
-		this.xSpeed = xSpeed;
-	}
-
-	public double getySpeed() {
-		return ySpeed;
-	}
-
-	public void setySpeed(double ySpeed) {
-		this.ySpeed = ySpeed;
-	}
-
-	/**
-	 * @param width the width to set
-	 */
-	public void setWidth(double width) {
-		this.width = width;
-	}
-
-	/**
-	 * @param height the height to set
-	 */
-	public void setHeight(double height) {
-		this.height = height;
 	}
 
 	/**
@@ -330,20 +268,131 @@ public abstract class Sprite implements Serializable {
 		this.img_path = img_path;
 	}
 
-	public double getMaxY() {
-		return maxY;
+	/**
+	 * @return the width
+	 */
+	public double width() {
+		return width;
 	}
 
-	public void setMaxY(double maxY) {
-		this.maxY = maxY;
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(double width) {
+		this.width = width;
 	}
 
+	/**
+	 * @return the height
+	 */
+	public double height() {
+		return height;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+	/**
+	 * @return the x
+	 */
+	public double getX() {
+		return x;
+	}
+
+	/**
+	 * @param x the x to set
+	 */
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	/**
+	 * @return the y
+	 */
+	public double getY() {
+		return y;
+	}
+
+	/**
+	 * @param y the y to set
+	 */
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	/**
+	 * @return the maxX
+	 */
 	public double getMaxX() {
 		return maxX;
 	}
 
+	/**
+	 * @param maxX the maxX to set
+	 */
 	public void setMaxX(double maxX) {
 		this.maxX = maxX;
 	}
+
+	/**
+	 * @return the maxY
+	 */
+	public double getMaxY() {
+		return maxY;
+	}
+
+	/**
+	 * @param maxY the maxY to set
+	 */
+	public void setMaxY(double maxY) {
+		this.maxY = maxY;
+	}
+
+	/**
+	 * @return the minX
+	 */
+	public double getMinX() {
+		return minX;
+	}
+
+	/**
+	 * @param minX the minX to set
+	 */
+	public void setMinX(double minX) {
+		this.minX = minX;
+	}
+
+	/**
+	 * @return the minY
+	 */
+	public double getMinY() {
+		return minY;
+	}
+
+	/**
+	 * @param minY the minY to set
+	 */
+	public void setMinY(double minY) {
+		this.minY = minY;
+	}
+
+	/**
+	 * @return the ruler
+	 */
+	public User getRuler() {
+		return ruler;
+	}
+
+	/**
+	 * @param ruler the ruler to set
+	 */
+	public void setRuler(User ruler) {
+		this.ruler = ruler;
+	}
+
 
 }

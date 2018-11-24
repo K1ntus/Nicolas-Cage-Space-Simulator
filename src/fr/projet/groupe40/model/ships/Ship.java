@@ -1,6 +1,7 @@
 package fr.projet.groupe40.model.ships;
 
 import java.io.Serializable;
+import java.util.List;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.Sprite;
@@ -24,14 +25,13 @@ public class Ship extends Sprite implements Serializable {
 		this.ship_type = ship_type;
 	}
 
-
 	/**
-	 * \brief Update the position of this ships, also handle collision with his destination
+	 * \brief Check if the ship has reached his destination, and handle this case
 	 */
-	public void update_position() {
+	public boolean reached_destination() {
 
 		if(reached)
-			return;
+			return true;
 		
 		if(destination.isInside(this)) {	//Case if the squads reach the destination			
 			if(this.getRuler().getFaction() != destination.getRuler().getFaction()) {	//If the faction are differents, then BOOM
@@ -58,11 +58,17 @@ public class Ship extends Sprite implements Serializable {
 				}
 			}
 			remove();	//Remove the squads of the galaxy
-			return;
+			return true;
 		}
+		return false;
 		
-		
-		
+	}
+	
+	/**
+	 * \brief Calculate the next position and provides collision handler
+	 * @param planets
+	 */
+	public void calc_next_position(List<Planet> planets) {
 		double speed = ship_type.speed;
 
 		double centre_x = destination.getX() + destination.width()/2; 
@@ -79,6 +85,19 @@ public class Ship extends Sprite implements Serializable {
 		} else {
 			setY(y-speed);
 		}
+		
+	}
+	
+	/**
+	 * \brief Update the position of this ship
+	 * @param planets
+	 */
+	public void update_position(List<Planet> planets) {
+		
+		if(this.reached_destination()) {	//Ships has reached his destination
+			return;
+		}
+		calc_next_position(planets);
 
 		
 	}

@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.planets.Planet;
-import fr.projet.groupe40.model.planets.RoundPlanet;
 import fr.projet.groupe40.util.Constantes;
 
 public class GalaxyGenerator {

@@ -4,22 +4,65 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.projet.groupe40.client.User;
 import fr.projet.groupe40.model.planets.Planet;
 import fr.projet.groupe40.util.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Squad implements Serializable {
+public class Squad extends Thread implements Serializable {
 	private static final long serialVersionUID = -6736174123976474099L;
 	
 	private ArrayList<Ship> ships = new ArrayList<Ship>();
+
 	private int summonX = 1, summonY = 1;
+	
+	@SuppressWarnings("unused")
+	private volatile transient Thread blinker;
 
 	public Squad() {
 		// TODO Auto-generated constructor stub
+		//setDaemon(true);	//Thread will close if game window has been closed
+		//start();			//Run the thread which is generating troups
 	}
 
+	/**
+	 * \brief gestion des decollages
+	 */
+	/*
+	@Override
+	public void run() {
+		@SuppressWarnings("unused")
+		Thread thisThread = Thread.currentThread();
+		while(true) {
+			for(Planet p : planets)
+				p.updateGarrison();	
+				//generateRandomSquads();		
+			try {
+				sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+*/
+	/**
+	 * \brief Stop the thread updating the garrison when called
+	 */
+	public void stopThread() {
+        blinker = null;
+    }
+	
+	
+	
+	/**
+	 * \brief check if a squad has been selected or not
+	 * @param x position to check
+	 * @param y position to check
+	 * @return true if a squad has been selected
+	 */
 	public boolean squad_selected(double x, double y) {
 		for(Ship s : ships) {
 			if(s.isInside(x, y, Constantes.size_squads, Constantes.size_squads)) {
@@ -51,18 +94,18 @@ public class Squad implements Serializable {
 	/**
 	 * \brief Update the position of every ships of this squad
 	 */
-	public void update_all_positions() {
+	public void update_all_positions(List<Planet> planets) {
 		Iterator<Ship> it = ships.iterator();
 		
 		while (it.hasNext()) {
 			Ship ship = it.next();
 			try {
-				if(ship.isInside(ship.destination)) {
+				if(ship.isInside(ship.destination)) {	//Case when it reach his destination
 					ships.remove(ship);
 					it = ships.iterator();
 				}
 
-				ship.update_position();
+				ship.update_position(planets);	//else
 				ship.validatePosition();
 			} catch(NullPointerException e) {
 				it.remove();
@@ -159,7 +202,6 @@ public class Squad implements Serializable {
 	 * @return abscissa position
 	 */
 	private double decollageX(Planet source) {
-		double x = 0;
 		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
 			

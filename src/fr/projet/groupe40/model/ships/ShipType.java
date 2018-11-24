@@ -5,7 +5,8 @@ import java.io.Serializable;
 import fr.projet.groupe40.util.Constantes;
 
 public class ShipType implements Serializable {
-
+	private static final long serialVersionUID = 6833813366446523473L;
+	
 	protected double speed, power, production_time;
 	public ShipType() {
 		generate_parameters();
