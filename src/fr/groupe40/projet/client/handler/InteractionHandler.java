@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
 @Deprecated
-public class InteractionHandler {
+public abstract class  InteractionHandler {
 
 	protected Galaxy galaxy;	//To be accessed by handler
     private double orgSceneX, orgSceneY;

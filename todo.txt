@@ -43,6 +43,10 @@ Minimal Version:
 To go further:
 		* Evï¿½nements:
 			** Gï¿½nï¿½ration alï¿½atoire de pirates (Trou de ver)
+			** Rébellion ? A creuser
+			** Trop forte attaque -> destruction de la planète
+			** Etoile de la mort -> destruction de planète
+			** Soleil au centre avec BCP de troupes -> tué = reset à 1 de ttes les planetes
 		* Gameplay:
 			** Nombre d'ennemis
 			** Forme des planï¿½tes
