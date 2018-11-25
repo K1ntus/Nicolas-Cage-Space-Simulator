@@ -108,21 +108,20 @@ public class Ship extends Sprite implements Serializable {
 			}
 
 			 if(p.isInside(x-speed, y-speed, width, height) || p.isInside(x+speed, y-speed, width, height)) {
-				System.out.println("Bottom collision");
+				//System.out.println("Bottom collision");
 				collision = p;
 				return Collision.BOTTOM;
-				
 			} else if(p.isInside(x-speed, y+speed, width, height) || p.isInside(x+speed, y+speed, width, height)) {
-				System.out.println("Top collision");
+				//System.out.println("Top collision");
 				collision = p;
 				return Collision.TOP;
-			}else if(p.isInside(x-speed, y, width, height)) {	
-				System.out.println("Right collision");
+				
+			}else if(p.isInside(x-speed, y-speed, width, height) || p.isInside(x-speed, y+speed, width, height) ) {	
+				//System.out.println("Right collision");
 				collision = p;
 				return Collision.RIGHT;
-				
-			} else if(p.isInside(x+speed, y, width, height)) {
-				System.out.println("Left collision");
+			} else if(p.isInside(x+speed, y-speed, width, height) || p.isInside(x+speed, y+speed, width, height) ) {
+				//System.out.println("Left collision");
 				collision = p;
 				return Collision.LEFT;
 				

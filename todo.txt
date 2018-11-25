@@ -7,6 +7,7 @@ Bugs to fix:
 23/11|	* AI
 		* Collisions au decollage	//~50% ok, gérer plusieurs vagues de décollage. (Thread avec un delay ?)
 		* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
+		* Collisions gauche/droite entre ships/planetes
 
 
 **********************************************************************
