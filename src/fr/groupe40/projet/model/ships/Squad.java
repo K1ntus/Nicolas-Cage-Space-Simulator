@@ -206,7 +206,6 @@ public class Squad extends Thread implements Serializable {
 			
 		} else if (summonX*Constantes.size_squads + source.getX() >= source.getX()+source.width()) {
 			summonX = 1;
-			summonY = -summonY;
 		}
 
 		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
@@ -220,9 +219,9 @@ public class Squad extends Thread implements Serializable {
 	 */
 	private double decollageY(Planet source) {
 		if(summonY >= 1)
-			return (source.getY() - Constantes.size_squads);
+			return (source.getY() - Constantes.size_squads - 2*Constantes.min_ship_speed);
 		else
-			return (source.width() + source.getY() + Constantes.size_squads);		
+			return (source.width() + source.getY() + Constantes.size_squads + 2*Constantes.min_ship_speed);		
 	}
 	
 }

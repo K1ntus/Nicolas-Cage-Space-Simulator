@@ -18,6 +18,7 @@ public class Ship extends Sprite implements Serializable {
 	
 	protected Planet destination, source;
 	protected boolean reached;
+	private Planet collision;
 
 	public Ship(String path, User ruler, Planet destination, Planet source, double x_init, double y_init, ShipType ship_type) {
 		super(path, ruler, false);
@@ -26,6 +27,7 @@ public class Ship extends Sprite implements Serializable {
 		this.setX(x_init);
 		this.setY(y_init);
 		this.ship_type = ship_type;
+		this.collision = source;
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class Ship extends Sprite implements Serializable {
 		double centre_x = destination.getX() + destination.width()/2; 
 		double centre_y = destination.getY() + destination.height()/2;
 		double x = this.getX(); double y = this.getY();
-		switch(whereis_collision(x, y, centre_x, centre_y, speed)) {
+		switch(whereis_collision(x, y, speed, planets)) {
 			case NO_COLLISION:
 				no_collision_mover(x, y, centre_x, centre_y, speed);
 				break;
@@ -96,7 +98,36 @@ public class Ship extends Sprite implements Serializable {
 		}
 	}
 	
-	public Collision whereis_collision(double x, double y, double centre_x, double centre_y, double speed) {
+	public Collision whereis_collision(double x, double y, double speed, List<Planet> planets) {
+		double width = this.width();
+		double height = this.height();
+		
+		for(Planet p : planets) {
+			if(p.equals(destination)) {
+				continue;
+			}
+
+			 if(p.isInside(x-speed, y-speed, width, height) || p.isInside(x+speed, y-speed, width, height)) {
+				System.out.println("Bottom collision");
+				collision = p;
+				return Collision.BOTTOM;
+				
+			} else if(p.isInside(x-speed, y+speed, width, height) || p.isInside(x+speed, y+speed, width, height)) {
+				System.out.println("Top collision");
+				collision = p;
+				return Collision.TOP;
+			}else if(p.isInside(x-speed, y, width, height)) {	
+				System.out.println("Right collision");
+				collision = p;
+				return Collision.RIGHT;
+				
+			} else if(p.isInside(x+speed, y, width, height)) {
+				System.out.println("Left collision");
+				collision = p;
+				return Collision.LEFT;
+				
+			} 
+		}
 		return NO_COLLISION;
 		
 	}
@@ -104,8 +135,14 @@ public class Ship extends Sprite implements Serializable {
 	
 	public void top_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
-		//TODO implement top collision for ship
 		
+		double xCollision = collision.getX(), yCollision = collision.getY();
+		double widthCollision = collision.width();
+		
+		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision+widthCollision, yCollision))
+			deltaX = speed;
+		else
+			deltaX = -speed;
 
 		this.setX(x+deltaX);
 		this.setY(y+deltaY);
@@ -113,7 +150,14 @@ public class Ship extends Sprite implements Serializable {
 	
 	public void bottom_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
-		//TODO implement bottom collision for ship
+		
+		double xCollision = collision.getX(), yCollision = collision.getY();
+		double widthCollision = collision.width();
+
+		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision+widthCollision, yCollision))
+			deltaX = speed;
+		else
+			deltaX = -speed;
 		
 
 		this.setX(x+deltaX);
@@ -122,7 +166,14 @@ public class Ship extends Sprite implements Serializable {
 	
 	public void left_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
-		//TODO implement left collision for ship
+		
+		double xCollision = collision.getX(), yCollision = collision.getY();
+		double heightCollision = collision.height();
+
+		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision, yCollision+heightCollision))
+			deltaY = -speed;
+		else
+			deltaY = speed;
 		
 
 		this.setX(x+deltaX);
@@ -131,7 +182,14 @@ public class Ship extends Sprite implements Serializable {
 	
 	public void right_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
-		//TODO implement right collision for ship
+		
+		double xCollision = collision.getX(), yCollision = collision.getY();
+		double heightCollision = collision.height();
+
+		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision, yCollision+heightCollision))
+			deltaY = -speed;
+		else
+			deltaY = speed;
 		
 
 		this.setX(x+deltaX);

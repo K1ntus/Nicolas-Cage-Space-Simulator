@@ -48,6 +48,7 @@ To go further:
 			** Etoile de la mort -> destruction de planète
 			** Soleil au centre avec BCP de troupes -> tué = reset à 1 de ttes les planetes
 				** Tore de Stanford en protection supplémentaire
+				** ou peut-être les deux avec un gif en mode gardiens ?
 		* Gameplay:
 			** Nombre d'ennemis
 			** Forme des planï¿½tes

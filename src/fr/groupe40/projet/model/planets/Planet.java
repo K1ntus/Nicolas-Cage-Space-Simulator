@@ -26,7 +26,7 @@ public class Planet extends Sprite {
 	}
 	/**	Utilities **/
 	public boolean clickedOnPlanet(double x, double y) {
-		if(isInside(x, y,0,0)) {
+		if(isInside(x, y, 0, 0)) {
 			if(Constantes.DEBUG) {
 				System.out.println("Vous avez clique sur une planete avec "+this.troups);
 				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
