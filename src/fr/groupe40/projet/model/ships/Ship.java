@@ -85,19 +85,19 @@ public class Ship extends Sprite implements Serializable {
 				break;
 			case TOP:
 				top_collision_mover(x, y, centre_x, centre_y, speed);
-				System.out.println("Top collision");
+				//System.out.println("Top collision");
 				break;
 			case BOTTOM:
 				bottom_collision_mover(x, y, centre_x, centre_y, speed);
-				System.out.println("Bottom collision");
+				//System.out.println("Bottom collision");
 				break;
 			case LEFT:
 				left_collision_mover(x, y, centre_x, centre_y, speed);
-				System.out.println("Right collision");
+				//System.out.println("Right collision");
 				break;
 			case RIGHT:
 				right_collision_mover(x, y, centre_x, centre_y, speed);
-				System.out.println("Left collision");
+				//System.out.println("Left collision");
 				break;	
 		}
 	}
