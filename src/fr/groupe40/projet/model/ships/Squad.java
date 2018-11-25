@@ -206,6 +206,7 @@ public class Squad extends Thread implements Serializable {
 			
 		} else if (summonX*Constantes.size_squads + source.getX() >= source.getX()+source.width()) {
 			summonX = 1;
+			summonY = -1;
 		}
 
 		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
