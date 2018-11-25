@@ -85,15 +85,19 @@ public class Ship extends Sprite implements Serializable {
 				break;
 			case TOP:
 				top_collision_mover(x, y, centre_x, centre_y, speed);
+				System.out.println("Top collision");
 				break;
 			case BOTTOM:
 				bottom_collision_mover(x, y, centre_x, centre_y, speed);
+				System.out.println("Bottom collision");
 				break;
 			case LEFT:
 				left_collision_mover(x, y, centre_x, centre_y, speed);
+				System.out.println("Right collision");
 				break;
 			case RIGHT:
 				right_collision_mover(x, y, centre_x, centre_y, speed);
+				System.out.println("Left collision");
 				break;	
 		}
 	}
@@ -101,33 +105,30 @@ public class Ship extends Sprite implements Serializable {
 	public Collision whereis_collision(double x, double y, double speed, List<Planet> planets) {
 		double width = this.width();
 		double height = this.height();
+		Collision res = NO_COLLISION;
 		
 		for(Planet p : planets) {
 			if(p.equals(destination)) {
 				continue;
 			}
 
-			 if(p.isInside(x-speed, y-speed, width, height) || p.isInside(x+speed, y-speed, width, height)) {
-				//System.out.println("Bottom collision");
-				collision = p;
-				return Collision.BOTTOM;
-			} else if(p.isInside(x-speed, y+speed, width, height) || p.isInside(x+speed, y+speed, width, height)) {
-				//System.out.println("Top collision");
-				collision = p;
-				return Collision.TOP;
-				
-			}else if(p.isInside(x-speed, y-speed, width, height) || p.isInside(x-speed, y+speed, width, height) ) {	
-				//System.out.println("Right collision");
+			  if(p.isInside(x-speed, y, width, height)) {	
 				collision = p;
 				return Collision.RIGHT;
-			} else if(p.isInside(x+speed, y-speed, width, height) || p.isInside(x+speed, y+speed, width, height) ) {
-				//System.out.println("Left collision");
+			} else if(p.isInside(x+speed, y, width, height)) {
 				collision = p;
 				return Collision.LEFT;
 				
-			} 
+			} else if(p.isInside(x-speed, y-speed, width, height) || p.isInside(x+speed, y-speed, width, height)) {
+				collision = p;
+				return Collision.BOTTOM;
+			} else if(p.isInside(x-speed, y+speed, width, height) || p.isInside(x+speed, y+speed, width, height)) {
+				collision = p;
+				return Collision.TOP;
+				
+			}
 		}
-		return NO_COLLISION;
+		return res;
 		
 	}
 	
@@ -139,7 +140,7 @@ public class Ship extends Sprite implements Serializable {
 		double widthCollision = collision.width();
 		
 		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision+widthCollision, yCollision))
-			deltaX = speed;
+			deltaX = +speed;
 		else
 			deltaX = -speed;
 
@@ -154,7 +155,7 @@ public class Ship extends Sprite implements Serializable {
 		double widthCollision = collision.width();
 
 		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision+widthCollision, yCollision))
-			deltaX = speed;
+			deltaX = +speed;
 		else
 			deltaX = -speed;
 		
@@ -170,9 +171,9 @@ public class Ship extends Sprite implements Serializable {
 		double heightCollision = collision.height();
 
 		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision, yCollision+heightCollision))
-			deltaY = -speed;
+			deltaY = +speed;
 		else
-			deltaY = speed;
+			deltaY = -speed;
 		
 
 		this.setX(x+deltaX);
@@ -186,9 +187,9 @@ public class Ship extends Sprite implements Serializable {
 		double heightCollision = collision.height();
 
 		if(destination.distance(xCollision, yCollision) > destination.distance(xCollision, yCollision+heightCollision))
-			deltaY = -speed;
+			deltaY = +speed;
 		else
-			deltaY = speed;
+			deltaY = -speed;
 		
 
 		this.setX(x+deltaX);
