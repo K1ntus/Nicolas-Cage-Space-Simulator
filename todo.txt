@@ -5,7 +5,7 @@ Bugs to fix:
 20/11|	* Game loading/save
 23/11|	* Fleets sending
 23/11|	* AI
-		* Collisions au decollage	//~50% ok, gérer plusieurs vagues de décollage. (Thread avec un delay ?)
+26/11|	* Collisions au decollage	//~50% ok, gérer plusieurs vagues de décollage. (Thread avec un delay ?)
 		* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
 		* Collisions gauche/droite entre ships/planetes
 
