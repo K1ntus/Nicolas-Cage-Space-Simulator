@@ -74,8 +74,8 @@ public class Game extends Application {
     						Planet destination = p.getRuler().getDestination();
     							
     						if(destination != null && source != null) {
-    							Squad s = new Squad();
-    							s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
+    							Squad s = new Squad(Constantes.human_user.getPercent_of_troups_to_send(), source, destination);
+    							//s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
     							
     							galaxy.getSquads().add(s);
     								
@@ -190,8 +190,8 @@ public class Game extends Application {
             	if(source == null || destination == null || source.getRuler() != Constantes.human_user) {	
             		return;
             	}else {
-					Squad s = new Squad();
-					s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
+					Squad s = new Squad(Constantes.human_user.getPercent_of_troups_to_send(), source, destination);
+					//s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
 					galaxy.getSquads().add(s);
 
     				source = null;

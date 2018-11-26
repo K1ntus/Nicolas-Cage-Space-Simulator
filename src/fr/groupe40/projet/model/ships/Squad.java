@@ -20,34 +20,52 @@ public class Squad extends Thread implements Serializable {
 	
 	@SuppressWarnings("unused")
 	private volatile transient Thread blinker;
-
-	public Squad() {
+	
+	private int nb_ship;
+	private Planet source, destination;
+	
+	
+	public Squad(double pourcent, Planet src, Planet dest) {
+		this.source = src;
+		this.destination = dest;
+		this.nb_ship = (int) (src.getTroups() * (pourcent / 100));
 		// TODO Auto-generated constructor stub
-		//setDaemon(true);	//Thread will close if game window has been closed
-		//start();			//Run the thread which is generating troups
+		setDaemon(true);	//Thread will close if game window has been closed
+		start();			//Run the thread which is generating troups
 	}
 
 	/**
 	 * \brief gestion des decollages
 	 */
-	/*
+	
 	@Override
 	public void run() {
 		@SuppressWarnings("unused")
 		Thread thisThread = Thread.currentThread();
-		while(true) {
-			for(Planet p : planets)
-				p.updateGarrison();	
-				//generateRandomSquads();		
+		while(nb_ship>0) {
+			double x = this.decollageX(source);
+			double y = this.decollageY(source);
+			ships.add(
+				new Ship(
+						Constantes.path_img_ships,
+						source.getRuler(),
+						destination,
+						source,
+						x,
+						y,
+						source.getShips_type()
+					)
+			);
+			source.setTroups(source.getTroups()-1);
 			try {
-				sleep(1000);
-			} catch (InterruptedException e) {
+				sleep(200);
+				nb_ship-=1;
+			}catch(InterruptedException e) {
 				e.printStackTrace();
 			}
-			
 		}
 	}
-*/
+
 	/**
 	 * \brief Stop the thread updating the garrison when called
 	 */
@@ -165,6 +183,10 @@ public class Squad extends Thread implements Serializable {
 	public Squad sendFleet(Planet source, Planet destination, int percent) {
 		int troups = source.getTroups();
 		
+		this.source = source;
+		this.destination = destination;
+		
+		
 		if(troups > Constantes.min_troups+1) {	//Not send more troups than possible
 			int fleet_size = troups - (Constantes.min_troups);
 				
@@ -201,6 +223,7 @@ public class Squad extends Thread implements Serializable {
 	 * @return abscissa position
 	 */
 	private double decollageX(Planet source) {
+		/*
 		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
 			
@@ -210,7 +233,8 @@ public class Squad extends Thread implements Serializable {
 		}
 
 		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
-		
+		*/
+		return(source.getX()+source.width()/2);
 	}
 	
 	/**
