@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Game extends Application {
 	
@@ -34,6 +35,7 @@ public class Game extends Application {
 		/** Window and game kernel creation **/
 		stage.setTitle("Surgeon Simulator 2");
 		stage.setResizable(false);
+		//stage.initStyle(StageStyle.UNIFIED);
 
 		Group root = new Group();
 		Scene scene = new Scene(root);
