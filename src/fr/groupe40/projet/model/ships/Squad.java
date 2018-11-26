@@ -94,9 +94,13 @@ public class Squad extends Thread implements Serializable {
 	 * @param gc GraphicsContext
 	 */
 	public void render_ships(GraphicsContext gc) {
-		for(Ship s : ships) {
-			s.render(gc);
-		}
+			for(Ship s : ships) {
+				try {
+					s.render(gc);
+				} catch (ConcurrentModificationException e) {
+					continue;
+				}
+			}
 	}
 
 	/**

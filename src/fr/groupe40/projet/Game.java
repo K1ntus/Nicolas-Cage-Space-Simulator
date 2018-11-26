@@ -35,7 +35,7 @@ public class Game extends Application {
 		/** Window and game kernel creation **/
 		stage.setTitle("Surgeon Simulator 2");
 		stage.setResizable(false);
-		//stage.initStyle(StageStyle.UNIFIED);
+		stage.initStyle(StageStyle.UTILITY);
 
 		Group root = new Group();
 		Scene scene = new Scene(root);

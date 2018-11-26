@@ -63,8 +63,7 @@ public class User implements Serializable{
 			return null;
 		}
 		if(troups_destination < source.getTroups()) {
-			Squad s = new Squad();
-			s.sendFleet(source, destination, 50);
+			Squad s = new Squad(50, source, destination);
 			return s;
 		}
 		
