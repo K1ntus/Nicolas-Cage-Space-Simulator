@@ -43,6 +43,10 @@ public class Squad extends Thread implements Serializable {
 		@SuppressWarnings("unused")
 		Thread thisThread = Thread.currentThread();
 		while(nb_ship>0) {
+			if(source.getTroups() <= Constantes.min_troups+1) {
+				nb_ship = 0;
+				break;
+			}
 			double x = this.decollageX(source);
 			double y = this.decollageY(source);
 			ships.add(

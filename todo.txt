@@ -5,10 +5,10 @@ Bugs to fix:
 20/11|	* Game loading/save
 23/11|	* Fleets sending
 23/11|	* AI
-26/11|	* Collisions au decollage	//~50% ok, gérer plusieurs vagues de décollage. (Thread avec un delay ?)
+26/11|	* Collisions au decollage	//~50% ok, gï¿½rer plusieurs vagues de dï¿½collage. (Thread avec un delay ?)
 		* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
 		* Collisions gauche/droite entre ships/planetes
-		* Valeur négative de troups en cas d'envoie simultanée
+28/11|	* Valeur nï¿½gative de troups en cas d'envoie simultanï¿½e
 
 
 **********************************************************************
@@ -45,12 +45,12 @@ Minimal Version:
 To go further:
 		* Evï¿½nements:
 			** Gï¿½nï¿½ration alï¿½atoire de pirates (Trou de ver)
-			** Rébellion ? A creuser
-			** Trop forte attaque -> destruction de la planète
-			** Etoile de la mort -> destruction de planète
-			** Soleil au centre avec BCP de troupes -> tué = reset à 1 de ttes les planetes
-				** Tore de Stanford en protection supplémentaire
-				** ou peut-être les deux avec un gif en mode gardiens ?
+			** Rï¿½bellion ? A creuser
+			** Trop forte attaque -> destruction de la planï¿½te
+			** Etoile de la mort -> destruction de planï¿½te
+			** Soleil au centre avec BCP de troupes -> tuï¿½ = reset ï¿½ 1 de ttes les planetes
+				** Tore de Stanford en protection supplï¿½mentaire
+				** ou peut-ï¿½tre les deux avec un gif en mode gardiens ?
 		* Gameplay:
 			** Nombre d'ennemis
 			** Forme des planï¿½tes
