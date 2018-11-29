@@ -5,26 +5,33 @@ Bugs to fix:
 20/11|	* Game loading/save
 23/11|	* Fleets sending
 23/11|	* AI
-26/11|	* Collisions au decollage	//~50% ok, gï¿½rer plusieurs vagues de dï¿½collage. (Thread avec un delay ?)
+26/11|	* Collisions au decollage	//~50% ok, gerer plusieurs vagues de decollage. 
 		* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
-		* Collisions gauche/droite entre ships/planetes
-28/11|	* Valeur nï¿½gative de troups en cas d'envoie simultanï¿½e
+27/11|	* Collisions gauche/droite entre ships/planetes
+28/11|	* Valeur negative de troups en cas d'envoie simultanee
 
 
 **********************************************************************
 
 
 Minimal Version:
-18/11|	* Dï¿½collage des vaisseaux:	//Should be ok
-			** L'envoi de vaisseaux doit etre fait par diffusion autour de la planete emettrice, c'est-a-dire que les vaisseaux ne doivent pas se recouvrir au dï¿½collage. 
-			** Par consï¿½quent, le decollage d'un grand nombre de vaisseaux d'une petite planete peut necessiter plusieurs vagues de decollage. 
+18/11|	* Decollage des vaisseaux:	//Should be ok
+			** L'envoi de vaisseaux doit etre fait par diffusion autour de la planete emettrice, c'est-a-dire que les vaisseaux ne doivent pas se recouvrir au decollage. 
+			** Par consequent, le decollage d'un grand nombre de vaisseaux d'une petite planete peut necessiter plusieurs vagues de decollage. 
 			** Les vaisseaux envoyes par un unique ordre compose un escadron. 
 	
 24/11|	* Changement direction d'un escadron (squad) deja lance
 		
-		* Collisions Vaisseaux/Planetes
+27/11|	* Collisions Vaisseaux/Planetes
 			** Par contre, un vaisseau devant atteindre une planete donnee ne devra ni survoler, ni rentrer en collision avec une autre planete. 
 			** Pour ce faire, vous devrez mettre en place un algorithme de deplacement permettant le contournement des planetes non visees.
+		
+		* Améliorer le système de position de décollage des vaisseaux (et collisions quand plusieurs attaques simultanées)
+		
+		* Passer la classe 'Planet' en abstract
+		
+		* Gérer les interactions dans une nouvelle classe (hors du main)
+		
 		
 		* Rediger un README.md
 		
@@ -44,17 +51,17 @@ Minimal Version:
 
 To go further:
 		* Evï¿½nements:
-			** Gï¿½nï¿½ration alï¿½atoire de pirates (Trou de ver)
-			** Rï¿½bellion ? A creuser
-			** Trop forte attaque -> destruction de la planï¿½te
-			** Etoile de la mort -> destruction de planï¿½te
-			** Soleil au centre avec BCP de troupes -> tuï¿½ = reset ï¿½ 1 de ttes les planetes
-				** Tore de Stanford en protection supplï¿½mentaire
-				** ou peut-ï¿½tre les deux avec un gif en mode gardiens ?
+			** Generation aleatoire de pirates (Trou de ver)
+			** Rebellion ? A creuser
+			** Trop forte attaque -> destruction de la planete
+			** Etoile de la mort -> destruction de planete
+			** Soleil au centre avec BCP de troupes -> tue = reset a 1 de garnison de ttes les planetes
+				** Tore de Stanford en protection supplementaire
+				** ou peut-etre les deux avec un gif en mode gardiens ?
 		* Gameplay:
 			** Nombre d'ennemis
-			** Forme des planï¿½tes
-			** Sprite alï¿½atoire pour les planï¿½tes
+			** Forme des planetes
+			** Sprite aleatoire pour les planetes
 			** Taille des vaisseaux en fonction de leurs troupes
 		* Optimisation:
 			** Squads avec un "nuage de points" au lieu d'un objet par vaisseau
@@ -65,9 +72,9 @@ To go further:
 
 		* Update JUnit
 		* Documenter les fonctions
-		* Corriger l'implï¿½mentation
+		* Corriger l'implementation
 	
-		-> Rendu version amï¿½liorï¿½e
+		-> Rendu version ameliorer
 
 
 **********************************************************************

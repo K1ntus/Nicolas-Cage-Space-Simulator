@@ -62,7 +62,7 @@ public class Squad extends Thread implements Serializable {
 			);
 			source.setTroups(source.getTroups()-1);
 			try {
-				sleep(200);
+				sleep(250);	//Magic number
 				nb_ship-=1;
 			}catch(InterruptedException e) {
 				e.printStackTrace();
