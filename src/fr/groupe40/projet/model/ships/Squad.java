@@ -242,9 +242,9 @@ public class Squad extends Thread implements Serializable {
 	 */
 	private double decollageY(Planet source) {
 		if(source.getY() > destination.getY())
-			return (source.getY() - Constantes.size_squads - 2*Constantes.min_ship_speed);
+			return (source.getY() - Constantes.size_squads-1);
 		else
-			return (source.width() + source.getY() + Constantes.size_squads + 2*Constantes.min_ship_speed);		
+			return (source.width() + source.getY() + 1);		
 	}
 	
 }
