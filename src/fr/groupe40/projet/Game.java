@@ -1,12 +1,12 @@
 package fr.groupe40.projet;
 
-import com.sun.javafx.scene.traversal.Direction;
 
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Direction;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;

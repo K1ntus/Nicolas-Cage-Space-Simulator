@@ -1,10 +1,10 @@
 package fr.groupe40.projet.client.handler;
 
-import com.sun.javafx.scene.traversal.Direction;
 
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Direction;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;

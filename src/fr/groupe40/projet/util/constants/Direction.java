@@ -7,7 +7,7 @@ package fr.groupe40.projet.util.constants;
  * @author Sarah Portejoie
  *
  */
-public enum Collision {
+public enum Direction {
 	
 	/**
 	 * There is no collisions
@@ -18,12 +18,12 @@ public enum Collision {
 	/**
 	 * TOP collision between a ship and a planet
 	 */
-	TOP,
+	TOP, UP,
 	
 	/**
 	 * BOTTOM collision between a ship and a planet
 	 */
-	BOTTOM,
+	BOTTOM, DOWN,
 	
 	/**
 	 * LEFT collision between a ship and a planet

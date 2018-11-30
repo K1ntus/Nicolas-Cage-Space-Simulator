@@ -1,6 +1,6 @@
 package fr.groupe40.projet.model.ships;
 
-import static fr.groupe40.projet.util.constants.Collision.NO_COLLISION;
+import static fr.groupe40.projet.util.constants.Direction.NO_COLLISION;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constants.Collision;
+import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Constants;
 
 /**
@@ -140,10 +140,10 @@ public class Ship extends Sprite implements Serializable {
 	 * @param planets array with every planets of the board on it
 	 * @return a Collision constante
 	 */
-	public Collision whereis_collision(double x, double y, double speed, List<Planet> planets) {
+	public Direction whereis_collision(double x, double y, double speed, List<Planet> planets) {
 		double width = this.width();
 		double height = this.height();
-		Collision res = NO_COLLISION;
+		Direction res = NO_COLLISION;
 		
 		for(Planet p : planets) {
 			if(p.equals(destination)) {
@@ -152,17 +152,17 @@ public class Ship extends Sprite implements Serializable {
 
 			  if(p.isInside(x-speed, y, width, height)) {	
 				collision = p;
-				return Collision.RIGHT;
+				return Direction.RIGHT;
 			} else if(p.isInside(x+speed, y, width, height)) {
 				collision = p;
-				return Collision.LEFT;
+				return Direction.LEFT;
 				
 			} else if(p.isInside(x-speed, y-speed, width, height) || p.isInside(x+speed, y-speed, width, height)) {
 				collision = p;
-				return Collision.BOTTOM;
+				return Direction.BOTTOM;
 			} else if(p.isInside(x-speed, y+speed, width, height) || p.isInside(x+speed, y+speed, width, height)) {
 				collision = p;
-				return Collision.TOP;
+				return Direction.TOP;
 				
 			}
 		}
