@@ -2,7 +2,7 @@ package fr.groupe40.projet.client.handler;
 
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.Constantes;
+import fr.groupe40.projet.util.constantes.Constantes;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;

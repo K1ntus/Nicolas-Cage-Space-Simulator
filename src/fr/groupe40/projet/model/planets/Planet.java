@@ -3,7 +3,7 @@ package fr.groupe40.projet.model.planets;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.ShipType;
-import fr.groupe40.projet.util.Constantes;
+import fr.groupe40.projet.util.constantes.Constantes;
 
 public class Planet extends Sprite {
 	private static final long serialVersionUID = 260148039781013750L;

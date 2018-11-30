@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.Constantes;
+import fr.groupe40.projet.util.constantes.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 
 public class User implements Serializable{

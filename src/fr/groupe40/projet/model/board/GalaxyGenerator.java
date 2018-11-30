@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.Constantes;
+import fr.groupe40.projet.util.constantes.Constantes;
 
 public class GalaxyGenerator {
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
@@ -40,7 +40,8 @@ public class GalaxyGenerator {
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
 			getPlanets().get(1).setRuler(Constantes.human_user);
-			//getPlanets().get(2).setRuler(Constantes.ai_user);
+			if(Constantes.is_ai)
+				getPlanets().get(2).setRuler(Constantes.ai_user);
 		}
 		
 		

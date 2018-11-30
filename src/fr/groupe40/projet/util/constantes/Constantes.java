@@ -1,4 +1,4 @@
-package fr.groupe40.projet.util;
+package fr.groupe40.projet.util.constantes;
 
 import fr.groupe40.projet.client.User;
 import javafx.scene.paint.Color;
@@ -50,6 +50,8 @@ public final class Constantes {
 	public static final User ai_user = new User(ai, -1);
 	public static final User pirates_users = new User(ai, -2);
 	public static final User human_user = new User(player, 1);
+	
+	public static final boolean is_ai = true;
 		
 	/**	Defense & Production **/
 	public static final long ms_per_produce = 1000;
@@ -92,8 +94,11 @@ public final class Constantes {
 	public static final boolean DEBUG_TROUPS = false;
 	
 	/**	AI Config **/
+	@Deprecated
 	public static final boolean limit_ai_squads_number = true;	//If ai should have a limited number of squads at the same time
+	@Deprecated
 	public static final int max_squads_for_ai = 2;	//max number of squads from an ai player at the same time. -1 to disable this limit
+	
 	
 	
 }

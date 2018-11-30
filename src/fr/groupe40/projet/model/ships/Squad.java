@@ -8,18 +8,13 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.Constantes;
+import fr.groupe40.projet.util.constantes.Constantes;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Squad extends Thread implements Serializable {
 	private static final long serialVersionUID = -6736174123976474099L;
 	
 	private ArrayList<Ship> ships = new ArrayList<Ship>();
-
-	private int summonX = 1, summonY = 1;
-	
-	@SuppressWarnings("unused")
-	private volatile transient Thread blinker;
 	
 	private int nb_ship;
 	private Planet source, destination;
@@ -29,7 +24,7 @@ public class Squad extends Thread implements Serializable {
 		this.source = src;
 		this.destination = dest;
 		this.nb_ship = (int) (src.getTroups() * (pourcent / 100));
-		// TODO Auto-generated constructor stub
+
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
 	}
@@ -37,13 +32,12 @@ public class Squad extends Thread implements Serializable {
 	/**
 	 * \brief gestion des decollages
 	 */
-	
 	@Override
 	public void run() {
 		@SuppressWarnings("unused")
 		Thread thisThread = Thread.currentThread();
 		while(nb_ship>0) {
-			if(source.getTroups() <= Constantes.min_troups+1) {
+			if(source.getTroups() -1 <= Constantes.min_troups) {
 				nb_ship = 0;
 				break;
 			}
@@ -61,22 +55,15 @@ public class Squad extends Thread implements Serializable {
 					)
 			);
 			source.setTroups(source.getTroups()-1);
+			
+			nb_ship-=1;
 			try {
 				sleep(250);	//Magic number
-				nb_ship-=1;
 			}catch(InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
-	/**
-	 * \brief Stop the thread updating the garrison when called
-	 */
-	public void stopThread() {
-        blinker = null;
-    }
-	
 	
 	
 	/**
@@ -93,6 +80,7 @@ public class Squad extends Thread implements Serializable {
 		}
 		return false;		
 	}
+	
 	/**
 	 * \brief Render every ships of this squad
 	 * @param gc GraphicsContext
@@ -232,6 +220,7 @@ public class Squad extends Thread implements Serializable {
 	 */
 	private double decollageX(Planet source) {
 		/*
+		 
 		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
 			
@@ -241,6 +230,7 @@ public class Squad extends Thread implements Serializable {
 		}
 
 		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
+		
 		*/
 		return(source.getX()+source.width()/2);
 	}
@@ -251,7 +241,7 @@ public class Squad extends Thread implements Serializable {
 	 * @return ordered position
 	 */
 	private double decollageY(Planet source) {
-		if(summonY >= 1)
+		if(source.getY() > destination.getY())
 			return (source.getY() - Constantes.size_squads - 2*Constantes.min_ship_speed);
 		else
 			return (source.width() + source.getY() + Constantes.size_squads + 2*Constantes.min_ship_speed);		

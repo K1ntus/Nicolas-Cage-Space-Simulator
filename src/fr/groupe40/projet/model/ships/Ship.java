@@ -1,15 +1,15 @@
 package fr.groupe40.projet.model.ships;
 
+import static fr.groupe40.projet.util.constantes.Collision.*;
+
 import java.io.Serializable;
 import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
-import static fr.groupe40.projet.util.Collision.*;
-import fr.groupe40.projet.util.Collision;
-
-import fr.groupe40.projet.util.Constantes;
+import fr.groupe40.projet.util.constantes.Collision;
+import fr.groupe40.projet.util.constantes.Constantes;
 
 public class Ship extends Sprite implements Serializable {
 	private static final long serialVersionUID = -1872446628467348036L;

@@ -2,7 +2,7 @@ package fr.groupe40.projet.model.ships;
 
 import java.io.Serializable;
 
-import fr.groupe40.projet.util.Constantes;
+import fr.groupe40.projet.util.constantes.Constantes;
 
 public class ShipType implements Serializable {
 	private static final long serialVersionUID = 6833813366446523473L;
