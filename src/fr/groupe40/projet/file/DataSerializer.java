@@ -15,7 +15,6 @@ import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 
-@SuppressWarnings("unused")
 public class DataSerializer {
 	
 	/**

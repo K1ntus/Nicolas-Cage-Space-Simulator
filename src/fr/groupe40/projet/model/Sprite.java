@@ -229,13 +229,12 @@ public abstract class Sprite implements Serializable {
 	
 	/**
 	 * \brief Check if a sprite directly intersect another one
-	 * @param s
-	 * @return
+	 * @param s the sprite to compare with
+	 * @return true if the sprite is inside, else false
 	 */
 	public boolean isInside(Sprite s) {
 		return ((x >= s.x && x <= s.x + s.width) || (s.x >= x && s.x <= x + width))
 				&& ((y >= s.y && y <= s.y + s.height) || (s.y >= y && s.y <= y + height));
-		//return isInside(s.getX(), s.getY());
 	}
 
 	/**

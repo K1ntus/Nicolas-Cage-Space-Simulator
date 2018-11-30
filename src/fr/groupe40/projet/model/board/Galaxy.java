@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.sun.javafx.scene.traversal.Direction;
+
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
@@ -198,20 +200,16 @@ public class Galaxy implements Serializable{
 	 * \brief handle the scrolls event to change the percent of a fleet to send
 	 * @param action The scroll action (up or down case)
 	 */
-	public void clientScrollHandler(int action) {
-		for(Planet p : planets) {
-			User u = p.getRuler();
-			if(u.equals(Constants.human_user)) {
-				int percent = u.getPercent_of_troups_to_send();
-				switch(action) {
-					case 0://lower
-						u.setPercent_of_troups_to_send(percent - 5); break;
-					case -1://greater
-						u.setPercent_of_troups_to_send(percent + 5); break;
-					default:
-						break;
-				}
-			}
+	public void clientScrollHandler(Direction direction) {
+		User u = Constants.human_user;
+		int percent = u.getPercent_of_troups_to_send();
+		switch(direction) {
+			case DOWN://lower
+				u.setPercent_of_troups_to_send(percent - 5); break;
+			case UP://greater
+				u.setPercent_of_troups_to_send(percent + 5); break;
+			default:
+				break;
 		}
 	}
 	

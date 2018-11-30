@@ -6,14 +6,14 @@ Bugs to fix:
 23/11|	* Fleets sending
 23/11|	* AI
 26/11|	* Collisions au decollage	//~50% ok, gerer plusieurs vagues de decollage. 
-		* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
+30/11|	* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
 27/11|	* Collisions gauche/droite entre ships/planetes
 28/11|	* Valeur negative de troups en cas d'envoie simultanee
 		* Refaire envoie de troupes (paquets par paquets (ie. squads par squads))
 		* 
 		* Valeur négative en cas d'attaques d'ia pendant envoie de troupes ?
 		* Optimiser décollage (plusieurs positions en même temps
-		* Mettre les update dans le run() (Tick par tick)
+30/11|	* Mettre les update dans le run() (Tick par tick)
 
 
 **********************************************************************

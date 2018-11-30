@@ -1,5 +1,7 @@
 package fr.groupe40.projet;
 
+import com.sun.javafx.scene.traversal.Direction;
+
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
@@ -77,8 +79,10 @@ public class Game extends Application {
 		stage.show();
 
 		
-        
-        /*	Saver	*/
+
+    	/**
+    	 * \brief Manage the saver/loader
+    	 */
     	EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
 
     		@Override
@@ -129,7 +133,10 @@ public class Game extends Application {
     			
     		}
     	};
-    	
+
+    	/**
+    	 * \brief Manage the drag initial event
+    	 */
     	EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -165,7 +172,10 @@ public class Game extends Application {
                 
             }
         };
-    	
+
+    	/**
+    	 * \brief Manage the drop of the mouse
+    	 */
     	EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent){
@@ -223,14 +233,16 @@ public class Game extends Application {
             }
     	};
     	
-    	
+    	/**
+    	 * \brief Manage the scroll event
+    	 */
     	EventHandler<ScrollEvent> scrollEvent = new EventHandler<ScrollEvent>() {
     		@Override
     		public void handle(ScrollEvent event) {
     		    if (event.getDeltaY() < 0) {	//diminution
-    		        galaxy.clientScrollHandler(0);
+    		        galaxy.clientScrollHandler(Direction.DOWN);
     		    } else if (event.getDeltaY() > 0){//augmentation
-    		        galaxy.clientScrollHandler(-1);
+    		        galaxy.clientScrollHandler(Direction.UP);
     		    } else {
     		    	//Do nothing
     		    }

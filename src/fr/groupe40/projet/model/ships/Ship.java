@@ -284,7 +284,8 @@ public class Ship extends Sprite implements Serializable {
 	 * @param speed speed of this ship
 	 */
 	public void no_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
-		double angle = destination_angle()/90;
+		//double angle = destination_angle()/90;
+		double angle = 1;
 		if(x < centre_x) {
 			setX(x+speed*angle);
 		} else {

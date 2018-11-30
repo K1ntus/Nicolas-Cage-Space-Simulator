@@ -1,5 +1,7 @@
 package fr.groupe40.projet.client.handler;
 
+import com.sun.javafx.scene.traversal.Direction;
+
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Constants;
@@ -126,9 +128,9 @@ public abstract class  InteractionHandler {
 		@Override
 		public void handle(ScrollEvent event) {
 		    if (event.getDeltaY() < 0) {	//diminution
-		        galaxy.clientScrollHandler(0);
+		        galaxy.clientScrollHandler(Direction.DOWN);
 		    } else if (event.getDeltaY() > 0){//augmentation
-		        galaxy.clientScrollHandler(-1);
+		        galaxy.clientScrollHandler(Direction.UP);
 		    } else {
 		    	//Do nothing
 		    }
