@@ -8,7 +8,14 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Constants;
 
 public class GalaxyGenerator {
+	/**
+	 * \brief the results planets array that has been generated
+	 */
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
+	
+	/**
+	 * \brief Create and Generate the board
+	 */
 	public GalaxyGenerator() {
 		generatePlanets();
 	}

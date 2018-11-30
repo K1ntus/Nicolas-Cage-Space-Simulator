@@ -37,17 +37,23 @@ public class User implements Serializable{
 	 * \brief this user has lost or not
 	 */
 	private boolean lost;
-/**
- * \brief
- * @param faction
- * @param id
- */
+	
+	/**
+	 * \brief Create a new user from a faction and an id
+	 * @param faction the faction of this user
+	 * @param id the id of this user
+	 */
 	public User(int faction, int id) {
 		this.faction = faction;
 		this.id = id;
 		setLost(false);
 		percent_of_troups_to_send = 100;
 	}
+	
+	/**
+	 * \brief Create a user only from his id
+	 * @param faction the faction of this player
+	 */
 	public User(int faction) {
 		this.faction = faction;
 		
@@ -66,15 +72,24 @@ public class User implements Serializable{
 		destination = null;
 	}
 
+	/**
+	 * \brief create an user from an user
+	 * @param user to copy parameters from
+	 */
 	public User(User user) {
 		this.id = user.id;
 		this.faction = user.faction;
-		setLost(false);
-		percent_of_troups_to_send = 100;
+		this.lost = user.lost;
+		this.percent_of_troups_to_send = user.percent_of_troups_to_send;
 	}
 	
-	/** AI handler **/
-
+	/* AI handler */
+	/**
+	 * \brief send fleet automatization for ai user
+	 * @param source the source planet
+	 * @param destination the destination planet
+	 * @return the squad that has been send, else null
+	 */
 	public Squad sendFleetAI(Planet source, Planet destination) {
 		User u_dest = destination.getRuler();
 		int troups_destination = destination.getTroups();
@@ -94,27 +109,45 @@ public class User implements Serializable{
 		//TODO render when a user has been defeated
 	}
 	
+	/**
+	 * \brief return the faction of an user
+	 * @return faction
+	 */
 	public int getFaction() {
 		return faction;
 	}
 
+	/**
+	 * \brief set the faction of an user
+	 * @param faction his new faction
+	 */
 	public void setFaction(int faction) {
 		this.faction = faction;
 	}
 
+	/**
+	 * \brief return the id of an user
+	 * @return id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * \brief set a new id for an user
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	/**
 	 * @return the percent_of_troups_to_send
 	 */
 	public int getPercent_of_troups_to_send() {
 		return percent_of_troups_to_send;
 	}
+	
 	/**
 	 * @param percent_of_troups_to_send the percent_of_troups_to_send to set
 	 */
@@ -155,13 +188,28 @@ public class User implements Serializable{
 	public void setSource(Planet source) {
 		this.source = source;
 	}
+	
+	/**
+	 * \brief return if this user has lost or not
+	 * @return lost
+	 */
 	public boolean isLost() {
 		return lost;
 	}
+	
+	/**
+	 * \brief set the lost state of an user
+	 * @param lost
+	 */
 	public void setLost(boolean lost) {
 		this.lost = lost;
 	}
 	
+	/**
+	 * \brief compare two user
+	 * @param u
+	 * @return true if they're both equals, else false
+	 */
 	public boolean equals(User u) {
 		if (u.faction == this.faction && u.id == this.id) {
 			return true;

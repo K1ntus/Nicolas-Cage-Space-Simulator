@@ -10,14 +10,39 @@ import javafx.scene.image.Image;
 public abstract class Sprite implements Serializable {
 	private static final long serialVersionUID = 361050239890707789L;
 	
+	/**
+	 * \brief his image to display
+	 */
 	private transient Image image;	//unserializable
+	
+	/**
+	 * \brief his img path
+	 */
 	private String img_path;
 	
+	/**
+	 * \brief his width & height
+	 */
 	private double width, height;
+	
+	/**
+	 * \brief x and y position
+	 */
 	private double x, y;
+	
+	/**
+	 * \brief maximal x and y position
+	 */
 	private double maxX, maxY;
+	
+	/**
+	 * \brief minimal x and y position
+	 */
 	private double minX, minY;
 
+	/**
+	 * \brief the ruler of this sprites (Planets, Ship, ...)
+	 */
 	private User ruler;
 
 	/**

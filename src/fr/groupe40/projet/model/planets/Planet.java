@@ -24,7 +24,15 @@ public class Planet extends Sprite {
 		setX(x);
 		setY(y);
 	}
-	/**	Utilities **/
+	
+	/*	Utilities */
+	/**
+	 * \brief check if a position is in a planet
+	 * @param x
+	 * @param y
+	 * @return true if inside, else false
+	 */
+	@Deprecated
 	public boolean clickedOnPlanet(double x, double y) {
 		if(isInside(x, y, 0, 0)) {
 			if(Constants.DEBUG) {
@@ -38,7 +46,10 @@ public class Planet extends Sprite {
 			
 	}
 	
-	/** Update	**/
+	/* Update	*/
+	/**
+	 * \brief update the garrison value of this planet if not neutral
+	 */
 	public void updateGarrison() {
     	if(getRuler().getFaction() != Constants.neutral) {
     		if(troups < Constants.max_troups) {
@@ -52,10 +63,11 @@ public class Planet extends Sprite {
     	}
 	}
 	
-	/**	Interactions **/
-	
-	/**	Planet Generation	**/
+	/*	Planet Generation	*/
 
+	/**
+	 * \brief Generate a randomized planet 
+	 */
 	private void generate() {
 		selected = false;
 		
@@ -84,7 +96,10 @@ public class Planet extends Sprite {
 		updateImage();
 	}
 	
-	//find his place in the universe
+	/**
+	 * \brief find his place in the universe
+	 * @return 0 if his position is correct, else error value
+	 */
 	public int calculateNextPosition() {
 		
 		if (this.getX() + this.width() >= Constants.width -  Constants.right_margin_size + Constants.size_squads) {
@@ -106,7 +121,10 @@ public class Planet extends Sprite {
 		return 0;
 	}
 	
-	
+	/**
+	 * \brief check new position for generation
+	 * @return 0 if ok. -1 if unable to generate
+	 */
 	public int updatePlanetePosition() {
 		setX(this.getX() + this.width()/5);
 		switch(calculateNextPosition()) {

@@ -17,16 +17,29 @@ import fr.groupe40.projet.util.constants.Constants;
 
 @SuppressWarnings("unused")
 public class DataSerializer {
+	
+	/**
+	 * \brief the fileName of the save
+	 */
 	private String name;
+	
+	/**
+	 * \brief the object containing all the data to save
+	 */
 	private Galaxy data;
+	
 	private ObjectOutputStream oos;
 	
+	/**
+	 * \brief create the structure containing the data and the fileName
+	 * @param name save fileName
+	 * @param data game data
+	 */
 	public DataSerializer(String name, Galaxy data) {
 		this.name = name;
-		this.data = data;
-		
-		
+		this.data = data;		
 	}
+	
 	/**
 	 * \brief Save the current game state in a file
 	 * @return true if the game has been saved, else false
