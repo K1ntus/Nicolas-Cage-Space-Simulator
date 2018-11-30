@@ -17,6 +17,10 @@ public abstract class  InteractionHandler {
 	private Planet source = null; private Planet destination = null;
 	//private Squad selected = null;
 	
+	/**
+	 * \brief constructor for the user input
+	 * @param galaxy
+	 */
 	public InteractionHandler(Galaxy galaxy) {
 		this.galaxy = galaxy;
 	}
@@ -29,7 +33,8 @@ public abstract class  InteractionHandler {
 	        
             orgSceneX = mouseEvent.getSceneX();
             orgSceneY = mouseEvent.getSceneY();
-/*
+            
+            /*
 			for(Squad s : galaxy.getSquads()) {
 	            if(s.isInside(orgSceneX, orgSceneY, Constants.size_squads, Constants.size_squads)) {
 					if(s.getRuler().getFaction() == Constants.player) {
@@ -42,7 +47,8 @@ public abstract class  InteractionHandler {
 						}
 					}
 				}
-			}*/
+			}
+			*/
 			
 			for(Planet p : galaxy.getPlanets()) {
 	            if(p.isInsidePlanet(orgSceneX, orgSceneY)) {
@@ -71,7 +77,7 @@ public abstract class  InteractionHandler {
             double offsetX = mouseEvent.getSceneX();
             double offsetY = mouseEvent.getSceneY();
 
-/*
+            /*
         	if(selected != null) {	
     			for(Planet p : galaxy.getPlanets()) {
     				try {						
@@ -111,15 +117,9 @@ public abstract class  InteractionHandler {
         	if(source == null || destination == null || source.getRuler() != Constants.human_user) {	
         		return;
         	}else {
-				//Squad s = source.sendFleet(destination);
-				//galaxy.getSquads().add(s);	
 				source = null;
 				destination = null;
         	}
-        	
-			//System.out.println(source.toString() + " -> " + destination.toString());
-			//((Canvas) (mouseEvent.getSource())).setTranslateX(newTranslateX);  //transform the object
-            //((Canvas) (mouseEvent.getSource())).setTranslateY(newTranslateY);
         }
 	};
 	
