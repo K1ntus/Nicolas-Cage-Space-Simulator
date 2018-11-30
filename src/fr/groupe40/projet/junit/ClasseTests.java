@@ -1,14 +1,11 @@
 package fr.groupe40.projet.junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
-import fr.groupe40.projet.util.constantes.Constantes;
-import junit.framework.Assert;
 
 public class ClasseTests {
 

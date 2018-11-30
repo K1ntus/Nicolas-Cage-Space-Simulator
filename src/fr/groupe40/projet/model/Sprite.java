@@ -256,8 +256,6 @@ public abstract class Sprite implements Serializable {
 		gc.drawImage(image, x, y);
 	}
 
-	/* Conflict Area */
-	
 	
 	/* Getter & Setter */
 

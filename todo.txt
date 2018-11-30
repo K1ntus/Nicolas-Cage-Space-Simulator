@@ -9,6 +9,8 @@ Bugs to fix:
 		* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
 27/11|	* Collisions gauche/droite entre ships/planetes
 28/11|	* Valeur negative de troups en cas d'envoie simultanee
+		* Refaire envoie de troupes (paquets par paquets (ie. squads par squads))
+		* 
 		* Valeur négative en cas d'attaques d'ia pendant envoie de troupes ?
 		* Optimiser décollage (plusieurs positions en même temps
 		* Mettre les update dans le run() (Tick par tick)

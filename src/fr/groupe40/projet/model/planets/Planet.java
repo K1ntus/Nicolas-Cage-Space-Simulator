@@ -32,8 +32,7 @@ public class Planet extends Sprite {
 	 * @param y
 	 * @return true if inside, else false
 	 */
-	@Deprecated
-	public boolean clickedOnPlanet(double x, double y) {
+	public boolean isInsidePlanet(double x, double y) {
 		if(isInside(x, y, 0, 0)) {
 			if(Constants.DEBUG) {
 				System.out.println("Vous avez clique sur une planete avec "+this.troups);
@@ -184,4 +183,5 @@ public class Planet extends Sprite {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
+
 }

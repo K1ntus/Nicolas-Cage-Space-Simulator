@@ -11,61 +11,58 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Squad extends Thread implements Serializable {
+public class Squad implements Serializable {
 	private static final long serialVersionUID = -6736174123976474099L;
 	
 	private ArrayList<Ship> ships = new ArrayList<Ship>();
 	
 	private int nb_ship;
 	private Planet source, destination;
+	private int summonX = 0, summonY = 0;
+	private boolean summoning = true;
 	
 	
 	public Squad(double pourcent, Planet src, Planet dest) {
 		this.source = src;
 		this.destination = dest;
 		this.nb_ship = (int) (src.getTroups() * (pourcent / 100));
-
-		setDaemon(true);	//Thread will close if game window has been closed
-		start();			//Run the thread which is generating troups
 	}
 
-	/**
-	 * \brief gestion des decollages
-	 */
-	@Override
-	public void run() {
-		while(nb_ship>0) {
+	public void sendFleet() {
+		if(nb_ship <= 0)
+			return;
+		
+		
+		while(summoning) {
 			if(source.getTroups() -1 <= Constants.min_troups) {
 				nb_ship = 0;
-				break;
+				return;
 			}
+			
 			double x = this.decollageX(source);
 			double y = this.decollageY(source);
+			
 			User u = source.getRuler();
 			String img_path = Constants.path_img_human_ships;
 			if (u.equals(Constants.ai_user)) {
 				img_path = Constants.path_img_AI_ships;
 			}
 			ships.add(
-				new Ship(
-						img_path,
-						source.getRuler(),
-						destination,
-						source,
-						x,
-						y,
-						source.getShips_type()
-					)
+			new Ship(
+					img_path,
+					source.getRuler(),
+					destination,
+					source,
+					x,
+					y,
+					source.getShips_type()
+				)
 			);
 			source.setTroups(source.getTroups()-1);
-			
+				
 			nb_ship-=1;
-			try {
-				sleep(250);	//Magic number
-			}catch(InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
+		summoning = true;
 	}
 	
 	
@@ -182,20 +179,21 @@ public class Squad extends Thread implements Serializable {
 	 * @return abscissa position
 	 */
 	private double decollageX(Planet source) {
-		/*
-		 
 		if(summonX*Constants.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
 			
+			
 		} else if (summonX*Constants.size_squads + source.getX() >= source.getX()+source.width()) {
 			summonX = 1;
-			summonY = -1;
+			if(summonY != -1)
+				summonY = -1;
+			if(summonY == -1) {
+				summoning = false;
+				summonY = 1;				
+			}
 		}
 
 		return (summonX*Constants.size_squads + (source.getX() - Constants.size_squads));
-		
-		*/
-		return(source.getX()+source.width()/2);
 	}
 	
 	/**

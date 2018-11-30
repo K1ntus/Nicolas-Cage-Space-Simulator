@@ -16,8 +16,8 @@ public final class Constants {
 	
 	/*	Window Parameters	*/
 	//Window height & width
-	public static final int height = 600;
 	public static final int width = 800;
+	public static final int height = 600;
 	
 	//Four margins
 	public static final double top_margin_size = 50;
@@ -26,13 +26,13 @@ public final class Constants {
 	public static final double right_margin_size = 50;
 
 	/*	Generation parameters */
-	public static final int nb_planets_tentatives = 6;	//<-> max planets available
+	public static final int nb_planets_tentatives = 5;	//<-> max planets available	//Exponential complexity
 	public static final int min_numbers_of_planets = 2;
 	public static final int minimal_distance_between_planets = 150;	//Distance in pixels required between each planets
 	
 	//Nb of ai squads generated from the beginning
-	//Currently for debugging
-	public static final int nb_squads = 0;
+	//Currently for debugging and not working anymore
+	//public static final int nb_squads = 50;
 	
 	/*	Graphics	*/
 	public static final double size_squads = 15.0;	//size in pixels of a "squad"
@@ -60,7 +60,10 @@ public final class Constants {
 	public static final boolean is_ai = true;
 		
 	/*	Defense & Production */
-	public static final long ms_per_produce = 1000;
+	public static final long tick_per_produce = 51;
+	public static final long tick_per_lift_off = 80;
+	public static final long tick_per_ai_attack = 91;
+	
 	public static final int max_initDefense = 15;//The initial troups in a planet at the generation of the world
 	public static final int min_troups = 1;	//minimal troups in a planet
 	public static final int max_troups = 100;	//minimal troups in a planet
@@ -82,6 +85,7 @@ public final class Constants {
 	/*	file */
 	//public static final String path_save = "/saves/";
 	public static final String path_save = "";
+	public static final String fileName_save = "01";
 	
 	public static final String path_img_planets = "/resources/images/planets/square/default.png";
 	public static final String path_img_round_planets = "/resources/images/planets/rounds/1.png";

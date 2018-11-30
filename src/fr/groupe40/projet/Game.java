@@ -30,6 +30,8 @@ public class Game extends Application {
 	private Planet source, destination;
 	private Squad selected;
 	
+	private int game_tick = 0;
+	
 	public void start(Stage stage) {
 		
 		/** Window and game kernel creation **/
@@ -128,7 +130,7 @@ public class Game extends Application {
     			}
     			
                 for(Planet p : galaxy.getPlanets()) {
-    	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
+    	            if(p.isInsidePlanet(orgSceneX, orgSceneY)) {
     					source = p;
     					if(source == null) {	break;	}
     					if(p.getRuler().equals(Constants.human_user)){
@@ -158,7 +160,7 @@ public class Game extends Application {
             	if(selected != null) {	
         			for(Planet p : galaxy.getPlanets()) {
         				try {						
-        					if(p.clickedOnPlanet(offsetX, offsetY)) {
+        					if(p.isInsidePlanet(offsetX, offsetY)) {
         						selected.update_destination(p);
         		    			selected = null;
         						return;
@@ -176,7 +178,7 @@ public class Game extends Application {
             	if(source == null) { return; }
     			for(Planet p : galaxy.getPlanets()) {
     				try {						
-    					if(p.clickedOnPlanet(offsetX, offsetY)) {
+    					if(p.isInsidePlanet(offsetX, offsetY)) {
     						if(!source.isInside(p)) {
     							destination = p;
     							source.getRuler().setDestination(p);
@@ -185,7 +187,6 @@ public class Game extends Application {
     					}
 
     				} catch(NullPointerException e) {
-    				//Nothing
     					return;
     				}
     			}
@@ -227,8 +228,30 @@ public class Game extends Application {
 		/**	Rendering **/
 		new AnimationTimer() {
 			public void handle(long arg0) {
-				galaxy.update();
-				galaxy.render(gc);			
+				
+				game_tick += 1;
+				galaxy.updateSquadPosition();
+				
+				if(game_tick % Constants.tick_per_produce == 0)
+					galaxy.updateGarrison();
+				
+				if(game_tick % Constants.tick_per_lift_off == 0)
+					galaxy.updateWavesSending();
+				
+				if(game_tick % Constants.tick_per_ai_attack == 0)
+					galaxy.updateAI();
+				
+				galaxy.render(gc);
+				if(galaxy.userHasLost(Constants.human_user)) {
+					System.out.println("Vous avez perdu");
+					galaxy.renderDefeat(gc);
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					System.exit(0);
+				}
 			}
 		}.start();
 	}

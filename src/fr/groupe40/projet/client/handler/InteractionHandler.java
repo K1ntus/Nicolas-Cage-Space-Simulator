@@ -43,7 +43,7 @@ public abstract class  InteractionHandler {
 			}*/
 			
 			for(Planet p : galaxy.getPlanets()) {
-	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
+	            if(p.isInsidePlanet(orgSceneX, orgSceneY)) {
 					source = p;
 					if(source == null) {	break;	}
 					if(p.getRuler().equals(Constants.human_user)){
@@ -93,7 +93,7 @@ public abstract class  InteractionHandler {
         	*/
 			for(Planet p : galaxy.getPlanets()) {
 				try {						
-					if(p.clickedOnPlanet(offsetX, offsetY)) {
+					if(p.isInsidePlanet(offsetX, offsetY)) {
 						if(!source.isInside(p)) {
 							destination = p;
 							source.getRuler().setDestination(p);

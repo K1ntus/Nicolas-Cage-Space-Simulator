@@ -32,8 +32,8 @@ public class GameScreen {
 		this.canvas = new Canvas(Constants.width, Constants.height);
 		this.setGc(canvas.getGraphicsContext2D());
 		this.setGalaxy(new Galaxy());
-		this.getGalaxy().initFont(getGc());
-		this.saver = new DataSerializer("01", getGalaxy());
+		this.getGalaxy().initFont(gc);
+		this.saver = new DataSerializer(Constants.fileName_save, getGalaxy());
 	}
 
 	
@@ -117,7 +117,7 @@ public class GameScreen {
 				}
 				
 	            for(Planet p : getGalaxy().getPlanets()) {
-		            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
+		            if(p.isInsidePlanet(orgSceneX, orgSceneY)) {
 						source = p;
 						if(source == null) {	break;	}
 						if(p.getRuler().equals(Constants.human_user)){
@@ -147,7 +147,7 @@ public class GameScreen {
 	        	if(selected != null) {	
 	    			for(Planet p : getGalaxy().getPlanets()) {
 	    				try {						
-	    					if(p.clickedOnPlanet(offsetX, offsetY)) {
+	    					if(p.isInsidePlanet(offsetX, offsetY)) {
 	    						selected.update_destination(p);
 	    		    			selected = null;
 	    						return;
@@ -165,7 +165,7 @@ public class GameScreen {
 	        	if(source == null) { return; }
 				for(Planet p : getGalaxy().getPlanets()) {
 					try {						
-						if(p.clickedOnPlanet(offsetX, offsetY)) {
+						if(p.isInsidePlanet(offsetX, offsetY)) {
 							if(!source.isInside(p)) {
 								destination = p;
 								source.getRuler().setDestination(p);

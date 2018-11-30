@@ -1,6 +1,6 @@
 package fr.groupe40.projet.model.ships;
 
-import static fr.groupe40.projet.util.constants.Collision.*;
+import static fr.groupe40.projet.util.constants.Collision.NO_COLLISION;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,12 +14,36 @@ import fr.groupe40.projet.util.constants.Constants;
 public class Ship extends Sprite implements Serializable {
 	private static final long serialVersionUID = -1872446628467348036L;
 
+	/**
+	 * \brief ship type of this ship
+	 */
 	private ShipType ship_type = new ShipType();	
 	
+	/**
+	 * 	\brief Source and Destination planets
+	 */
 	protected Planet destination, source;
+	
+	/**
+	 * \brief If this ships has reacher or not his destination
+	 */
 	protected boolean reached;
+	
+	/**
+	 * \brief The planet where there's a collision during his path in the board
+	 */
 	private Planet collision;
 
+	/**
+	 * \brief constructor of the ship object
+	 * @param path image path of this ship
+	 * @param ruler ruler of this ship
+	 * @param destination his destination planet
+	 * @param source his source planet
+	 * @param x_init his initial x
+	 * @param y_init his initial y
+	 * @param ship_type ship_type (speed, power, ...)
+	 */
 	public Ship(String path, User ruler, Planet destination, Planet source, double x_init, double y_init, ShipType ship_type) {
 		super(path, ruler, false);
 		this.destination = destination;
@@ -102,6 +126,14 @@ public class Ship extends Sprite implements Serializable {
 		}
 	}
 	
+	/**
+	 * \brief return where is the collision between a ship and every planets of a list
+	 * @param x horizontal position of the ship
+	 * @param y vertical position of the ship
+	 * @param speed speed of the sheep
+	 * @param planets array with every planets of the board on it
+	 * @return a Collision constante
+	 */
 	public Collision whereis_collision(double x, double y, double speed, List<Planet> planets) {
 		double width = this.width();
 		double height = this.height();
@@ -132,7 +164,16 @@ public class Ship extends Sprite implements Serializable {
 		
 	}
 	
+
 	
+	/**
+	 * \brief Next position calculation when there s a collision in the upper side
+	 * @param x current x position
+	 * @param y current y position
+	 * @param centre_x destination x
+	 * @param centre_y destination y
+	 * @param speed speed of this ship
+	 */
 	public void top_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
 		
@@ -147,7 +188,16 @@ public class Ship extends Sprite implements Serializable {
 		this.setX(x+deltaX);
 		this.setY(y+deltaY);
 	}
+
 	
+	/**
+	 * \brief Next position calculation when there s a collision in the bottom side
+	 * @param x current x position
+	 * @param y current y position
+	 * @param centre_x destination x
+	 * @param centre_y destination y
+	 * @param speed speed of this ship
+	 */
 	public void bottom_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
 		
@@ -164,6 +214,14 @@ public class Ship extends Sprite implements Serializable {
 		this.setY(y+deltaY);
 	}
 	
+	/**
+	 * \brief Next position calculation when there s a collision in the left side
+	 * @param x current x position
+	 * @param y current y position
+	 * @param centre_x destination x
+	 * @param centre_y destination y
+	 * @param speed speed of this ship
+	 */	
 	public void left_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
 		
@@ -180,6 +238,14 @@ public class Ship extends Sprite implements Serializable {
 		this.setY(y+deltaY);
 	}
 	
+	/**
+	 * \brief Next position calculation when there s a collision in the right side
+	 * @param x current x position
+	 * @param y current y position
+	 * @param centre_x destination x
+	 * @param centre_y destination y
+	 * @param speed speed of this ship
+	 */
 	public void right_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
 		
@@ -196,17 +262,39 @@ public class Ship extends Sprite implements Serializable {
 		this.setY(y+deltaY);
 	}	
 	
+	/**
+	 * \brief calculate the angle between a ship and his destination
+	 * @return angle in degrees
+	 */
+	public double destination_angle() {
+		double hyp = this.distance(destination);
+		double adjacent_side = Math.abs((destination.getX() + destination.width()/2) - this.getX());
+		
+		double angle = Math.toDegrees(Math.cos(adjacent_side / hyp)); 
+		
+		return angle;
+	}
+	
+	/**
+	 * \brief case when there s no collision for a ship
+	 * @param x current x position
+	 * @param y current y position
+	 * @param centre_x destination x
+	 * @param centre_y destination y
+	 * @param speed speed of this ship
+	 */
 	public void no_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
+		double angle = destination_angle()/90;
 		if(x < centre_x) {
-			setX(x+speed);
+			setX(x+speed*angle);
 		} else {
-			setX(x-speed);
+			setX(x-speed*angle);
 		}
 		
 		if(y < centre_y) {
-			setY(y+speed);
+			setY(y+speed*angle);
 		} else {
-			setY(y-speed);
+			setY(y-speed*angle);
 		}		
 	}
 	
@@ -221,9 +309,7 @@ public class Ship extends Sprite implements Serializable {
 		if(this.reached_destination()) {	//Ships has reached his destination
 			return;
 		}
-		calc_next_position(planets);
-
-		
+		calc_next_position(planets);		
 	}
 	
 	/**
@@ -235,52 +321,81 @@ public class Ship extends Sprite implements Serializable {
 		this.reached = true;
 	}
 
-	public double getSpeed() {
-		return ship_type.speed;
+	/**
+	 * @return the ship_type
+	 */
+	public ShipType getShip_type() {
+		return ship_type;
 	}
 
-	public void setSpeed(double speed) {
-		this.ship_type.speed = speed;
+	/**
+	 * @param ship_type the ship_type to set
+	 */
+	public void setShip_type(ShipType ship_type) {
+		this.ship_type = ship_type;
 	}
 
-	public double getPower() {
-		return ship_type.power;
-	}
-
-	public void setPower(double power) {
-		this.ship_type.power = power;
-	}
-
-	public double getProduction_time() {
-		return ship_type.production_time;
-	}
-
-	public void setProduction_time(double production_time) {
-		this.ship_type.production_time = production_time;
-	}
-
+	/**
+	 * @return the destination
+	 */
 	public Planet getDestination() {
 		return destination;
 	}
 
+	/**
+	 * @param destination the destination to set
+	 */
 	public void setDestination(Planet destination) {
 		this.destination = destination;
 	}
 
+	/**
+	 * @return the source
+	 */
 	public Planet getSource() {
 		return source;
 	}
 
+	/**
+	 * @param source the source to set
+	 */
 	public void setSource(Planet source) {
 		this.source = source;
 	}
 
+	/**
+	 * @return the reached
+	 */
 	public boolean isReached() {
 		return reached;
 	}
 
+	/**
+	 * @param reached the reached to set
+	 */
 	public void setReached(boolean reached) {
 		this.reached = reached;
+	}
+
+	/**
+	 * @return the collision
+	 */
+	public Planet getCollision() {
+		return collision;
+	}
+
+	/**
+	 * @param collision the collision to set
+	 */
+	public void setCollision(Planet collision) {
+		this.collision = collision;
+	}
+
+	/**
+	 * @return the speed
+	 */
+	public double getSpeed() {
+		return ship_type.speed;
 	}
 
 	
