@@ -13,7 +13,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 
 @SuppressWarnings("unused")
 public class DataSerializer {
@@ -101,18 +101,18 @@ public class DataSerializer {
 		for(Planet p : g.getPlanets()) {
 			
 			User u = p.getRuler();
-			if (u.getFaction() == Constantes.ai) {
-				p.setRuler(Constantes.ai_user);
-			}else if (u.getFaction() == Constantes.player) {
-				p.setRuler(Constantes.human_user);
+			if (u.getFaction() == Constants.ai) {
+				p.setRuler(Constants.ai_user);
+			}else if (u.getFaction() == Constants.player) {
+				p.setRuler(Constants.human_user);
 			}else {
-				p.setRuler(Constantes.neutral_user);
+				p.setRuler(Constants.neutral_user);
 			}
 
 			p.getRuler().setDestination(null);
 			p.getRuler().setSource(null);
 			
-			p.setImg_path(Constantes.path_img_planets);
+			p.setImg_path(Constants.path_img_planets);
 			p.updateImage();
 		}
 		
@@ -120,12 +120,12 @@ public class DataSerializer {
 			ArrayList<Ship> ships = s.getShips();
 			User u = ships.get(0).getRuler();
 			
-			if (u.getFaction() == Constantes.ai) {
-				s.update_ruler(Constantes.ai_user);
-			}else if (u.getFaction() == Constantes.player) {
-				s.update_ruler(Constantes.human_user);
+			if (u.getFaction() == Constants.ai) {
+				s.update_ruler(Constants.ai_user);
+			}else if (u.getFaction() == Constants.player) {
+				s.update_ruler(Constants.human_user);
 			}else {
-				s.update_ruler(Constantes.neutral_user);
+				s.update_ruler(Constants.neutral_user);
 			}
 			
 			s.updateImage();

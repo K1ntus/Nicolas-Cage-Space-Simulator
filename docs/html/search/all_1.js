@@ -5,6 +5,6 @@ var searchData=
   ['clientscrollhandler',['clientScrollHandler',['../classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy.html#af4b01f22d35d56f0b775c9244eff5acf',1,'fr::groupe40::projet::model::board::Galaxy']]],
   ['collision',['Collision',['../enumfr_1_1groupe40_1_1projet_1_1util_1_1_collision.html',1,'fr::groupe40::projet::util']]],
   ['collisionhandler',['collisionHandler',['../classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy.html#a707f976a47503d6afab529da6a36a148',1,'fr::groupe40::projet::model::board::Galaxy']]],
-  ['color_5fneutral',['color_neutral',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_constantes.html#ab371ca0a12a467e674717725bf528c80',1,'fr::groupe40::projet::util::Constantes']]],
-  ['constantes',['Constantes',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_constantes.html',1,'fr::groupe40::projet::util']]]
+  ['color_5fneutral',['color_neutral',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_Constants.html#ab371ca0a12a467e674717725bf528c80',1,'fr::groupe40::projet::util::Constants']]],
+  ['Constants',['Constants',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_Constants.html',1,'fr::groupe40::projet::util']]]
 ];

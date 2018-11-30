@@ -2,7 +2,7 @@ package fr.groupe40.projet.client.handler;
 
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -29,13 +29,13 @@ public abstract class  InteractionHandler {
             orgSceneY = mouseEvent.getSceneY();
 /*
 			for(Squad s : galaxy.getSquads()) {
-	            if(s.isInside(orgSceneX, orgSceneY, Constantes.size_squads, Constantes.size_squads)) {
-					if(s.getRuler().getFaction() == Constantes.player) {
+	            if(s.isInside(orgSceneX, orgSceneY, Constants.size_squads, Constants.size_squads)) {
+					if(s.getRuler().getFaction() == Constants.player) {
 						selected = s;
 						System.out.println("selected: "+s.toString());
 						return;
 					}else {
-						if(Constantes.DEBUG) {
+						if(Constants.DEBUG) {
 							System.out.println("Vous n'etes pas le dirigeant de cette colonie");
 						}
 					}
@@ -46,11 +46,11 @@ public abstract class  InteractionHandler {
 	            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
 					source = p;
 					if(source == null) {	break;	}
-					if(p.getRuler().equals(Constantes.human_user)){
+					if(p.getRuler().equals(Constants.human_user)){
 						source.getRuler().setSource(p);
 						break;
 					}else {
-						if(Constantes.DEBUG) {
+						if(Constants.DEBUG) {
 							System.out.println("Vous n'etes pas le dirigeant de cette colonie");
 						}
 					}
@@ -106,7 +106,7 @@ public abstract class  InteractionHandler {
 					return;
 				}
 			}
-        	if(source == null || destination == null || source.getRuler() != Constantes.human_user) {	
+        	if(source == null || destination == null || source.getRuler() != Constants.human_user) {	
         		return;
         	}else {
 				//Squad s = source.sendFleet(destination);

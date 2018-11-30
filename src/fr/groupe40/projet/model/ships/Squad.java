@@ -8,7 +8,7 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Squad extends Thread implements Serializable {
@@ -34,18 +34,21 @@ public class Squad extends Thread implements Serializable {
 	 */
 	@Override
 	public void run() {
-		@SuppressWarnings("unused")
-		Thread thisThread = Thread.currentThread();
 		while(nb_ship>0) {
-			if(source.getTroups() -1 <= Constantes.min_troups) {
+			if(source.getTroups() -1 <= Constants.min_troups) {
 				nb_ship = 0;
 				break;
 			}
 			double x = this.decollageX(source);
 			double y = this.decollageY(source);
+			User u = source.getRuler();
+			String img_path = Constants.path_img_human_ships;
+			if (u.equals(Constants.ai_user)) {
+				img_path = Constants.path_img_AI_ships;
+			}
 			ships.add(
 				new Ship(
-						Constantes.path_img_ships,
+						img_path,
 						source.getRuler(),
 						destination,
 						source,
@@ -74,7 +77,7 @@ public class Squad extends Thread implements Serializable {
 	 */
 	public boolean squad_selected(double x, double y) {
 		for(Ship s : ships) {
-			if(s.isInside(x, y, Constantes.size_squads, Constantes.size_squads)) {
+			if(s.isInside(x, y, Constants.size_squads, Constants.size_squads)) {
 				return true;
 			}
 		}
@@ -136,7 +139,10 @@ public class Squad extends Thread implements Serializable {
 	 */
 	public void updateImage() {
 		for(Ship s : ships) {
-			s.setImg_path(Constantes.path_img_ships);
+			if(destination.getRuler() == Constants.human_user)
+				s.setImg_path(Constants.path_img_human_ships);
+			else if(destination.getRuler() == Constants.ai_user)
+				s.setImg_path(Constants.path_img_AI_ships);
 			s.updateImage();			
 		}		
 	}
@@ -169,49 +175,6 @@ public class Squad extends Thread implements Serializable {
 		}
 	}
 
-	/**
-	 * \brief Send fleets from a source planet to his destination
-	 * @param source Source planet
-	 * @param destination Destination planet
-	 * @param percent The percent of the source planet troups to be sent
-	 * @return
-	 */
-	public Squad sendFleet(Planet source, Planet destination, int percent) {
-		int troups = source.getTroups();
-		
-		this.source = source;
-		this.destination = destination;
-		
-		
-		if(troups > Constantes.min_troups+1) {	//Not send more troups than possible
-			int fleet_size = troups - (Constantes.min_troups);
-				
-			//TODO IF Percent >Constantes, then ... type of the ship for advanced version
-				
-			fleet_size *= (percent /100.0);
-			if(fleet_size < 1) {
-				return null;
-			}
-			source.setTroups(troups - fleet_size);
-				
-			for(int i = 0; i < fleet_size; i++) {
-				double x = this.decollageX(source);
-				double y = this.decollageY(source);
-				ships.add(
-					new Ship(
-							Constantes.path_img_ships,
-							source.getRuler(),
-							destination,
-							source,
-							x,
-							y,
-							source.getShips_type()
-						)
-				);
-			}	
-		}
-		return null;
-	}
 	
 	/**
 	 * \brief Calculate the x Position for liftoff
@@ -221,15 +184,15 @@ public class Squad extends Thread implements Serializable {
 	private double decollageX(Planet source) {
 		/*
 		 
-		if(summonX*Constantes.size_squads + source.getX() < source.getX()+source.width()) {
+		if(summonX*Constants.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
 			
-		} else if (summonX*Constantes.size_squads + source.getX() >= source.getX()+source.width()) {
+		} else if (summonX*Constants.size_squads + source.getX() >= source.getX()+source.width()) {
 			summonX = 1;
 			summonY = -1;
 		}
 
-		return (summonX*Constantes.size_squads + (source.getX() - Constantes.size_squads));
+		return (summonX*Constants.size_squads + (source.getX() - Constants.size_squads));
 		
 		*/
 		return(source.getX()+source.width()/2);
@@ -242,7 +205,7 @@ public class Squad extends Thread implements Serializable {
 	 */
 	private double decollageY(Planet source) {
 		if(source.getY() > destination.getY())
-			return (source.getY() - Constantes.size_squads-1);
+			return (source.getY() - Constants.size_squads-1);
 		else
 			return (source.width() + source.getY() + 1);		
 	}

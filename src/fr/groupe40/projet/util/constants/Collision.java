@@ -1,4 +1,4 @@
-package fr.groupe40.projet.util.constantes;
+package fr.groupe40.projet.util.constants;
 
 
 /**
@@ -14,22 +14,22 @@ public enum Collision {
 	NO_COLLISION,
 	
 	/**
-	 * TODO comment
+	 * TOP collision between a ship and a planet
 	 */
 	TOP,
 	
 	/**
-	 * TODO comment
+	 * BOTTOM collision between a ship and a planet
 	 */
 	BOTTOM,
 	
 	/**
-	 * TODO comment
+	 * LEFT collision between a ship and a planet
 	 */
 	LEFT,
 	
 	/**
-	 * TODO comment
+	 * RIGHT collision between a ship and a planet
 	 */
 	RIGHT
 }

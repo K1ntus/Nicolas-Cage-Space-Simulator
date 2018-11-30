@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 
 public class GalaxyGenerator {
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
@@ -18,15 +18,15 @@ public class GalaxyGenerator {
 	 * \brief Generate the planets for the galaxy initialization
 	 */
 	public void generatePlanets() {
-		double width = Math.random() * Constantes.size_maximal_planets *0.25 + Constantes.size_minimal_planets;
+		double width = Math.random() * Constants.size_maximal_planets *0.25 + Constants.size_minimal_planets;
 		double height = width;
 		//Sprite(String path, double width, double height, double maxX, double maxY) 
 
 		
-		for(int i = 0; i < Constantes.nb_planets_tentatives; i++) {
-			double y = (Math.random() * (Constantes.height - (height + Constantes.bottom_margin_size)));
-			Planet p = new Planet(Constantes.path_img_planets, new User(Constantes.neutral_user), true, (int) (Constantes.left_margin_size + Constantes.size_squads), 0);
-			//Planet p = new RoundPlanet(new User(Constantes.neutral_user), true, (int) (Constantes.left_margin_size + Constantes.size_squads), 0);
+		for(int i = 0; i < Constants.nb_planets_tentatives; i++) {
+			double y = (Math.random() * (Constants.height - (height + Constants.bottom_margin_size)));
+			Planet p = new Planet(Constants.path_img_planets, new User(Constants.neutral_user), true, (int) (Constants.left_margin_size + Constants.size_squads), 0);
+			//Planet p = new RoundPlanet(new User(Constants.neutral_user), true, (int) (Constants.left_margin_size + Constants.size_squads), 0);
 			p.setY(y);
 			p.validatePosition();
 			
@@ -35,13 +35,13 @@ public class GalaxyGenerator {
 			}
 		}
 		
-		if(getPlanets().size() < Constantes.min_numbers_of_planets) {	//si moins de 2 planetes
+		if(getPlanets().size() < Constants.min_numbers_of_planets) {	//si moins de 2 planetes
 			System.out.println("Impossible de generer un terrain minimal");
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
-			getPlanets().get(1).setRuler(Constantes.human_user);
-			if(Constantes.is_ai)
-				getPlanets().get(2).setRuler(Constantes.ai_user);
+			getPlanets().get(1).setRuler(Constants.human_user);
+			if(Constants.is_ai)
+				getPlanets().get(2).setRuler(Constants.ai_user);
 		}
 		
 		
@@ -56,7 +56,7 @@ public class GalaxyGenerator {
 		Iterator<Planet> it = getPlanets().iterator();
 		
 		while (it.hasNext()) {
-			if(p.getY() > Constantes.height - Constantes.bottom_margin_size - Constantes.size_squads - p.height()) {
+			if(p.getY() > Constants.height - Constants.bottom_margin_size - Constants.size_squads - p.height()) {
 				return false;
 			}
 			

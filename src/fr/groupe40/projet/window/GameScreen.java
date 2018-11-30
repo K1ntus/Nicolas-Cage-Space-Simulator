@@ -4,10 +4,9 @@ import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,7 +29,7 @@ public class GameScreen {
 	
 	public GameScreen(Scene scene) {
 		this.scene = scene;
-		this.canvas = new Canvas(Constantes.width, Constantes.height);
+		this.canvas = new Canvas(Constants.width, Constants.height);
 		this.setGc(canvas.getGraphicsContext2D());
 		this.setGalaxy(new Galaxy());
 		this.getGalaxy().initFont(getGc());
@@ -60,14 +59,14 @@ public class GameScreen {
 						System.out.println("*planet boucle:" +p.toString());
 						System.out.println("** ruler: " + p.getRuler().toString());
 
-						if(p.getRuler().equals(Constantes.human_user)){
+						if(p.getRuler().equals(Constants.human_user)){
 							System.out.println("*** ruler well selected");
 							Planet source = p.getRuler().getSource();
 							Planet destination = p.getRuler().getDestination();
 								
 							if(destination != null && source != null) {
-								Squad s = new Squad(Constantes.human_user.getPercent_of_troups_to_send(), source, destination);
-								//s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
+								Squad s = new Squad(Constants.human_user.getPercent_of_troups_to_send(), source, destination);
+								//s.sendFleet(source, destination, Constants.human_user.getPercent_of_troups_to_send());
 								
 								getGalaxy().getSquads().add(s);
 									
@@ -110,7 +109,7 @@ public class GameScreen {
 	            
 				for(Squad s : getGalaxy().getSquads()) {
 					if(s.squad_selected(orgSceneX, orgSceneY)) {
-						if(s.getRuler().getFaction() == Constantes.player) {
+						if(s.getRuler().getFaction() == Constants.player) {
 							selected = s;
 						}
 					}
@@ -121,11 +120,11 @@ public class GameScreen {
 		            if(p.clickedOnPlanet(orgSceneX, orgSceneY)) {
 						source = p;
 						if(source == null) {	break;	}
-						if(p.getRuler().equals(Constantes.human_user)){
+						if(p.getRuler().equals(Constants.human_user)){
 							source.getRuler().setSource(p);
 							break;
 						}else {
-							if(Constantes.DEBUG) {
+							if(Constants.DEBUG) {
 								System.out.println("Vous n'etes pas le dirigeant de cette colonie");
 							}
 						}
@@ -179,11 +178,11 @@ public class GameScreen {
 						return;
 					}
 				}
-	        	if(source == null || destination == null || source.getRuler() != Constantes.human_user) {	
+	        	if(source == null || destination == null || source.getRuler() != Constants.human_user) {	
 	        		return;
 	        	}else {
-					Squad s = new Squad(Constantes.human_user.getPercent_of_troups_to_send(), source, destination);
-					//s.sendFleet(source, destination, Constantes.human_user.getPercent_of_troups_to_send());
+					Squad s = new Squad(Constants.human_user.getPercent_of_troups_to_send(), source, destination);
+					//s.sendFleet(source, destination, Constants.human_user.getPercent_of_troups_to_send());
 					getGalaxy().getSquads().add(s);
 
 					source = null;

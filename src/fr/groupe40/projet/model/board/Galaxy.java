@@ -9,7 +9,7 @@ import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -39,7 +39,7 @@ public class Galaxy extends Thread implements Serializable{
 		this.planets = generator.getPlanets();
 		this.generator = null;
 		
-		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
+		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
 		
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
@@ -55,7 +55,7 @@ public class Galaxy extends Thread implements Serializable{
 		this.squads = g.squads;
 		this.generator = null;
 		
-		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
+		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
 		
@@ -71,21 +71,18 @@ public class Galaxy extends Thread implements Serializable{
 		this.planets = generator.getPlanets();
 		this.generator = null;
 		
-		setBackground(new Image(Constantes.path_img_background, Constantes.width, Constantes.height, false, false, true));
+		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
 		setDaemon(true);	//Thread will close if game window has been closed
 		start();			//Run the thread which is generating troups
 		
 	}
 
 	/*	Thread	*/
-
 	/**
 	 * \brief Thread updating the garrison value for each planets / 1 second
 	 */
 	@Override
 	public void run() {
-		@SuppressWarnings("unused")
-		Thread thisThread = Thread.currentThread();
 		while(true) {
 			for(Planet p : planets)
 				p.updateGarrison();	
@@ -120,7 +117,6 @@ public class Galaxy extends Thread implements Serializable{
 		renderGarrison(gc);
 		renderPercentageSelected(gc);
 	}
-	
 	/**
 	 * \brief Main update function, manage AI, squads and hasLost
 	 */
@@ -132,7 +128,7 @@ public class Galaxy extends Thread implements Serializable{
 			s.update_all_positions(planets);			
 		}
 
-		userHasLost(Constantes.ai_user);
+		userHasLost(Constants.ai_user);
 	}
 	
 	/*	AI	*/
@@ -209,12 +205,12 @@ public class Galaxy extends Thread implements Serializable{
 	public void clientScrollHandler(int action) {
 		for(Planet p : planets) {
 			User u = p.getRuler();
-			if(u.getFaction() == Constantes.player) {
+			if(u.equals(Constants.human_user)) {
 				switch(action) {
-				case 0://lower
-					u.setPercent_of_troups_to_send(u.getPercent_of_troups_to_send() - 5); break;
-				case -1://greater
-					u.setPercent_of_troups_to_send(u.getPercent_of_troups_to_send() + 5); break;
+					case 0://lower
+						u.setPercent_of_troups_to_send(u.getPercent_of_troups_to_send() - 25); break;
+					case -1://greater
+						u.setPercent_of_troups_to_send(u.getPercent_of_troups_to_send() + 25); break;
 				}
 			}
 		}
@@ -307,12 +303,12 @@ public class Galaxy extends Thread implements Serializable{
 	/*
 	@Deprecated
 	public void generateRandomSquads() {
-		for(int i = 0, j=0; i < Constantes.nb_squads; i++) {
+		for(int i = 0, j=0; i < Constants.nb_squads; i++) {
 			for(Planet p : planets) {
-				Squad s = new Squad(Constantes.path_img_ships, new User(Constantes.ai), false, Constantes.max_troups, planets.get(2));
-				s.setPosition(Constantes.width * Math.random() - Constantes.size_squads, Constantes.height * Math.random() - Constantes.size_squads);
+				Squad s = new Squad(Constants.path_img_ships, new User(Constants.ai), false, Constants.max_troups, planets.get(2));
+				s.setPosition(Constants.width * Math.random() - Constants.size_squads, Constants.height * Math.random() - Constants.size_squads);
 				j += 1;
-				if(j == Constantes.nb_squads) {
+				if(j == Constants.nb_squads) {
 					return;
 				}
 				if (p.isInside(s))
@@ -358,12 +354,10 @@ public class Galaxy extends Thread implements Serializable{
 			
 			for (Ship ship : ss.getShips()) {
 				if(ship.isReached()) {
-					System.out.println("des reached");
 					ss.getShips().remove(ship);
 					continue;					
 				}else {
 					//isCollision(ss);
-					System.out.println("rendering ship");
 					ss.render_ships(gc);	
 					
 				}
@@ -381,14 +375,14 @@ public class Galaxy extends Thread implements Serializable{
 			gc.setStroke(Color.BLACK);
 			
 			switch(p.getRuler().getFaction()) {
-				case Constantes.player:
-					gc.setFill(Constantes.color_player); break;
-				case Constantes.ai:
-					gc.setFill(Constantes.color_ai); break;
-				case Constantes.neutral:
-					gc.setFill(Constantes.color_neutral); break;
+				case Constants.player:
+					gc.setFill(Constants.color_player); break;
+				case Constants.ai:
+					gc.setFill(Constants.color_ai); break;
+				case Constants.neutral:
+					gc.setFill(Constants.color_neutral); break;
 				default:
-					gc.setFill(Constantes.color_default); break;
+					gc.setFill(Constants.color_default); break;
 			}
 			gc.fillText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
 			gc.strokeText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
@@ -400,25 +394,29 @@ public class Galaxy extends Thread implements Serializable{
 	 * @param gc
 	 */
 	public void renderPercentageSelected(GraphicsContext gc) {
-		gc.setFill(Constantes.color_default);
+
+		
+		gc.setFill(Constants.color_default);
 		gc.setStroke(Color.RED);
 		gc.setTextAlign(TextAlignment.CENTER);	
 		
 		for(Planet p :planets) {
 			User u = p.getRuler();
-			if (u.getFaction() == Constantes.player) {
+			if (u.getFaction() == Constants.player) {
 				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
 				
-				gc.fillText(txt, Constantes.width/7, 25);
-				gc.strokeText(txt, Constantes.width/7, 25);
+				gc.fillText(txt, Constants.width/7, 25);
+				gc.strokeText(txt, Constants.width/7, 25);
 				
 				return;				
 			}
 		}
-		String txt = Constantes.message_game_over;
-		gc.fillText(txt, Constantes.width/5, 25);
-		gc.strokeText(txt, Constantes.width/5, 25);
+		String txt = Constants.message_game_over;
+		gc.fillText(txt, Constants.width/5, 25);
+		gc.strokeText(txt, Constants.width/5, 25);
 		
+		
+
 	}
 	
 	/**
@@ -436,7 +434,7 @@ public class Galaxy extends Thread implements Serializable{
 	 */
 	public void initFont(GraphicsContext gc) {
 		gc.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
-		gc.setFill(Constantes.color_default);
+		gc.setFill(Constants.color_default);
 		gc.setStroke(Color.RED);
 		gc.setLineWidth(1);		
 	}

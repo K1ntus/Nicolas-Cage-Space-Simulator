@@ -3,7 +3,7 @@ package fr.groupe40.projet.model;
 import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -27,25 +27,25 @@ public abstract class Sprite implements Serializable {
 	 * @param isPlanet Its a planet or not
 	 */
 	public Sprite(String path, User ruler, boolean isPlanet) {
-		setImg_path(path);
+		this.img_path = path;
 		
-		width = Constantes.size_squads;
-		setMaxX(Constantes.width - width);
-		setMaxY(Constantes.height - height);
+		width = Constants.size_squads;
+		setMaxX(Constants.width - width);
+		setMaxY(Constants.height - height);
 
 		this.ruler = ruler;
 		
 		if(isPlanet) {
-			width = Math.random() * Constantes.size_maximal_planets  + Constantes.size_minimal_planets;
-			if(width > Constantes.size_maximal_planets)
-				width = Constantes.size_maximal_planets;
+			width = Math.random() * Constants.size_maximal_planets  + Constants.size_minimal_planets;
+			if(width > Constants.size_maximal_planets)
+				width = Constants.size_maximal_planets;
 
-			setMaxX(Constantes.width - width - Constantes.right_margin_size);
-			setMaxY(Constantes.height - height - Constantes.bottom_margin_size);
+			setMaxX(Constants.width - width - Constants.right_margin_size);
+			setMaxY(Constants.height - height - Constants.bottom_margin_size);
 		}
 
-		minY = Constantes.top_margin_size - height;
-		minX = Constantes.left_margin_size - width;
+		minY = Constants.top_margin_size - height;
+		minX = Constants.left_margin_size - width;
 		height = width;			
 		
 		updateImage();
@@ -120,7 +120,7 @@ public abstract class Sprite implements Serializable {
 		}
 
 		if (y + height >= getMaxY()) {
-			y = getMaxY() - height - Constantes.bottom_margin_size;
+			y = getMaxY() - height - Constants.bottom_margin_size;
 		} else if (y <= minY) {
 			y = minY;
 		}else if (y < 0) {
@@ -138,7 +138,7 @@ public abstract class Sprite implements Serializable {
 	 */
 	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
 		//(x - center_x)^2 + (y - center_y)^2 < radius^2
-		double radius = this.width/2 + Constantes.minimal_distance_between_planets;
+		double radius = this.width/2 + Constants.minimal_distance_between_planets;
 		double circle_x = this.x + this.width/2;
 		double circle_y = this.y + this.height/2;
 		double circle_left = circle_x - radius;

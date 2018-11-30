@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constantes.Constantes;
+import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 
 public class User implements Serializable{
@@ -13,15 +13,35 @@ public class User implements Serializable{
 	 * 
 	 */
 	
+	/**
+	 * \brief the faction of this user (-1 => AI, 0 => neutral, >1 => humain)
+	 */
 	private int faction;
+	
+	/**
+	 * \brief the id of this user
+	 */
 	private int id;
 	
+	/**
+	 * \brief percentage of troups to send per planet-launch
+	 */
 	private int percent_of_troups_to_send;
 	
+	/**
+	 * \brief his last fleet travel
+	 */
 	private Planet source,destination;
 	
+	/**
+	 * \brief this user has lost or not
+	 */
 	private boolean lost;
-
+/**
+ * \brief
+ * @param faction
+ * @param id
+ */
 	public User(int faction, int id) {
 		this.faction = faction;
 		this.id = id;
@@ -32,12 +52,12 @@ public class User implements Serializable{
 		this.faction = faction;
 		
 		switch(faction) {
-		case Constantes.ai:
-			id = Constantes.ai; break;
-		case Constantes.neutral:
-			id = Constantes.neutral; break;
-		case Constantes.player:
-			id = Constantes.player; break;
+		case Constants.ai:
+			id = Constants.ai; break;
+		case Constants.neutral:
+			id = Constants.neutral; break;
+		case Constants.player:
+			id = Constants.player; break;
 		}
 		percent_of_troups_to_send = 100;
 
