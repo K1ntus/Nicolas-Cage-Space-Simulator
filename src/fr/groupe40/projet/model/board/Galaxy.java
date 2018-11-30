@@ -20,7 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 /**
- * 
+ * \brief 'Board' class. It contains the data of the game as ships, planets, ...
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -224,49 +224,38 @@ public class Galaxy implements Serializable{
 		double x = s.getX(), y = s.getY();
 		double width = s.width(), height = s.height();
 		double speed = s.getSpeed();
-		/*
-		double distance = p.distance(x, y, p.getX(), p.getY());
-		Planet source = s.getSource();
-		Planet destination = s.getDestination();
-		*/
-		
+
 		double xCenter = p.getX() + p.width() /2;
 		double yCenter = p.getY() + p.height()/2;
-		//double distanceBetween2Planets = source.distance(destination);
 		
 		if(p.isInside(x-2*speed, y, width, height)) {	
 			if(yCenter > y) {
 				deltaY -= speed;		
 			} else {
 				deltaY += speed;
-			}
-			
-			//System.out.println("squad inside a planet on his way1");
+			}			
 		} else if(p.isInside(x+2*speed, y, width, height)) {
 			if(yCenter > y) {
 				deltaY -= speed;		
 			} else {
 				deltaY += speed;
 			}
-			
-			//System.out.println("squad inside a planet on his way2");
 		}
+		
 		if(p.isInside(x, y-2*speed, width, height)) {
 			if(xCenter > x) {
 				deltaX += speed;
 			} else {
 				deltaX -= speed;	
 			}
-			
-			//System.out.println("squad inside a planet on his way3");
 		} else if(p.isInside(x, y+2*speed, width, height)) {
 			if(xCenter > x) {	
 				deltaX += speed;
 			} else {
 				deltaX -= speed;	
 			}
-			//System.out.println("squad inside a planet on his way4");
 		}
+		
 		if(p.isInside(x+deltaX,y+deltaY,width,height))
 			return;
 		s.setPosition(x+deltaX, y+deltaY);
@@ -289,35 +278,6 @@ public class Galaxy implements Serializable{
 
 		return false;
 	}
-
-	
-
-	/* Others Generations */
-	//mainly for debugging for the moment, mb using it has pirate ?
-	/**
-	 * \brief Generate random squads on board that are aggressive to the player
-	 */
-	
-	/*
-	@Deprecated
-	public void generateRandomSquads() {
-		for(int i = 0, j=0; i < Constants.nb_squads; i++) {
-			for(Planet p : planets) {
-				Squad s = new Squad(Constants.path_img_ships, new User(Constants.ai), false, Constants.max_troups, planets.get(2));
-				s.setPosition(Constants.width * Math.random() - Constants.size_squads, Constants.height * Math.random() - Constants.size_squads);
-				j += 1;
-				if(j == Constants.nb_squads) {
-					return;
-				}
-				if (p.isInside(s))
-					continue;
-				squads.add(s);
-
-			}
-		}
-	}
-	*/
-
 	
 	/* Rendering subfunction */
 

@@ -3,6 +3,12 @@ package fr.groupe40.projet.util.constants;
 import fr.groupe40.projet.client.User;
 import javafx.scene.paint.Color;
 
+/**
+ * \brief contains every constants to manage this project
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public final class Constants {
 	/**Deprecated	*/
 	@Deprecated

@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['name_5fplayer2',['name_player2',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_Constants.html#ab635bb52f76d0eca60948b28f369c44a',1,'fr::groupe40::projet::util::Constants']]],
-  ['nb_5fplanets_5ftentatives',['nb_planets_tentatives',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_Constants.html#a8e2d019fc2eedd9b61a3d82994e35d9f',1,'fr::groupe40::projet::util::Constants']]],
-  ['neutral',['neutral',['../classfr_1_1groupe40_1_1projet_1_1util_1_1_Constants.html#aea1263e516c6d50bdf88db763ede883f',1,'fr::groupe40::projet::util::Constants']]],
-  ['no_5fcollision',['NO_COLLISION',['../enumfr_1_1groupe40_1_1projet_1_1util_1_1_collision.html#a007237d39993e1e03b2fde3e8fa91847',1,'fr::groupe40::projet::util::Collision']]]
+  ['speed',['speed',['../classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_type.html#a1b9a8c6f8feb78937126e77eee96fa4f',1,'fr::groupe40::projet::model::ships::ShipType']]]
 ];

@@ -21,6 +21,12 @@ import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * \brief Main class. Currently managing users interactions and display
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class Game extends Application {
 	
 	public static void main(String[] args) {

@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.util.constants.Constants;
 
+
+/**
+ * \brief Class containing the ships parameters as speed, ...
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class ShipType implements Serializable {
 	private static final long serialVersionUID = 6833813366446523473L;
 	

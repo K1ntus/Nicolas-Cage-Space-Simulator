@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['calc_5fnext_5fposition',['calc_next_position',['../classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship.html#adfd10eb0bb2fe81b8612a9da7acc8148',1,'fr::groupe40::projet::model::ships::Ship']]],
-  ['clickedonplanet',['clickedOnPlanet',['../classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet.html#a5636af2bdd54feb506204cbda5859f1f',1,'fr::groupe40::projet::model::planets::Planet']]],
-  ['clientscrollhandler',['clientScrollHandler',['../classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy.html#af4b01f22d35d56f0b775c9244eff5acf',1,'fr::groupe40::projet::model::board::Galaxy']]],
-  ['collisionhandler',['collisionHandler',['../classfr_1_1groupe40_1_1projet_1_1model_1_1board_1_1_galaxy.html#a707f976a47503d6afab529da6a36a148',1,'fr::groupe40::projet::model::board::Galaxy']]]
+  ['bottom_5fcollision_5fmover',['bottom_collision_mover',['../classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship.html#a88644a9fdb0c146f6f9ba556326e7122',1,'fr::groupe40::projet::model::ships::Ship']]]
 ];

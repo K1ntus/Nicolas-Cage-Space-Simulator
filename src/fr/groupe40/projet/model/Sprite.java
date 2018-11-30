@@ -7,6 +7,13 @@ import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+
+/**
+ * 
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public abstract class Sprite implements Serializable {
 	private static final long serialVersionUID = 361050239890707789L;
 	

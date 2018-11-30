@@ -7,6 +7,12 @@ import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * 
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class User implements Serializable{
 	private static final long serialVersionUID = 8499986523207461968L;
 	/**

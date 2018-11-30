@@ -11,6 +11,13 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Constants;
 import javafx.scene.canvas.GraphicsContext;
 
+
+/**
+ * \brief Squad object
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class Squad implements Serializable {
 	private static final long serialVersionUID = -6736174123976474099L;
 	

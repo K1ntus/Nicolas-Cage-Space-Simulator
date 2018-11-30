@@ -1,5 +1,10 @@
 \hypertarget{classfr_1_1groupe40_1_1projet_1_1_game}{}\section{fr.\+groupe40.\+projet.\+Game Class Reference}
 \label{classfr_1_1groupe40_1_1projet_1_1_game}\index{fr.\+groupe40.\+projet.\+Game@{fr.\+groupe40.\+projet.\+Game}}
+
+
+Main class. Currently managing users interactions and display.  
+
+
 Inheritance diagram for fr.\+groupe40.\+projet.\+Game\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,7 +14,7 @@ Inheritance diagram for fr.\+groupe40.\+projet.\+Game\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1_game_a3700e488ecfb4fe5ff34bda5cb82b414}{start}} (Stage stage)
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1_game_a3700e488ecfb4fe5ff34bda5cb82b414}{start} (Stage stage)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -19,6 +24,16 @@ static void {\bfseries main} (String\mbox{[}$\,$\mbox{]} args)
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Main class. Currently managing users interactions and display. 
+
+\begin{DoxyAuthor}{Author}
+Jordane Masson 
+
+Sarah Portejoie 
+\end{DoxyAuthor}
+
+
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1_game_a3700e488ecfb4fe5ff34bda5cb82b414}\label{classfr_1_1groupe40_1_1projet_1_1_game_a3700e488ecfb4fe5ff34bda5cb82b414}} 
 \index{fr\+::groupe40\+::projet\+::\+Game@{fr\+::groupe40\+::projet\+::\+Game}!start@{start}}
@@ -26,10 +41,15 @@ static void {\bfseries main} (String\mbox{[}$\,$\mbox{]} args)
 \subsubsection{\texorpdfstring{start()}{start()}}
 {\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+Game.\+start (\begin{DoxyParamCaption}\item[{Stage}]{stage }\end{DoxyParamCaption})}
 
-Window and game kernel creation ~\newline
-~\newline
- Saver ~\newline
- Rendering 
+Window and game kernel creation
+
+Manage the saver/loader
+
+Manage the drag initial event
+
+Manage the drop of the mouse
+
+Manage the scroll event
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

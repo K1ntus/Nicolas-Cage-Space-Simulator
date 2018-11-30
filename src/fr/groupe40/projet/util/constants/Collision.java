@@ -2,7 +2,9 @@ package fr.groupe40.projet.util.constants;
 
 
 /**
- * Different types of collision between SpaceShips and Planets.
+ * \brief Different types of collision between SpaceShips and Planets.
+ * @author Jordane Masson
+ * @author Sarah Portejoie
  *
  */
 public enum Collision {

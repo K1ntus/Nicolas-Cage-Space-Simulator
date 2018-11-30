@@ -5,24 +5,55 @@ import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.ShipType;
 import fr.groupe40.projet.util.constants.Constants;
 
+/**
+ * \brief Abstract class of the general type "planet"
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class Planet extends Sprite {
 	private static final long serialVersionUID = 260148039781013750L;
 	/**
 	 * 
 	 */
+	
+	/**
+	 * \brief lift off x and y position of a ship
+	 */
 	double summonX = 1, summonY = 1;
+	
+	/**
+	 * \brief the number of troups produced each time
+	 */
 	private int produce_rate;
+	
+	/**
+	 * \brief the number of troups in the garrison
+	 */
 	private int troups;
 	
+	/**
+	 * \brief the type of ships generated there
+	 */	
 	private ShipType ships_type;
 	
+	/**
+	 * \brief return true if this planet is selected by the user
+	 */
 	private boolean selected;
 
-	public Planet(String path, User ruler, boolean isPlanet, int x, int y) {
-		super(path, ruler, isPlanet);
-		generate();
-		setX(x);
-		setY(y);
+	/**
+	 * \brief Constructor of a planet
+	 * @param path the string image path
+	 * @param ruler the beginning ruler of this planet
+	 * @param x top left x position
+	 * @param y top left y position
+	 */
+	public Planet(String path, User ruler, int x, int y) {
+		super(path, ruler, true);
+		this.generate();
+		this.setX(x);
+		this.setY(y);
 	}
 	
 	/*	Utilities */
@@ -102,18 +133,14 @@ public class Planet extends Sprite {
 	public int calculateNextPosition() {
 		
 		if (this.getX() + this.width() >= Constants.width -  Constants.right_margin_size + Constants.size_squads) {
-			//System.out.println("[INFO] Greater x case for planet generation");
 			return Constants.error_greater_x;
 		} else if (this.getX() < Constants.left_margin_size  + Constants.size_squads ) {
-			//System.out.println("[INFO] Lower x case for planet generation");
 			return Constants.error_lower_x;
 		}
 
 		if (this.getY() + this.height() >= Constants.height) {
-			//System.out.println("[INFO] Higher y case for planet generation. Skip this one.");
 			return Constants.error_greater_y;
 		} else if (this.getY() < Constants.top_margin_size  + Constants.size_squads) {
-			//System.out.println("[INFO] Lower y case for planet generation");
 			return Constants.error_lower_y;
 		}
 		

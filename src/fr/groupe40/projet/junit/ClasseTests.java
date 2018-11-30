@@ -39,7 +39,7 @@ public class ClasseTests {
 	@Test
 	public void testisInside() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null); // MyClass is tested
-		 Planet p = new Planet(null, null, false, 500, 500);
+		 Planet p = new Planet(null, null, 500, 500);
 		 assertEquals(false, tester.isInside(p));
 		 tester.setX(p.getX());
 		 tester.setY(p.getY());

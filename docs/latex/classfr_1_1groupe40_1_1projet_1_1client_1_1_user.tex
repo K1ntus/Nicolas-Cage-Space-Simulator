@@ -9,64 +9,153 @@ Inheritance diagram for fr.\+groupe40.\+projet.\+client.\+User\+:\begin{figure}[
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_acd2d859d7679c886c0445aa8d18f177f}{User} (int faction, int id)
+\begin{DoxyCompactList}\small\item\em Create a new user from a faction and an id. \end{DoxyCompactList}\item 
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_ae3f43ec29e7b599c4f203bc0fa9c5fd5}{User} (int faction)
+\begin{DoxyCompactList}\small\item\em Create a user only from his id. \end{DoxyCompactList}\item 
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_aadb257aeb0ed9544df923a83f8ed1e61}{User} (\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User} user)
+\begin{DoxyCompactList}\small\item\em create an user from an user \end{DoxyCompactList}\item 
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad} \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32007a7692972de524c9a03c813b97d1}{send\+Fleet\+AI} (\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} source, \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} destination)
+\begin{DoxyCompactList}\small\item\em send fleet automatization for ai user \end{DoxyCompactList}\item 
+int \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32446cf36b262fc03f5dc96a207a5375}{get\+Faction} ()
+\begin{DoxyCompactList}\small\item\em return the faction of an user \end{DoxyCompactList}\item 
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af10956b4173a0bcd31fe89d450aa1cf1}{set\+Faction} (int faction)
+\begin{DoxyCompactList}\small\item\em set the faction of an user \end{DoxyCompactList}\item 
+int \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a43318df463de36284d68071ec0a59f34}{get\+Id} ()
+\begin{DoxyCompactList}\small\item\em return the id of an user \end{DoxyCompactList}\item 
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a81fb7ded5bdecebd2ddce5d03999f568}{set\+Id} (int id)
+\begin{DoxyCompactList}\small\item\em set a new id for an user \end{DoxyCompactList}\item 
+int \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_aa1a898620fe07e7b13579cb9f9e7b865}{get\+Percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send} ()
+\item 
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_adcf16120e83f73eb8ac0be34fce57b7b}{set\+Percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send} (int percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send)
+\item 
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a1a8f8f74a34b5e4745f23089a223f6d6}{get\+Destination} ()
+\item 
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a4b36462569cbce5ac7c47ea1394f9a4c}{set\+Destination} (\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} destination)
+\item 
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a8d5a9ada62388f690f9dd9d70d4f4d1c}{get\+Source} ()
+\item 
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a3da3fb9206c4e00df7700940bd69f601}{set\+Source} (\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} source)
+\item 
+boolean \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a0e846e067a87f2cedcc43f25968f000f}{is\+Lost} ()
+\begin{DoxyCompactList}\small\item\em return if this user has lost or not \end{DoxyCompactList}\item 
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af0d8095643e7901ef0320d4245da0771}{set\+Lost} (boolean lost)
+\begin{DoxyCompactList}\small\item\em set the lost state of an user \end{DoxyCompactList}\item 
+boolean \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a9ef8e41efa22dad7be2e4b9966ff7818}{equals} (\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User} u)
+\begin{DoxyCompactList}\small\item\em compare two user \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Jordane Masson 
+
+Sarah Portejoie 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_acd2d859d7679c886c0445aa8d18f177f}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_acd2d859d7679c886c0445aa8d18f177f}} 
-{\bfseries User} (int faction, int id)
-\item 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!User@{User}}
+\index{User@{User}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily fr.\+groupe40.\+projet.\+client.\+User.\+User (\begin{DoxyParamCaption}\item[{int}]{faction,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Create a new user from a faction and an id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em faction} & the faction of this user \\
+\hline
+{\em id} & the id of this user \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_ae3f43ec29e7b599c4f203bc0fa9c5fd5}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_ae3f43ec29e7b599c4f203bc0fa9c5fd5}} 
-{\bfseries User} (int faction)
-\item 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!User@{User}}
+\index{User@{User}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily fr.\+groupe40.\+projet.\+client.\+User.\+User (\begin{DoxyParamCaption}\item[{int}]{faction }\end{DoxyParamCaption})}
+
+
+
+Create a user only from his id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em faction} & the faction of this player \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_aadb257aeb0ed9544df923a83f8ed1e61}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_aadb257aeb0ed9544df923a83f8ed1e61}} 
-{\bfseries User} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}} user)
-\item 
-\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}} \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32007a7692972de524c9a03c813b97d1}{send\+Fleet\+AI}} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} source, \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} destination)
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a18768dbc8c591a12f6a215e5742895a8}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a18768dbc8c591a12f6a215e5742895a8}} 
-void {\bfseries render\+When\+Defeat} (Graphics\+Context gc)
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32446cf36b262fc03f5dc96a207a5375}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32446cf36b262fc03f5dc96a207a5375}} 
-int {\bfseries get\+Faction} ()
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af10956b4173a0bcd31fe89d450aa1cf1}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af10956b4173a0bcd31fe89d450aa1cf1}} 
-void {\bfseries set\+Faction} (int faction)
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a43318df463de36284d68071ec0a59f34}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a43318df463de36284d68071ec0a59f34}} 
-int {\bfseries get\+Id} ()
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a81fb7ded5bdecebd2ddce5d03999f568}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a81fb7ded5bdecebd2ddce5d03999f568}} 
-void {\bfseries set\+Id} (int id)
-\item 
-int \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_aa1a898620fe07e7b13579cb9f9e7b865}{get\+Percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send}} ()
-\item 
-void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_adcf16120e83f73eb8ac0be34fce57b7b}{set\+Percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send}} (int percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send)
-\item 
-\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a1a8f8f74a34b5e4745f23089a223f6d6}{get\+Destination}} ()
-\item 
-void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a4b36462569cbce5ac7c47ea1394f9a4c}{set\+Destination}} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} destination)
-\item 
-\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a8d5a9ada62388f690f9dd9d70d4f4d1c}{get\+Source}} ()
-\item 
-void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a3da3fb9206c4e00df7700940bd69f601}{set\+Source}} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} source)
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a0e846e067a87f2cedcc43f25968f000f}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a0e846e067a87f2cedcc43f25968f000f}} 
-boolean {\bfseries is\+Lost} ()
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af0d8095643e7901ef0320d4245da0771}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af0d8095643e7901ef0320d4245da0771}} 
-void {\bfseries set\+Lost} (boolean lost)
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a9ef8e41efa22dad7be2e4b9966ff7818}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a9ef8e41efa22dad7be2e4b9966ff7818}} 
-boolean {\bfseries equals} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}} u)
-\end{DoxyCompactItemize}
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!User@{User}}
+\index{User@{User}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily fr.\+groupe40.\+projet.\+client.\+User.\+User (\begin{DoxyParamCaption}\item[{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}}]{user }\end{DoxyParamCaption})}
+
+
+
+create an user from an user 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & to copy parameters from \\
+\hline
+\end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a9ef8e41efa22dad7be2e4b9966ff7818}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a9ef8e41efa22dad7be2e4b9966ff7818}} 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!equals@{equals}}
+\index{equals@{equals}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{equals()}{equals()}}
+{\footnotesize\ttfamily boolean fr.\+groupe40.\+projet.\+client.\+User.\+equals (\begin{DoxyParamCaption}\item[{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}}]{u }\end{DoxyParamCaption})}
+
+
+
+compare two user 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if they\textquotesingle{}re both equals, else false 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a1a8f8f74a34b5e4745f23089a223f6d6}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a1a8f8f74a34b5e4745f23089a223f6d6}} 
 \index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!get\+Destination@{get\+Destination}}
 \index{get\+Destination@{get\+Destination}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
 \subsubsection{\texorpdfstring{get\+Destination()}{getDestination()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} fr.\+groupe40.\+projet.\+client.\+User.\+get\+Destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} fr.\+groupe40.\+projet.\+client.\+User.\+get\+Destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \begin{DoxyReturn}{Returns}
 the destination 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32446cf36b262fc03f5dc96a207a5375}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32446cf36b262fc03f5dc96a207a5375}} 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!get\+Faction@{get\+Faction}}
+\index{get\+Faction@{get\+Faction}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{get\+Faction()}{getFaction()}}
+{\footnotesize\ttfamily int fr.\+groupe40.\+projet.\+client.\+User.\+get\+Faction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return the faction of an user 
+
+\begin{DoxyReturn}{Returns}
+faction 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a43318df463de36284d68071ec0a59f34}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a43318df463de36284d68071ec0a59f34}} 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{get\+Id()}{getId()}}
+{\footnotesize\ttfamily int fr.\+groupe40.\+projet.\+client.\+User.\+get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return the id of an user 
+
+\begin{DoxyReturn}{Returns}
+id 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_aa1a898620fe07e7b13579cb9f9e7b865}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_aa1a898620fe07e7b13579cb9f9e7b865}} 
 \index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!get\+Percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send@{get\+Percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send}}
@@ -81,26 +170,98 @@ the percent\+\_\+of\+\_\+troups\+\_\+to\+\_\+send
 \index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!get\+Source@{get\+Source}}
 \index{get\+Source@{get\+Source}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
 \subsubsection{\texorpdfstring{get\+Source()}{getSource()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}} fr.\+groupe40.\+projet.\+client.\+User.\+get\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet} fr.\+groupe40.\+projet.\+client.\+User.\+get\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \begin{DoxyReturn}{Returns}
 the source 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a0e846e067a87f2cedcc43f25968f000f}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a0e846e067a87f2cedcc43f25968f000f}} 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!is\+Lost@{is\+Lost}}
+\index{is\+Lost@{is\+Lost}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{is\+Lost()}{isLost()}}
+{\footnotesize\ttfamily boolean fr.\+groupe40.\+projet.\+client.\+User.\+is\+Lost (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return if this user has lost or not 
+
+\begin{DoxyReturn}{Returns}
+lost 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32007a7692972de524c9a03c813b97d1}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a32007a7692972de524c9a03c813b97d1}} 
 \index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!send\+Fleet\+AI@{send\+Fleet\+AI}}
 \index{send\+Fleet\+AI@{send\+Fleet\+AI}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
 \subsubsection{\texorpdfstring{send\+Fleet\+A\+I()}{sendFleetAI()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad}} fr.\+groupe40.\+projet.\+client.\+User.\+send\+Fleet\+AI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}}]{source,  }\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}}]{destination }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_squad}{Squad} fr.\+groupe40.\+projet.\+client.\+User.\+send\+Fleet\+AI (\begin{DoxyParamCaption}\item[{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}]{source,  }\item[{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}]{destination }\end{DoxyParamCaption})}
 
-AI handler \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a4b36462569cbce5ac7c47ea1394f9a4c}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a4b36462569cbce5ac7c47ea1394f9a4c}} 
+
+
+send fleet automatization for ai user 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & the source planet \\
+\hline
+{\em destination} & the destination planet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the squad that has been send, else null 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a4b36462569cbce5ac7c47ea1394f9a4c}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a4b36462569cbce5ac7c47ea1394f9a4c}} 
 \index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!set\+Destination@{set\+Destination}}
 \index{set\+Destination@{set\+Destination}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
 \subsubsection{\texorpdfstring{set\+Destination()}{setDestination()}}
-{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+client.\+User.\+set\+Destination (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}}]{destination }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+client.\+User.\+set\+Destination (\begin{DoxyParamCaption}\item[{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}]{destination }\end{DoxyParamCaption})}
 
 
 \begin{DoxyParams}{Parameters}
 {\em destination} & the destination to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af10956b4173a0bcd31fe89d450aa1cf1}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af10956b4173a0bcd31fe89d450aa1cf1}} 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!set\+Faction@{set\+Faction}}
+\index{set\+Faction@{set\+Faction}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{set\+Faction()}{setFaction()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+client.\+User.\+set\+Faction (\begin{DoxyParamCaption}\item[{int}]{faction }\end{DoxyParamCaption})}
+
+
+
+set the faction of an user 
+
+
+\begin{DoxyParams}{Parameters}
+{\em faction} & his new faction \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a81fb7ded5bdecebd2ddce5d03999f568}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a81fb7ded5bdecebd2ddce5d03999f568}} 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!set\+Id@{set\+Id}}
+\index{set\+Id@{set\+Id}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{set\+Id()}{setId()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+client.\+User.\+set\+Id (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+set a new id for an user 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af0d8095643e7901ef0320d4245da0771}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_af0d8095643e7901ef0320d4245da0771}} 
+\index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!set\+Lost@{set\+Lost}}
+\index{set\+Lost@{set\+Lost}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
+\subsubsection{\texorpdfstring{set\+Lost()}{setLost()}}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+client.\+User.\+set\+Lost (\begin{DoxyParamCaption}\item[{boolean}]{lost }\end{DoxyParamCaption})}
+
+
+
+set the lost state of an user 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lost} & \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_adcf16120e83f73eb8ac0be34fce57b7b}\label{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_adcf16120e83f73eb8ac0be34fce57b7b}} 
@@ -118,7 +279,7 @@ AI handler \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1client_1_1_user_a
 \index{fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}!set\+Source@{set\+Source}}
 \index{set\+Source@{set\+Source}!fr\+::groupe40\+::projet\+::client\+::\+User@{fr\+::groupe40\+::projet\+::client\+::\+User}}
 \subsubsection{\texorpdfstring{set\+Source()}{setSource()}}
-{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+client.\+User.\+set\+Source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}}]{source }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+client.\+User.\+set\+Source (\begin{DoxyParamCaption}\item[{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{Planet}}]{source }\end{DoxyParamCaption})}
 
 
 \begin{DoxyParams}{Parameters}

@@ -1,5 +1,10 @@
 \hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}{}\section{fr.\+groupe40.\+projet.\+model.\+planets.\+Planet Class Reference}
 \label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet}\index{fr.\+groupe40.\+projet.\+model.\+planets.\+Planet@{fr.\+groupe40.\+projet.\+model.\+planets.\+Planet}}
+
+
+Abstract class of the general type \char`\"{}planet\char`\"{}.  
+
+
 Inheritance diagram for fr.\+groupe40.\+projet.\+model.\+planets.\+Planet\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,19 +14,17 @@ Inheritance diagram for fr.\+groupe40.\+projet.\+model.\+planets.\+Planet\+:\beg
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a25a432927475ec4e3d0812a4fc631239}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a25a432927475ec4e3d0812a4fc631239}} 
-{\bfseries Planet} (String path, \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}} ruler, boolean is\+Planet, int x, int y)
-\item 
-boolean \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a5636af2bdd54feb506204cbda5859f1f}{clicked\+On\+Planet}} (double x, double y)
-\item 
-void \mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a6db5bb259c3c2889b0285b0472fc6a76}{update\+Garrison}} ()
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a745df6537c22855fc854381c7ad2c029}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a745df6537c22855fc854381c7ad2c029}} 
-int {\bfseries calculate\+Next\+Position} ()
-\item 
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a55af7887127afab452dec09d5d149d90}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a55af7887127afab452dec09d5d149d90}} 
-int {\bfseries update\+Planete\+Position} ()
-\item 
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a7cdf092f3e8443176362cf97ddcd11ae}{Planet} (String path, \hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User} ruler, int x, int y)
+\begin{DoxyCompactList}\small\item\em Constructor of a planet. \end{DoxyCompactList}\item 
+boolean \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a14c09ad18bf0c963662ee45d0c6f07a1}{is\+Inside\+Planet} (double x, double y)
+\begin{DoxyCompactList}\small\item\em check if a position is in a planet \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a6db5bb259c3c2889b0285b0472fc6a76}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a6db5bb259c3c2889b0285b0472fc6a76}} 
+void \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a6db5bb259c3c2889b0285b0472fc6a76}{update\+Garrison} ()
+\begin{DoxyCompactList}\small\item\em update the garrison value of this planet if not neutral \end{DoxyCompactList}\item 
+int \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a745df6537c22855fc854381c7ad2c029}{calculate\+Next\+Position} ()
+\begin{DoxyCompactList}\small\item\em find his place in the universe \end{DoxyCompactList}\item 
+int \hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a55af7887127afab452dec09d5d149d90}{update\+Planete\+Position} ()
+\begin{DoxyCompactList}\small\item\em check new position for generation \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_af412d3420465e77b44fb404c1f2b2b09}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_af412d3420465e77b44fb404c1f2b2b09}} 
 String {\bfseries to\+String} ()
 \item 
@@ -38,10 +41,10 @@ int {\bfseries get\+Troups} ()
 void {\bfseries set\+Troups} (int troups)
 \item 
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a80f0d147f16e2ef34f3ee3addf05dabe}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a80f0d147f16e2ef34f3ee3addf05dabe}} 
-\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_type}{Ship\+Type}} {\bfseries get\+Ships\+\_\+type} ()
+\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_type}{Ship\+Type} {\bfseries get\+Ships\+\_\+type} ()
 \item 
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a78187d3031a81c7cbd281b9aa6eac0bc}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a78187d3031a81c7cbd281b9aa6eac0bc}} 
-void {\bfseries set\+Ships\+\_\+type} (\mbox{\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_type}{Ship\+Type}} ships\+\_\+type)
+void {\bfseries set\+Ships\+\_\+type} (\hyperlink{classfr_1_1groupe40_1_1projet_1_1model_1_1ships_1_1_ship_type}{Ship\+Type} ships\+\_\+type)
 \item 
 \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a17d6b5e960300fe739ecb1e40f7a76b2}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a17d6b5e960300fe739ecb1e40f7a76b2}} 
 boolean {\bfseries is\+Selected} ()
@@ -51,20 +54,88 @@ void {\bfseries set\+Selected} (boolean selected)
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Abstract class of the general type \char`\"{}planet\char`\"{}. 
+
+\begin{DoxyAuthor}{Author}
+Jordane Masson 
+
+Sarah Portejoie 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a7cdf092f3e8443176362cf97ddcd11ae}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a7cdf092f3e8443176362cf97ddcd11ae}} 
+\index{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}!Planet@{Planet}}
+\index{Planet@{Planet}!fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}}
+\subsubsection{\texorpdfstring{Planet()}{Planet()}}
+{\footnotesize\ttfamily fr.\+groupe40.\+projet.\+model.\+planets.\+Planet.\+Planet (\begin{DoxyParamCaption}\item[{String}]{path,  }\item[{\hyperlink{classfr_1_1groupe40_1_1projet_1_1client_1_1_user}{User}}]{ruler,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Constructor of a planet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & the string image path \\
+\hline
+{\em ruler} & the beginning ruler of this planet \\
+\hline
+{\em x} & top left x position \\
+\hline
+{\em y} & top left y position \\
+\hline
+\end{DoxyParams}
+
+
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a5636af2bdd54feb506204cbda5859f1f}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a5636af2bdd54feb506204cbda5859f1f}} 
-\index{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}!clicked\+On\+Planet@{clicked\+On\+Planet}}
-\index{clicked\+On\+Planet@{clicked\+On\+Planet}!fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}}
-\subsubsection{\texorpdfstring{clicked\+On\+Planet()}{clickedOnPlanet()}}
-{\footnotesize\ttfamily boolean fr.\+groupe40.\+projet.\+model.\+planets.\+Planet.\+clicked\+On\+Planet (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a745df6537c22855fc854381c7ad2c029}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a745df6537c22855fc854381c7ad2c029}} 
+\index{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}!calculate\+Next\+Position@{calculate\+Next\+Position}}
+\index{calculate\+Next\+Position@{calculate\+Next\+Position}!fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}}
+\subsubsection{\texorpdfstring{calculate\+Next\+Position()}{calculateNextPosition()}}
+{\footnotesize\ttfamily int fr.\+groupe40.\+projet.\+model.\+planets.\+Planet.\+calculate\+Next\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Utilities \mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a6db5bb259c3c2889b0285b0472fc6a76}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a6db5bb259c3c2889b0285b0472fc6a76}} 
-\index{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}!update\+Garrison@{update\+Garrison}}
-\index{update\+Garrison@{update\+Garrison}!fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}}
-\subsubsection{\texorpdfstring{update\+Garrison()}{updateGarrison()}}
-{\footnotesize\ttfamily void fr.\+groupe40.\+projet.\+model.\+planets.\+Planet.\+update\+Garrison (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Update 
+
+find his place in the universe 
+
+\begin{DoxyReturn}{Returns}
+0 if his position is correct, else error value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a14c09ad18bf0c963662ee45d0c6f07a1}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a14c09ad18bf0c963662ee45d0c6f07a1}} 
+\index{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}!is\+Inside\+Planet@{is\+Inside\+Planet}}
+\index{is\+Inside\+Planet@{is\+Inside\+Planet}!fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}}
+\subsubsection{\texorpdfstring{is\+Inside\+Planet()}{isInsidePlanet()}}
+{\footnotesize\ttfamily boolean fr.\+groupe40.\+projet.\+model.\+planets.\+Planet.\+is\+Inside\+Planet (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})}
+
+
+
+check if a position is in a planet 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if inside, else false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a55af7887127afab452dec09d5d149d90}\label{classfr_1_1groupe40_1_1projet_1_1model_1_1planets_1_1_planet_a55af7887127afab452dec09d5d149d90}} 
+\index{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}!update\+Planete\+Position@{update\+Planete\+Position}}
+\index{update\+Planete\+Position@{update\+Planete\+Position}!fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet@{fr\+::groupe40\+::projet\+::model\+::planets\+::\+Planet}}
+\subsubsection{\texorpdfstring{update\+Planete\+Position()}{updatePlanetePosition()}}
+{\footnotesize\ttfamily int fr.\+groupe40.\+projet.\+model.\+planets.\+Planet.\+update\+Planete\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+check new position for generation 
+
+\begin{DoxyReturn}{Returns}
+0 if ok. -\/1 if unable to generate 
+\end{DoxyReturn}
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

@@ -11,6 +11,12 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Collision;
 import fr.groupe40.projet.util.constants.Constants;
 
+/**
+ * \brief Ship of a squad, contains the destination, src, ...
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class Ship extends Sprite implements Serializable {
 	private static final long serialVersionUID = -1872446628467348036L;
 
