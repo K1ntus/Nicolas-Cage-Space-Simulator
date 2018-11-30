@@ -192,11 +192,12 @@ public abstract class Sprite implements Serializable {
 		
 		return false;
 	}
+	
 	/**
 	 * \brief Check if a sprite intersect another circle from a sprite
 	 * In fact, we're generating a circle around a sprite to check the distance between each others
-	 * @param p
-	 * @return
+	 * @param p a sprite
+	 * @return true if the sprite is in the circle else false
 	 */
 	public boolean intersectCircle(Sprite p) {
 		return intersectCircle(
@@ -209,11 +210,11 @@ public abstract class Sprite implements Serializable {
 
 	/**
 	 * \brief Check if a rectangle is inside another
-	 * @param x	
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @return
+	 * @param x	the x-top corner
+	 * @param y the y-top corner
+	 * @param width the width of the rectangle
+	 * @param height the height of the rectangle
+	 * @return true if inside else false
 	 */
 	public boolean isInside(double x, double y, double width, double height) {
 		if(x > this.x+this.width || x+width < this.x) {
@@ -259,6 +260,9 @@ public abstract class Sprite implements Serializable {
 	
 	/* Getter & Setter */
 
+	/**
+	 * \brief convert the object to string with his 2D position
+	 */
 	public String toString() {
 		return "Sprite<" + x + ", " + y + ">";
 	}

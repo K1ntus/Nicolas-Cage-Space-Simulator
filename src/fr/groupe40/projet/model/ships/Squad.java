@@ -14,20 +14,46 @@ import javafx.scene.canvas.GraphicsContext;
 public class Squad implements Serializable {
 	private static final long serialVersionUID = -6736174123976474099L;
 	
+	/**
+	 * \brief array with every ships of the squad
+	 */
 	private ArrayList<Ship> ships = new ArrayList<Ship>();
 	
+	/**
+	 * \brief buffer with the number of ships waiting to be sent
+	 */
 	private int nb_ship;
+	
+	/**
+	 * \brief src and destination planets
+	 */
 	private Planet source, destination;
+	
+	/**
+	 * \brief x and y summoning position 
+	 */
 	private int summonX = 0, summonY = 0;
+	
+	/**
+	 * \brief value change if we re able to summon or not a wave
+	 */
 	private boolean summoning = true;
 	
-	
-	public Squad(double pourcent, Planet src, Planet dest) {
+	/**
+	 * \brief constructor of this squad
+	 * @param percent the percent of troups from a planet to send
+	 * @param src source planet
+	 * @param dest destination planet
+	 */
+	public Squad(double percent, Planet src, Planet dest) {
 		this.source = src;
 		this.destination = dest;
-		this.nb_ship = (int) (src.getTroups() * (pourcent / 100));
+		this.nb_ship = (int) (src.getTroups() * (percent / 100));
 	}
 
+	/**
+	 * \brief send a fleet, summoned when there s ships that had to be sent
+	 */
 	public void sendFleet() {
 		if(nb_ship <= 0)
 			return;
@@ -155,24 +181,6 @@ public class Squad implements Serializable {
 	}
 
 	
-	public ArrayList<Ship> getShips() {
-		return ships;
-	}
-
-	public void setShips(ArrayList<Ship> ships) {
-		this.ships = ships;
-	}
-
-	public User getRuler() {
-		try {
-			return ships.get(0).getRuler();
-		} catch (IndexOutOfBoundsException e) {
-			//Every squads has reached destination
-			return null;
-		}
-	}
-
-	
 	/**
 	 * \brief Calculate the x Position for liftoff
 	 * @param source the source planet
@@ -207,5 +215,113 @@ public class Squad implements Serializable {
 		else
 			return (source.width() + source.getY() + 1);		
 	}
-	
+
+	/**
+	 * @return the ships
+	 */
+	public ArrayList<Ship> getShips() {
+		return ships;
+	}
+
+	/**
+	 * @param ships the ships to set
+	 */
+	public void setShips(ArrayList<Ship> ships) {
+		this.ships = ships;
+	}
+
+	/**
+	 * @return the nb_ship
+	 */
+	public int getNb_ship() {
+		return nb_ship;
+	}
+
+	/**
+	 * @param nb_ship the nb_ship to set
+	 */
+	public void setNb_ship(int nb_ship) {
+		this.nb_ship = nb_ship;
+	}
+
+	/**
+	 * @return the source
+	 */
+	public Planet getSource() {
+		return source;
+	}
+
+	/**
+	 * @param source the source to set
+	 */
+	public void setSource(Planet source) {
+		this.source = source;
+	}
+
+	/**
+	 * @return the destination
+	 */
+	public Planet getDestination() {
+		return destination;
+	}
+
+	/**
+	 * @param destination the destination to set
+	 */
+	public void setDestination(Planet destination) {
+		this.destination = destination;
+	}
+
+	/**
+	 * @return the summonX
+	 */
+	public int getSummonX() {
+		return summonX;
+	}
+
+	/**
+	 * @param summonX the summonX to set
+	 */
+	public void setSummonX(int summonX) {
+		this.summonX = summonX;
+	}
+
+	/**
+	 * @return the summonY
+	 */
+	public int getSummonY() {
+		return summonY;
+	}
+
+	/**
+	 * @param summonY the summonY to set
+	 */
+	public void setSummonY(int summonY) {
+		this.summonY = summonY;
+	}
+
+	/**
+	 * @return the summoning
+	 */
+	public boolean isSummoning() {
+		return summoning;
+	}
+
+	/**
+	 * @param summoning the summoning to set
+	 */
+	public void setSummoning(boolean summoning) {
+		this.summoning = summoning;
+	}
+
+
+	public User getRuler() {
+		try {
+			return ships.get(0).getRuler();
+		} catch (IndexOutOfBoundsException e) {
+			//Every squads has reached destination
+			return null;
+		}
+	}
+
 }

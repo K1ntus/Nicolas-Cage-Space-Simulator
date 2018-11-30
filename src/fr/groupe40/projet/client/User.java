@@ -105,9 +105,6 @@ public class User implements Serializable{
 		return null;
 	}
 	
-	public void renderWhenDefeat(GraphicsContext gc) {
-		//TODO render when a user has been defeated
-	}
 	
 	/**
 	 * \brief return the faction of an user

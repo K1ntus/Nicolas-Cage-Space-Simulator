@@ -7,7 +7,24 @@ import fr.groupe40.projet.util.constants.Constants;
 public class ShipType implements Serializable {
 	private static final long serialVersionUID = 6833813366446523473L;
 	
-	protected double speed, power, production_time;
+	/**
+	 * \brief the speed of this ship
+	 */
+	protected double speed;
+	
+	/**
+	 * \brief the power of this ship (theorically, when a ship reached a planet, his garrison decrement from this value)
+	 */
+	protected double power;
+	
+	/**
+	 * \brief the number of ships produced per update for his planet
+	 */
+	protected double production_time;
+	
+	/**
+	 * \brief Generate random ship parameters
+	 */
 	public ShipType() {
 		generate_parameters();
 	}

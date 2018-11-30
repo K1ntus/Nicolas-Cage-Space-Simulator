@@ -28,6 +28,9 @@ public class DataSerializer {
 	 */
 	private Galaxy data;
 	
+	/**
+	 * \brief variable that handle the object saving in file
+	 */
 	private ObjectOutputStream oos;
 	
 	/**

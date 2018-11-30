@@ -24,12 +24,31 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	/**
+	 * \brief Board object containing every sprites, etc
+	 */
 	private Galaxy galaxy;
 	//private InteractionHandler interactionHandler;
+	
+	/**
+	 * \brief for the drag&drop, the next x&y position
+	 */
 	private double orgSceneX, orgSceneY;
+	
+	/**
+	 * \brief the source and destination planets selected
+	 */
 	private Planet source, destination;
+	
+	/**
+	 * \brief squads selected by the user
+	 */
 	private Squad selected;
 	
+	/**
+	 * \brief game_tick counter for events, etc
+	 */
 	private int game_tick = 0;
 	
 	public void start(Stage stage) {
@@ -59,7 +78,7 @@ public class Game extends Application {
 
 		
         
-        /**	Saver	**/
+        /*	Saver	*/
     	EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
 
     		@Override
@@ -225,7 +244,7 @@ public class Game extends Application {
         scene.setOnMousePressed(mousePressedEvent);
         scene.setOnMouseDragged(mouseDraggedEvent);	
         
-		/**	Rendering **/
+		/*	Rendering */
 		new AnimationTimer() {
 			public void handle(long arg0) {
 				
@@ -242,7 +261,8 @@ public class Game extends Application {
 					galaxy.updateAI();
 				
 				galaxy.render(gc);
-				if(galaxy.userHasLost(Constants.human_user)) {
+				
+				if(galaxy.userHasLost(Constants.human_user)) {	//The user has lost
 					System.out.println("Vous avez perdu");
 					galaxy.renderDefeat(gc);
 					try {
