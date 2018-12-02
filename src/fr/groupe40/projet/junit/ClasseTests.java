@@ -1,4 +1,6 @@
 package fr.groupe40.projet.junit;
+import fr.groupe40.projet.util.constantes.*;
+import fr.groupe40.projet.util.constants.Constants;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +8,7 @@ import org.junit.Test;
 
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
+import junit.framework.Assert;
 
 public class ClasseTests {
 
@@ -20,20 +23,20 @@ public class ClasseTests {
 	public void testSetY() {
 		 Ship tester = new Ship(null, null, null, null, 10, 40, null); // MyClass is tested
 		 	tester.setY(5.0);
-	        assertEquals(5.0, tester.getY());
+	        Assert.assertEquals(5.0, tester.getY());
 	}
 	@Test
 	public void testSetMinX() {
 		 Ship tester = new Ship(null, null, null, null, 13, 14, null); // MyClass is tested
 		 	tester.setMinX(0.0);
-	        assertEquals(0.0, tester.getMinX());
+	        Assert.assertEquals(0.0, tester.getMinX());
 	}
 	
 	@Test
 	public void testSetMinY() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null); // MyClass is tested
-		 	tester.setMinY(2.0);
-	        assertEquals(2.0, tester.getMinY());
+		 	tester.setMinY(1.0);
+	        Assert.assertEquals(1.0, tester.getMinY());
 	}
 	
 	@Test
@@ -43,14 +46,28 @@ public class ClasseTests {
 		 assertEquals(false, tester.isInside(p));
 		 tester.setX(p.getX());
 		 tester.setY(p.getY());
-	     assertEquals(true, tester.isInside(p));
+	     Assert.assertEquals(true, tester.isInside(p));
 	}
-	/*
+	
 	@Test
 	public void testisInside2() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
-		 Assert.assertEquals(false ,tester.isInside(500,500, Constantes.size_maximal_planets, Constantes.size_maximal_planets));
-		 Assert.assertEquals(false ,tester.isInside(1,1, Constantes.size_maximal_planets, Constantes.size_maximal_planets));
+		 Assert.assertEquals(false ,tester.isInside(500,500, Constants.size_minimal_planets, Constants.size_minimal_planets));
+		
 	}
-	*/
+	
+	@Test
+	public void testisInside3() {
+		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
+		 Assert.assertEquals(true ,tester.isInside(1,1, Constants.size_minimal_planets, Constants.size_maximal_planets));
+	}
+	
+	@Test
+	public void testdistance() {
+		Ship tester = new Ship(null, null, null, null, 0, 0, null);
+		double a = 100.0;
+		double b = 200.0;
+		double c = Math.sqrt((a * a) + (b * b));
+		Assert.assertEquals(c, tester.distance(tester.getX(), tester.getY(),a,b));
+	}
 }
