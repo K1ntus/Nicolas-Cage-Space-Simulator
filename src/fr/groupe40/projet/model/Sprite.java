@@ -169,7 +169,7 @@ public abstract class Sprite implements Serializable {
 	 * @return true if there s a collision, else false
 	 */
 	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
-		//(x - center_x)^2 + (y - center_y)^2 < radius^2
+
 		double radius = this.width/2 + Constants.minimal_distance_between_planets;
 		double circle_x = this.x + this.width/2;
 		double circle_y = this.y + this.height/2;
@@ -188,7 +188,8 @@ public abstract class Sprite implements Serializable {
 			return true;
 		}
 		        		
-		//Check every point of the rectangle
+		//Check every point of the 'rectangle'
+		//High consumption
 		for(double x1 = x_left; x1 < x_right; x1++) {
 			for(double y1 = y_top; y1 < y_bottom; y1++) {
 				if(Math.hypot(x1 - circle_x, y1 - circle_y) <= radius) {

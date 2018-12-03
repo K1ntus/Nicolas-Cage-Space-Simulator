@@ -9,13 +9,24 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.FileChooser;
 
+/**
+ * \brief Manage the keyboard events
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class KeyboardListener {
 	private Galaxy galaxy;
 	private Scene scene;
 	private DataSerializer saver;
 
+	/**
+	 * 
+	 * @param galaxy the game board
+	 * @param scene the scene to link the handler
+	 * @param saver the object managing game saving/loading
+	 */
 	public KeyboardListener(Galaxy galaxy, Scene scene, DataSerializer saver) {
 		this.galaxy = galaxy;
 		this.scene = scene;

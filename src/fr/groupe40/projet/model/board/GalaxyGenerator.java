@@ -5,11 +5,11 @@ import java.util.Iterator;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.planets.RoundPlanet;
+import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.util.constants.Constants;
 
 /**
- * \brief Galaxy Generator (mainly planets)
+ * \brief Galaxy Planets Generator
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -39,10 +39,9 @@ public class GalaxyGenerator {
 		
 		for(int i = 0; i < Constants.nb_planets_tentatives; i++) {
 			double y = (Math.random() * (Constants.height - (height + Constants.bottom_margin_size)));
-			//			SquarePlanet p = new SquarePlanet(Constants.path_img_planets, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
+			SquarePlanet p = new SquarePlanet(Constants.path_img_round_kfc_planet, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
 
-			RoundPlanet p = new RoundPlanet(Constants.path_img_round_kfc_planet, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
-			//Planet p = new RoundPlanet(new User(Constants.neutral_user), true, (int) (Constants.left_margin_size + Constants.size_squads), 0);
+			//RoundPlanet p = new RoundPlanet(Constants.path_img_round_kfc_planet, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
 			p.setY(y);
 			p.validatePosition();
 			

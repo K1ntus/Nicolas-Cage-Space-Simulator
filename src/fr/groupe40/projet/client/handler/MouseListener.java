@@ -29,15 +29,21 @@ public class MouseListener {
 	 */
 	private Squad selected;
 	
+	
+	/**
+	 * \brief create the object with the minimal requirement
+	 * @param galaxy to check the elements in the board
+	 * @param scene linking the handler to this scene
+	 */
 	public MouseListener(Galaxy galaxy, Scene scene) {
 		this.galaxy = galaxy;
 		this.scene = scene;
-		
-
-		// TODO Auto-generated constructor stub
 	}
 
 	
+	/**
+	 * \brief launch the mouse handler
+	 */
 	public void start() {
 
 		/**

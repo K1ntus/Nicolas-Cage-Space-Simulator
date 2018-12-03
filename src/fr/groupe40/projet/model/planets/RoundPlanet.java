@@ -22,7 +22,7 @@ public class RoundPlanet extends Planet implements Serializable{
 	public boolean isInsidePlanet(Sprite p) {
 		return intersectCircle(p.getX(), p.getY(), p.width(), p.height());
 	}
-	
+
 	public boolean isInsidePlanet(double x, double y, double width, double height) {
 		if(intersectCircle(x, y, width, height)) {
 			if(Constants.DEBUG) {
@@ -35,7 +35,7 @@ public class RoundPlanet extends Planet implements Serializable{
 		return false;
 			
 	}
-
+	
 	public String toString() {
 		return "RoundPlanet <" + getX() + ", " + getY() + ">";
 	}
