@@ -14,7 +14,8 @@ Bugs to fix:
 		* Valeur négative en cas d'attaques d'ia pendant envoie de troupes ?
 		* Optimiser décollage (plusieurs positions en même temps
 30/11|	* Mettre les update dans le run() (Tick par tick)
-
+		* Loading again full of bugs 
+		
 
 **********************************************************************
 

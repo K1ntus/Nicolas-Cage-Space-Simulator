@@ -1,13 +1,11 @@
 package fr.groupe40.projet.junit;
-import fr.groupe40.projet.util.constantes.*;
-import fr.groupe40.projet.util.constants.Constants;
-
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
+import fr.groupe40.projet.util.constants.Constants;
 import junit.framework.Assert;
 
 public class ClasseTests {

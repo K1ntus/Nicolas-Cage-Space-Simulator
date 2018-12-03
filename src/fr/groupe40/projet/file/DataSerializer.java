@@ -1,5 +1,6 @@
 package fr.groupe40.projet.file;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,6 +15,8 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 /**
@@ -44,9 +47,11 @@ public class DataSerializer {
 	 * @param name save fileName
 	 * @param data game data
 	 */
-	public DataSerializer(String name, Galaxy data) {
+	private Stage stage;
+	public DataSerializer(String name, Galaxy data, Stage stage) {
 		this.name = name;
 		this.data = data;		
+		this.stage= stage;
 	}
 	
 	/**
@@ -92,6 +97,13 @@ public class DataSerializer {
 	 * @return the galaxy loaded from the save file
 	 */
 	public Galaxy load_game() {
+		/*
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Select your game save");
+		fileChooser.showOpenDialog(stage);
+		fileChooser.setInitialDirectory(new File("\""));
+		*/
+		
 		FileInputStream file;
 		Galaxy loaded = new Galaxy();
 		try {
@@ -140,15 +152,19 @@ public class DataSerializer {
 		
 		for(Squad s : g.getSquads()) {
 			ArrayList<Ship> ships = s.getShips();
-			User u = ships.get(0).getRuler();
-			
-			if (u.getFaction() == Constants.ai) {
-				s.update_ruler(Constants.ai_user);
-			}else if (u.getFaction() == Constants.player) {
-				s.update_ruler(Constants.human_user);
-			}else {
-				s.update_ruler(Constants.neutral_user);
+			try {
+				User u = ships.get(0).getRuler();
+				if (u.getFaction() == Constants.ai) {
+					s.update_ruler(Constants.ai_user);
+				}else if (u.getFaction() == Constants.player) {
+					s.update_ruler(Constants.human_user);
+				}else {
+					s.update_ruler(Constants.neutral_user);
+				}
+			} catch (IndexOutOfBoundsException e) {
+				
 			}
+			
 			
 			s.updateImage();
 		}

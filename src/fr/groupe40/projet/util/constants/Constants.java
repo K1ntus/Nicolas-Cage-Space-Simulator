@@ -66,9 +66,10 @@ public final class Constants {
 	public static final boolean is_ai = true;
 		
 	/*	Defense & Production */
-	public static final long tick_per_produce = 51;
-	public static final long tick_per_lift_off = 80;
+	public static final long tick_per_produce = 40;
+	public static final long tick_per_lift_off = 50;
 	public static final long tick_per_ai_attack = 91;
+	public static final long tick_before_counter_reset = 250;
 	
 	public static final int max_initDefense = 15;//The initial troups in a planet at the generation of the world
 	public static final int min_troups = 1;	//minimal troups in a planet
