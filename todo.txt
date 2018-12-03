@@ -9,10 +9,10 @@ Bugs to fix:
 30/11|	* Bug scrolling value (augmente/diminue par dizaine pour une raison inconnue)
 27/11|	* Collisions gauche/droite entre ships/planetes
 28/11|	* Valeur negative de troups en cas d'envoie simultanee
-		* Refaire envoie de troupes (paquets par paquets (ie. squads par squads))
+30/11|	* Refaire envoie de troupes (paquets par paquets (ie. squads par squads))
 		* 
 		* Valeur négative en cas d'attaques d'ia pendant envoie de troupes ?
-		* Optimiser décollage (plusieurs positions en même temps
+30/11|	* Optimiser décollage (plusieurs positions en même temps
 30/11|	* Mettre les update dans le run() (Tick par tick)
 		* Loading again full of bugs 
 		
@@ -32,11 +32,11 @@ Minimal Version:
 			** Par contre, un vaisseau devant atteindre une planete donnee ne devra ni survoler, ni rentrer en collision avec une autre planete. 
 			** Pour ce faire, vous devrez mettre en place un algorithme de deplacement permettant le contournement des planetes non visees.
 		
-		* Am�liorer le syst�me de position de d�collage des vaisseaux (et collisions quand plusieurs attaques simultan�es)
+		* Ameliorer le systeme de position de decollage des vaisseaux (et collisions quand plusieurs attaques simultan�es)
 		
 		* Passer la classe 'Planet' en abstract
 		
-		* G�rer les interactions dans une nouvelle classe (hors du main)
+3/11|	* Gerer les interactions dans une nouvelle classe (hors du main)
 		
 		
 		* Rediger un README.md  https://stackedit.io/app#
