@@ -42,8 +42,8 @@ public final class Constants {
 	
 	/*	Graphics	*/
 	public static final double size_squads = 15.0;	//size in pixels of a "squad"
-	public static final double size_minimal_planets = 4*15.0;	//minimal size of a planet in pixel ((4*size squad)
-	public static final double size_maximal_planets = 5*15.0;
+	public static final double size_minimal_planets = 5*15.0;	//minimal size of a planet in pixel ((4*size squad)
+	public static final double size_maximal_planets = 8*15.0;
 	public static final String message_game_over = "Vous avez perdu !";
 		
 	/*	Ships Options */
@@ -69,6 +69,7 @@ public final class Constants {
 	public static final long tick_per_produce = 40;
 	public static final long tick_per_lift_off = 50;
 	public static final long tick_per_ai_attack = 91;
+	public static final long tick_per_squad_position_update = 1;	//original is 1, higher for better performance
 	public static final long tick_before_counter_reset = 250;
 	
 	public static final int max_initDefense = 15;//The initial troups in a planet at the generation of the world
@@ -97,6 +98,16 @@ public final class Constants {
 	public static final String path_img_planets = "/resources/images/planets/square/default.png";
 	public static final String path_img_round_planets = "/resources/images/planets/rounds/1.png";
 	public static final String path_img_round_kfc_planet = "/resources/images/planets/rounds/kfc.png";
+	public static final String path_img_square_nicolas_cage = "/resources/images/planets/square/nicolas_cage.png";
+	
+	
+	//To edit in Squads object
+	public static final String path_img_human_ships = "/resources/images/ships/human.gif";
+	public static final String path_img_AI_ships = "/resources/images/ships/ai.png";
+	public static final String path_img_tender_ships = "/resources/images/ships/tenders.png";
+	public static final String path_img_NCage_ships = "/resources/images/ships/nicolas_cage.png";
+
+	public static final String path_gfx_ship_explosion = "/resources/images/fx/blast.gif";
 
 	public static final String path_img_background = "/resources/images/background.jpg";
 	
@@ -107,8 +118,6 @@ public final class Constants {
 	public static final String path_img_gui_percent = "/resources/images/gui/progress_bar.png";
 	public static final String path_img_gui_logo = "/resources/images/gui/logo.png";
 
-	public static final String path_img_human_ships = "/resources/images/ships/human.gif";
-	public static final String path_img_AI_ships = "/resources/images/ships/ai.png";
 
 	/*	 Error & Debugging	*/
 	public static final int error_greater_x = 2;

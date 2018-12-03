@@ -72,7 +72,9 @@ public class Game extends Application {
 			public void handle(long arg0) {
 				
 				game_tick += 1;
-				galaxy.updateSquadPosition();
+				
+				if(game_tick % Constants.tick_per_squad_position_update == 0)
+					galaxy.updateSquadPosition();
 				
 				if(game_tick % Constants.tick_per_produce == 0)
 					galaxy.updateGarrison();

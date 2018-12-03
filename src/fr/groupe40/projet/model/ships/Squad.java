@@ -78,7 +78,7 @@ public class Squad implements Serializable {
 			User u = source.getRuler();
 			String img_path = Constants.path_img_human_ships;
 			if (u.equals(Constants.ai_user)) {
-				img_path = Constants.path_img_AI_ships;
+				img_path = Constants.path_img_tender_ships;
 			}
 			ships.add(
 			new Ship(
@@ -134,7 +134,7 @@ public class Squad implements Serializable {
 	 */
 	public void update_destination(Planet destination) {
 		for(Ship ship : ships) {
-			ship.destination = destination;
+			ship.setDestination(destination);
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class Squad implements Serializable {
 		while (it.hasNext()) {
 			Ship ship = it.next();
 			try {
-				if(ship.destination.isInside(ship)) {	//Case when it reach his destination
+				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
 					ships.remove(ship);
 					it = ships.iterator();
 				}

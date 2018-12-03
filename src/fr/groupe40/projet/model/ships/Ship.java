@@ -28,12 +28,12 @@ public class Ship extends Sprite implements Serializable {
 	/**
 	 * 	\brief Source and Destination planets
 	 */
-	protected Planet destination, source;
+	private Planet destination, source;
 	
 	/**
 	 * \brief If this ships has reacher or not his destination
 	 */
-	protected boolean reached;
+	private boolean reached;
 	
 	/**
 	 * \brief The planet where there's a collision during his path in the board
@@ -68,7 +68,8 @@ public class Ship extends Sprite implements Serializable {
 		if(reached)
 			return true;
 		
-		if(destination.isInside(this)) {	//Case if the squads reach the destination			
+		if(destination.isInside(this)) {	//Case if the squads reach the destination	
+			this.setImage(Constants.path_gfx_ship_explosion);
 			if(this.getRuler() != destination.getRuler()) {	//If the faction are differents, then BOOM
 				int difference = destination.getTroups() - 1;
 				
@@ -324,7 +325,7 @@ public class Ship extends Sprite implements Serializable {
 	 */
 	public void remove() {
 		this.setRuler(Constants.neutral_user);
-		this.setImage(null);
+		this.setImage(Constants.path_gfx_ship_explosion);
 		this.reached = true;
 	}
 

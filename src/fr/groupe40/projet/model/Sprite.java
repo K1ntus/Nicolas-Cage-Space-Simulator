@@ -287,6 +287,9 @@ public abstract class Sprite implements Serializable {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+	public void setImage(String img_path) {
+		this.image = new Image(img_path, width, height, false, false);
+	}
 
 	/**
 	 * @return the img_path

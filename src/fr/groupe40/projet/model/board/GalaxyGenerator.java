@@ -39,7 +39,7 @@ public class GalaxyGenerator {
 		
 		for(int i = 0; i < Constants.nb_planets_tentatives; i++) {
 			double y = (Math.random() * (Constants.height - (height + Constants.bottom_margin_size)));
-			SquarePlanet p = new SquarePlanet(Constants.path_img_round_kfc_planet, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
+			SquarePlanet p = new SquarePlanet(Constants.path_img_square_nicolas_cage, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
 
 			//RoundPlanet p = new RoundPlanet(Constants.path_img_round_kfc_planet, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
 			p.setY(y);
