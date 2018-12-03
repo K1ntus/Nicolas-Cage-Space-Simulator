@@ -147,7 +147,7 @@ public class Squad implements Serializable {
 		while (it.hasNext()) {
 			Ship ship = it.next();
 			try {
-				if(ship.isInside(ship.destination)) {	//Case when it reach his destination
+				if(ship.destination.isInside(ship)) {	//Case when it reach his destination
 					ships.remove(ship);
 					it = ships.iterator();
 				}

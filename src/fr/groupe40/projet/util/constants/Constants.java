@@ -96,6 +96,7 @@ public final class Constants {
 	
 	public static final String path_img_planets = "/resources/images/planets/square/default.png";
 	public static final String path_img_round_planets = "/resources/images/planets/rounds/1.png";
+	public static final String path_img_round_kfc_planet = "/resources/images/planets/rounds/kfc.png";
 
 	public static final String path_img_background = "/resources/images/background.jpg";
 	

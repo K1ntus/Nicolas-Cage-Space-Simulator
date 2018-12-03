@@ -3,7 +3,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.util.constants.Constants;
 import junit.framework.Assert;
@@ -40,7 +40,7 @@ public class ClasseTests {
 	@Test
 	public void testisInside() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null); // MyClass is tested
-		 Planet p = new Planet(null, null, 500, 500);
+		 SquarePlanet p = new SquarePlanet(null, null, 500, 500);
 		 assertEquals(false, tester.isInside(p));
 		 tester.setX(p.getX());
 		 tester.setY(p.getY());

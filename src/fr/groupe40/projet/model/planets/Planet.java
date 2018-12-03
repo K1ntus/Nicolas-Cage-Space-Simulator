@@ -11,7 +11,7 @@ import fr.groupe40.projet.util.constants.Constants;
  * @author Sarah Portejoie
  *
  */
-public class Planet extends Sprite {
+public abstract class Planet extends Sprite {
 	private static final long serialVersionUID = 260148039781013750L;
 	/**
 	 * 
@@ -63,18 +63,7 @@ public class Planet extends Sprite {
 	 * @param y
 	 * @return true if inside, else false
 	 */
-	public boolean isInsidePlanet(double x, double y) {
-		if(isInside(x, y, 0, 0)) {
-			if(Constants.DEBUG) {
-				System.out.println("Vous avez clique sur une planete avec "+this.troups);
-				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
-				System.out.println("et de type: "+ this.getRuler().getFaction());
-			}
-			return true;
-		}
-		return false;
-			
-	}
+	public abstract boolean isInsidePlanet(double x, double y);
 	
 	/* Update	*/
 	/**
@@ -174,9 +163,7 @@ public class Planet extends Sprite {
 	}
 
 
-	public String toString() {
-		return "Planet <" + getX() + ", " + getY() + ">";
-	}
+	public abstract String toString();
 
 
 	public int getProduce_rate() {
