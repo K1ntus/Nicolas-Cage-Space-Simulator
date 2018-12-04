@@ -14,7 +14,7 @@ Bugs to fix:
 		* Valeur négative en cas d'attaques d'ia pendant envoie de troupes ?
 30/11|	* Optimiser décollage (plusieurs positions en même temps
 30/11|	* Mettre les update dans le run() (Tick par tick)
-		* Loading again full of bugs 
+04/12|	* Loading again full of bugs 
 		
 
 **********************************************************************
@@ -34,9 +34,9 @@ Minimal Version:
 		
 		* Ameliorer le systeme de position de decollage des vaisseaux (et collisions quand plusieurs attaques simultanees)
 		
-		* Passer la classe 'Planet' en abstract
+04/12|	* Passer la classe 'Planet' en abstract
 		
-3/11|	* Gerer les interactions dans une nouvelle classe (hors du main)
+03/11|	* Gerer les interactions dans une nouvelle classe (hors du main)
 		
 		
 		* Rediger un README.md  https://stackedit.io/app#

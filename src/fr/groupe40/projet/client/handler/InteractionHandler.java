@@ -17,7 +17,7 @@ public class InteractionHandler {
 	 * @param galaxy
 	 */
 	public InteractionHandler(Galaxy galaxy, Scene scene, DataSerializer saver) {
-		this.keyboard = new KeyboardListener(galaxy, scene, saver);
+		this.setKeyboard(new KeyboardListener(galaxy, scene, saver));
 		this.mouse = new MouseListener(galaxy, scene);
 		
 	}
@@ -27,7 +27,15 @@ public class InteractionHandler {
 	 */
 	public void exec() {
 		mouse.launch();
-		keyboard.launch();	
+		getKeyboard().launch();	
 		
+	}
+
+	public KeyboardListener getKeyboard() {
+		return keyboard;
+	}
+
+	public void setKeyboard(KeyboardListener keyboard) {
+		this.keyboard = keyboard;
 	}
 }

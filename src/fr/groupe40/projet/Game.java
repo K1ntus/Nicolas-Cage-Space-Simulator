@@ -4,13 +4,18 @@ package fr.groupe40.projet;
 import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
+import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -55,7 +60,7 @@ public class Game extends Application {
 		galaxy = new Galaxy();
 		galaxy.initFont(gc);
 
-		DataSerializer saver = new DataSerializer(Constants.fileName_save, galaxy, stage);
+		DataSerializer saver = new DataSerializer(Constants.fileName_save, galaxy);
 		
 		InteractionHandler interactionHandler = new InteractionHandler(galaxy, scene, saver);
 		interactionHandler.exec();
@@ -64,6 +69,31 @@ public class Game extends Application {
 		stage.show();
 
 		
+
+		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
+	
+			@Override
+			public void handle(KeyEvent e) {
+					
+				if (e.getCode() == KeyCode.F5) {
+					System.out.println("Saving game ...");
+					//OPEN POPUP ?
+					saver.save_game();
+					
+								
+				}
+					
+				if (e.getCode() == KeyCode.F6) {
+					System.out.println("Loading game ...");
+					galaxy = saver.load_game();
+					saver.reload_image_and_data(galaxy);
+					
+					//interactionHandler = new InteractionHandler(galaxy);
+				}
+				
+			}
+		};
+		scene.setOnKeyPressed(keyboardHandler);
         
 		/*	Rendering */
 		new AnimationTimer() {
@@ -96,6 +126,7 @@ public class Game extends Application {
 					}
 					System.exit(0);
 				}
+				
 			}
 		}.start();
 	}

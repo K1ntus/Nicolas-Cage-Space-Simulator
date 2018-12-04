@@ -42,16 +42,16 @@ public class DataSerializer {
 	 */
 	private ObjectOutputStream oos;
 	
+	private boolean new_game_loaded = false;
+	
 	/**
 	 * \brief create the structure containing the data and the fileName
 	 * @param name save fileName
 	 * @param data game data
 	 */
-	private Stage stage;
-	public DataSerializer(String name, Galaxy data, Stage stage) {
+	public DataSerializer(String name, Galaxy data) {
 		this.name = name;
 		this.data = data;		
-		this.stage= stage;
 	}
 	
 	/**
@@ -125,6 +125,7 @@ public class DataSerializer {
 			e.printStackTrace();
 		}	
 		Galaxy res = new Galaxy(loaded);
+		setNew_game_loaded(true);
 		return res;
 	}
 	/**
@@ -132,6 +133,7 @@ public class DataSerializer {
 	 * @param g Galaxy to be reloaded
 	 */
 	public void reload_image_and_data(Galaxy g) {
+		new_game_loaded = false;
 		for(Planet p : g.getPlanets()) {
 			
 			User u = p.getRuler();
@@ -168,5 +170,13 @@ public class DataSerializer {
 			
 			s.updateImage();
 		}
+	}
+
+	public boolean isNew_game_loaded() {
+		return new_game_loaded;
+	}
+
+	public void setNew_game_loaded(boolean new_game_loaded) {
+		this.new_game_loaded = new_game_loaded;
 	}
 }

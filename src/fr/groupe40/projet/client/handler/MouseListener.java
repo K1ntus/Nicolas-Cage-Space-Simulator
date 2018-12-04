@@ -81,8 +81,6 @@ public class MouseListener {
 					}
 				}
 
-		        System.out.println("source planet selectioned : "+ selected_planets[0]);
-		        System.out.println("destination planet selectioned : "+ selected_planets[1]);
 	        }
 	        
 	    };
@@ -94,7 +92,6 @@ public class MouseListener {
 	        @Override
 	        public void handle(MouseEvent mouseEvent){
 	        	mouseEvent.setDragDetect(false);
-	        	//System.out.println("Drag detected - Source: " + source.toString());
 	        	
 	            double offsetX = mouseEvent.getSceneX();
 	            double offsetY = mouseEvent.getSceneY();
@@ -137,13 +134,10 @@ public class MouseListener {
 	        	if(selected_planets[0] == null || selected_planets[1] == null || selected_planets[0].getRuler() != Constants.human_user) {	
 	        		return;
 	        	}else {
-			        System.out.println("source planet selectioned : "+ selected_planets[0]);
-			        System.out.println("destination planet selectioned : "+ selected_planets[1]);
 					Squad s = new Squad(Constants.human_user.getPercent_of_troups_to_send(), selected_planets[0], selected_planets[1]);
 					//s.sendFleet(source, destination, Constants.human_user.getPercent_of_troups_to_send());
 					galaxy.getSquads().add(s);
 
-			        System.out.println("send fleet");
 					selected_planets[0] = null;
 					selected_planets[1] = null;
 	        	}

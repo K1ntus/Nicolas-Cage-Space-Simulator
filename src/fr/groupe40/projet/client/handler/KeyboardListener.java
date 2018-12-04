@@ -16,10 +16,12 @@ import javafx.scene.input.KeyEvent;
  * @author Sarah Portejoie
  *
  */
+@Deprecated
 public class KeyboardListener {
 	private Galaxy galaxy;
 	private Scene scene;
 	private DataSerializer saver;
+	private boolean new_game_loaded = false;
 
 	/**
 	 * 
@@ -39,58 +41,18 @@ public class KeyboardListener {
 	 * \brief Manage the saver/loader
 	 */
 	public void launch() {
-		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
-	
-			@Override
-			public void handle(KeyEvent e) {
-					
-				if(e.getCode() == KeyCode.SPACE) {
-					System.out.println("* button space pressed");
-						
-					for(Planet p : galaxy.getPlanets()) {
-						System.out.println("*planet boucle:" +p.toString());
-						System.out.println("** ruler: " + p.getRuler().toString());
-	
-						if(p.getRuler().equals(Constants.human_user)){
-							System.out.println("*** ruler well selected");
-							Planet source = p.getRuler().getSource();
-							Planet destination = p.getRuler().getDestination();
-								
-							if(destination != null && source != null) {
-								Squad s = new Squad(Constants.human_user.getPercent_of_troups_to_send(), source, destination);
-								//s.sendFleet(source, destination, Constants.human_user.getPercent_of_troups_to_send());
-								
-								galaxy.getSquads().add(s);
-									
-									
-							}
-						} else {
-							p.getRuler().setDestination(null);
-						}
-					}
-	
-				}
-					
-				if (e.getCode() == KeyCode.F5) {
-					System.out.println("Saving game ...");
-					//OPEN POPUP ?
-					saver.save_game();
-					
-								
-				}
-					
-				if (e.getCode() == KeyCode.F6) {
+	}
 
-					System.out.println("Loading game ...");
-					galaxy = saver.load_game();
-					saver.reload_image_and_data(galaxy);
-					
-					//interactionHandler = new InteractionHandler(galaxy);
-				}
-				
-			}
-		};
-    scene.setOnKeyPressed(keyboardHandler);
+
+
+	public boolean isNew_game_loaded() {
+		return new_game_loaded;
+	}
+
+
+
+	public void setNew_game_loaded(boolean new_game_loaded) {
+		this.new_game_loaded = new_game_loaded;
 	}
 
 }
