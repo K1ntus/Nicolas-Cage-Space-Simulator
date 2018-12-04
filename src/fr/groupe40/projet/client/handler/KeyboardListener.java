@@ -38,7 +38,7 @@ public class KeyboardListener {
 	/**
 	 * \brief Manage the saver/loader
 	 */
-	public void start() {
+	public void launch() {
 		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
 	
 			@Override

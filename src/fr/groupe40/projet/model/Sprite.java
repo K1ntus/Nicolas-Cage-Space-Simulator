@@ -168,9 +168,8 @@ public abstract class Sprite implements Serializable {
 	 * @param y_bottom
 	 * @return true if there s a collision, else false
 	 */
-	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom) {
+	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom, double radius) {
 
-		double radius = this.width/2 + Constants.minimal_distance_between_planets;
 		double circle_x = this.x + this.width/2;
 		double circle_y = this.y + this.height/2;
 		double circle_left = circle_x - radius;
@@ -207,12 +206,13 @@ public abstract class Sprite implements Serializable {
 	 * @param p a sprite
 	 * @return true if the sprite is in the circle else false
 	 */
-	public boolean intersectCircle(Sprite p) {
+	public boolean intersectCircle(Sprite p, double radius) {
 		return intersectCircle(
 				p.getX(),
 				p.getY(),
 				p.getX()+p.width, 
-				p.getY()+p.height
+				p.getY()+p.height,
+				radius
 			);
 	}
 
@@ -224,27 +224,22 @@ public abstract class Sprite implements Serializable {
 	 * @param height the height of the rectangle
 	 * @return true if inside else false
 	 */
-	public boolean isInside(double x, double y, double width, double height) {
-		if(x > this.x+this.width || x+width < this.x) {
-			return false;
-		}
-		
-		if(y > this.y+this.height || y+height < this.y) {
-			return false;
-		}
-		return true;
-	}
+	public abstract boolean isInside(double x, double y, double width, double height);
+	
+	/**
+	 * \brief Check if a pair of pos is inside another
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public abstract boolean isInside(double x, double y);
 	
 	/**
 	 * \brief Check if a sprite directly intersect another one
 	 * @param s the sprite to compare with
 	 * @return true if the sprite is inside, else false
 	 */
-	public boolean isInside(Sprite s) {
-		return ((x >= s.x && x <= s.x + s.width) || (s.x >= x && s.x <= x + width))
-				&& ((y >= s.y && y <= s.y + s.height) || (s.y >= y && s.y <= y + height));
-	}
-
+	public abstract boolean isInside(Sprite s);
 	/**
 	 * \brief Set the position of a sprite then validate his position
 	 * @param x
@@ -430,6 +425,7 @@ public abstract class Sprite implements Serializable {
 	public void setRuler(User ruler) {
 		this.ruler = ruler;
 	}
+
 
 
 }

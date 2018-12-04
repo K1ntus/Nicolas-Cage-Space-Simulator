@@ -49,7 +49,6 @@ public class Game extends Application {
 		Scene scene = new Scene(root);
 		Canvas canvas = new Canvas(Constants.width, Constants.height);
 		root.getChildren().add(canvas);
-
 		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
@@ -59,8 +58,7 @@ public class Game extends Application {
 		DataSerializer saver = new DataSerializer(Constants.fileName_save, galaxy, stage);
 		
 		InteractionHandler interactionHandler = new InteractionHandler(galaxy, scene, saver);
-		interactionHandler.start();
-
+		interactionHandler.exec();
 		
 		stage.setScene(scene);
 		stage.show();

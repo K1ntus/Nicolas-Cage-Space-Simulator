@@ -25,8 +25,9 @@ public class InteractionHandler {
 	/**
 	 * \brief launch the mouse & keyboard handler
 	 */
-	public void start() {
-		mouse.start();
-		keyboard.start();		
+	public void exec() {
+		mouse.launch();
+		keyboard.launch();	
+		
 	}
 }

@@ -56,15 +56,6 @@ public abstract class Planet extends Sprite {
 		this.setY(y);
 	}
 	
-	/*	Utilities */
-	/**
-	 * \brief check if a position is in a planet
-	 * @param x
-	 * @param y
-	 * @return true if inside, else false
-	 */
-	public abstract boolean isInsidePlanet(double x, double y);
-	
 	/* Update	*/
 	/**
 	 * \brief update the garrison value of this planet if not neutral

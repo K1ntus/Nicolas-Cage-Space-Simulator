@@ -32,7 +32,7 @@ Minimal Version:
 			** Par contre, un vaisseau devant atteindre une planete donnee ne devra ni survoler, ni rentrer en collision avec une autre planete. 
 			** Pour ce faire, vous devrez mettre en place un algorithme de deplacement permettant le contournement des planetes non visees.
 		
-		* Ameliorer le systeme de position de decollage des vaisseaux (et collisions quand plusieurs attaques simultan�es)
+		* Ameliorer le systeme de position de decollage des vaisseaux (et collisions quand plusieurs attaques simultanees)
 		
 		* Passer la classe 'Planet' en abstract
 		

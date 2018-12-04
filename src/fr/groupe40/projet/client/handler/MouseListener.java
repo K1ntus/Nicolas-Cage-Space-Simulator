@@ -22,12 +22,12 @@ public class MouseListener {
 	/**
 	 * \brief the source and destination planets selected
 	 */
-	private Planet source, destination;
+	private Planet[] selected_planets = {null, null};
 	
 	/**
 	 * \brief squads selected by the user
 	 */
-	private Squad selected;
+	private Squad selected_squad;
 	
 	
 	/**
@@ -44,7 +44,48 @@ public class MouseListener {
 	/**
 	 * \brief launch the mouse handler
 	 */
-	public void start() {
+	public void launch() {
+		/**
+		 * \brief Manage the initial mouse drag event
+		 */
+		EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
+	        @Override
+	        public void handle(MouseEvent mouseEvent) {
+		        mouseEvent.setDragDetect(true);
+		        
+	            orgSceneX = mouseEvent.getSceneX();
+	            orgSceneY = mouseEvent.getSceneY();
+	            
+	            
+				for(Squad s : galaxy.getSquads()) {
+					if(s.squad_selected(orgSceneX, orgSceneY)) {
+						if(s.getRuler().getFaction() == Constants.player) {
+							selected_squad = s;
+						}
+					}
+
+				}
+				
+	            for(Planet p : galaxy.getPlanets()) {
+		            if(p.isInside(orgSceneX, orgSceneY)) {
+		            	selected_planets[0] = p;
+						if(selected_planets[0] == null) {	break;	}
+						if(p.getRuler().equals(Constants.human_user)){
+							selected_planets[0].getRuler().setSource(p);
+							break;
+						}else {
+							if(Constants.DEBUG) {
+								System.out.println("Vous n'etes pas le dirigeant de cette colonie");
+							}
+						}
+					}
+				}
+
+		        System.out.println("source planet selectioned : "+ selected_planets[0]);
+		        System.out.println("destination planet selectioned : "+ selected_planets[1]);
+	        }
+	        
+	    };
 
 		/**
 		 * \brief Manage the drop of the mouse
@@ -58,32 +99,33 @@ public class MouseListener {
 	            double offsetX = mouseEvent.getSceneX();
 	            double offsetY = mouseEvent.getSceneY();
 
-
-	        	if(selected != null) {	
+	            //Move launched squads
+	        	if(selected_squad != null) {	
 	    			for(Planet p : galaxy.getPlanets()) {
 	    				try {						
-	    					if(p.isInsidePlanet(offsetX, offsetY)) {
-	    						selected.update_destination(p);
-	    		    			selected = null;
+	    					if(p.isInside(offsetX, offsetY)) {
+	    						selected_squad.update_destination(p);
+	    						selected_squad = null;
 	    						return;
 	    					}
 
 	    				} catch(NullPointerException e) {
 	    				//Nothing
-	    	    			selected = null;
+	    					selected_squad = null;
 	    					return;
 	    				}
 	    			}
 	    			return;
 	        	}
 	        	
-	        	if(source == null) { return; }
+	        	//Select destination planet
+	        	if(selected_planets[0] == null) { return; }
 				for(Planet p : galaxy.getPlanets()) {
 					try {						
-						if(p.isInsidePlanet(offsetX, offsetY)) {
-							if(!source.isInside(p)) {
-								destination = p;
-								source.getRuler().setDestination(p);
+						if(p.isInside(offsetX, offsetY)) {
+							if(!selected_planets[0].isInside(p)) {
+								selected_planets[1] = p;
+								selected_planets[0].getRuler().setDestination(p);
 							}
 							break;
 						}
@@ -92,15 +134,18 @@ public class MouseListener {
 						return;
 					}
 				}
-	        	if(source == null || destination == null || source.getRuler() != Constants.human_user) {	
+	        	if(selected_planets[0] == null || selected_planets[1] == null || selected_planets[0].getRuler() != Constants.human_user) {	
 	        		return;
 	        	}else {
-					Squad s = new Squad(Constants.human_user.getPercent_of_troups_to_send(), source, destination);
+			        System.out.println("source planet selectioned : "+ selected_planets[0]);
+			        System.out.println("destination planet selectioned : "+ selected_planets[1]);
+					Squad s = new Squad(Constants.human_user.getPercent_of_troups_to_send(), selected_planets[0], selected_planets[1]);
 					//s.sendFleet(source, destination, Constants.human_user.getPercent_of_troups_to_send());
 					galaxy.getSquads().add(s);
 
-					source = null;
-					destination = null;
+			        System.out.println("send fleet");
+					selected_planets[0] = null;
+					selected_planets[1] = null;
 	        	}
 	        	
 	        }
@@ -125,44 +170,6 @@ public class MouseListener {
 		};
 		
 
-		/**
-		 * \brief Manage the drag initial event
-		 */
-		EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
-	        @Override
-	        public void handle(MouseEvent mouseEvent) {
-		        mouseEvent.setDragDetect(true);
-		        
-	            orgSceneX = mouseEvent.getSceneX();
-	            orgSceneY = mouseEvent.getSceneY();
-	            
-	            
-				for(Squad s : galaxy.getSquads()) {
-					if(s.squad_selected(orgSceneX, orgSceneY)) {
-						if(s.getRuler().getFaction() == Constants.player) {
-							selected = s;
-						}
-					}
-
-				}
-				
-	            for(Planet p : galaxy.getPlanets()) {
-		            if(p.isInsidePlanet(orgSceneX, orgSceneY)) {
-						source = p;
-						if(source == null) {	break;	}
-						if(p.getRuler().equals(Constants.human_user)){
-							source.getRuler().setSource(p);
-							break;
-						}else {
-							if(Constants.DEBUG) {
-								System.out.println("Vous n'etes pas le dirigeant de cette colonie");
-							}
-						}
-					}
-				}
-	            
-	        }
-	    };
 
 		scene.setOnScroll(scrollEvent);
 	    scene.setOnMousePressed(mousePressedEvent);
