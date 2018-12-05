@@ -71,6 +71,10 @@ To go further:
 			** Taille des vaisseaux en fonction de leurs troupes
 		* Optimisation:
 			** Squads avec un "nuage de points" au lieu d'un objet par vaisseau
+		* Config
+			** Configuration des paramètres via un fichier xml
+		* Menu du jeu (paramètres
+		
 		
 		
 **********************************************************************
