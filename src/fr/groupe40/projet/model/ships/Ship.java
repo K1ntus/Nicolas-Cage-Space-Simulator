@@ -107,18 +107,21 @@ public class Ship extends Sprite implements Serializable {
 		if(destination.isInside(this)) {	//Case if the squads reach the destination	
 			this.setImage(Constants.path_gfx_ship_explosion);
 			if(this.getRuler() != destination.getRuler()) {	//If the faction are differents, then BOOM
-				int difference = destination.getTroups() - 1;
+				int difference = (int) (destination.getTroups() - ship_type.power);
 				
 				if(difference >=1) {	//Difference > 1 => kamikaze
 					destination.setTroups(difference);					
 				} else {				//Else, negative or 0 => new leader
-					destination.setRuler(this.getRuler());
-					
-					difference = Math.abs(difference);
-					if(difference >= Constants.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-						destination.setTroups(Constants.max_troups);					
-					} else {	//Else, renforcement
-						destination.setTroups(difference + 1);
+					if(destination.getRuler() != Constants.sun_user) {
+							
+						destination.setRuler(this.getRuler());
+						
+						difference = Math.abs(difference);
+						if(difference >= Constants.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
+							destination.setTroups(Constants.max_troups);					
+						} else {	//Else, renforcement
+							destination.setTroups(difference + 1);
+						}
 					}
 				}
 			}else if(this.getRuler() == destination.getRuler()) {	//Same faction

@@ -7,6 +7,7 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
@@ -142,6 +143,11 @@ public class Galaxy implements Serializable{
 	 * \brief update the garrison value of each planets
 	 */
 	public void updateGarrison() {
+		if(planets.get(0).getTroups() <= Constants.min_troups) {
+			Sun.sun_destroyed(planets, squads);
+			planets.remove(0);
+		}
+		
 		for(Planet p : planets)
 			p.updateGarrison();	
 	}

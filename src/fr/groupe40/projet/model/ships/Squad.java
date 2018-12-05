@@ -46,6 +46,10 @@ public class Squad implements Serializable {
 	 */
 	private boolean summoning = true;
 	
+	private User ruler;
+	
+	private String img_path;
+
 	/**
 	 * \brief constructor of this squad
 	 * @param percent the percent of troups from a planet to send
@@ -56,6 +60,29 @@ public class Squad implements Serializable {
 		this.source = src;
 		this.destination = dest;
 		this.nb_ship = (int) (src.getTroups() * (percent / 100));
+		this.ruler = src.getRuler();
+		
+
+		if (ruler.equals(Constants.ai_user)) {
+			img_path = Constants.path_img_AI_ships;
+		} else if (ruler.equals(Constants.event_user)) {
+			img_path = Constants.path_img_event_ships;
+		} else {
+			img_path = Constants.path_img_human_ships;
+		}
+	}
+	/**
+	 * \brief constructor of this squad
+	 * @param percent the percent of troups from a planet to send
+	 * @param src source planet
+	 * @param dest destination planet
+	 */
+	public Squad(String img_path, User ruler, double percent, Planet src, Planet dest) {
+		this.source = src;
+		this.destination = dest;
+		this.nb_ship = (int) (src.getTroups() * (percent / 100));
+		this.ruler = ruler;
+		this.img_path = img_path;
 	}
 
 	/**
@@ -76,14 +103,12 @@ public class Squad implements Serializable {
 			double y = this.decollageY(source);
 			
 			User u = source.getRuler();
-			String img_path = Constants.path_img_human_ships;
-			if (u.equals(Constants.ai_user)) {
-				img_path = Constants.path_img_tender_ships;
-			}
+			
+			
 			ships.add(
 			new Ship(
 					img_path,
-					source.getRuler(),
+					ruler,
 					destination,
 					source,
 					x,

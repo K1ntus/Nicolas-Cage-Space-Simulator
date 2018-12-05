@@ -148,7 +148,6 @@ public class DataSerializer {
 			p.getRuler().setDestination(null);
 			p.getRuler().setSource(null);
 			
-			p.setImg_path(Constants.path_img_planets);
 			p.updateImage();
 		}
 		

@@ -2,10 +2,9 @@ package fr.groupe40.projet;
 
 
 import fr.groupe40.projet.client.handler.InteractionHandler;
+import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
-import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -43,6 +42,8 @@ public class Game extends Application {
 	 */
 	private long game_tick = 0;	//long because counter, had to prevent the overflow case
 	
+	private Events eventManager;
+	
 	public void start(Stage stage) {
 		
 		/** Window and game kernel creation **/
@@ -62,6 +63,9 @@ public class Game extends Application {
 
 		DataSerializer saver = new DataSerializer(Constants.fileName_save, galaxy);
 		
+		if(Constants.events_enabled) 
+			eventManager = new Events(galaxy, gc, true, true);		
+
 		InteractionHandler interactionHandler = new InteractionHandler(galaxy, scene, saver);
 		interactionHandler.exec();
 		
@@ -93,6 +97,7 @@ public class Game extends Application {
 				
 			}
 		};
+		
 		scene.setOnKeyPressed(keyboardHandler);
         
 		/*	Rendering */
@@ -113,14 +118,19 @@ public class Game extends Application {
 				if(game_tick % Constants.tick_per_ai_attack == 0)
 					galaxy.updateAI();
 				
+				if(game_tick % Constants.tick_per_events == 0)
+					if(Constants.events_enabled)
+						eventManager.event_randomizer();
+				
 				galaxy.render(gc);
 				
 								
 				if(galaxy.userHasLost(Constants.human_user)) {	//The user has lost
 					System.out.println("Vous avez perdu");
+					galaxy.render(gc);
 					galaxy.renderDefeat(gc);
 					try {
-						Thread.sleep(5000);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

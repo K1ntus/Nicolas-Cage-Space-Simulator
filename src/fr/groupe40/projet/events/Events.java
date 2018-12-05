@@ -1,6 +1,71 @@
 package fr.groupe40.projet.events;
 
-@Deprecated
-public class Events {
+import java.util.ArrayList;
+import java.util.Random;
 
+import fr.groupe40.projet.model.board.Galaxy;
+import javafx.scene.canvas.GraphicsContext;
+
+/**
+ * \brief squads from random/all colonies are removed, becoming aggressive
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ */
+public class Events {
+	
+	private enum events {
+		NOTHING,	//No event invoked
+		PIRATE,		//Randomly generated hostile fleet
+		REVOLT,		//Fleet automatically lift-off from a planet and attack one of the same user
+		SICKNESS	//Planet stop producing for a while (add smoke/poison particles ?)
+	}
+
+	private ArrayList<events> event_available = new ArrayList<events>();
+	private Galaxy galaxy;
+	private GraphicsContext gc;
+	
+	
+	/**
+	 * \brief choose which events are enabled/disabled
+	 * @param pirate
+	 * @param revolt
+	 */
+	public Events(Galaxy galaxy, GraphicsContext gc, boolean pirate, boolean revolt) {
+		this.galaxy = galaxy;
+		this.gc = gc;
+		
+		event_available.add(events.NOTHING);
+		if(pirate)
+			event_available.add(events.PIRATE);
+		if(revolt)
+			event_available.add(events.REVOLT);
+	}
+
+
+	private static events getRandomEvent(ArrayList<events> event) {
+	    int rnd = new Random().nextInt(event.size());
+	    return event.get(rnd);
+	}
+
+
+
+	public void event_randomizer() {
+		if(event_available.size() == 1)
+			return;
+
+		switch(getRandomEvent(event_available)) {
+			case PIRATE:
+				System.out.println("** pirate assault");
+				PirateAssault.start(galaxy);
+				break;
+			case REVOLT:
+				System.out.println("** planet revolt");
+				Revolt.start(galaxy);
+				break;
+			case NOTHING:
+				System.out.println("*** no event");
+				break;
+		}
+
+	}
 }

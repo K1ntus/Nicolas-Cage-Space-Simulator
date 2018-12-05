@@ -55,6 +55,22 @@ public abstract class Planet extends Sprite {
 		this.setX(x);
 		this.setY(y);
 	}
+	/**
+	 * \brief Constructor of a planet
+	 * @param path the string image path
+	 * @param ruler the beginning ruler of this planet
+	 * @param x top left x position
+	 * @param y top left y position
+	 */
+	public Planet(String path, User ruler, int x, int y, double size) {
+		super(path, ruler, true);
+		this.generate();
+		this.setX(x);
+		this.setY(y);
+
+		this.setWidth(size);
+		this.setHeight(size);
+	}
 	
 	/* Update	*/
 	/**
@@ -156,6 +172,21 @@ public abstract class Planet extends Sprite {
 
 	public abstract String toString();
 
+	/**
+	 * \brief return if two planets are the same
+	 * @param u
+	 * @return true if they're both equals, else false
+	 */
+	public boolean equals(Planet p) {
+		User user1 = this.getRuler();
+		User user2 = p.getRuler();
+		
+		if (user1.equals(user2) && this.getX() == p.getX()) {
+			return true;
+		}
+		return false;
+	}
+	
 
 	public int getProduce_rate() {
 		return produce_rate;
