@@ -20,7 +20,6 @@ import fr.groupe40.projet.util.constants.Resources;
  * @author Sarah Portejoie
  *
  */
-@SuppressWarnings("unused")
 public class GalaxyGenerator {
 	/**
 	 * \brief the results planets array that has been generated

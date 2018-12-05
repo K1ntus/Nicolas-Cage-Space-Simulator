@@ -14,6 +14,7 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Players;
+import javafx.scene.canvas.GraphicsContext;
 
 
 /**
@@ -93,7 +94,7 @@ public class DataSerializer {
 	 * \brief Load a game from a save and apply it to the current game start
 	 * @return the galaxy loaded from the save file
 	 */
-	public Galaxy load_game() {
+	public Galaxy load_game(GraphicsContext gc) {
 		/*
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Select your game save");
@@ -102,7 +103,7 @@ public class DataSerializer {
 		*/
 		
 		FileInputStream file;
-		Galaxy loaded = new Galaxy();
+		Galaxy loaded = new Galaxy(gc);
 		try {
 			file = new FileInputStream(name + ".save");
 			ObjectInputStream ois = new ObjectInputStream(file);
@@ -121,7 +122,7 @@ public class DataSerializer {
 			System.out.println("Unable to load game");
 			e.printStackTrace();
 		}	
-		Galaxy res = new Galaxy(loaded);
+		Galaxy res = new Galaxy(loaded, gc);
 		setNew_game_loaded(true);
 		return res;
 	}

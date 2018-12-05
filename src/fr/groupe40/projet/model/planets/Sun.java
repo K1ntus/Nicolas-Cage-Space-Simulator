@@ -6,10 +6,14 @@ import java.util.Iterator;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
+import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Resources;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public class Sun extends Planet implements Serializable {
 
@@ -67,8 +71,12 @@ public class Sun extends Planet implements Serializable {
 	}
 
 
-	public static void sun_destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads) {
+	public static void sun_destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads, GraphicsContext gc) {
 		// TODO Auto-generated method stub
+		Image explosion = new Image(Resources.path_gfx_ship_explosion, Generation.size_sun, Generation.size_sun, false, false, true);
+		System.out.println(gc.toString());
+		renderExplosion(gc, planets.get(0).getX(), planets.get(0).getY() , explosion);
+		
 		for(Planet p : planets) {
 			p.setTroups(PlanetsGarrison.min_troups);
 		}
@@ -82,4 +90,8 @@ public class Sun extends Planet implements Serializable {
 		
 	}
 
+	public static void renderExplosion(GraphicsContext gc, double x, double y, Image explosion) {
+		gc.drawImage(explosion, x, y);
+		
+	}
 }

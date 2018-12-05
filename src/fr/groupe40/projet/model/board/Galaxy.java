@@ -52,13 +52,15 @@ public class Galaxy implements Serializable{
 	 */
 	private transient Image background;
 	
+	private transient GraphicsContext gc;
 	/**
 	 * \brief Generate a game board with every parameters randomized
 	 */
-	public Galaxy() {
+	public Galaxy(GraphicsContext gc) {
 		this.squads = new ArrayList<Squad>();
 		this.planets = generator.getPlanets();
 		this.generator = null;
+		this.gc = gc;
 		
 		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
 		
@@ -68,10 +70,11 @@ public class Galaxy implements Serializable{
 	 * \brief Generate a game board from another
 	 * @param g The game board to copy from
 	 */
-	public Galaxy(Galaxy g) {
+	public Galaxy(Galaxy g, GraphicsContext gc) {
 		this.planets = g.planets;
 		this.squads = g.squads;
 		this.generator = null;
+		this.gc = gc;
 		
 		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
 	}
@@ -81,10 +84,11 @@ public class Galaxy implements Serializable{
 	 * @param planets Planets that we want to have
 	 * @param squads Squads already present
 	 */
-	public Galaxy(List<Planet> planets, List<Squad> squads) {
+	public Galaxy(List<Planet> planets, List<Squad> squads, GraphicsContext gc) {
 		this.squads = (ArrayList<Squad>) squads;
 		this.planets = generator.getPlanets();
 		this.generator = null;
+		this.gc = gc;
 		
 		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
 		
@@ -126,7 +130,7 @@ public class Galaxy implements Serializable{
 		for(Planet p : planets) {
 			User ruler = p.getRuler();
 			
-			if(ruler.getId() < 0) {	//0 = neutral, >0 human, <0 bot
+			if(ruler.getId() < 0 && ruler.getFaction() == Players.ai) {	//0 = neutral, >0 human, <0 bot
 				source = p;
 				
 				for(Planet p2 : planets) {	//Check again the planets list
@@ -147,8 +151,8 @@ public class Galaxy implements Serializable{
 	 * \brief update the garrison value of each planets
 	 */
 	public void updateGarrison() {
-		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups) {
-			Sun.sun_destroyed(planets, squads);
+		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups && planets.get(0).getRuler().equals(Players.sun_user)) {
+			Sun.sun_destroyed(planets, squads, gc);
 			planets.remove(0);
 		}
 		
@@ -295,7 +299,7 @@ public class Galaxy implements Serializable{
 	 * @param gc
 	 */
 	public void renderBackground(GraphicsContext gc) {
-		gc.drawImage(getBackground(), 0, 0);
+		gc.drawImage(background, 0, 0);
 	}
 	
 	/**
@@ -398,13 +402,6 @@ public class Galaxy implements Serializable{
 		
 	}
 	
-	/**
-	 * \brief render a explosion when a ship reach his destination
-	 * @param gc
-	 */
-	public void renderExplosion(GraphicsContext gc) {
-		
-	}
 	
 	/* init the font type */
 	/**

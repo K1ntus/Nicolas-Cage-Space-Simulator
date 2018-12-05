@@ -61,7 +61,7 @@ public class Game extends Application {
 		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
-		galaxy = new Galaxy();
+		galaxy = new Galaxy(gc);
 		galaxy.initFont(gc);
 
 		DataSerializer saver = new DataSerializer(Constants.fileName_save, galaxy);
@@ -92,7 +92,7 @@ public class Game extends Application {
 					
 				if (e.getCode() == KeyCode.F6) {
 					System.out.println("Loading game ...");
-					galaxy = saver.load_game();
+					galaxy = saver.load_game(gc);
 					saver.reload_image_and_data(galaxy);
 					
 					//interactionHandler = new InteractionHandler(galaxy);
