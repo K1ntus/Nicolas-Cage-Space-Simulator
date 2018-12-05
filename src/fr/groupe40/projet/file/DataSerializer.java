@@ -1,6 +1,5 @@
 package fr.groupe40.projet.file;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,9 +13,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Constants;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import fr.groupe40.projet.util.constants.Players;
 
 
 /**
@@ -137,12 +134,12 @@ public class DataSerializer {
 		for(Planet p : g.getPlanets()) {
 			
 			User u = p.getRuler();
-			if (u.getFaction() == Constants.ai) {
-				p.setRuler(Constants.ai_user);
-			}else if (u.getFaction() == Constants.player) {
-				p.setRuler(Constants.human_user);
+			if (u.getFaction() == Players.ai) {
+				p.setRuler(Players.ai_user);
+			}else if (u.getFaction() == Players.player) {
+				p.setRuler(Players.human_user);
 			}else {
-				p.setRuler(Constants.neutral_user);
+				p.setRuler(Players.neutral_user);
 			}
 
 			p.getRuler().setDestination(null);
@@ -155,12 +152,12 @@ public class DataSerializer {
 			ArrayList<Ship> ships = s.getShips();
 			try {
 				User u = ships.get(0).getRuler();
-				if (u.getFaction() == Constants.ai) {
-					s.update_ruler(Constants.ai_user);
-				}else if (u.getFaction() == Constants.player) {
-					s.update_ruler(Constants.human_user);
+				if (u.getFaction() == Players.ai) {
+					s.update_ruler(Players.ai_user);
+				}else if (u.getFaction() == Players.player) {
+					s.update_ruler(Players.human_user);
 				}else {
-					s.update_ruler(Constants.neutral_user);
+					s.update_ruler(Players.neutral_user);
 				}
 			} catch (IndexOutOfBoundsException e) {
 				

@@ -6,10 +6,13 @@ import java.util.Iterator;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.RoundPlanet;
-
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 
 /**
  * \brief Galaxy Planets Generator
@@ -37,11 +40,11 @@ public class GalaxyGenerator {
 	 * \brief Generate a sun in the center of the board
 	 */
 	public void generateSun() {
-		Planet sun = new Sun(Constants.path_img_sun, Constants.sun_user, Constants.width/2, Constants.height/2);
+		Planet sun = new Sun(Resources.path_img_sun, Players.sun_user, Generation.width/2, Generation.height/2);
 		sun.updateImage();
 		sun.setX(sun.getX() - sun.width()/2);
 		sun.setY(sun.getY() - sun.width()/2);
-		sun.setTroups(Constants.sun_troups);
+		sun.setTroups(PlanetsGarrison.sun_troups);
 		planets.add(sun);
 	}
 
@@ -51,8 +54,8 @@ public class GalaxyGenerator {
 		double rand= Math.random();
 		
 		if(rand < 0.5)
-			return Constants.path_img_square_basic;
-		return Constants.path_img_square_nicolas_cage;
+			return Resources.path_img_square_basic;
+		return Resources.path_img_square_nicolas_cage;
 	}
 	
 	private String getRandomSquarePlanetImgPath() {
@@ -61,30 +64,30 @@ public class GalaxyGenerator {
 		/*if(rand < 0.25)
 			return Constants.path_img_round_planet1;
 		else */if(rand < 0.5)
-			return Constants.path_img_round_planet2;
+			return Resources.path_img_round_planet2;
 		else if(rand < 0.75)
-			return Constants.path_img_round_doge;
-		return Constants.path_img_round_kfc_planet;
+			return Resources.path_img_round_doge;
+		return Resources.path_img_round_kfc_planet;
 	}
 	
 	private Planet getRandomPlanet() {
 		double rand = Math.random();
 		
 		if(rand < 0.5)
-			return new RoundPlanet(getRandomRoundPlanetImgPath(), new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
-		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
+			return new RoundPlanet(getRandomRoundPlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
+		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
 	}
 	/**
 	 * \brief Generate the planets for the galaxy initialization
 	 */
 	public void generatePlanets() {
-		double width = Math.random() * Constants.size_maximal_planets *0.25 + Constants.size_minimal_planets;
+		double width = Math.random() * Generation.size_maximal_planets *0.25 + Generation.size_minimal_planets;
 		double height = width;
 		//Sprite(String path, double width, double height, double maxX, double maxY) 
 
 		
-		for(int i = 0; i < Constants.nb_planets_tentatives; i++) {
-			double y = (Math.random() * (Constants.height - (height + Constants.bottom_margin_size)));
+		for(int i = 0; i < Generation.nb_planets_tentatives; i++) {
+			double y = (Math.random() * (Generation.height - (height + Generation.bottom_margin_size)));
 			Planet p = getRandomPlanet();
 			/*
 			Planet p;
@@ -101,15 +104,15 @@ public class GalaxyGenerator {
 			}
 		}
 		
-		if(planets.size() < Constants.min_numbers_of_planets) {	//si moins de 2 planetes
+		if(planets.size() < Generation.min_numbers_of_planets) {	//si moins de 2 planetes
 			System.out.println("Impossible de generer un terrain minimal");
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
-			planets.get(1).setRuler(Constants.human_user);
-			planets.get(1).setImg_path(Constants.path_img_planet_human);
+			planets.get(1).setRuler(Players.human_user);
+			planets.get(1).setImg_path(Resources.path_img_planet_human);
 			planets.get(1).updateImage();
 			if(Constants.ai_enabled)
-				planets.get(2).setRuler(Constants.ai_user);
+				planets.get(2).setRuler(Players.ai_user);
 		}
 		
 		
@@ -124,13 +127,13 @@ public class GalaxyGenerator {
 		Iterator<Planet> it = planets.iterator();
 		
 		while (it.hasNext()) {
-			if(p.getY() > Constants.height - Constants.bottom_margin_size - Constants.size_squads - p.height()) {
+			if(p.getY() > Generation.height - Generation.bottom_margin_size - Generation.size_squads - p.height()) {
 				return false;
 			}
 			
 			Planet p_already_placed = it.next();
 			
-			if(p_already_placed.isInside(p) || p_already_placed.intersectCircle(p, p.width()/2 + Constants.minimal_distance_between_planets)) {
+			if(p_already_placed.isInside(p) || p_already_placed.intersectCircle(p, p.width()/2 + Generation.minimal_distance_between_planets)) {
 				if(p.updatePlanetePosition() == -1) {
 					System.out.println("unable to generate this planet");
 					return false;

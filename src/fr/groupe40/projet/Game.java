@@ -6,6 +6,9 @@ import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Ticks;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -53,7 +56,7 @@ public class Game extends Application {
 
 		Group root = new Group();
 		Scene scene = new Scene(root);
-		Canvas canvas = new Canvas(Constants.width, Constants.height);
+		Canvas canvas = new Canvas(Generation.width, Generation.height);
 		root.getChildren().add(canvas);
 		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -106,26 +109,26 @@ public class Game extends Application {
 				
 				game_tick += 1;
 				
-				if(game_tick % Constants.tick_per_squad_position_update == 0)
+				if(game_tick % Ticks.tick_per_squad_position_update == 0)
 					galaxy.updateSquadPosition();
 				
-				if(game_tick % Constants.tick_per_produce == 0)
+				if(game_tick % Ticks.tick_per_produce == 0)
 					galaxy.updateGarrison();
 				
-				if(game_tick % Constants.tick_per_lift_off == 0)
+				if(game_tick % Ticks.tick_per_lift_off == 0)
 					galaxy.updateWavesSending();
 				
-				if(game_tick % Constants.tick_per_ai_attack == 0)
+				if(game_tick % Ticks.tick_per_ai_attack == 0)
 					galaxy.updateAI();
 				
-				if(game_tick % Constants.tick_per_events == 0)
+				if(game_tick % Ticks.tick_per_events == 0)
 					if(Constants.events_enabled)
 						eventManager.event_randomizer();
 				
 				galaxy.render(gc);
 				
 								
-				if(galaxy.userHasLost(Constants.human_user)) {	//The user has lost
+				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
 					System.out.println("Vous avez perdu");
 					galaxy.render(gc);
 					galaxy.renderDefeat(gc);

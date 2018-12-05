@@ -3,9 +3,10 @@ package fr.groupe40.projet.events;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 
 /**
  * \brief squads from random/all colonies are removed, becoming aggressive and attack one of his planet
@@ -19,7 +20,7 @@ final class Revolt {
 		for(Planet src: galaxy.getPlanets()) {
 			User u = src.getRuler();
 
-			if(u.equals(Constants.human_user) && !user) {
+			if(u.equals(Players.human_user) && !user) {
 				user = true;
 				System.out.println("revolt event begun1");
 				for(Planet dest: galaxy.getPlanets()) {
@@ -35,7 +36,7 @@ final class Revolt {
 			}
 			
 			if(Constants.ai_enabled)
-				if(u.equals(Constants.ai_user) && !ai) {
+				if(u.equals(Players.ai_user) && !ai) {
 					ai = true;
 					
 					System.out.println("revolt event begun1");
@@ -56,7 +57,7 @@ final class Revolt {
 	}
 	
 	private static void launch_fleet(Galaxy galaxy, Planet src, Planet dest) {
-		Squad s = new Squad(Constants.path_img_event_ships, Constants.event_user, 25, src, dest);		
+		Squad s = new Squad(Resources.path_img_event_ships, Players.event_user, 25, src, dest);		
 		
 		galaxy.getSquads().add(s);		
 	}

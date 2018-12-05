@@ -8,8 +8,11 @@ import java.util.List;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Direction;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 
 /**
  * \brief Ship of a squad, contains the destination, src, ...
@@ -105,20 +108,20 @@ public class Ship extends Sprite implements Serializable {
 			return true;
 		
 		if(destination.isInside(this)) {	//Case if the squads reach the destination	
-			this.setImage(Constants.path_gfx_ship_explosion);
+			this.setImage(Resources.path_gfx_ship_explosion);
 			if(this.getRuler() != destination.getRuler()) {	//If the faction are differents, then BOOM
 				int difference = (int) (destination.getTroups() - ship_type.power);
 				
 				if(difference >=1) {	//Difference > 1 => kamikaze
 					destination.setTroups(difference);					
 				} else {				//Else, negative or 0 => new leader
-					if(destination.getRuler() != Constants.sun_user) {
+					if(destination.getRuler() != Players.sun_user) {
 							
 						destination.setRuler(this.getRuler());
 						
 						difference = Math.abs(difference);
-						if(difference >= Constants.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-							destination.setTroups(Constants.max_troups);					
+						if(difference >= PlanetsGarrison.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
+							destination.setTroups(PlanetsGarrison.max_troups);					
 						} else {	//Else, renforcement
 							destination.setTroups(difference + 1);
 						}
@@ -126,8 +129,8 @@ public class Ship extends Sprite implements Serializable {
 				}
 			}else if(this.getRuler() == destination.getRuler()) {	//Same faction
 				int sum = 1 + destination.getTroups();	//Sum of defense + squad
-				if(sum >= Constants.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-					destination.setTroups(Constants.max_troups);					
+				if(sum >= PlanetsGarrison.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
+					destination.setTroups(PlanetsGarrison.max_troups);					
 				} else {	//Else, renforcement
 					destination.setTroups(sum);
 				}
@@ -365,8 +368,8 @@ public class Ship extends Sprite implements Serializable {
 	 * \brief prepare his removal from the squad list
 	 */
 	public void remove() {
-		this.setRuler(Constants.neutral_user);
-		this.setImage(Constants.path_gfx_ship_explosion);
+		this.setRuler(Players.neutral_user);
+		this.setImage(Resources.path_gfx_ship_explosion);
 		this.reached = true;
 	}
 

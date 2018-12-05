@@ -4,6 +4,11 @@ import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.ShipType;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.ShipsParameters;
 
 /**
  * \brief Abstract class of the general type "planet"
@@ -77,12 +82,12 @@ public abstract class Planet extends Sprite {
 	 * \brief update the garrison value of this planet if not neutral
 	 */
 	public void updateGarrison() {
-    	if(getRuler().getFaction() != Constants.neutral) {
-    		if(troups < Constants.max_troups) {
+    	if(getRuler().getFaction() != Players.neutral) {
+    		if(troups < PlanetsGarrison.max_troups) {
     			
     			troups = troups + produce_rate;	
-    			if(troups > Constants.max_troups) {
-    				troups = Constants.max_troups;
+    			if(troups > PlanetsGarrison.max_troups) {
+    				troups = PlanetsGarrison.max_troups;
     			}
     		
     		}
@@ -97,25 +102,25 @@ public abstract class Planet extends Sprite {
 	private void generate() {
 		selected = false;
 		
-		setWidth(Math.random() * Constants.size_minimal_planets + Constants.size_minimal_planets);
+		setWidth(Math.random() * Generation.size_minimal_planets + Generation.size_minimal_planets);
 		setHeight(width());
-		double x = (Math.random() * (Constants.width - width()));
-		double y = (Math.random() * (Constants.height - height()));
+		double x = (Math.random() * (Generation.width - width()));
+		double y = (Math.random() * (Generation.height - height()));
 
-		if (x <= Constants.left_margin_size + Constants.size_squads)
-			x = Constants.left_margin_size + Constants.size_squads;
+		if (x <= Generation.left_margin_size + Generation.size_squads)
+			x = Generation.left_margin_size + Generation.size_squads;
 		else if( x >= getMaxX())
 			x = getMaxX();
 		
-		if (getY() <= Constants.top_margin_size)
-			y = Constants.top_margin_size;
+		if (getY() <= Generation.top_margin_size)
+			y = Generation.top_margin_size;
 		else if( getY()+height() >= getMaxY())
 			y = getMaxY();
 		
 		setX(x);
 		setY(y);
-		troups = (int) (Math.random() * (Constants.max_initDefense - Constants.min_troups) +1);
-		produce_rate =  (int) (Math.random() * (Constants.max_ship_produce - Constants.min_ship_produce) +1);
+		troups = (int) (Math.random() * (PlanetsGarrison.max_initDefense - PlanetsGarrison.min_troups) +1);
+		produce_rate =  (int) (Math.random() * (ShipsParameters.max_ship_produce - ShipsParameters.min_ship_produce) +1);
 		
 		ships_type = new ShipType();
 		
@@ -128,16 +133,16 @@ public abstract class Planet extends Sprite {
 	 */
 	public int calculateNextPosition() {
 		
-		if (this.getX() + this.width() >= Constants.width -  Constants.right_margin_size + Constants.size_squads) {
-			return Constants.error_greater_x;
-		} else if (this.getX() < Constants.left_margin_size  + Constants.size_squads ) {
-			return Constants.error_lower_x;
+		if (this.getX() + this.width() >= Generation.width -  Generation.right_margin_size + Generation.size_squads) {
+			return Debugging.error_greater_x;
+		} else if (this.getX() < Generation.left_margin_size  + Generation.size_squads ) {
+			return Debugging.error_lower_x;
 		}
 
-		if (this.getY() + this.height() >= Constants.height) {
-			return Constants.error_greater_y;
-		} else if (this.getY() < Constants.top_margin_size  + Constants.size_squads) {
-			return Constants.error_lower_y;
+		if (this.getY() + this.height() >= Generation.height) {
+			return Debugging.error_greater_y;
+		} else if (this.getY() < Generation.top_margin_size  + Generation.size_squads) {
+			return Debugging.error_lower_y;
 		}
 		
 		return 0;
@@ -150,18 +155,18 @@ public abstract class Planet extends Sprite {
 	public int updatePlanetePosition() {
 		setX(this.getX() + this.width()/5);
 		switch(calculateNextPosition()) {
-			case Constants.error_greater_x:
-				setY(getY() + Constants.height / 10);
-				setX(Constants.left_margin_size  + Constants.size_squads);
+			case Debugging.error_greater_x:
+				setY(getY() + Generation.height / 10);
+				setX(Generation.left_margin_size  + Generation.size_squads);
 				break;
-			case Constants.error_lower_x:
-				setX(Constants.left_margin_size  + Constants.size_squads);
+			case Debugging.error_lower_x:
+				setX(Generation.left_margin_size  + Generation.size_squads);
 				break;
-			case Constants.error_greater_y:
+			case Debugging.error_greater_y:
 				return -1;
-			case Constants.error_lower_y:
-				setX(Constants.top_margin_size  + Constants.size_squads);
-				setY(Constants.top_margin_size  + Constants.size_squads + 1);
+			case Debugging.error_lower_y:
+				setX(Generation.top_margin_size  + Generation.size_squads);
+				setY(Generation.top_margin_size  + Generation.size_squads + 1);
 				break;
 			default:
 				return 0;

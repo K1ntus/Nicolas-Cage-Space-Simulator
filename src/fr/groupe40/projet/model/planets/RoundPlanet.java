@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
 
 /**
  * \brief Round planet
@@ -23,7 +23,7 @@ public class RoundPlanet extends Planet implements Serializable{
 	@Override
 	public boolean isInside(double x, double y) {
 		if(isInside(x, y, 0, 0)) {
-			if(Constants.DEBUG) {
+			if(Debugging.DEBUG) {
 				System.out.println("Vous avez clique sur une planete avec "+this.getTroups());
 				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
 				System.out.println("et de type: "+ this.getRuler().getFaction());

@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Constants;
-import javafx.scene.canvas.GraphicsContext;
+import fr.groupe40.projet.util.constants.Players;
 
 /**
  * 
@@ -64,12 +63,12 @@ public class User implements Serializable{
 		this.faction = faction;
 		
 		switch(faction) {
-		case Constants.ai:
-			id = Constants.ai; break;
-		case Constants.neutral:
-			id = Constants.neutral; break;
-		case Constants.player:
-			id = Constants.player; break;
+		case Players.ai:
+			id = Players.ai; break;
+		case Players.neutral:
+			id = Players.neutral; break;
+		case Players.player:
+			id = Players.player; break;
 		}
 		percent_of_troups_to_send = 100;
 

@@ -8,7 +8,10 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 
 
@@ -63,12 +66,12 @@ public class Squad implements Serializable {
 		this.ruler = src.getRuler();
 		
 
-		if (ruler.equals(Constants.ai_user)) {
-			img_path = Constants.path_img_AI_ships;
-		} else if (ruler.equals(Constants.event_user)) {
-			img_path = Constants.path_img_event_ships;
+		if (ruler.equals(Players.ai_user)) {
+			img_path = Resources.path_img_AI_ships;
+		} else if (ruler.equals(Players.event_user)) {
+			img_path = Resources.path_img_event_ships;
 		} else {
-			img_path = Constants.path_img_human_ships;
+			img_path = Resources.path_img_human_ships;
 		}
 	}
 	/**
@@ -94,16 +97,13 @@ public class Squad implements Serializable {
 		
 		
 		while(summoning) {
-			if(source.getTroups() -1 <= Constants.min_troups) {
+			if(source.getTroups() -1 <= PlanetsGarrison.min_troups) {
 				nb_ship = 0;
 				return;
 			}
 			
 			double x = this.decollageX(source);
-			double y = this.decollageY(source);
-			
-			User u = source.getRuler();
-			
+			double y = this.decollageY(source);			
 			
 			ships.add(
 			new Ship(
@@ -132,7 +132,7 @@ public class Squad implements Serializable {
 	 */
 	public boolean squad_selected(double x, double y) {
 		for(Ship s : ships) {
-			if(s.isInside(x, y, Constants.size_squads, Constants.size_squads)) {
+			if(s.isInside(x, y, Generation.size_squads, Generation.size_squads)) {
 				return true;
 			}
 		}
@@ -194,10 +194,10 @@ public class Squad implements Serializable {
 	 */
 	public void updateImage() {
 		for(Ship s : ships) {
-			if(destination.getRuler() == Constants.human_user)
-				s.setImg_path(Constants.path_img_human_ships);
-			else if(destination.getRuler() == Constants.ai_user)
-				s.setImg_path(Constants.path_img_AI_ships);
+			if(destination.getRuler() == Players.human_user)
+				s.setImg_path(Resources.path_img_human_ships);
+			else if(destination.getRuler() == Players.ai_user)
+				s.setImg_path(Resources.path_img_AI_ships);
 			s.updateImage();			
 		}		
 	}
@@ -219,11 +219,11 @@ public class Squad implements Serializable {
 	 * @return abscissa position
 	 */
 	private double decollageX(Planet source) {
-		if(summonX*Constants.size_squads + source.getX() < source.getX()+source.width()) {
+		if(summonX*Generation.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
 			
 			
-		} else if (summonX*Constants.size_squads + source.getX() >= source.getX()+source.width()) {
+		} else if (summonX*Generation.size_squads + source.getX() >= source.getX()+source.width()) {
 			summonX = 1;
 			if(summonY != -1)
 				summonY = -1;
@@ -233,7 +233,7 @@ public class Squad implements Serializable {
 			}
 		}
 
-		return (summonX*Constants.size_squads + (source.getX() - Constants.size_squads));
+		return (summonX*Generation.size_squads + (source.getX() - Generation.size_squads));
 	}
 	
 	/**
@@ -243,7 +243,7 @@ public class Squad implements Serializable {
 	 */
 	private double decollageY(Planet source) {
 		if(source.getY() > destination.getY())
-			return (source.getY() - Constants.size_squads-1);
+			return (source.getY() - Generation.size_squads-1);
 		else
 			return (source.width() + source.getY() + 1);		
 	}

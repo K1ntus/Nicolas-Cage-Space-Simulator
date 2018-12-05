@@ -2,13 +2,7 @@ package fr.groupe40.projet.client.handler;
 
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
-import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Constants;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 /**
  * \brief Manage the keyboard events

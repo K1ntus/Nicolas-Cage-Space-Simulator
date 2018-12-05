@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Generation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -61,23 +62,23 @@ public abstract class Sprite implements Serializable {
 	public Sprite(String path, User ruler, boolean isPlanet) {
 		this.img_path = path;
 		
-		width = Constants.size_squads;
-		setMaxX(Constants.width - width);
-		setMaxY(Constants.height - height);
+		width = Generation.size_squads;
+		setMaxX(Generation.width - width);
+		setMaxY(Generation.height - height);
 
 		this.ruler = ruler;
 		
 		if(isPlanet) {
-			width = Math.random() * Constants.size_maximal_planets  + Constants.size_minimal_planets;
-			if(width > Constants.size_maximal_planets)
-				width = Constants.size_maximal_planets;
+			width = Math.random() * Generation.size_maximal_planets  + Generation.size_minimal_planets;
+			if(width > Generation.size_maximal_planets)
+				width = Generation.size_maximal_planets;
 
-			setMaxX(Constants.width - width - Constants.right_margin_size);
-			setMaxY(Constants.height - height - Constants.bottom_margin_size);
+			setMaxX(Generation.width - width - Generation.right_margin_size);
+			setMaxY(Generation.height - height - Generation.bottom_margin_size);
 		}
 
-		minY = Constants.top_margin_size - height;
-		minX = Constants.left_margin_size - width;
+		minY = Generation.top_margin_size - height;
+		minX = Generation.left_margin_size - width;
 		height = width;			
 		
 		updateImage();
@@ -152,7 +153,7 @@ public abstract class Sprite implements Serializable {
 		}
 
 		if (y + height >= getMaxY()) {
-			y = getMaxY() - height - Constants.bottom_margin_size;
+			y = getMaxY() - height - Generation.bottom_margin_size;
 		} else if (y <= minY) {
 			y = minY;
 		}else if (y < 0) {

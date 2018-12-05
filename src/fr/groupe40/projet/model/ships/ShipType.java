@@ -2,7 +2,7 @@ package fr.groupe40.projet.model.ships;
 
 import java.io.Serializable;
 
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.ShipsParameters;
 
 
 /**
@@ -40,8 +40,8 @@ public class ShipType implements Serializable {
 	 * \brief Generate power, speed and production time for a planet/squad
 	 */
 	private void generate_parameters() {
-		this.power = (int) (Math.random() * (Constants.max_ship_power - Constants.min_ship_power)+1);
-		this.speed =  (int) (Math.random() * (Constants.max_ship_speed - Constants.min_ship_speed)+1);
-		this.production_time =  (int) (Math.random() * (Constants.max_ship_produce - Constants.min_ship_produce)+1);
+		this.power = (int) (Math.random() * (ShipsParameters.max_ship_power - ShipsParameters.min_ship_power)+1);
+		this.speed =  (int) (Math.random() * (ShipsParameters.max_ship_speed - ShipsParameters.min_ship_speed)+1);
+		this.production_time =  (int) (Math.random() * (ShipsParameters.max_ship_produce - ShipsParameters.min_ship_produce)+1);
 	}
 }

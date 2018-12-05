@@ -12,6 +12,10 @@ import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -56,7 +60,7 @@ public class Galaxy implements Serializable{
 		this.planets = generator.getPlanets();
 		this.generator = null;
 		
-		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
+		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
 		
 	}
 
@@ -69,7 +73,7 @@ public class Galaxy implements Serializable{
 		this.squads = g.squads;
 		this.generator = null;
 		
-		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
+		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
 	}
 
 	/**
@@ -82,7 +86,7 @@ public class Galaxy implements Serializable{
 		this.planets = generator.getPlanets();
 		this.generator = null;
 		
-		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
+		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
 		
 	}
 	
@@ -109,7 +113,7 @@ public class Galaxy implements Serializable{
 			s.update_all_positions(planets);			
 		}
 
-		userHasLost(Constants.ai_user);
+		userHasLost(Players.ai_user);
 	}
 	
 	/*	AI	*/
@@ -143,7 +147,7 @@ public class Galaxy implements Serializable{
 	 * \brief update the garrison value of each planets
 	 */
 	public void updateGarrison() {
-		if(planets.get(0).getTroups() <= Constants.min_troups) {
+		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups) {
 			Sun.sun_destroyed(planets, squads);
 			planets.remove(0);
 		}
@@ -206,7 +210,7 @@ public class Galaxy implements Serializable{
 	 * @param action The scroll action (up or down case)
 	 */
 	public void clientScrollHandler(Direction direction) {
-		User u = Constants.human_user;
+		User u = Players.human_user;
 		int percent = u.getPercent_of_troups_to_send();
 		switch(direction) {
 			case DOWN://lower
@@ -339,11 +343,11 @@ public class Galaxy implements Serializable{
 			gc.setStroke(Color.BLACK);
 			
 			switch(p.getRuler().getFaction()) {
-				case Constants.player:
+				case Players.player:
 					gc.setFill(Constants.color_player); break;
-				case Constants.ai:
+				case Players.ai:
 					gc.setFill(Constants.color_ai); break;
-				case Constants.neutral:
+				case Players.neutral:
 					gc.setFill(Constants.color_neutral); break;
 				default:
 					gc.setFill(Constants.color_default); break;
@@ -364,18 +368,18 @@ public class Galaxy implements Serializable{
 		
 		for(Planet p :planets) {
 			User u = p.getRuler();
-			if (u.getFaction() == Constants.player) {
+			if (u.getFaction() == Players.player) {
 				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
 				
-				gc.fillText(txt, Constants.width/7, 25);
-				gc.strokeText(txt, Constants.width/7, 25);
+				gc.fillText(txt, Generation.width/7, 25);
+				gc.strokeText(txt, Generation.width/7, 25);
 				
 				return;				
 			}
 		}
 		String txt = Constants.message_game_over;
-		gc.fillText(txt, Constants.width/5, 25);
-		gc.strokeText(txt, Constants.width/5, 25);
+		gc.fillText(txt, Generation.width/5, 25);
+		gc.strokeText(txt, Generation.width/5, 25);
 	}
 	
 	/**
@@ -389,8 +393,8 @@ public class Galaxy implements Serializable{
 		gc.setTextAlign(TextAlignment.CENTER);	
 
 		String txt = Constants.message_game_over;
-		gc.fillText(txt, Constants.width/2, 25);
-		gc.strokeText(txt, Constants.width/2, 25);
+		gc.fillText(txt, Generation.width/2, 25);
+		gc.strokeText(txt, Generation.width/2, 25);
 		
 	}
 	

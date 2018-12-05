@@ -27,7 +27,7 @@ public class InteractionHandler {
 	 */
 	public void exec() {
 		mouse.launch();
-		getKeyboard().launch();	
+		keyboard.launch();	
 		
 	}
 

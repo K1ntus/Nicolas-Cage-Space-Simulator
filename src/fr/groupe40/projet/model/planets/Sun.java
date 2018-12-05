@@ -7,7 +7,9 @@ import java.util.Iterator;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
 
 public class Sun extends Planet implements Serializable {
 
@@ -17,14 +19,14 @@ public class Sun extends Planet implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Sun(String pathImgPlanets, User user, int x, int y) {
-		super(pathImgPlanets, user, x, y, Constants.size_sun);
+		super(pathImgPlanets, user, x, y, Generation.size_sun);
 	}
 
 	
 	@Override
 	public boolean isInside(double x, double y) {
 		if(isInside(x, y, 0, 0)) {
-			if(Constants.DEBUG) {
+			if(Debugging.DEBUG) {
 				System.out.println("Vous avez clique sur le soleil");
 			}
 			return true;
@@ -68,7 +70,7 @@ public class Sun extends Planet implements Serializable {
 	public static void sun_destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads) {
 		// TODO Auto-generated method stub
 		for(Planet p : planets) {
-			p.setTroups(Constants.min_troups);
+			p.setTroups(PlanetsGarrison.min_troups);
 		}
 
 		Iterator<Squad> it = squads.iterator();
