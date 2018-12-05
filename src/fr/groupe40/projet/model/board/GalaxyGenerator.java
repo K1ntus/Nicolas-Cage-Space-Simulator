@@ -106,6 +106,8 @@ public class GalaxyGenerator {
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
 			planets.get(1).setRuler(Constants.human_user);
+			planets.get(1).setImg_path(Constants.path_img_planet_human);
+			planets.get(1).updateImage();
 			if(Constants.ai_enabled)
 				planets.get(2).setRuler(Constants.ai_user);
 		}
