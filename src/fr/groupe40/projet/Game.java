@@ -106,6 +106,7 @@ public class Game extends Application {
 		/*	Rendering */
 		new AnimationTimer() {
 			public void handle(long arg0) {
+				galaxy.render(gc);
 				
 				game_tick += 1;
 				
@@ -120,12 +121,12 @@ public class Game extends Application {
 				
 				if(game_tick % Ticks.tick_per_ai_attack == 0)
 					galaxy.updateAI();
+
 				
 				if(game_tick % Ticks.tick_per_events == 0)
 					if(Constants.events_enabled)
 						eventManager.event_randomizer();
 				
-				galaxy.render(gc);
 				
 								
 				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost

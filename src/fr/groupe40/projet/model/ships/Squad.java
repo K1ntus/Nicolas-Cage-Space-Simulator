@@ -74,6 +74,14 @@ public class Squad implements Serializable {
 			img_path = Resources.path_img_human_ships;
 		}
 	}
+	
+
+	/**
+	 * \brief constructor of this squad for pirate event
+	 */
+	public Squad() {
+
+	}
 	/**
 	 * \brief constructor of this squad
 	 * @param percent the percent of troups from a planet to send

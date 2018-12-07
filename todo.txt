@@ -57,17 +57,17 @@ Minimal Version:
 
 To go further:
 		* Ev�nements:
-			** Generation aleatoire de pirates (Trou de ver)
-			** Rebellion ? A creuser
+07/12|		** Generation aleatoire de pirates (Trou de ver)
+06/12|		** Rebellion ? A creuser
 			** Trop forte attaque -> destruction de la planete
 			** Etoile de la mort -> destruction de planete
-			** Soleil au centre avec BCP de troupes -> tue = reset a 1 de garnison de ttes les planetes
+05/12|		** Soleil au centre avec BCP de troupes -> tue = reset a 1 de garnison de ttes les planetes
 				** Tore de Stanford en protection supplementaire
 				** ou peut-etre les deux avec un gif en mode gardiens ?
 		* Gameplay:
 			** Nombre d'ennemis
 			** Forme des planetes
-			** Sprite aleatoire pour les planetes
+04/12|		** Sprite aleatoire pour les planetes
 			** Taille des vaisseaux en fonction de leurs troupes
 		* Optimisation:
 			** Squads avec un "nuage de points" au lieu d'un objet par vaisseau

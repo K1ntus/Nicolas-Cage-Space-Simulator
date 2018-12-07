@@ -23,7 +23,7 @@ public class Events {
 	private ArrayList<events> event_available = new ArrayList<events>();
 	private Galaxy galaxy;
 	private GraphicsContext gc;
-	
+	private PlanetSickness planet_sickness= new PlanetSickness();
 	
 	/**
 	 * \brief choose which events are enabled/disabled
@@ -52,16 +52,23 @@ public class Events {
 	public void event_randomizer() {
 		if(event_available.size() == 1)
 			return;
+		
+		if(planet_sickness.isRunning()) {
+			planet_sickness.stop();
+		}
 
 		switch(getRandomEvent(event_available)) {
 			case PIRATE:
 				System.out.println("** pirate assault");
-				PirateAssault.start(galaxy);
+				PirateAssault.start(galaxy, gc);
 				break;
 			case REVOLT:
 				System.out.println("** planet revolt");
 				Revolt.start(galaxy);
 				break;
+			case SICKNESS:
+				System.out.println("** sickness start **");
+				planet_sickness.start(galaxy);
 			case NOTHING:
 				System.out.println("*** no event");
 				break;

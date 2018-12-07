@@ -18,6 +18,7 @@ public final class Resources {
 	public static final String path_img_human_ships = "/resources/images/ships/human.gif";
 	//public static final String path_img_event_ships = "/resources/images/ships/salt.png";
 	public static final String path_img_event_ships = "/resources/images/ships/tenders.png";
+	public static final String path_img_event_pirate_ships = "/resources/images/ships/pirate.png";
 	public static final String path_img_AI_ships = "/resources/images/ships/ai.png";
 	//public static final String path_img_NCage_ships = "/resources/images/ships/nicolas_cage.png";
 	//public static final String path_img_AI_ships = "/resources/images/ships/ai.png";

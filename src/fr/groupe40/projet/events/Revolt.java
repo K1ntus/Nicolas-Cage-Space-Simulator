@@ -5,6 +5,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 
@@ -22,14 +23,15 @@ final class Revolt {
 
 			if(u.equals(Players.human_user) && !user) {
 				user = true;
-				System.out.println("revolt event begun1");
 				for(Planet dest: galaxy.getPlanets()) {
 					int id1 = dest.getRuler().getId();
 					int id2 = u.getId();
 					if(!src.equals(dest) && (id1 == id2)) {
 						launch_fleet(galaxy, src, dest);
+
+						if(Debugging.DEBUG)
+							System.out.println("One of your fleet revolt against you");
 						
-						System.out.println("revolt event begun2");
 						break;
 					}
 				}
@@ -39,14 +41,15 @@ final class Revolt {
 				if(u.equals(Players.ai_user) && !ai) {
 					ai = true;
 					
-					System.out.println("revolt event begun1");
 					for(Planet dest: galaxy.getPlanets()) {
 						int id1 = dest.getRuler().getId();
 						int id2 = u.getId();
 						if(!src.equals(dest) && (id1 == id2)) {
 							launch_fleet(galaxy, src, dest);
 							
-							System.out.println("revolt event begun2");
+							if(Debugging.DEBUG)
+								System.out.println("An AI fleet revolt against his ruler");
+							
 							break;
 						}
 					}
