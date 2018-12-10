@@ -153,6 +153,11 @@ public class Galaxy implements Serializable{
 	 */
 	public void updateGarrison() {
 		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups && planets.get(0).getRuler().equals(Players.sun_user)) {
+
+	    	AudioClip sun_explosion_sound = new AudioClip(this.getClass().getResource(Resources.path_sound_sun_explosion).toExternalForm());
+	    	sun_explosion_sound.setVolume(Resources.sun_explosion_volume);
+
+	    	sun_explosion_sound.play(); 
 			Sun.sun_destroyed(planets, squads, gc);
 			planets.remove(0);
 		}

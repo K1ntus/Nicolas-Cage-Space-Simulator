@@ -28,8 +28,9 @@ public final class Resources {
 	public static final String path_img_background = "/resources/images/background.jpg";
 	
 	public static final String path_sound_explosion = "/resources/sounds/explosion.mp3";
-	public static final String path_sound_aa = "/resources/sounds/aa.mp4";
+	public static final String path_sound_sun_explosion = "/resources/sounds/sun_explosion.mp3";
 	public static final String path_sound_main_theme = "/resources/sounds/main_theme.mp3";
+	public static final String path_sound_aa = "/resources/sounds/aa.mp4";
 	
 	public static final String path_img_gui_percent_background = "/resources/images/gui/background_progressbar.png";
 	public static final String path_img_gui_percent = "/resources/images/gui/progress_bar.png";
@@ -37,10 +38,6 @@ public final class Resources {
 
 	public static final double main_theme_volume = 0.05; //Between 0 (cut the music) and 1
 	public static final double ship_explosion_volume = 0.5;
-
-
-
-
-
+	public static final double sun_explosion_volume = 0.5;
 
 }

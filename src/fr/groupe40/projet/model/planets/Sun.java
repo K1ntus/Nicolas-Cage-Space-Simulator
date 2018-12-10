@@ -13,6 +13,7 @@ import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 public class Sun extends Planet implements Serializable{
 
@@ -72,6 +73,8 @@ public class Sun extends Planet implements Serializable{
 
 	public static void sun_destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads, GraphicsContext gc) {
 		Image explosion = new Image(Resources.path_gfx_ship_explosion, Generation.size_sun, Generation.size_sun, false, false, true);
+		
+
 
 		renderExplosion(gc, planets.get(0).getX(), planets.get(0).getY() , explosion);
 		
