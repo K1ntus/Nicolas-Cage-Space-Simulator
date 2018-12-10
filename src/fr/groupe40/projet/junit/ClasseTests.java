@@ -7,6 +7,7 @@ import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.util.constants.Generation;
 
+@SuppressWarnings("deprecation")
 public class ClasseTests {
 
 	@Test
