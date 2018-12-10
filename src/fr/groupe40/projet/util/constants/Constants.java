@@ -1,6 +1,5 @@
 package fr.groupe40.projet.util.constants;
 
-import fr.groupe40.projet.client.User;
 import javafx.scene.paint.Color;
 
 /**
@@ -44,12 +43,15 @@ public final class Constants {
 	//public static final String path_save = "/saves/";
 	public static final String path_save = "";
 	public static final String fileName_save = "01";
-
+	
+	/* Event */
 	public static final int planet_sickness_value = 2;
 	public static final int pirate_assault_max_nb_ships = 10;
 
 	public static final boolean events_enabled = true;
-	public static final boolean ai_enabled = true;
 	public static final boolean sun_enabled = true;
+	
+	/* AI */
+	public static final boolean ai_enabled = true;
 	
 }

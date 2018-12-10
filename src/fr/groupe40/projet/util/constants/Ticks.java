@@ -2,7 +2,6 @@ package fr.groupe40.projet.util.constants;
 
 public final class Ticks {
 
-	/*	Defense & Production */
 	//~40 ticks = 1 second
 	public static final long tick_per_produce = 40;
 	public static final long tick_per_lift_off = 50;

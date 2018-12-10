@@ -4,8 +4,6 @@ import fr.groupe40.projet.client.User;
 
 public final class Players {
 
-	/*	PLAYERS	*/
-	//public static final int max_number_of_ai = 1;
 	public static final int neutral = 0, player = 1, ai = -1;
 	
 	public static final User neutral_user = new User(neutral, 0);

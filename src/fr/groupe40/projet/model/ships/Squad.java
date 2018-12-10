@@ -1,18 +1,25 @@
 package fr.groupe40.projet.model.ships;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
 
 
 /**
@@ -53,6 +60,7 @@ public class Squad implements Serializable {
 	
 	private String img_path;
 
+	private MediaPlayer mediaPlayer_boom;
 	/**
 	 * \brief constructor of this squad
 	 * @param percent the percent of troups from a planet to send
@@ -73,6 +81,7 @@ public class Squad implements Serializable {
 		} else {
 			img_path = Resources.path_img_human_ships;
 		}
+
 	}
 	
 
@@ -109,9 +118,14 @@ public class Squad implements Serializable {
 				nb_ship = 0;
 				return;
 			}
-			
-			double x = this.decollageX(source);
-			double y = this.decollageY(source);			
+			double x,y;
+			if(source instanceof SquarePlanet) {	//Planet is a square
+				x = this.decollageX(source);
+				y = this.decollageY(source);						
+			} else {	//Planet is a circle
+				x = this.decollageX(source);
+				y = this.decollageY(source);							
+			}
 			
 			ships.add(
 			new Ship(
@@ -174,13 +188,15 @@ public class Squad implements Serializable {
 	/**
 	 * \brief Update the position of every ships of this squad
 	 */
-	public void update_all_positions(List<Planet> planets) {
+	public void update_all_positions(List<Planet> planets, AudioClip mediaPlayer_boom2) {
 		Iterator<Ship> it = ships.iterator();
 		
 		while (it.hasNext()) {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
+					System.out.println("is inside");
+					renderCollision(mediaPlayer_boom2, ship.getX(),ship.getY());
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -195,6 +211,13 @@ public class Squad implements Serializable {
 				it = ships.iterator();
 			}
 		}
+	}
+	public void renderCollision(AudioClip mediaPlayer_boom2, double x, double y) {
+		if(mediaPlayer_boom2 == null) {
+			System.out.println("is null");
+			return;
+		}
+			mediaPlayer_boom2.play();
 	}
 
 	/**

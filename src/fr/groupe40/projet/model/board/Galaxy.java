@@ -18,6 +18,8 @@ import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -62,7 +64,7 @@ public class Galaxy implements Serializable{
 		this.generator = null;
 		this.gc = gc;
 		
-		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
+		this.background = new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true);
 		
 	}
 
@@ -75,8 +77,8 @@ public class Galaxy implements Serializable{
 		this.squads = g.squads;
 		this.generator = null;
 		this.gc = gc;
-		
-		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
+
+		this.background = new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true);
 	}
 
 	/**
@@ -111,10 +113,10 @@ public class Galaxy implements Serializable{
 	/**
 	 * \brief Main update function, manage AI, squads and hasLost
 	 */
-	public void updateSquadPosition() {
+	public void updateSquadPosition(AudioClip mediaPlayer_boom) {
 		for(Squad s : squads) {
 			if(s==null) {	squads.remove(s);	continue;}
-			s.update_all_positions(planets);			
+			s.update_all_positions(planets, mediaPlayer_boom);			
 		}
 
 		userHasLost(Players.ai_user);
@@ -176,30 +178,30 @@ public class Galaxy implements Serializable{
 	 * @param u the user to check
 	 * @return true if he has last, else false
 	 */
-	public boolean userHasLost(User u) {	//S il existe au moins une planete lui appartenant -> pas perdu
+	public boolean userHasLost(User u) {	
 		if(u.isLost()) {	//if user already registered has loser
+			System.out.println("ai: "+u.toString()+" has lost");
 			return true;
 		}
 		
 		int id = u.getId();
 		
-		for(Planet p : planets) {
+		for(Planet p : planets) { //if this user still have at least ONE planet, then doesnt has lost
 			int ruler_id = p.getRuler().getId();
 			if(ruler_id == id) {
 				return false;
 			}
 		}
 		
-		for(Squad s : squads) {
-			User ruler = s.getRuler();
-			int ruler_id = 0;
-			if(ruler != null)
-				ruler_id = ruler.getId();
-			else
+		for(Squad s : squads) {		//if this user still have at least ONE squad, then doesnt has lost	
+			try {
+				User ruler = s.getRuler();
+				int ruler_id = ruler.getId();
+				if(ruler_id == id) 
+					return false;
 				continue;
-			
-			if(ruler_id == id) {
-				return false;
+			}catch(NullPointerException e) {
+				continue;
 			}
 		}
 		
@@ -216,6 +218,7 @@ public class Galaxy implements Serializable{
 	public void clientScrollHandler(Direction direction) {
 		User u = Players.human_user;
 		int percent = u.getPercent_of_troups_to_send();
+		
 		switch(direction) {
 			case DOWN://lower
 				u.setPercent_of_troups_to_send(percent - 5); break;
@@ -269,8 +272,9 @@ public class Galaxy implements Serializable{
 			}
 		}
 		
-		if(p.isInside(x+deltaX,y+deltaY,width,height))
+		if(p.isInside(x+deltaX,y+deltaY,width,height)) {
 			return;
+		}
 		s.setPosition(x+deltaX, y+deltaY);
 			
 	}

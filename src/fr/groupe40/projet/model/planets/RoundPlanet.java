@@ -22,7 +22,7 @@ public class RoundPlanet extends Planet implements Serializable{
 
 	@Override
 	public boolean isInside(double x, double y) {
-		if(isInside(x, y, 0, 0)) {
+		if(this.isInside(x, y, 0, 0)) {
 			if(Debugging.DEBUG) {
 				System.out.println("Vous avez clique sur une planete avec "+this.getTroups());
 				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
@@ -123,7 +123,7 @@ public class RoundPlanet extends Planet implements Serializable{
 	*/
 	
 	public String toString() {
-		return "RoundPlanet <" + getX() + ", " + getY() + ">";
+		return "RoundPlanet <" + this.getX() + ", " + this.getY() + "> - Ruled by id: " +this.getRuler().getId();
 	}
 
 

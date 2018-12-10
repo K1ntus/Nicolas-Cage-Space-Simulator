@@ -3,7 +3,6 @@ package fr.groupe40.projet.model.planets;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.ShipType;
-import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
@@ -102,29 +101,29 @@ public abstract class Planet extends Sprite {
 	private void generate() {
 		selected = false;
 		
-		setWidth(Math.random() * Generation.size_minimal_planets + Generation.size_minimal_planets);
-		setHeight(width());
+		this.setWidth(Math.random() * Generation.size_minimal_planets + Generation.size_minimal_planets);
+		this.setHeight(this.width());
 		double x = (Math.random() * (Generation.width - width()));
 		double y = (Math.random() * (Generation.height - height()));
 
 		if (x <= Generation.left_margin_size + Generation.size_squads)
 			x = Generation.left_margin_size + Generation.size_squads;
-		else if( x >= getMaxX())
-			x = getMaxX();
+		else if( x >= this.getMaxX())
+			x = this.getMaxX();
 		
-		if (getY() <= Generation.top_margin_size)
+		if (this.getY() <= Generation.top_margin_size)
 			y = Generation.top_margin_size;
-		else if( getY()+height() >= getMaxY())
-			y = getMaxY();
+		else if( this.getY()+this.height() >= this.getMaxY())
+			y = this.getMaxY();
 		
-		setX(x);
-		setY(y);
+		this.setX(x);
+		this.setY(y);
 		troups = (int) (Math.random() * (PlanetsGarrison.max_initDefense - PlanetsGarrison.min_troups) +1);
 		produce_rate =  (int) (Math.random() * (ShipsParameters.max_ship_produce - ShipsParameters.min_ship_produce) +1);
 		
 		ships_type = new ShipType();
 		
-		updateImage();
+		this.updateImage();
 	}
 	
 	/**
@@ -153,20 +152,20 @@ public abstract class Planet extends Sprite {
 	 * @return 0 if ok. -1 if unable to generate
 	 */
 	public int updatePlanetePosition() {
-		setX(this.getX() + this.width()/5);
-		switch(calculateNextPosition()) {
+		this.setX(this.getX() + this.width()/5);
+		switch(this.calculateNextPosition()) {
 			case Debugging.error_greater_x:
-				setY(getY() + Generation.height / 10);
-				setX(Generation.left_margin_size  + Generation.size_squads);
+				this.setY(this.getY() + Generation.height / 10);
+				this.setX(Generation.left_margin_size  + Generation.size_squads);
 				break;
 			case Debugging.error_lower_x:
-				setX(Generation.left_margin_size  + Generation.size_squads);
+				this.setX(Generation.left_margin_size  + Generation.size_squads);
 				break;
 			case Debugging.error_greater_y:
 				return -1;
 			case Debugging.error_lower_y:
-				setX(Generation.top_margin_size  + Generation.size_squads);
-				setY(Generation.top_margin_size  + Generation.size_squads + 1);
+				this.setX(Generation.top_margin_size  + Generation.size_squads);
+				this.setY(Generation.top_margin_size  + Generation.size_squads + 1);
 				break;
 			default:
 				return 0;
@@ -186,7 +185,7 @@ public abstract class Planet extends Sprite {
 		User user1 = this.getRuler();
 		User user2 = p.getRuler();
 		
-		if (user1.equals(user2) && this.getX() == p.getX()) {
+		if (user1.equals(user2) && this.getX() == p.getX() && p.getY() == this.getY()) {
 			return true;
 		}
 		return false;

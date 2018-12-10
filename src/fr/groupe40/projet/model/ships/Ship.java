@@ -8,7 +8,6 @@ import java.util.List;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
@@ -122,7 +121,7 @@ public class Ship extends Sprite implements Serializable {
 						difference = Math.abs(difference);
 						if(difference >= PlanetsGarrison.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
 							destination.setTroups(PlanetsGarrison.max_troups);					
-						} else {	//Else, renforcement
+						} else {	//Else, reinforcement
 							destination.setTroups(difference + 1);
 						}
 					}
@@ -131,7 +130,7 @@ public class Ship extends Sprite implements Serializable {
 				int sum = 1 + destination.getTroups();	//Sum of defense + squad
 				if(sum >= PlanetsGarrison.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
 					destination.setTroups(PlanetsGarrison.max_troups);					
-				} else {	//Else, renforcement
+				} else {	//Else, reinforcement
 					destination.setTroups(sum);
 				}
 			}
@@ -449,6 +448,13 @@ public class Ship extends Sprite implements Serializable {
 	public double getSpeed() {
 		return ship_type.speed;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Ships <" + this.getX() + ", " + this.getY() + "> - Ruled by id: " +this.getRuler().getId()+ "\nCaracteristics: "+this.getShip_type();
+	}
+
 
 	
 	

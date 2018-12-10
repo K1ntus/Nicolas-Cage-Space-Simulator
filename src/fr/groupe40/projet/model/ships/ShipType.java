@@ -44,4 +44,11 @@ public class ShipType implements Serializable {
 		this.speed =  (int) (Math.random() * (ShipsParameters.max_ship_speed - ShipsParameters.min_ship_speed)+1);
 		this.production_time =  (int) (Math.random() * (ShipsParameters.max_ship_produce - ShipsParameters.min_ship_produce)+1);
 	}
+	
+
+
+	@Override
+	public String toString() {
+		return "[Ships Parameters] - Speed="+this.speed+", power="+this.power+", production speed="+this.production_time;
+	}
 }

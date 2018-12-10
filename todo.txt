@@ -56,7 +56,7 @@ Minimal Version:
 
 
 To go further:
-		* Ev�nements:
+		* Evenements:
 07/12|		** Generation aleatoire de pirates (Trou de ver)
 06/12|		** Rebellion ? A creuser
 			** Trop forte attaque -> destruction de la planete
@@ -72,8 +72,8 @@ To go further:
 		* Optimisation:
 			** Squads avec un "nuage de points" au lieu d'un objet par vaisseau
 		* Config
-			** Configuration des paramètres via un fichier xml
-		* Menu du jeu (paramètres
+			** Configuration des paramètres via un fichier xml ou CSV (plus facile)
+		* Menu du jeu (paramètres)
 		
 		
 		

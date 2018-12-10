@@ -1,6 +1,8 @@
 package fr.groupe40.projet;
 
 
+import java.io.File;
+
 import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
@@ -8,6 +10,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Ticks;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -18,6 +21,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -46,11 +51,20 @@ public class Game extends Application {
 	private long game_tick = 0;	//long because counter, had to prevent the overflow case
 	
 	private Events eventManager;
+	//private MediaPlayer mediaPlayer_boom;
+	private AudioClip mediaPlayer_boom = new AudioClip(this.getClass().getResource(Resources.path_sound_explosion).toExternalForm());
+	/*
+	Media explosion_sound = new Media(
+			new File(Resources.path_sound_explosion).toURI().toString()
+			);
+	this.mediaPlayer_boom = new MediaPlayer(explosion_sound);// Only format allowed
+	*/
 	
 	public void start(Stage stage) {
+		System.out.println("path: "+new File(Resources.path_sound_explosion).toURI().toString());
 		
 		/** Window and game kernel creation **/
-		stage.setTitle("Surgeon Simulator 2");
+		stage.setTitle("Nicolas Cage Space Simulator");
 		stage.setResizable(false);
 		stage.initStyle(StageStyle.UTILITY);
 
@@ -105,13 +119,12 @@ public class Game extends Application {
         
 		/*	Rendering */
 		new AnimationTimer() {
-			public void handle(long arg0) {
+			public void handle(long arg0) {	
 				galaxy.render(gc);
-				
 				game_tick += 1;
-				
+
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
-					galaxy.updateSquadPosition();
+					galaxy.updateSquadPosition(mediaPlayer_boom);
 				
 				if(game_tick % Ticks.tick_per_produce == 0)
 					galaxy.updateGarrison();

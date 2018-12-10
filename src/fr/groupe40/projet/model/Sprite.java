@@ -3,7 +3,7 @@ package fr.groupe40.projet.model;
 import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Generation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -241,6 +241,18 @@ public abstract class Sprite implements Serializable {
 	 * @return true if the sprite is inside, else false
 	 */
 	public abstract boolean isInside(Sprite s);
+	
+
+	public boolean equals(Sprite s) {
+		User user1 = this.getRuler();
+		User user2 = s.getRuler();
+		
+		if (!user1.equals(user2) || this.x != s.x || this.y != s.y) {
+			return false;
+		}
+		return false;
+	}
+	
 	/**
 	 * \brief Set the position of a sprite then validate his position
 	 * @param x
