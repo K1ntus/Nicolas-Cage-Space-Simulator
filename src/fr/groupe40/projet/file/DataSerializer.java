@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import fr.groupe40.projet.client.User;
+import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
@@ -153,8 +154,21 @@ public class DataSerializer {
 			ArrayList<Ship> ships = s.getShips();
 			try {
 				User u = ships.get(0).getRuler();
-				if (u.getFaction() == Players.ai) {
-					s.update_ruler(Players.ai_user);
+				if (u.getId() < 0) {
+					switch(u.getId()) {
+					case Players.event_id:
+						s.update_ruler(Players.event_user);
+						break;
+					case Players.sun_id:
+						s.update_ruler(Players.sun_user);
+						break;
+					case Players.pirate_id:
+						s.update_ruler(Players.pirate_user);
+						break;
+					default:
+						s.update_ruler(Players.ai_user);
+						break;
+					}
 				}else if (u.getFaction() == Players.player) {
 					s.update_ruler(Players.human_user);
 				}else {
@@ -167,6 +181,8 @@ public class DataSerializer {
 			
 			s.updateImage();
 		}
+		
+
 	}
 
 	public boolean isNew_game_loaded() {

@@ -55,6 +55,7 @@ public class Game extends Application {
 	private AudioClip mediaPlayer_ship_explosion;
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	
+	private InteractionHandler interactionHandler;
 	public void start(Stage stage) {
 		/* 	---| OS check |---	
 		 * Doing that because there s a little white
@@ -93,7 +94,7 @@ public class Game extends Application {
 		if(Constants.events_enabled) 
 			eventManager = new Events(galaxy, gc, true, true);		
 
-		InteractionHandler interactionHandler = new InteractionHandler(galaxy, scene, saver);
+		interactionHandler = new InteractionHandler(galaxy, scene, saver);
 		interactionHandler.exec();
 		
 		
@@ -116,6 +117,9 @@ public class Game extends Application {
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
 					saver.reload_image_and_data(galaxy);
+
+					interactionHandler = new InteractionHandler(galaxy, scene, saver);
+					interactionHandler.exec();
 				}
 				
 			}
@@ -156,6 +160,7 @@ public class Game extends Application {
 					galaxy.renderDefeat(gc);
 					try {
 						Thread.sleep(1000);
+						//galaxy = new Galaxy(gc);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

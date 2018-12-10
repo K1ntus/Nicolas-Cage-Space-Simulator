@@ -72,7 +72,7 @@ public class MouseListener {
 		            	System.out.println(p.toString());
 		            	selected_planets[0] = p;
 						if(selected_planets[0] == null) {	break;	}
-						if(p.getRuler().equals(Players.human_user)){
+						if(p.getRuler().getFaction() == Players.player){
 							selected_planets[0].getRuler().setSource(p);
 							break;
 						}else {
