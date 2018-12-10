@@ -188,7 +188,7 @@ public class Squad implements Serializable {
 	/**
 	 * \brief Update the position of every ships of this squad
 	 */
-	public void update_all_positions(List<Planet> planets, AudioClip mediaPlayer_boom2) {
+	public void update_all_positions(List<Planet> planets, AudioClip mediaPlayer_boom) {
 		Iterator<Ship> it = ships.iterator();
 		
 		while (it.hasNext()) {
@@ -196,7 +196,7 @@ public class Squad implements Serializable {
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
 					System.out.println("is inside");
-					renderCollision(mediaPlayer_boom2, ship.getX(),ship.getY());
+					renderCollision(mediaPlayer_boom, ship.getX(),ship.getY());
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -212,12 +212,12 @@ public class Squad implements Serializable {
 			}
 		}
 	}
-	public void renderCollision(AudioClip mediaPlayer_boom2, double x, double y) {
-		if(mediaPlayer_boom2 == null) {
+	public void renderCollision(AudioClip mediaPlayer_boom, double x, double y) {
+		if(mediaPlayer_boom == null) {
 			System.out.println("is null");
 			return;
 		}
-			mediaPlayer_boom2.play();
+		mediaPlayer_boom.play();
 	}
 
 	/**

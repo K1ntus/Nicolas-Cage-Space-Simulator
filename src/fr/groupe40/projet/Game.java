@@ -1,8 +1,7 @@
 package fr.groupe40.projet;
 
 
-import java.io.File;
-
+import fr.groupe40.projet.client.Music;
 import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
@@ -22,7 +21,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -52,7 +50,8 @@ public class Game extends Application {
 	
 	private Events eventManager;
 	//private MediaPlayer mediaPlayer_boom;
-	private AudioClip mediaPlayer_boom = new AudioClip(this.getClass().getResource(Resources.path_sound_explosion).toExternalForm());
+	private AudioClip mediaPlayer_boom;
+	private AudioClip music_mainTheme;
 	/*
 	Media explosion_sound = new Media(
 			new File(Resources.path_sound_explosion).toURI().toString()
@@ -61,8 +60,18 @@ public class Game extends Application {
 	*/
 	
 	public void start(Stage stage) {
-		System.out.println("path: "+new File(Resources.path_sound_explosion).toURI().toString());
-		
+		try {
+			mediaPlayer_boom = new AudioClip(this.getClass().getResource(Resources.path_sound_explosion).toExternalForm());
+		} catch (NullPointerException e) {
+			System.out.println("Unable to load explosion sounds of ships");
+			mediaPlayer_boom = null;
+		}
+		try {
+			music_mainTheme = new AudioClip(this.getClass().getResource(Resources.path_sound_main_theme).toExternalForm());
+		} catch (NullPointerException e) {
+			System.out.println("Unable to load explosion sounds of ships");
+			music_mainTheme = null;
+		}
 		/** Window and game kernel creation **/
 		stage.setTitle("Nicolas Cage Space Simulator");
 		stage.setResizable(false);
@@ -74,6 +83,7 @@ public class Game extends Application {
 		root.getChildren().add(canvas);
 		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
+		Music main_theme_music = new Music(music_mainTheme);
 		
 		galaxy = new Galaxy(gc);
 		galaxy.initFont(gc);
@@ -140,7 +150,8 @@ public class Game extends Application {
 					if(Constants.events_enabled)
 						eventManager.event_randomizer();
 				
-				
+				if(game_tick % Ticks.tick_per_main_theme_check == 0)
+					main_theme_music.run();
 								
 				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
 					System.out.println("Vous avez perdu");
