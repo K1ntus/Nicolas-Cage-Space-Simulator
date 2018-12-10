@@ -158,16 +158,20 @@ public class Game extends Application {
 					System.out.println("Vous avez perdu");
 					galaxy.render(gc);
 					galaxy.renderDefeat(gc);
+					System.out.println("Generating new board");
+					galaxy.setGame_is_over(true);
+					//System.exit(0);
+				}
+				
+				if(galaxy.isGame_is_over()) {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					System.out.println("Generating new board");
 					galaxy = new Galaxy(gc);
 					interactionHandler = new InteractionHandler(galaxy, scene, saver);
-					interactionHandler.exec();
-					//System.exit(0);
+					interactionHandler.exec();					
 				}
 				
 			}

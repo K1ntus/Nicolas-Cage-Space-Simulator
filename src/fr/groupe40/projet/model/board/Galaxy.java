@@ -54,6 +54,8 @@ public class Galaxy implements Serializable{
 	private transient Image background;
 	
 	private transient GraphicsContext gc;
+	
+	private boolean game_is_over = false;
 	/**
 	 * \brief Generate a game board with every parameters randomized
 	 */
@@ -91,7 +93,7 @@ public class Galaxy implements Serializable{
 		this.generator = null;
 		this.gc = gc;
 		
-		setBackground(new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true));
+		this.background = new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true);
 		
 	}
 	
@@ -118,7 +120,10 @@ public class Galaxy implements Serializable{
 			s.update_all_positions(planets, mediaPlayer_boom);			
 		}
 
-		userHasLost(Players.ai_user);
+		if(userHasLost(Players.ai_user)) {
+			renderWinner(gc);		
+			game_is_over = true;
+		}
 	}
 	
 	/*	AI	*/
@@ -291,7 +296,7 @@ public class Galaxy implements Serializable{
 	public boolean isCollision(Ship s) {
 		for(Planet p : planets) {
 			if(p != s.getDestination() && p != s.getSource()) {
-				collisionHandler(s, p);
+				this.collisionHandler(s, p);
 				return true;
 			}
 		}
@@ -396,7 +401,6 @@ public class Galaxy implements Serializable{
 	
 	/**
 	 * \brief render in case of defeat 
-	 *	//TODO defeat rendering
 	 * @param gc the Graphics Context
 	 */
 	public void renderDefeat(GraphicsContext gc) {
@@ -405,6 +409,22 @@ public class Galaxy implements Serializable{
 		gc.setTextAlign(TextAlignment.CENTER);	
 
 		String txt = Constants.message_game_over;
+		gc.fillText(txt, Generation.width/2, 25);
+		gc.strokeText(txt, Generation.width/2, 25);
+		
+	}
+
+	
+	/**
+	 * \brief render in case of victory 
+	 * @param gc the Graphics Context
+	 */
+	public void renderWinner(GraphicsContext gc) {
+		gc.setFill(Constants.color_default);
+		gc.setStroke(Color.RED);
+		gc.setTextAlign(TextAlignment.CENTER);	
+
+		String txt = Constants.message_winner;
 		gc.fillText(txt, Generation.width/2, 25);
 		gc.strokeText(txt, Generation.width/2, 25);
 		
@@ -471,6 +491,20 @@ public class Galaxy implements Serializable{
 	 */
 	public void setBackground(Image background) {
 		this.background = background;
+	}
+
+	/**
+	 * @return the game_is_over
+	 */
+	public boolean isGame_is_over() {
+		return game_is_over;
+	}
+
+	/**
+	 * @param game_is_over the game_is_over to set
+	 */
+	public void setGame_is_over(boolean game_is_over) {
+		this.game_is_over = game_is_over;
 	}
 
 	
