@@ -160,11 +160,14 @@ public class Game extends Application {
 					galaxy.renderDefeat(gc);
 					try {
 						Thread.sleep(1000);
-						//galaxy = new Galaxy(gc);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					System.exit(0);
+					System.out.println("Generating new board");
+					galaxy = new Galaxy(gc);
+					interactionHandler = new InteractionHandler(galaxy, scene, saver);
+					interactionHandler.exec();
+					//System.exit(0);
 				}
 				
 			}
