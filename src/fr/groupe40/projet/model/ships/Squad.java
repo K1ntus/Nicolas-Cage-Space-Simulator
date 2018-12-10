@@ -195,8 +195,7 @@ public class Squad implements Serializable {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
-					System.out.println("is inside");
-					renderCollision(mediaPlayer_boom, ship.getX(),ship.getY());
+					renderCollisionSound(mediaPlayer_boom, ship.getX(),ship.getY());
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -212,9 +211,8 @@ public class Squad implements Serializable {
 			}
 		}
 	}
-	public void renderCollision(AudioClip mediaPlayer_boom, double x, double y) {
+	public void renderCollisionSound(AudioClip mediaPlayer_boom, double x, double y) {
 		if(mediaPlayer_boom == null) {
-			System.out.println("is null");
 			return;
 		}
 		mediaPlayer_boom.play();

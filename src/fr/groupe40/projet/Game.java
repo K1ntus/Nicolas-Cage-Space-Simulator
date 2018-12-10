@@ -49,29 +49,11 @@ public class Game extends Application {
 	private long game_tick = 0;	//long because counter, had to prevent the overflow case
 	
 	private Events eventManager;
-	//private MediaPlayer mediaPlayer_boom;
+	
 	private AudioClip mediaPlayer_boom;
-	private AudioClip music_mainTheme;
-	/*
-	Media explosion_sound = new Media(
-			new File(Resources.path_sound_explosion).toURI().toString()
-			);
-	this.mediaPlayer_boom = new MediaPlayer(explosion_sound);// Only format allowed
-	*/
+	
 	
 	public void start(Stage stage) {
-		try {
-			mediaPlayer_boom = new AudioClip(this.getClass().getResource(Resources.path_sound_explosion).toExternalForm());
-		} catch (NullPointerException e) {
-			System.out.println("Unable to load explosion sounds of ships");
-			mediaPlayer_boom = null;
-		}
-		try {
-			music_mainTheme = new AudioClip(this.getClass().getResource(Resources.path_sound_main_theme).toExternalForm());
-		} catch (NullPointerException e) {
-			System.out.println("Unable to load explosion sounds of ships");
-			music_mainTheme = null;
-		}
 		/** Window and game kernel creation **/
 		stage.setTitle("Nicolas Cage Space Simulator");
 		stage.setResizable(false);
@@ -83,7 +65,10 @@ public class Game extends Application {
 		root.getChildren().add(canvas);
 		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-		Music main_theme_music = new Music(music_mainTheme);
+		
+		Music soundHandler = new Music();
+		mediaPlayer_boom = soundHandler.generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
+
 		
 		galaxy = new Galaxy(gc);
 		galaxy.initFont(gc);
@@ -151,7 +136,7 @@ public class Game extends Application {
 						eventManager.event_randomizer();
 				
 				if(game_tick % Ticks.tick_per_main_theme_check == 0)
-					main_theme_music.run();
+					soundHandler.run();
 								
 				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
 					System.out.println("Vous avez perdu");

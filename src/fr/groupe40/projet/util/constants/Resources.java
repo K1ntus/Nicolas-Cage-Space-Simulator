@@ -35,6 +35,9 @@ public final class Resources {
 	public static final String path_img_gui_percent = "/resources/images/gui/progress_bar.png";
 	public static final String path_img_gui_logo = "/resources/images/gui/logo.png";
 
+	public static final double main_theme_volume = 0.05; //Between 0 (cut the music) and 1
+	public static final double ship_explosion_volume = 0.5;
+
 
 
 
