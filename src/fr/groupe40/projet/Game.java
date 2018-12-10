@@ -7,6 +7,7 @@ import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
@@ -48,28 +49,42 @@ public class Game extends Application {
 	 */
 	private long game_tick = 0;	//long because counter, had to prevent the overflow case
 	
-	private Events eventManager;
+	private Events eventManager;	
+	private Music soundHandler = new Music();
 	
-	private AudioClip mediaPlayer_boom;
-	
+	private AudioClip mediaPlayer_ship_explosion;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	public void start(Stage stage) {
-		/** Window and game kernel creation **/
+		/* 	---| OS check |---	
+		 * Doing that because there s a little white
+		 * margin under Windows (only tested under win 7 btw)
+		 * So, if that's a windows OS, we re editing
+		 * the window style to remove it
+		 */
+		if((OS.indexOf("win") >= 0)) {
+			if(Debugging.DEBUG)
+				System.out.println("OS type is windows");
+			stage.initStyle(StageStyle.UTILITY);
+		}else {
+			if(Debugging.DEBUG)
+				System.out.println("Non windows OS");
+		}
+		
+		/* Initialize ships explosion sound */
+		mediaPlayer_ship_explosion = soundHandler.generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
+
+		/* Window and game kernel creation */
 		stage.setTitle("Nicolas Cage Space Simulator");
 		stage.setResizable(false);
-		stage.initStyle(StageStyle.UTILITY);
 
 		Group root = new Group();
 		Scene scene = new Scene(root);
 		Canvas canvas = new Canvas(Generation.width, Generation.height);
 		root.getChildren().add(canvas);
-		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
-		Music soundHandler = new Music();
-		mediaPlayer_boom = soundHandler.generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 
-		
 		galaxy = new Galaxy(gc);
 		galaxy.initFont(gc);
 
@@ -81,11 +96,11 @@ public class Game extends Application {
 		InteractionHandler interactionHandler = new InteractionHandler(galaxy, scene, saver);
 		interactionHandler.exec();
 		
+		
 		stage.setScene(scene);
 		stage.show();
 
-		
-
+		/**	KEYBOARD HANDLER	**/
 		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
 	
 			@Override
@@ -95,16 +110,12 @@ public class Game extends Application {
 					System.out.println("Saving game ...");
 					//OPEN POPUP ?
 					saver.save_game();
-					
-								
 				}
 					
 				if (e.getCode() == KeyCode.F6) {
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
 					saver.reload_image_and_data(galaxy);
-					
-					//interactionHandler = new InteractionHandler(galaxy);
 				}
 				
 			}
@@ -115,11 +126,12 @@ public class Game extends Application {
 		/*	Rendering */
 		new AnimationTimer() {
 			public void handle(long arg0) {	
-				galaxy.render(gc);
 				game_tick += 1;
 
+				galaxy.render(gc);
+				
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
-					galaxy.updateSquadPosition(mediaPlayer_boom);
+					galaxy.updateSquadPosition(mediaPlayer_ship_explosion);
 				
 				if(game_tick % Ticks.tick_per_produce == 0)
 					galaxy.updateGarrison();

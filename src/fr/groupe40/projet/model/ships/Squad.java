@@ -1,13 +1,11 @@
 package fr.groupe40.projet.model.ships;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
@@ -17,9 +15,6 @@ import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaException;
-import javafx.scene.media.MediaPlayer;
 
 
 /**
@@ -59,8 +54,7 @@ public class Squad implements Serializable {
 	private User ruler;
 	
 	private String img_path;
-
-	private MediaPlayer mediaPlayer_boom;
+	
 	/**
 	 * \brief constructor of this squad
 	 * @param percent the percent of troups from a planet to send

@@ -20,7 +20,11 @@ public class Music {
     		return; 
     	}
     	main_theme.setVolume(Resources.main_theme_volume);
-    	if(main_theme.isPlaying()){  } else{ main_theme.play(); }
+    	if(main_theme.isPlaying()){
+    		//DO nothing, music is already playing
+    	} else{ //Replay the music
+    		main_theme.play(); 
+    	}
     }
     
     public AudioClip generateAudioClip(String path, double volume) {

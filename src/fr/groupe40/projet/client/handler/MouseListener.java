@@ -69,6 +69,7 @@ public class MouseListener {
 				
 	            for(Planet p : galaxy.getPlanets()) {
 		            if(p.isInside(orgSceneX, orgSceneY)) {
+		            	System.out.println(p.toString());
 		            	selected_planets[0] = p;
 						if(selected_planets[0] == null) {	break;	}
 						if(p.getRuler().equals(Players.human_user)){

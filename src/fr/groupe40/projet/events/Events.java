@@ -41,14 +41,20 @@ public class Events {
 			event_available.add(events.REVOLT);
 	}
 
-
+	/**
+	 * \brief Pick a random event in the event list and return it
+	 * @param event array containing the events
+	 * @return	an event
+	 */
 	private static events getRandomEvent(ArrayList<events> event) {
 	    int rnd = new Random().nextInt(event.size());
 	    return event.get(rnd);
 	}
 
 
-
+	/**
+	 * \brief Randomly pick an event and handle it
+	 */
 	public void event_randomizer() {
 		if(event_available.size() == 1)
 			return;
@@ -59,18 +65,18 @@ public class Events {
 
 		switch(getRandomEvent(event_available)) {
 			case PIRATE:
-				System.out.println("** pirate assault");
+				//System.out.println("** pirate assault");
 				PirateAssault.start(galaxy, gc);
 				break;
 			case REVOLT:
-				System.out.println("** planet revolt");
+				//System.out.println("** planet revolt");
 				Revolt.start(galaxy);
 				break;
 			case SICKNESS:
-				System.out.println("** sickness start **");
+				//System.out.println("** sickness start **");
 				planet_sickness.start(galaxy);
 			case NOTHING:
-				System.out.println("*** no event");
+				//System.out.println("*** no event");
 				break;
 		}
 
