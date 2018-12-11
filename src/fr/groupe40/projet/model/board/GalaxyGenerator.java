@@ -53,8 +53,8 @@ public class GalaxyGenerator {
 		double rand= Math.random();
 		
 		if(rand < 0.5)
-			return Resources.path_img_square_basic;
-		return Resources.path_img_square_nicolas_cage;
+			return Resources.path_img_square_time_night;
+		return Resources.path_img_square_basic;
 	}
 	
 	private String getRandomSquarePlanetImgPath() {
@@ -62,10 +62,12 @@ public class GalaxyGenerator {
 
 		/*if(rand < 0.25)
 			return Constants.path_img_round_planet1;
-		else */if(rand < 0.5)
+		else */ if(rand < 0.25)
 			return Resources.path_img_round_planet2;
-		else if(rand < 0.75)
+		else if(rand < 0.5)
 			return Resources.path_img_round_doge;
+		else if(rand < 0.75)
+			return Resources.path_img_round_smoke;
 		return Resources.path_img_round_kfc_planet;
 	}
 	
@@ -94,7 +96,7 @@ public class GalaxyGenerator {
 				p = new RoundPlanet(Constants.path_img_round_kfc_planet, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
 			else
 				p = new SquarePlanet(Constants.path_img_square_nicolas_cage, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
-*/
+			 */
 			p.setY(y);
 			p.validatePosition();
 			

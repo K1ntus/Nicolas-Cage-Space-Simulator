@@ -4,11 +4,12 @@ public final class Resources {
 	public static final String path_img_planet_human = "/resources/images/planets/special/earth.png";
 	
 	public static final String path_img_square_basic = "/resources/images/planets/square/default.png";
-	public static final String path_img_square_nicolas_cage = "/resources/images/planets/square/nicolas_cage.png";
+	public static final String path_img_square_time_night = "/resources/images/planets/square/time_square_night.png";
 
 	public static final String path_img_round_planet1 = "/resources/images/planets/rounds/1.png";
 	public static final String path_img_round_planet2 = "/resources/images/planets/rounds/2.png";
 	public static final String path_img_round_doge = "/resources/images/planets/rounds/doge.png";
+	public static final String path_img_round_smoke = "/resources/images/planets/rounds/smoke.png";
 	public static final String path_img_round_kfc_planet = "/resources/images/planets/rounds/kfc.png";
 
 	public static final String path_img_sun = "/resources/images/sun.png";

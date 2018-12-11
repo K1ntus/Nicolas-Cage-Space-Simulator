@@ -56,6 +56,7 @@ public class Galaxy implements Serializable{
 	private transient GraphicsContext gc;
 	
 	private boolean game_is_over = false;
+	
 	/**
 	 * \brief Generate a game board with every parameters randomized
 	 */

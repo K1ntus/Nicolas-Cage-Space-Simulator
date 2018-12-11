@@ -3,7 +3,6 @@ package fr.groupe40.projet.model;
 import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Generation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
