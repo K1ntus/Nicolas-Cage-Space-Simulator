@@ -44,15 +44,24 @@ public class MainMenu {
         //Pseudo player
         //grid.add(new Label(Windows.form_player_name), 0, 1);
         //grid.add(player_nickname_form, 1, 1);
-        
-        //Top title
 
+        //Top title
         Image title = new Image(Resources.path_img_menu_title);
         ImageView title_img = new ImageView();
         title_img.setImage(title);
-        title_img.setFitWidth(Generation.width/1.5);
+        title_img.setFitWidth(Generation.width/2);
         title_img.setPreserveRatio(true);
         grid.add((title_img),2,0);
+        title_img.setTranslateX(Generation.width/3);
+        
+        //Nicolas cage pict
+        Image nicolassse_cage = new Image(Resources.path_img_sun);
+        ImageView nicolas_cage_img = new ImageView();
+        nicolas_cage_img.setImage(nicolassse_cage);
+        nicolas_cage_img.setFitWidth(Generation.width/5);
+        nicolas_cage_img.setPreserveRatio(true);
+        grid.add((nicolas_cage_img),3,6);
+        nicolas_cage_img.setTranslateX(-Generation.width/2 + Generation.width/3);
         
         
         
