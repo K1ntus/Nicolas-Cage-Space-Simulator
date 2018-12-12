@@ -12,6 +12,8 @@ import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Ticks;
+import fr.groupe40.projet.util.constants.Windows;
+import fr.groupe40.projet.window.MainMenu;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -22,6 +24,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -74,6 +77,15 @@ public class Game extends Application {
 	 */
 	private InteractionHandler interactionHandler;
 	
+	private Windows.WindowType window_type = Windows.WindowType.MAIN_MENU;
+	private boolean game_pre_init_done = false;
+	private boolean game_init_done = false;
+	
+	private MainMenu main_menu = new MainMenu();
+	private GraphicsContext gc;
+	private Canvas canvas_game;
+	private Scene scene_game;
+	private DataSerializer saver;
 	/**
 	 * \brief 'main' method
 	 */
@@ -87,7 +99,7 @@ public class Game extends Application {
 		if((OS.indexOf("win") >= 0)) {
 			if(Debugging.DEBUG)
 				System.out.println("OS type is windows");
-			stage.initStyle(StageStyle.UTILITY);
+			stage.initStyle(StageStyle.UNDECORATED);
 		}else {
 			if(Debugging.DEBUG)
 				System.out.println("Non windows OS");
@@ -101,27 +113,18 @@ public class Game extends Application {
 		stage.setResizable(false);
 
 		Group root = new Group();
-		Scene scene = new Scene(root);
-		Canvas canvas = new Canvas(Generation.width, Generation.height);
-		root.getChildren().add(canvas);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
+
+		//Scene scene_mainMenu = new Scene(main_menu.getView(), Generation.width, Generation.height);
+		//Scene scene_mainMenu = new Scene(main_menu.getView(), Generation.width, Generation.height);
+		stage.setScene(main_menu.getScene());
+		stage.show();
 		
 
-		galaxy = new Galaxy(gc);
-		galaxy.initFont(gc);
-
-		DataSerializer saver = new DataSerializer(Constants.fileName_save, galaxy);
 		
-		if(Constants.events_enabled) 
-			eventManager = new Events(galaxy, gc, true, true);		
-
-		interactionHandler = new InteractionHandler(galaxy, scene, saver);
-		interactionHandler.exec();
-		
-		
+		/*
 		stage.setScene(scene);
 		stage.show();
-
+	*/
 		/**	KEYBOARD HANDLER	**/
 		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
 	
@@ -139,18 +142,50 @@ public class Game extends Application {
 					galaxy = saver.load_game(gc);
 					saver.reload_image_and_data(galaxy);
 
-					interactionHandler = new InteractionHandler(galaxy, scene, saver);
+					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 					interactionHandler.exec();
 				}
 				
 			}
 		};
-		
-		scene.setOnKeyPressed(keyboardHandler);
         
-		/*	Rendering */
+		/*	Rendering, game initialisation, etc */
 		new AnimationTimer() {
-			public void handle(long arg0) {	
+
+			private void pre_init() {
+				canvas_game = new Canvas(Generation.width, Generation.height);
+				root.getChildren().add(canvas_game);
+				gc = canvas_game.getGraphicsContext2D();
+				
+				
+				galaxy = new Galaxy(gc);
+				galaxy.initFont(gc);
+
+				saver = new DataSerializer(Constants.fileName_save, galaxy);
+				
+				if(Constants.events_enabled) 
+					eventManager = new Events(galaxy, gc, true, true);	
+				System.out.println("Pre_init done");	
+				game_pre_init_done = true;
+			}
+			
+			private void init() {
+				scene_game = new Scene(root);
+				interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
+				interactionHandler.exec();			
+
+				scene_game.setOnKeyPressed(keyboardHandler);
+
+				window_type = Windows.WindowType.GAME;
+				
+				stage.setScene(scene_game);
+				stage.show();	
+				
+				game_init_done = true;
+				System.out.println("init done");
+			}
+			
+			private void run() {
 				game_tick += 1;
 
 				galaxy.render(gc);
@@ -191,13 +226,44 @@ public class Game extends Application {
 						e.printStackTrace();
 					}
 					galaxy = new Galaxy(gc);
-					interactionHandler = new InteractionHandler(galaxy, scene, saver);
+					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 					interactionHandler.exec();					
 				}
 				
 			}
+			
+			private void apply_settings_to_game() {
+				
+			}
+			
+			
+			public void handle(long arg0) {	
+				if(window_type == Windows.WindowType.GAME) {
+					if(game_init_done) {
+						run();
+					}else {
+						init();
+					}
+				} else if(window_type == Windows.WindowType.MAIN_MENU && !main_menu.isPlay_game()) {
+					if(!game_pre_init_done) {
+						pre_init();
+					}
+				} else if (main_menu.isPlay_game()) {
+					if(!game_pre_init_done) {
+						pre_init();
+					} else if(!game_init_done) {
+						init();
+					} else {
+						run();
+					}
+				} else if (window_type == Windows.WindowType.SETTINGS) {
+					//TODO Setting screen
+					apply_settings_to_game();
+				}
+			}
 		}.start();
+
 	}
-	
+
 	
 }

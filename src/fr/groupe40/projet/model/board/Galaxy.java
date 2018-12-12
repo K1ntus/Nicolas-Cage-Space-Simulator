@@ -72,7 +72,7 @@ public class Galaxy implements Serializable{
 		this.generator = null;
 		this.gc = gc;
 		
-		this.background = new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true);
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
 		
 	}
 
@@ -86,7 +86,7 @@ public class Galaxy implements Serializable{
 		this.generator = null;
 		this.gc = gc;
 
-		this.background = new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true);
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class Galaxy implements Serializable{
 		this.generator = null;
 		this.gc = gc;
 		
-		this.background = new Image(Resources.path_img_background, Generation.width, Generation.height, false, false, true);
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
 		
 	}
 	
