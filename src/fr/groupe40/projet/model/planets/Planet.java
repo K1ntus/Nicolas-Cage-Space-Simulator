@@ -17,9 +17,6 @@ import fr.groupe40.projet.util.constants.ShipsParameters;
  */
 public abstract class Planet extends Sprite {
 	private static final long serialVersionUID = 260148039781013750L;
-	/**
-	 * 
-	 */
 	
 	/**
 	 * \brief lift off x and y position of a ship

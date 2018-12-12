@@ -6,14 +6,24 @@ import javafx.scene.media.AudioClip;
 
 public class Music {
 
+	/**
+	 * \brief contains the main theme audio clip
+	 */
 	private AudioClip main_theme;
 
-    public Music() {
+	/**
+	 * \brief instanciate the music object, and launch or not the main_theme automatically
+	 * @param launch_music Auto-launch main theme if true, else false
+	 */
+    public Music(boolean launch_music) {
     	this.main_theme = this.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
-		if(Constants.main_theme_enabled)
+		if(Constants.main_theme_enabled && launch_music)
     		main_theme.play();
 	}
 
+    /**
+     * \brief Launch the main theme, if the theme isnt playing, auto-relaunch it
+     */
     public void run() {
     	if(main_theme == null || !Constants.main_theme_enabled) { 
     		System.out.println("Unable to load main-theme music");
@@ -27,6 +37,12 @@ public class Music {
     	}
     }
     
+    /**
+     * \brief return an audioclip from a path to the file and his volume
+     * @param path	path to the media file
+     * @param volume	volume wanted of this sound (between 0 and 1, usually 0.5 is ok)
+     * @return
+     */
     public AudioClip generateAudioClip(String path, double volume) {
 		try {
 	    	AudioClip res = new AudioClip(this.getClass().getResource(path).toExternalForm());

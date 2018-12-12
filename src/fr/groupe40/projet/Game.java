@@ -40,8 +40,8 @@ public class Game extends Application {
 	/**
 	 * \brief Board object containing every sprites, etc
 	 */
+	
 	private Galaxy galaxy;
-	//private InteractionHandler interactionHandler;
 	
 	
 	/**
@@ -49,13 +49,34 @@ public class Game extends Application {
 	 */
 	private long game_tick = 0;	//long because counter, had to prevent the overflow case
 	
+	/**
+	 * \brief manage the game events
+	 */
 	private Events eventManager;	
-	private Music soundHandler = new Music();
 	
+	/**
+	 * \brief manage the background game sound + methods to simplify sounds usage
+	 */
+	private Music soundHandler = new Music(true);
+	
+	/**
+	 * \brief contain the sound of a ship collision, set there to not worries about serialization for loading/saving
+	 */
 	private AudioClip mediaPlayer_ship_explosion;
+	
+	/**
+	 * \brief get the OS type string, used to change the window style
+	 */
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	
+	/**
+	 * \brief manage the user input, currently, only the mouse is managed there
+	 */
 	private InteractionHandler interactionHandler;
+	
+	/**
+	 * \brief 'main' method
+	 */
 	public void start(Stage stage) {
 		/* 	---| OS check |---	
 		 * Doing that because there s a little white

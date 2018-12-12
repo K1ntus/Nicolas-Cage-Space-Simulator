@@ -16,6 +16,10 @@ import fr.groupe40.projet.util.constants.Resources;
  */
 final class Revolt {
 
+	/**
+	 * \brief begin the revolt event
+	 * @param galaxy
+	 */
 	protected static void start(Galaxy galaxy) {
 		boolean ai = false, user = false;
 		for(Planet src: galaxy.getPlanets()) {
@@ -59,6 +63,12 @@ final class Revolt {
 		}
 	}
 	
+	/**
+	 * \brief launch a fleet between two planet of the board
+	 * @param galaxy the game board
+	 * @param src the source planet
+	 * @param dest the destination planet
+	 */
 	private static void launch_fleet(Galaxy galaxy, Planet src, Planet dest) {
 		Squad s = new Squad(Resources.path_img_event_ships, Players.event_user, 25, src, dest);		
 		

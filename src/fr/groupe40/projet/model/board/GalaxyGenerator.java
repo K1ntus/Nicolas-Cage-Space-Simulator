@@ -49,6 +49,10 @@ public class GalaxyGenerator {
 
 	/* Planets Generation */
 
+	/**
+	 * \brief return a randomly string path for round planet type
+	 * @return the path of this ressource
+	 */
 	private String getRandomRoundPlanetImgPath() {
 		double rand= Math.random();
 		
@@ -57,6 +61,10 @@ public class GalaxyGenerator {
 		return Resources.path_img_square_basic;
 	}
 	
+	/**
+	 * \brief return a randomly string path for square planet type
+	 * @return the path of this ressource
+	 */
 	private String getRandomSquarePlanetImgPath() {
 		double rand= Math.random();
 
@@ -71,6 +79,10 @@ public class GalaxyGenerator {
 		return Resources.path_img_round_kfc_planet;
 	}
 	
+	/**
+	 * \brief return a randomly generated planet type (ie. round or square)
+	 * @return the planet generated
+	 */
 	private Planet getRandomPlanet() {
 		double rand = Math.random();
 		
@@ -78,6 +90,7 @@ public class GalaxyGenerator {
 			return new RoundPlanet(getRandomRoundPlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
 		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
 	}
+	
 	/**
 	 * \brief Generate the planets for the galaxy initialization
 	 */

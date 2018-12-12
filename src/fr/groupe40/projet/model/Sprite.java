@@ -242,7 +242,13 @@ public abstract class Sprite implements Serializable {
 	public abstract boolean isInside(Sprite s);
 	
 
+	/**
+	 * \brief check if two sprite are equals, should be abstract
+	 * @param s the sprite to compare with
+	 * @return true if both are the same
+	 */
 	public boolean equals(Sprite s) {
+		//TODO ABSTRACT
 		User user1 = this.getRuler();
 		User user2 = s.getRuler();
 		

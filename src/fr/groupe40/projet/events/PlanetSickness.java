@@ -15,11 +15,22 @@ import fr.groupe40.projet.util.constants.Players;
  * @author Sarah Portejoie
  */
 public class PlanetSickness {
+	/**
+	 * \brief contains the list of planet affected by sickness
+	 */
 	private ArrayList<Planet> planet_sickness = new ArrayList<Planet>();
+	
+	/**
+	 * \brief is this event already running or not to prevent multiple cast of it
+	 */
 	private boolean running = false;
 
+	/**
+	 * \brief begin the sickness event in the board
+	 * @param galaxy board affected by planet sickness
+	 */
 	protected void start(Galaxy galaxy) {
-		setRunning(true);
+		this.running = true;
 		
 		for(Planet p: galaxy.getPlanets()) {
 			if(Math.random() > 0.5) {
@@ -48,6 +59,9 @@ public class PlanetSickness {
 		
 	}
 	
+	/**
+	 * \brief stop the planet sickness events for every currently affected planets
+	 */
 	public void stop() {
 		Iterator<Planet> it = planet_sickness.iterator();
 		while (it.hasNext()) {
@@ -55,7 +69,7 @@ public class PlanetSickness {
 			removeSickness(p);
 			it.remove();
 		}
-		setRunning(false);
+		this.running = false;
 	}
 
 	public boolean isRunning() {

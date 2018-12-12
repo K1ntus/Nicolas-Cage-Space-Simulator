@@ -7,7 +7,11 @@ import javafx.scene.Scene;
 
 public class InteractionHandler {
 	
-	private KeyboardListener keyboard;
+	//private KeyboardListener keyboard;
+	
+	/**
+	 * \brief will manage the mouse event
+	 */
 	private MouseListener mouse;
 
 	//private Squad selected = null;
@@ -17,7 +21,7 @@ public class InteractionHandler {
 	 * @param galaxy
 	 */
 	public InteractionHandler(Galaxy galaxy, Scene scene, DataSerializer saver) {
-		this.setKeyboard(new KeyboardListener(galaxy, scene, saver));
+		//this.setKeyboard(new KeyboardListener(galaxy, scene, saver));
 		this.mouse = new MouseListener(galaxy, scene);
 		
 	}
@@ -27,10 +31,11 @@ public class InteractionHandler {
 	 */
 	public void exec() {
 		mouse.launch();
-		keyboard.launch();	
+		//keyboard.launch();	
 		
 	}
 
+	/*
 	public KeyboardListener getKeyboard() {
 		return keyboard;
 	}
@@ -38,4 +43,5 @@ public class InteractionHandler {
 	public void setKeyboard(KeyboardListener keyboard) {
 		this.keyboard = keyboard;
 	}
+	*/
 }

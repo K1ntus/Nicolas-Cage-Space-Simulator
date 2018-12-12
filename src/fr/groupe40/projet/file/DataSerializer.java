@@ -40,6 +40,7 @@ public class DataSerializer {
 	 */
 	private ObjectOutputStream oos;
 	
+	@Deprecated
 	private boolean new_game_loaded = false;
 	
 	/**

@@ -53,8 +53,14 @@ public class Galaxy implements Serializable{
 	 */
 	private transient Image background;
 	
+	/**
+	 * \brief graphical environnement
+	 */
 	private transient GraphicsContext gc;
 	
+	/**
+	 * \brief state of the game
+	 */
 	private boolean game_is_over = false;
 	
 	/**

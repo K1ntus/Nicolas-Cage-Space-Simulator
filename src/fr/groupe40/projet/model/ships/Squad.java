@@ -51,8 +51,14 @@ public class Squad implements Serializable {
 	 */
 	private boolean summoning = true;
 	
+	/**
+	 * \brief the player controlling this squad
+	 */
 	private User ruler;
 	
+	/**
+	 * \brief the img path of all his ships
+	 */
 	private String img_path;
 	
 	/**
@@ -85,6 +91,7 @@ public class Squad implements Serializable {
 	public Squad() {
 
 	}
+	
 	/**
 	 * \brief constructor of this squad
 	 * @param percent the percent of troups from a planet to send
@@ -189,7 +196,7 @@ public class Squad implements Serializable {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
-					renderCollisionSound(mediaPlayer_boom, ship.getX(),ship.getY());
+					renderCollisionSound(mediaPlayer_boom);
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -205,7 +212,12 @@ public class Squad implements Serializable {
 			}
 		}
 	}
-	public void renderCollisionSound(AudioClip mediaPlayer_boom, double x, double y) {
+	
+	/**
+	 * \brief play sound when a ship of his squad reach his destination
+	 * @param mediaPlayer_boom the audio clip to play
+	 */
+	public void renderCollisionSound(AudioClip mediaPlayer_boom) {
 		if(mediaPlayer_boom == null) {
 			return;
 		}

@@ -19,6 +19,12 @@ import javafx.scene.image.Image;
  */
 final class PirateAssault {	
 	
+	/**
+	 * \brief currently not working, because only the first frame of the gif is displayed, the main board refreshing each tick.
+	 * @param x the x position on board
+	 * @param y the y position on board
+	 * @param gc the graphics context to display it
+	 */
 	private static void renderSummoning(double x, double y, GraphicsContext gc) {
 		Image portal = new Image(Resources.path_gfx_ship_explosion, Generation.size_squads, Generation.size_squads, false, false, true);
 
@@ -26,6 +32,11 @@ final class PirateAssault {
 		
 	}
 	
+	/**
+	 * \brief run the pirate assault event
+	 * @param galaxy the board that will invoke this event
+	 * @param gc the graphics environnement
+	 */
 	protected static void start(Galaxy galaxy, GraphicsContext gc) {
 		
 		Squad pirate_squad = new Squad();

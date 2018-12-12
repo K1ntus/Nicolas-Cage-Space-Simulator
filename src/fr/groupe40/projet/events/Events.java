@@ -13,6 +13,11 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class Events {
 	
+	/**
+	 * \brief contains every available event
+	 * @author jordan
+	 *
+	 */
 	private enum events {
 		NOTHING,	//No event invoked
 		PIRATE,		//Randomly generated hostile fleet
@@ -20,9 +25,24 @@ public class Events {
 		SICKNESS	//Planet stop producing for a while (add smoke/poison particles ?)
 	}
 
+	/**
+	 * \brief array list containing every enabled events from the enum type 'events'
+	 */
 	private ArrayList<events> event_available = new ArrayList<events>();
+	
+	/**
+	 * \brief main board to summon/invoke the events on it
+	 */
 	private Galaxy galaxy;
+	
+	/**
+	 * graphic environnement to display few events
+	 */
 	private GraphicsContext gc;
+	
+	/**
+	 * \brief special type needed to manage this event, handle the current planets suffering of sickness, etc
+	 */
 	private PlanetSickness planet_sickness= new PlanetSickness();
 	
 	/**

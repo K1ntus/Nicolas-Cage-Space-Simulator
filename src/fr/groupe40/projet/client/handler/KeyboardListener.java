@@ -11,6 +11,7 @@ import javafx.scene.Scene;
  *
  */
 @Deprecated
+@SuppressWarnings("unused")
 public class KeyboardListener {
 	private Galaxy galaxy;
 	private Scene scene;
