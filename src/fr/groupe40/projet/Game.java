@@ -21,6 +21,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
@@ -113,18 +114,21 @@ public class Game extends Application {
 		stage.setResizable(false);
 
 		Group root = new Group();
-
-		//Scene scene_mainMenu = new Scene(main_menu.getView(), Generation.width, Generation.height);
-		//Scene scene_mainMenu = new Scene(main_menu.getView(), Generation.width, Generation.height);
-		stage.setScene(main_menu.getScene());
-		stage.show();
 		
+		Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
+		gc = canvas_mainMenu.getGraphicsContext2D();
+        Image background_image = new Image(Resources.path_img_menu_background, Generation.width, Generation.height, true, true, false);
+        gc.drawImage(background_image, 0, 0);
+		
+		root.getChildren().add(canvas_mainMenu);
+
+		Scene scene_main_menu = main_menu.getScene();
+        //scene_main_menu.setRoot(root);
+		stage.setScene(scene_main_menu);
+		stage.show();
+
 
 		
-		/*
-		stage.setScene(scene);
-		stage.show();
-	*/
 		/**	KEYBOARD HANDLER	**/
 		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
 	
@@ -153,24 +157,30 @@ public class Game extends Application {
 		new AnimationTimer() {
 
 			private void pre_init() {
-				canvas_game = new Canvas(Generation.width, Generation.height);
-				root.getChildren().add(canvas_game);
-				gc = canvas_game.getGraphicsContext2D();
-				
-				
 				galaxy = new Galaxy(gc);
-				galaxy.initFont(gc);
 
 				saver = new DataSerializer(Constants.fileName_save, galaxy);
 				
 				if(Constants.events_enabled) 
 					eventManager = new Events(galaxy, gc, true, true);	
-				System.out.println("Pre_init done");	
+				
 				game_pre_init_done = true;
+				System.out.println("Pre_init done");	
 			}
 			
 			private void init() {
+
+				canvas_game = new Canvas(Generation.width, Generation.height);
+				
+				root.getChildren().remove(canvas_mainMenu);
+				root.getChildren().add(canvas_game);
+				
+				gc = canvas_game.getGraphicsContext2D();
+				galaxy.setGraphicsContext(gc);
+				galaxy.initFont(gc);
+				
 				scene_game = new Scene(root);
+				
 				interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 				interactionHandler.exec();			
 
@@ -182,6 +192,7 @@ public class Game extends Application {
 				stage.show();	
 				
 				game_init_done = true;
+				
 				System.out.println("init done");
 			}
 			

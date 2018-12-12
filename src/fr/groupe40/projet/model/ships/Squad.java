@@ -233,8 +233,8 @@ public class Squad implements Serializable {
 				s.setImg_path(Resources.path_img_human_ships);
 			else if(destination.getRuler() == Players.ai_user)
 				s.setImg_path(Resources.path_img_AI_ships);
-			s.updateImage();			
-		}		
+			s.updateImage();	
+		}	
 	}
 	
 	/**

@@ -514,5 +514,19 @@ public class Galaxy implements Serializable{
 		this.game_is_over = game_is_over;
 	}
 
+	/**
+	 * @return the gc
+	 */
+	public GraphicsContext getGraphicsContext() {
+		return gc;
+	}
+
+	/**
+	 * @param gc the gc to set
+	 */
+	public void setGraphicsContext(GraphicsContext gc) {
+		this.gc = gc;
+	}
+
 	
 }

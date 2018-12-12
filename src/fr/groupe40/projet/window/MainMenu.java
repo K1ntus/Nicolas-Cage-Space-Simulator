@@ -10,18 +10,21 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 
 
 public class MainMenu {
 	private GridPane grid = new GridPane();
-    private TextField player_nickname_form = new TextField();
+	
+    //private TextField player_nickname_form = new TextField();
+    
     private boolean play_game = false;
 	
 
@@ -40,8 +43,8 @@ public class MainMenu {
         //Pseudo player
         grid.add(new Text("-  Nicolas Cage Space Simulator  -"), 1, 0, 2, 1);
 
-        grid.add(new Label(Windows.form_player_name), 0, 1);
-        grid.add(player_nickname_form, 1, 1);
+        //grid.add(new Label(Windows.form_player_name), 0, 1);
+        //grid.add(player_nickname_form, 1, 1);
         
         
         //Buttons        
@@ -49,20 +52,20 @@ public class MainMenu {
         HBox hbbtn_play = new HBox(50);
         hbbtn_play.setAlignment(Pos.TOP_LEFT);
         hbbtn_play.getChildren().add(btn_play);
-        grid.add(btn_play, 3,1);
+        grid.add(btn_play, 1,1);
 
 
         Button btn_settings = new Button(Windows.button_settings);
         HBox hbBtn_settings = new HBox(50);
         hbBtn_settings.setAlignment(Pos.TOP_LEFT);
         hbBtn_settings.getChildren().add(btn_settings);
-        grid.add(btn_settings, 3, 2);
+        grid.add(btn_settings, 1, 2);
         
         Button btn_exit = new Button(Windows.button_close);
         HBox hbBtn_exit = new HBox(50);
         hbBtn_exit.setAlignment(Pos.TOP_LEFT);
         hbBtn_exit.getChildren().add(btn_exit);
-        grid.add(btn_exit, 3, 3);
+        grid.add(btn_exit, 1, 3);
 
 
         
@@ -91,6 +94,18 @@ public class MainMenu {
             	handleQuitButton();
             }
         });
+        
+        grid.setBackground(
+        		new Background(
+        				new BackgroundImage(
+	        				new Image((Resources.path_img_menu_background)),
+	        				null,
+	        				null,
+	        				BackgroundPosition.DEFAULT,
+	        				new BackgroundSize(Generation.width*1.0, 0.0, true, false, false, true)
+	        			)
+        			)
+        		);
              
 	}
 	
@@ -122,10 +137,6 @@ public class MainMenu {
 	
     public Scene getScene() {
         Scene res = new Scene(grid, Generation.width, Generation.height);  
-
-        Image background_image = new Image(Resources.path_img_menu_background, Generation.width, Generation.height, false, false, true);
-		ImagePattern pattern = new ImagePattern(background_image);
-		res.setFill(pattern);
 		
         return res;
     }
