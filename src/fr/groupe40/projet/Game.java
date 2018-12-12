@@ -25,7 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -84,9 +83,9 @@ public class Game extends Application {
 	
 	private MainMenu main_menu = new MainMenu();
 	private GraphicsContext gc;
-	private Canvas canvas_game;
 	private Scene scene_game;
 	private DataSerializer saver;
+	private Canvas canvas_game;
 	/**
 	 * \brief 'main' method
 	 */
@@ -117,7 +116,7 @@ public class Game extends Application {
 		
 		Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
 		gc = canvas_mainMenu.getGraphicsContext2D();
-        Image background_image = new Image(Resources.path_img_menu_background, Generation.width, Generation.height, true, true, false);
+        Image background_image = new Image(Resources.path_img_menu_background, Generation.width, Generation.height, true, true, true);
         gc.drawImage(background_image, 0, 0);
 		
 		root.getChildren().add(canvas_mainMenu);
