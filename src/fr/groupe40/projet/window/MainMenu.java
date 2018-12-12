@@ -40,7 +40,7 @@ public class MainMenu {
         grid.setVgap(20);
         grid.setPadding(new Insets(25, 25, 25, 25));
         
-        //Pseudo player
+        //Pseudo player not yet implemented
         //grid.add(new Label(Windows.form_player_name), 0, 1);
         //grid.add(player_nickname_form, 1, 1);
 

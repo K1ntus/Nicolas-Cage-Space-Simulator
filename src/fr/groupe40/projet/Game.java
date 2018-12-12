@@ -80,12 +80,12 @@ public class Game extends Application {
 	private Windows.WindowType window_type = Windows.WindowType.MAIN_MENU;
 	private boolean game_pre_init_done = false;
 	private boolean game_init_done = false;
+	private boolean game_loaded = false;
 	
 	private MainMenu main_menu = new MainMenu();
 	private GraphicsContext gc;
 	private Scene scene_game;
 	private DataSerializer saver;
-	private Canvas canvas_game;
 	/**
 	 * \brief 'main' method
 	 */
@@ -143,10 +143,7 @@ public class Game extends Application {
 				if (e.getCode() == KeyCode.F6) {
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
-					saver.reload_image_and_data(galaxy);
-
-					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
-					interactionHandler.exec();
+					game_loaded = true;
 				}
 				
 			}
@@ -154,6 +151,7 @@ public class Game extends Application {
         
 		/*	Rendering, game initialisation, etc */
 		new AnimationTimer() {
+			private Canvas canvas_game;
 
 			private void pre_init() {
 				galaxy = new Galaxy(gc);
@@ -197,7 +195,13 @@ public class Game extends Application {
 			
 			private void run() {
 				game_tick += 1;
-
+				if(game_loaded) {
+					saver.reload_image_and_data(galaxy);
+					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
+					interactionHandler.exec();
+					game_loaded = false;
+				}
+				
 				galaxy.render(gc);
 				
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
@@ -239,6 +243,7 @@ public class Game extends Application {
 					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 					interactionHandler.exec();					
 				}
+				
 				
 			}
 			
