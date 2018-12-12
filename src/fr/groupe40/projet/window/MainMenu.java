@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -41,10 +42,18 @@ public class MainMenu {
         grid.setPadding(new Insets(25, 25, 25, 25));
         
         //Pseudo player
-        grid.add(new Text("-  Nicolas Cage Space Simulator  -"), 1, 0, 2, 1);
-
         //grid.add(new Label(Windows.form_player_name), 0, 1);
         //grid.add(player_nickname_form, 1, 1);
+        
+        //Top title
+
+        Image title = new Image(Resources.path_img_menu_title);
+        ImageView title_img = new ImageView();
+        title_img.setImage(title);
+        title_img.setFitWidth(Generation.width/1.5);
+        title_img.setPreserveRatio(true);
+        grid.add((title_img),2,0);
+        
         
         
         //Buttons        

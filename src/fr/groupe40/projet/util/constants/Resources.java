@@ -27,6 +27,7 @@ public final class Resources {
 	//Backgrounds
 	public static final String path_img_game_background = "/resources/images/background.jpg";
 	public static final String path_img_menu_background = "/resources/images/main_menu.gif";
+	public static final String path_img_menu_title =  "/resources/images/title.png";
 	
 	public static final String path_img_gui_percent_background = "/resources/images/gui/background_progressbar.png";
 	public static final String path_img_gui_percent = "/resources/images/gui/progress_bar.png";
@@ -42,5 +43,6 @@ public final class Resources {
 	public static final double main_theme_volume = 0.05; //Between 0 (cut the music) and 1
 	public static final double ship_explosion_volume = 0.5;
 	public static final double sun_explosion_volume = 0.5;
+
 
 }
