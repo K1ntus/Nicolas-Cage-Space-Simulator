@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * \brief Main class. Currently managing users interactions and display
+ *  Main class. Currently managing users interactions and display
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -43,17 +43,17 @@ public class Game extends Application {
 	}
 	
 	/**
-	 * \brief get the OS type string, used to change the window style
+	 *  get the OS type string, used to change the window style
 	 */
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	/**
-	 * \brief manage the user input, currently, only the mouse is managed there
+	 *  manage the user input, currently, only the mouse is managed there
 	 */
 	private InteractionHandler interactionHandler;
 
 	/**
-	 * \brief Board object containing every sprites, etc
+	 *  Board object containing every sprites, etc
 	 */
 	private Galaxy galaxy;
 	
@@ -66,7 +66,7 @@ public class Game extends Application {
 	private boolean game_loaded = false;
 	
 	/**
-	 * \brief 'main' method
+	 *  'main' method
 	 */
 	public void start(Stage stage) {
 		/* 	---| OS check |---	
@@ -133,21 +133,21 @@ public class Game extends Application {
 			
 			
 			/**
-			 * \brief game_tick counter for events, etc
+			 *  game_tick counter for events, etc
 			 */
 			private long game_tick = 0;	//long because counter, had to prevent the overflow case
 			/**
-			 * \brief contain the sound of a ship collision, set there to not worries about serialization for loading/saving
+			 *  contain the sound of a ship collision, set there to not worries about serialization for loading/saving
 			 */
 			private AudioClip mediaPlayer_ship_explosion;
 
 			/**
-			 * \brief manage the game events
+			 *  manage the game events
 			 */
 			private Events eventManager;	
 			
 			/**
-			 * \brief manage the background game sound + methods to simplify sounds usage
+			 *  manage the background game sound + methods to simplify sounds usage
 			 */
 			private Music soundHandler = new Music(true);
 			

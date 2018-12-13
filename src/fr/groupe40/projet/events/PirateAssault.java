@@ -13,14 +13,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
- * \brief squads from random/all colonies are removed, becoming aggressive
+ *  squads from random/all colonies are removed, becoming aggressive
  * @author Jordane Masson
  * @author Sarah Portejoie
  */
 final class PirateAssault {	
 	
 	/**
-	 * \brief currently not working, because only the first frame of the gif is displayed, the main board refreshing each tick.
+	 *  currently not working, because only the first frame of the gif is displayed, the main board refreshing each tick.
 	 * @param x the x position on board
 	 * @param y the y position on board
 	 * @param gc the graphics context to display it
@@ -33,7 +33,7 @@ final class PirateAssault {
 	}
 	
 	/**
-	 * \brief run the pirate assault event
+	 *  run the pirate assault event
 	 * @param galaxy the board that will invoke this event
 	 * @param gc the graphics environnement
 	 */

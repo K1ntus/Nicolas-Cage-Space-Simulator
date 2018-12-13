@@ -25,7 +25,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 /**
- * \brief 'Board' class. It contains the data of the game as ships, planets, ...
+ *  'Board' class. It contains the data of the game as ships, planets, ...
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -34,37 +34,37 @@ public class Galaxy implements Serializable{
 	private static final long serialVersionUID = 3668540725184418675L;
 
 	/**
-	 * \brief Array with every planet of the board
+	 *  Array with every planet of the board
 	 */
 	private ArrayList <Planet> planets;
 
 	/**
-	 * \brief Array with every squads of the board
+	 *  Array with every squads of the board
 	 */
 	private ArrayList <Squad> squads;
 
 	/**
-	 * \brief board generator
+	 *  board generator
 	 */
 	private GalaxyGenerator generator = new GalaxyGenerator();
 
 	/**
-	 * \brief background image
+	 *  background image
 	 */
 	private transient Image background;
 	
 	/**
-	 * \brief graphical environnement
+	 *  graphical environnement
 	 */
 	private transient GraphicsContext gc;
 	
 	/**
-	 * \brief state of the game
+	 *  state of the game
 	 */
 	private boolean game_is_over = false;
 
 	/**
-	 * \brief Generate a game board with every parameters randomized
+	 *  Generate a game board with every parameters randomized
 	 */
 	public Galaxy(GraphicsContext gc) {
 		this.squads = new ArrayList<Squad>();
@@ -76,7 +76,7 @@ public class Galaxy implements Serializable{
 		
 	}
 	/**
-	 * \brief Generate a game board with every parameters randomized
+	 *  Generate a game board with every parameters randomized
 	 */
 	public Galaxy(GraphicsContext gc, GalaxyGenerator gg) {
 		this.squads = new ArrayList<Squad>();
@@ -89,7 +89,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Generate a game board from another
+	 *  Generate a game board from another
 	 * @param g The game board to copy from
 	 */
 	public Galaxy(Galaxy g, GraphicsContext gc) {
@@ -102,7 +102,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Generate a game board from an array of squads and planets
+	 *  Generate a game board from an array of squads and planets
 	 * @param planets Planets that we want to have
 	 * @param squads Squads already present
 	 */
@@ -118,7 +118,7 @@ public class Galaxy implements Serializable{
 	
 	/* Render & Game Update */
 	/**
-	 * \briefMain rendering function
+	 * Main rendering function
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
@@ -131,7 +131,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Main update function, manage AI, squads and hasLost
+	 *  Main update function, manage AI, squads and hasLost
 	 */
 	public void updateSquadPosition(AudioClip mediaPlayer_boom) {
 		for(Squad s : squads) {
@@ -147,7 +147,7 @@ public class Galaxy implements Serializable{
 	
 	/*	AI	*/
 	/**
-	 * \brief Manage the AI to send fleets
+	 *  Manage the AI to send fleets
 	 */
 	public void updateAI() {
 		Planet source, destination;
@@ -173,7 +173,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief update the garrison value of each planets
+	 *  update the garrison value of each planets
 	 */
 	public void updateGarrison() {
 		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
@@ -191,7 +191,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief send all a new wave if need for each squads
+	 *  send all a new wave if need for each squads
 	 */
 	public void updateWavesSending() {
 		for(Squad s : squads) {
@@ -202,7 +202,7 @@ public class Galaxy implements Serializable{
 	
 	/* Defeat handler */
 	/**
-	 * \brief Check if an user has lost
+	 *  Check if an user has lost
 	 * @param u the user to check
 	 * @return true if he has last, else false
 	 */
@@ -240,7 +240,7 @@ public class Galaxy implements Serializable{
 	
 	/* Client handler */
 	/**
-	 * \brief handle the scrolls event to change the percent of a fleet to send
+	 *  handle the scrolls event to change the percent of a fleet to send
 	 * @param action The scroll action (up or down case)
 	 */
 	public void clientScrollHandler(Direction direction) {
@@ -259,7 +259,7 @@ public class Galaxy implements Serializable{
 	
 	/* Collisions Between Ships & Planets */
 	/**
-	 * \brief Manage the collisions between squads & intermediate planets
+	 *  Manage the collisions between squads & intermediate planets
 	 * @param s The squad to manage
 	 * @param p The planet to test collision with
 	 */
@@ -308,7 +308,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief check if there s a collision between a squad and every planet on board
+	 *  check if there s a collision between a squad and every planet on board
 	 * @param s the squad to check
 	 * @return true if there s a collision, else false
 	 */
@@ -327,7 +327,7 @@ public class Galaxy implements Serializable{
 	/* Rendering subfunction */
 
 	/**
-	 * \brief Render the background image
+	 *  Render the background image
 	 * @param gc
 	 */
 	public void renderBackground(GraphicsContext gc) {
@@ -335,7 +335,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Render each planets image
+	 *  Render each planets image
 	 * @param gc
 	 */
 	public void renderPlanets(GraphicsContext gc) {
@@ -346,7 +346,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Render every squads on board
+	 *  Render every squads on board
 	 * @param gc
 	 */
 	public void renderSquads(GraphicsContext gc) {
@@ -369,7 +369,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Render the garrison amount of each planets on board
+	 *  Render the garrison amount of each planets on board
 	 * @param gc
 	 */
 	public void renderGarrison(GraphicsContext gc) {
@@ -394,7 +394,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Render the percentage of troups to send selected by the player
+	 *  Render the percentage of troups to send selected by the player
 	 * @param gc
 	 */
 	public void renderPercentageSelected(GraphicsContext gc) {
@@ -419,7 +419,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief render in case of defeat 
+	 *  render in case of defeat 
 	 * @param gc the Graphics Context
 	 */
 	public void renderDefeat(GraphicsContext gc) {
@@ -435,7 +435,7 @@ public class Galaxy implements Serializable{
 
 	
 	/**
-	 * \brief render in case of victory 
+	 *  render in case of victory 
 	 * @param gc the Graphics Context
 	 */
 	public void renderWinner(GraphicsContext gc) {
@@ -452,7 +452,7 @@ public class Galaxy implements Serializable{
 	
 	/* init the font type */
 	/**
-	 * \brief Init the default font style of the graphics context
+	 *  Init the default font style of the graphics context
 	 * @param gc
 	 */
 	public void initFont(GraphicsContext gc) {
@@ -465,7 +465,7 @@ public class Galaxy implements Serializable{
 	/* Getter & Setter */
 
 	/**
-	 * \brief Set the list containing every squads by another one
+	 *  Set the list containing every squads by another one
 	 * @param planets
 	 */
 	public ArrayList<Squad> getSquads() {
@@ -473,7 +473,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Return the list containing every squads on board
+	 *  Return the list containing every squads on board
 	 * @return
 	 */
 	public void setSquads(ArrayList<Squad> squads) {
@@ -481,7 +481,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Set the list containing every planet by another one
+	 *  Set the list containing every planet by another one
 	 * @param planets
 	 */
 	public void setPlanets(ArrayList<Planet> planets) {
@@ -489,7 +489,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Return the list containing every planets on board
+	 *  Return the list containing every planets on board
 	 * @return
 	 */
 	public ArrayList<Planet> getPlanets() {
@@ -497,7 +497,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Return the background image
+	 *  Return the background image
 	 * @return Image 
 	 */
 	public Image getBackground() {
@@ -505,7 +505,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Set the background image
+	 *  Set the background image
 	 * @param background
 	 */
 	public void setBackground(Image background) {

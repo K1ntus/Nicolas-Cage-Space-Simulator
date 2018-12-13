@@ -10,14 +10,14 @@ public class InteractionHandler {
 	//private KeyboardListener keyboard;
 	
 	/**
-	 * \brief will manage the mouse event
+	 *  will manage the mouse event
 	 */
 	private MouseListener mouse;
 
 	//private Squad selected = null;
 	
 	/**
-	 * \brief constructor for the user input
+	 *  constructor for the user input
 	 * @param galaxy
 	 */
 	public InteractionHandler(Galaxy galaxy, Scene scene, DataSerializer saver) {
@@ -27,7 +27,7 @@ public class InteractionHandler {
 	}
 	
 	/**
-	 * \brief launch the mouse & keyboard handler
+	 *  launch the mouse & keyboard handler
 	 */
 	public void exec() {
 		mouse.launch();

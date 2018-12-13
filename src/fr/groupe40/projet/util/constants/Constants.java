@@ -3,7 +3,7 @@ package fr.groupe40.projet.util.constants;
 import javafx.scene.paint.Color;
 
 /**
- * \brief contains every constants to manage this project
+ *  contains every constants to manage this project
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -21,7 +21,7 @@ public final class Constants {
 	
 
 	public static final String message_game_over = "Vous avez perdu !";
-	public static final String message_winner = "Vous avez gagné !";
+	public static final String message_winner = "Vous avez gagne !";
 
 	//4 ship types, attributed to a specific amount of ships
 	/*	Type of Squads */

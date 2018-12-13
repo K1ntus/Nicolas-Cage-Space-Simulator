@@ -16,23 +16,23 @@ public class MouseListener {
 	private Scene scene;
 
 	/**
-	 * \brief for the drag&drop, the next x&y position
+	 *  for the drag&drop, the next x&y position
 	 */
 	private double orgSceneX, orgSceneY;
 	
 	/**
-	 * \brief the source and destination planets selected
+	 *  the source and destination planets selected
 	 */
 	private Planet[] selected_planets = {null, null};
 	
 	/**
-	 * \brief squads selected by the user
+	 *  squads selected by the user
 	 */
 	private Squad selected_squad;
 	
 	
 	/**
-	 * \brief create the object with the minimal requirement
+	 *  create the object with the minimal requirement
 	 * @param galaxy to check the elements in the board
 	 * @param scene linking the handler to this scene
 	 */
@@ -43,11 +43,11 @@ public class MouseListener {
 
 	
 	/**
-	 * \brief launch the mouse handler
+	 *  launch the mouse handler
 	 */
 	public void launch() {
 		/**
-		 * \brief Manage the initial mouse drag event
+		 *  Manage the initial mouse drag event
 		 */
 		EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
 	        @Override
@@ -87,7 +87,7 @@ public class MouseListener {
 	    };
 
 		/**
-		 * \brief Manage the drop of the mouse
+		 *  Manage the drop of the mouse
 		 */
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override
@@ -147,7 +147,7 @@ public class MouseListener {
 		};
 		
 		/**
-		 * \brief Manage the scroll event
+		 *  Manage the scroll event
 		 */
 		EventHandler<ScrollEvent> scrollEvent = new EventHandler<ScrollEvent>() {
 			@Override

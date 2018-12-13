@@ -10,14 +10,14 @@ import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 
 /**
- * \brief squads from random/all colonies are removed, becoming aggressive and attack one of his planet
+ *  squads from random/all colonies are removed, becoming aggressive and attack one of his planet
  * @author Jordane Masson
  * @author Sarah Portejoie
  */
 final class Revolt {
 
 	/**
-	 * \brief begin the revolt event
+	 *  begin the revolt event
 	 * @param galaxy
 	 */
 	protected static void start(Galaxy galaxy) {
@@ -64,7 +64,7 @@ final class Revolt {
 	}
 	
 	/**
-	 * \brief launch a fleet between two planet of the board
+	 *  launch a fleet between two planet of the board
 	 * @param galaxy the game board
 	 * @param src the source planet
 	 * @param dest the destination planet

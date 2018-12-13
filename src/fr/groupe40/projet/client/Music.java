@@ -7,12 +7,12 @@ import javafx.scene.media.AudioClip;
 public class Music {
 
 	/**
-	 * \brief contains the main theme audio clip
+	 *  contains the main theme audio clip
 	 */
 	private AudioClip main_theme;
 
 	/**
-	 * \brief instanciate the music object, and launch or not the main_theme automatically
+	 *  instanciate the music object, and launch or not the main_theme automatically
 	 * @param launch_music Auto-launch main theme if true, else false
 	 */
     public Music(boolean launch_music) {
@@ -22,7 +22,7 @@ public class Music {
 	}
 
     /**
-     * \brief Launch the main theme, if the theme isnt playing, auto-relaunch it
+     *  Launch the main theme, if the theme isnt playing, auto-relaunch it
      */
     public void run() {
     	if(main_theme == null || !Constants.main_theme_enabled) { 
@@ -38,7 +38,7 @@ public class Music {
     }
     
     /**
-     * \brief return an audioclip from a path to the file and his volume
+     *  return an audioclip from a path to the file and his volume
      * @param path	path to the media file
      * @param volume	volume wanted of this sound (between 0 and 1, usually 0.5 is ok)
      * @return

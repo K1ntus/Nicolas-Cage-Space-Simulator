@@ -10,7 +10,7 @@ import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.ShipsParameters;
 
 /**
- * \brief Abstract class of the general type "planet"
+ *  Abstract class of the general type "planet"
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -19,32 +19,32 @@ public abstract class Planet extends Sprite {
 	private static final long serialVersionUID = 260148039781013750L;
 	
 	/**
-	 * \brief lift off x and y position of a ship
+	 *  lift off x and y position of a ship
 	 */
 	double summonX = 1, summonY = 1;
 	
 	/**
-	 * \brief the number of troups produced each time
+	 *  the number of troups produced each time
 	 */
 	private int produce_rate;
 	
 	/**
-	 * \brief the number of troups in the garrison
+	 *  the number of troups in the garrison
 	 */
 	private int troups;
 	
 	/**
-	 * \brief the type of ships generated there
+	 *  the type of ships generated there
 	 */	
 	private ShipType ships_type;
 	
 	/**
-	 * \brief return true if this planet is selected by the user
+	 *  return true if this planet is selected by the user
 	 */
 	private boolean selected;
 
 	/**
-	 * \brief Constructor of a planet
+	 *  Constructor of a planet
 	 * @param path the string image path
 	 * @param ruler the beginning ruler of this planet
 	 * @param x top left x position
@@ -57,7 +57,7 @@ public abstract class Planet extends Sprite {
 		this.setY(y);
 	}
 	/**
-	 * \brief Constructor of a planet
+	 *  Constructor of a planet
 	 * @param path the string image path
 	 * @param ruler the beginning ruler of this planet
 	 * @param x top left x position
@@ -75,7 +75,7 @@ public abstract class Planet extends Sprite {
 	
 	/* Update	*/
 	/**
-	 * \brief update the garrison value of this planet if not neutral
+	 *  update the garrison value of this planet if not neutral
 	 */
 	public void updateGarrison() {
     	if(getRuler().getFaction() != Players.neutral_faction) {
@@ -93,7 +93,7 @@ public abstract class Planet extends Sprite {
 	/*	Planet Generation	*/
 
 	/**
-	 * \brief Generate a randomized planet 
+	 *  Generate a randomized planet 
 	 */
 	private void generate() {
 		selected = false;
@@ -124,7 +124,7 @@ public abstract class Planet extends Sprite {
 	}
 	
 	/**
-	 * \brief find his place in the universe
+	 *  find his place in the universe
 	 * @return 0 if his position is correct, else error value
 	 */
 	public int calculateNextPosition() {
@@ -145,7 +145,7 @@ public abstract class Planet extends Sprite {
 	}
 	
 	/**
-	 * \brief check new position for generation
+	 *  check new position for generation
 	 * @return 0 if ok. -1 if unable to generate
 	 */
 	public int updatePlanetePosition() {
@@ -174,7 +174,7 @@ public abstract class Planet extends Sprite {
 	public abstract String toString();
 
 	/**
-	 * \brief return if two planets are the same
+	 *  return if two planets are the same
 	 * @param u
 	 * @return true if they're both equals, else false
 	 */

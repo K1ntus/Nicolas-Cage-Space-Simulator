@@ -7,14 +7,14 @@ import fr.groupe40.projet.model.board.Galaxy;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * \brief squads from random/all colonies are removed, becoming aggressive
+ *  squads from random/all colonies are removed, becoming aggressive
  * @author Jordane Masson
  * @author Sarah Portejoie
  */
 public class Events {
 	
 	/**
-	 * \brief contains every available event
+	 *  contains every available event
 	 * @author jordan
 	 *
 	 */
@@ -26,12 +26,12 @@ public class Events {
 	}
 
 	/**
-	 * \brief array list containing every enabled events from the enum type 'events'
+	 *  array list containing every enabled events from the enum type 'events'
 	 */
 	private ArrayList<events> event_available = new ArrayList<events>();
 	
 	/**
-	 * \brief main board to summon/invoke the events on it
+	 *  main board to summon/invoke the events on it
 	 */
 	private Galaxy galaxy;
 	
@@ -41,12 +41,12 @@ public class Events {
 	private GraphicsContext gc;
 	
 	/**
-	 * \brief special type needed to manage this event, handle the current planets suffering of sickness, etc
+	 *  special type needed to manage this event, handle the current planets suffering of sickness, etc
 	 */
 	private PlanetSickness planet_sickness= new PlanetSickness();
 	
 	/**
-	 * \brief choose which events are enabled/disabled
+	 *  choose which events are enabled/disabled
 	 * @param pirate
 	 * @param revolt
 	 */
@@ -62,7 +62,7 @@ public class Events {
 	}
 
 	/**
-	 * \brief Pick a random event in the event list and return it
+	 *  Pick a random event in the event list and return it
 	 * @param event array containing the events
 	 * @return	an event
 	 */
@@ -73,7 +73,7 @@ public class Events {
 
 
 	/**
-	 * \brief Randomly pick an event and handle it
+	 *  Randomly pick an event and handle it
 	 */
 	public void event_randomizer() {
 		if(event_available.size() == 1)

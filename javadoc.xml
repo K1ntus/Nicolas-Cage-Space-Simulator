@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="/opt/local/stow/eclipse/eclipse-oxygen/eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar:/opt/local/stow/eclipse/eclipse-oxygen/eclipse/plugins/org.junit_4.12.0.v201504281640/junit.jar" destdir="javadoc" doctitle="Nicolas Cage Space Simulator" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.8" sourcefiles="src/fr/groupe40/projet/model/board/Galaxy.java" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

@@ -7,7 +7,7 @@ import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.util.constants.Debugging;
 
 /**
- * \brief Round planet
+ *  Round planet
  * @author Jordane Masson
  * @author Sarah Portejoie
  *

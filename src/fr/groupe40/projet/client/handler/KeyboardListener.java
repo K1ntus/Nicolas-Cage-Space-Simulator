@@ -5,7 +5,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import javafx.scene.Scene;
 
 /**
- * \brief Manage the keyboard events
+ *  Manage the keyboard events
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -33,7 +33,7 @@ public class KeyboardListener {
 
 
 	/**
-	 * \brief Manage the saver/loader
+	 *  Manage the saver/loader
 	 */
 	public void launch() {
 	}

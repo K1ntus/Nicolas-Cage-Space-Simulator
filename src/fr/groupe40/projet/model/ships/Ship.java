@@ -14,7 +14,7 @@ import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 
 /**
- * \brief Ship of a squad, contains the destination, src, ...
+ *  Ship of a squad, contains the destination, src, ...
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -23,27 +23,27 @@ public class Ship extends Sprite implements Serializable {
 	private static final long serialVersionUID = -1872446628467348036L;
 
 	/**
-	 * \brief ship type of this ship
+	 *  ship type of this ship
 	 */
 	private ShipType ship_type = new ShipType();	
 	
 	/**
-	 * 	\brief Source and Destination planets
+	 * 	 Source and Destination planets
 	 */
 	private Planet destination, source;
 	
 	/**
-	 * \brief If this ships has reacher or not his destination
+	 *  If this ships has reacher or not his destination
 	 */
 	private boolean reached;
 	
 	/**
-	 * \brief The planet where there's a collision during his path in the board
+	 *  The planet where there's a collision during his path in the board
 	 */
 	private Planet collision;
 
 	/**
-	 * \brief constructor of the ship object
+	 *  constructor of the ship object
 	 * @param path image path of this ship
 	 * @param ruler ruler of this ship
 	 * @param destination his destination planet
@@ -99,7 +99,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 
 	/**
-	 * \brief Check if the ship has reached his destination, and handle this case
+	 *  Check if the ship has reached his destination, and handle this case
 	 */
 	public boolean reached_destination() {
 
@@ -142,7 +142,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Calculate the next position and provides collision handler
+	 *  Calculate the next position and provides collision handler
 	 * @param planets
 	 */
 	public void calc_next_position(List<Planet> planets) {
@@ -177,7 +177,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief return where is the collision between a ship and every planets of a list
+	 *  return where is the collision between a ship and every planets of a list
 	 * @param x horizontal position of the ship
 	 * @param y vertical position of the ship
 	 * @param speed speed of the sheep
@@ -217,7 +217,7 @@ public class Ship extends Sprite implements Serializable {
 
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the upper side
+	 *  Next position calculation when there s a collision in the upper side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -241,7 +241,7 @@ public class Ship extends Sprite implements Serializable {
 
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the bottom side
+	 *  Next position calculation when there s a collision in the bottom side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -265,7 +265,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the left side
+	 *  Next position calculation when there s a collision in the left side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -289,7 +289,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the right side
+	 *  Next position calculation when there s a collision in the right side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -313,7 +313,7 @@ public class Ship extends Sprite implements Serializable {
 	}	
 	
 	/**
-	 * \brief calculate the angle between a ship and his destination
+	 *  calculate the angle between a ship and his destination
 	 * @return angle in degrees
 	 */
 	public double destination_angle() {
@@ -326,7 +326,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief case when there s no collision for a ship
+	 *  case when there s no collision for a ship
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -352,7 +352,7 @@ public class Ship extends Sprite implements Serializable {
 	
 	
 	/**
-	 * \brief Update the position of this ship
+	 *  Update the position of this ship
 	 * @param planets
 	 */
 	public void update_position(List<Planet> planets) {
@@ -364,7 +364,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief prepare his removal from the squad list
+	 *  prepare his removal from the squad list
 	 */
 	public void remove() {
 		this.setRuler(Players.neutral_user);

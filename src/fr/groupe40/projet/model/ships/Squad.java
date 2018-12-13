@@ -18,7 +18,7 @@ import javafx.scene.media.AudioClip;
 
 
 /**
- * \brief Squad object
+ *  Squad object
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -27,42 +27,42 @@ public class Squad implements Serializable {
 	private static final long serialVersionUID = -6736174123976474099L;
 	
 	/**
-	 * \brief array with every ships of the squad
+	 *  array with every ships of the squad
 	 */
 	private ArrayList<Ship> ships = new ArrayList<Ship>();
 	
 	/**
-	 * \brief buffer with the number of ships waiting to be sent
+	 *  buffer with the number of ships waiting to be sent
 	 */
 	private int nb_ship;
 	
 	/**
-	 * \brief src and destination planets
+	 *  src and destination planets
 	 */
 	private Planet source, destination;
 	
 	/**
-	 * \brief x and y summoning position 
+	 *  x and y summoning position 
 	 */
 	private int summonX = 0, summonY = 0;
 	
 	/**
-	 * \brief value change if we re able to summon or not a wave
+	 *  value change if we re able to summon or not a wave
 	 */
 	private boolean summoning = true;
 	
 	/**
-	 * \brief the player controlling this squad
+	 *  the player controlling this squad
 	 */
 	private User ruler;
 	
 	/**
-	 * \brief the img path of all his ships
+	 *  the img path of all his ships
 	 */
 	private String img_path;
 	
 	/**
-	 * \brief constructor of this squad
+	 *  constructor of this squad
 	 * @param percent the percent of troups from a planet to send
 	 * @param src source planet
 	 * @param dest destination planet
@@ -86,14 +86,14 @@ public class Squad implements Serializable {
 	
 
 	/**
-	 * \brief constructor of this squad for pirate event
+	 *  constructor of this squad for pirate event
 	 */
 	public Squad() {
 
 	}
 	
 	/**
-	 * \brief constructor of this squad
+	 *  constructor of this squad
 	 * @param percent the percent of troups from a planet to send
 	 * @param src source planet
 	 * @param dest destination planet
@@ -107,7 +107,7 @@ public class Squad implements Serializable {
 	}
 
 	/**
-	 * \brief send a fleet, summoned when there s ships that had to be sent
+	 *  send a fleet, summoned when there s ships that had to be sent
 	 */
 	public void sendFleet() {
 		if(nb_ship <= 0)
@@ -148,7 +148,7 @@ public class Squad implements Serializable {
 	
 	
 	/**
-	 * \brief check if a squad has been selected or not
+	 *  check if a squad has been selected or not
 	 * @param x position to check
 	 * @param y position to check
 	 * @return true if a squad has been selected
@@ -163,7 +163,7 @@ public class Squad implements Serializable {
 	}
 	
 	/**
-	 * \brief Render every ships of this squad
+	 *  Render every ships of this squad
 	 * @param gc GraphicsContext
 	 */
 	public void render_ships(GraphicsContext gc) {
@@ -177,7 +177,7 @@ public class Squad implements Serializable {
 	}
 
 	/**
-	 * \brief update destination planet of every ships of this squads
+	 *  update destination planet of every ships of this squads
 	 * @param destination the new destination
 	 */
 	public void update_destination(Planet destination) {
@@ -187,7 +187,7 @@ public class Squad implements Serializable {
 	}
 	
 	/**
-	 * \brief Update the position of every ships of this squad
+	 *  Update the position of every ships of this squad
 	 */
 	public void update_all_positions(List<Planet> planets, AudioClip mediaPlayer_boom) {
 		Iterator<Ship> it = ships.iterator();
@@ -214,7 +214,7 @@ public class Squad implements Serializable {
 	}
 	
 	/**
-	 * \brief play sound when a ship of his squad reach his destination
+	 *  play sound when a ship of his squad reach his destination
 	 * @param mediaPlayer_boom the audio clip to play
 	 */
 	public void renderCollisionSound(AudioClip mediaPlayer_boom) {
@@ -225,7 +225,7 @@ public class Squad implements Serializable {
 	}
 
 	/**
-	 * \brief updateImage of every ships of this squad
+	 *  updateImage of every ships of this squad
 	 */
 	public void updateImage() {
 		for(Ship s : ships) {
@@ -244,7 +244,7 @@ public class Squad implements Serializable {
 	}
 	
 	/**
-	 * \brief update ruler of every ships of this squads
+	 *  update ruler of every ships of this squads
 	 * @param ruler the new ruler
 	 */
 	public void update_ruler(User ruler) {
@@ -255,7 +255,7 @@ public class Squad implements Serializable {
 
 	
 	/**
-	 * \brief Calculate the x Position for liftoff
+	 *  Calculate the x Position for liftoff
 	 * @param source the source planet
 	 * @return abscissa position
 	 */
@@ -278,7 +278,7 @@ public class Squad implements Serializable {
 	}
 	
 	/**
-	 * \brief Calculate the y Position for liftoff
+	 *  Calculate the y Position for liftoff
 	 * @param source the source planet
 	 * @return ordered position
 	 */

@@ -15,19 +15,19 @@ import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 
 /**
- * \brief Galaxy Planets Generator
+ *  Galaxy Planets Generator
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
  */
 public class GalaxyGenerator {
 	/**
-	 * \brief the results planets array that has been generated
+	 *  the results planets array that has been generated
 	 */
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
 	
 	/**
-	 * \brief Create and Generate the board
+	 *  Create and Generate the board
 	 */
 	public GalaxyGenerator() {
 		if(Constants.sun_enabled)
@@ -36,7 +36,7 @@ public class GalaxyGenerator {
 	}
 
 	/**
-	 * \brief Generate a sun in the center of the board
+	 *  Generate a sun in the center of the board
 	 */
 	public void generateSun() {
 		Planet sun = new Sun(Resources.path_img_sun, Generation.width/2, Generation.height/2);
@@ -50,7 +50,7 @@ public class GalaxyGenerator {
 	/* Planets Generation */
 
 	/**
-	 * \brief return a randomly string path for round planet type
+	 *  return a randomly string path for round planet type
 	 * @return the path of this ressource
 	 */
 	private String getRandomRoundPlanetImgPath() {
@@ -62,7 +62,7 @@ public class GalaxyGenerator {
 	}
 	
 	/**
-	 * \brief return a randomly string path for square planet type
+	 *  return a randomly string path for square planet type
 	 * @return the path of this ressource
 	 */
 	private String getRandomSquarePlanetImgPath() {
@@ -80,7 +80,7 @@ public class GalaxyGenerator {
 	}
 	
 	/**
-	 * \brief return a randomly generated planet type (ie. round or square)
+	 *  return a randomly generated planet type (ie. round or square)
 	 * @return the planet generated
 	 */
 	private Planet getRandomPlanet() {
@@ -92,7 +92,7 @@ public class GalaxyGenerator {
 	}
 	
 	/**
-	 * \brief Generate the planets for the galaxy initialization
+	 *  Generate the planets for the galaxy initialization
 	 */
 	public void generatePlanets() {
 		double width = Math.random() * Generation.size_maximal_planets *0.25 + Generation.size_minimal_planets;
@@ -133,7 +133,7 @@ public class GalaxyGenerator {
 	}
 
 	/**
-	 * \brief Test the valid position of a planet compare to each others.
+	 *  Test the valid position of a planet compare to each others.
 	 * @param p The planet we are trying to generate
 	 * @return false if not able to generate this planet, else true
 	 */

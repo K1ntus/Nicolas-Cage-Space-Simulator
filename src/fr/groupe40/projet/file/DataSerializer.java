@@ -19,7 +19,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 
 /**
- * \brief Class managing the saving/loading of the game
+ *  Class managing the saving/loading of the game
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -27,17 +27,17 @@ import javafx.scene.canvas.GraphicsContext;
 public class DataSerializer {
 	
 	/**
-	 * \brief the fileName of the save
+	 *  the fileName of the save
 	 */
 	private String name;
 	
 	/**
-	 * \brief the object containing all the data to save
+	 *  the object containing all the data to save
 	 */
 	private Galaxy data;
 	
 	/**
-	 * \brief variable that handle the object saving in file
+	 *  variable that handle the object saving in file
 	 */
 	private ObjectOutputStream oos;
 	
@@ -45,7 +45,7 @@ public class DataSerializer {
 	private boolean new_game_loaded = false;
 	
 	/**
-	 * \brief create the structure containing the data and the fileName
+	 *  create the structure containing the data and the fileName
 	 * @param name save fileName
 	 * @param data game data
 	 */
@@ -55,7 +55,7 @@ public class DataSerializer {
 	}
 	
 	/**
-	 * \brief Save the current game state in a file
+	 *  Save the current game state in a file
 	 * @return true if the game has been saved, else false
 	 */
 	public boolean save_game() {
@@ -93,7 +93,7 @@ public class DataSerializer {
 	}
 	
 	/**
-	 * \brief Load a game from a save and apply it to the current game start
+	 *  Load a game from a save and apply it to the current game start
 	 * @return the galaxy loaded from the save file
 	 */
 	public Galaxy load_game(GraphicsContext gc) {
@@ -129,7 +129,7 @@ public class DataSerializer {
 		return res;
 	}
 	/**
-	 * \brief Reload the game to apply the loading
+	 *  Reload the game to apply the loading
 	 * @param g Galaxy to be reloaded
 	 */
 	public void reload_image_and_data(Galaxy g) {
