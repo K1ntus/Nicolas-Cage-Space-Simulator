@@ -68,9 +68,7 @@ public class GalaxyGenerator {
 	private String getRandomSquarePlanetImgPath() {
 		double rand= Math.random();
 
-		/*if(rand < 0.25)
-			return Constants.path_img_round_planet1;
-		else */ if(rand < 0.25)
+		if(rand < 0.25)
 			return Resources.path_img_round_planet2;
 		else if(rand < 0.5)
 			return Resources.path_img_round_doge;

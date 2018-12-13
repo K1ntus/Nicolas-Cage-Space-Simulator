@@ -148,7 +148,6 @@ public class SettingsMenu {
 		
 
 		private void handleApplyButton() {
-	    	System.out.println("Apply button");
 	    	double ship_max_speed = ShipsParameters.max_ship_speed, ship_min_speed;
 	        if ((parameters_ships_max_speed.getText() != null && !parameters_ships_max_speed.getText().isEmpty())) {
 	        	ship_max_speed = Double.parseDouble(parameters_ships_max_speed.getText());
@@ -163,7 +162,7 @@ public class SettingsMenu {
 	        }
 	        if ((gui_size.getText() != null && !gui_size.getText().isEmpty())) {
 	            double gui_size_value = Double.parseDouble(gui_size.getText());
-	            if(gui_size_value > 10) {
+	            if(gui_size_value > 1) {
 		            Generation.size_squads = gui_size_value;
 		            Generation.size_minimal_planets = 5 * gui_size_value;
 		            Generation.size_maximal_planets = 8 * gui_size_value;
@@ -181,9 +180,7 @@ public class SettingsMenu {
 		
 		private void handleQuitButton() {
 	    	System.out.println("Bye !");
-	    	System.exit(0);
-			// TODO Auto-generated method stub
-			
+	    	System.exit(0);			
 		}
 
 		

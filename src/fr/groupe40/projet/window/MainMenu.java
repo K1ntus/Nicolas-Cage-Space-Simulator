@@ -19,31 +19,42 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-
+/**
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ */
 public class MainMenu {
+	/**
+	 * gridpane containing the button of this scene
+	 */
 	private GridPane grid = new GridPane();
 	
-    //private TextField player_nickname_form = new TextField();
-
-    private boolean play_game = false;
+	/**
+	 * is true if the user has pressed "play" button
+	 */
+	private boolean play_game = false;
+	
+	/**
+	 * is true if the user has pressed "setting" button
+	 */
     private boolean settings_menu = false;
 	
-
+    /**
+     * Constructor, build the scene
+     */
 	public MainMenu() {
-		this.init();
-	
+		this.init();	
 	}
 	
+	/**
+	 * Initialize the main menu javafx scene
+	 */
 	public void init() {
 		//Grid init
         grid.setAlignment(Pos.TOP_LEFT);
         grid.setHgap(10);
         grid.setVgap(20);
         grid.setPadding(new Insets(25, 25, 25, 25));
-        
-        //Pseudo player not yet implemented
-        //grid.add(new Label(Windows.form_player_name), 0, 1);
-        //grid.add(player_nickname_form, 1, 1);
 
         //Top title
         Image title = new Image(Resources.path_img_menu_title);
@@ -93,9 +104,7 @@ public class MainMenu {
             @Override
             public void handle(ActionEvent e) {
             	handlePlayButton();
-            	//actiontarget.setText("Il y a un matelas de disponible");
             }
-
         });
         
 
@@ -120,7 +129,7 @@ public class MainMenu {
 	        				null,
 	        				null,
 	        				BackgroundPosition.DEFAULT,
-	        				new BackgroundSize(Generation.width*1.0, 0.0, true, false, false, true)
+	        				new BackgroundSize(Generation.width, 0.0, true, false, false, true)
 	        			)
         			)
         		);
@@ -128,32 +137,38 @@ public class MainMenu {
 	}
 	
 
+	/**
+	 * Launch the game
+	 */
 	private void handlePlayButton() {
-    	System.out.println("Play button");
-		play_game = true;
-		// TODO Auto-generated method stub
-		
+		play_game = true;		
 	}
+	
+	/**
+	 * Function summoned when the quit button is pressed (quit the game)
+	 */
 	private void handleQuitButton() {
     	System.out.println("Bye !");
-    	System.exit(0);
-		// TODO Auto-generated method stub
-		
+    	System.exit(0);		
 	}
 	
-	
+	/**
+	 * Function summoned when the setting button is pressed
+	 */
 	private void handleSettingButton() {
-    	System.out.println("Not yet implemented");
-    	setSettings_menu(true);
-		// TODO Auto-generated method stub
-		
+    	settings_menu = true;		
 	}
 
-	
+	/**
+	 * @return the grid
+	 */
     public Parent getView() {
         return grid ;
     }
 	
+    /**
+     * @return the scene
+     */
     public Scene getScene() {
         Scene res = new Scene(grid, Generation.width, Generation.height);  
 		

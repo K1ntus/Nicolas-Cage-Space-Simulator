@@ -166,7 +166,9 @@ public class Game extends Application {
 				gg = new GalaxyGenerator();
 				
 				game_pre_init_done = true;
-				System.out.println("Pre_init done");	
+				
+				if(Debugging.DEBUG)
+					System.out.println("-> Pre-Init done");
 			}
 			
 			private void init() {
@@ -201,11 +203,13 @@ public class Game extends Application {
 				
 				game_init_done = true;
 				
-				System.out.println("init done");
+				if(Debugging.DEBUG)
+					System.out.println("-> Init done");
 			}
 			
 			private void run() {
 				game_tick += 1;
+				
 				if(game_loaded) {
 					saver.reload_image_and_data(galaxy);
 					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);

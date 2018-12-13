@@ -71,7 +71,6 @@ public class DataSerializer {
 			
 			oos.flush();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		} catch (final IOException e) {

@@ -248,7 +248,6 @@ public abstract class Sprite implements Serializable {
 	 * @return true if both are the same
 	 */
 	public boolean equals(Sprite s) {
-		//TODO ABSTRACT
 		User user1 = this.getRuler();
 		User user2 = s.getRuler();
 		

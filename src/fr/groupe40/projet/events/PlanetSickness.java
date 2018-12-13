@@ -50,13 +50,10 @@ public class PlanetSickness {
 	}
 
 	private void addSickness(Planet p) {
-		p.setProduce_rate(p.getProduce_rate() - Constants.planet_sickness_value);
-		
+		p.setProduce_rate(p.getProduce_rate() - Constants.planet_sickness_value);		
 	}
 	private void removeSickness(Planet p) {
-		p.setProduce_rate(p.getProduce_rate() + Constants.planet_sickness_value);
-		// TODO Auto-generated method stub
-		
+		p.setProduce_rate(p.getProduce_rate() + Constants.planet_sickness_value);		
 	}
 	
 	/**
