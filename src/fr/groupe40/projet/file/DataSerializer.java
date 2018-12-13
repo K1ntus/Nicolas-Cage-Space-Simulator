@@ -153,7 +153,7 @@ public class DataSerializer {
 						s.update_ruler(Players.ai_user);
 						break;
 					}
-				}else if (u.getFaction() == Players.player) {
+				}else if (u.getFaction() == Players.human_faction) {
 					s.update_ruler(Players.human_user);
 				}else {
 					s.update_ruler(Players.neutral_user);
@@ -174,22 +174,27 @@ public class DataSerializer {
 					
 			switch(p.getRuler().getId()) {
 				case Players.event_id:
+					System.out.println("** event user");
 					p.setRuler(Players.event_user);
 					break;
 				case Players.sun_id:
-					System.out.println("sun");
+					System.out.println("** sun");
 					p.setRuler(Players.sun_user);
 					break;
 				case Players.pirate_id:
+					System.out.println("** pirate user");
 					p.setRuler(Players.pirate_user);
 					break;
-				case Players.player:
+				case Players.human_faction:
+					System.out.println("** human user");
 					p.setRuler(Players.human_user);
 					break;
-				case Players.neutral:
+				case Players.neutral_faction:
+					System.out.println("** neutral user");
 					p.setRuler(Players.neutral_user);
 					break;
 				default:
+					System.out.println("** ai user");
 					p.setRuler(Players.ai_user);
 					break;
 			}

@@ -63,12 +63,12 @@ public class User implements Serializable{
 		this.faction = faction;
 		
 		switch(faction) {
-		case Players.ai:
-			id = Players.ai; break;
-		case Players.neutral:
-			id = Players.neutral; break;
-		case Players.player:
-			id = Players.player; break;
+		case Players.ai_faction:
+			id = Players.ai_faction; break;
+		case Players.neutral_faction:
+			id = Players.neutral_faction; break;
+		case Players.human_faction:
+			id = Players.human_faction; break;
 		}
 		percent_of_troups_to_send = 100;
 

@@ -39,7 +39,7 @@ public class GalaxyGenerator {
 	 * \brief Generate a sun in the center of the board
 	 */
 	public void generateSun() {
-		Planet sun = new Sun(Resources.path_img_sun, Players.sun_user, Generation.width/2, Generation.height/2);
+		Planet sun = new Sun(Resources.path_img_sun, Generation.width/2, Generation.height/2);
 		sun.updateImage();
 		sun.setX(sun.getX() - sun.width()/2);
 		sun.setY(sun.getY() - sun.width()/2);

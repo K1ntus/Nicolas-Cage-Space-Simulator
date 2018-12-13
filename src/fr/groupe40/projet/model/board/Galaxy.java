@@ -143,7 +143,7 @@ public class Galaxy implements Serializable{
 		for(Planet p : planets) {
 			User ruler = p.getRuler();
 			
-			if(ruler.getId() < 0 && ruler.getFaction() == Players.ai) {	//0 = neutral, >0 human, <0 bot
+			if(ruler.getId() < 0 && ruler.getFaction() == Players.ai_faction) {	//0 = neutral, >0 human, <0 bot
 				source = p;
 				
 				for(Planet p2 : planets) {	//Check again the planets list
@@ -367,11 +367,11 @@ public class Galaxy implements Serializable{
 			gc.setStroke(Color.BLACK);
 			
 			switch(p.getRuler().getFaction()) {
-				case Players.player:
+				case Players.human_faction:
 					gc.setFill(Constants.color_player); break;
-				case Players.ai:
+				case Players.ai_faction:
 					gc.setFill(Constants.color_ai); break;
-				case Players.neutral:
+				case Players.neutral_faction:
 					gc.setFill(Constants.color_neutral); break;
 				default:
 					gc.setFill(Constants.color_default); break;
@@ -392,7 +392,7 @@ public class Galaxy implements Serializable{
 		
 		for(Planet p :planets) {
 			User u = p.getRuler();
-			if (u.getFaction() == Players.player) {
+			if (u.getFaction() == Players.human_faction) {
 				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
 				
 				gc.fillText(txt, Generation.width/7, 25);

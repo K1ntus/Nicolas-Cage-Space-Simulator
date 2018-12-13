@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Generation;
@@ -21,8 +20,8 @@ public class Sun extends Planet implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Sun(String pathImgPlanets, User user, int x, int y) {
-		super(pathImgPlanets, user, x, y, Generation.size_sun);
+	public Sun(String pathImgPlanets, int x, int y) {
+		super(pathImgPlanets, Players.sun_user, x, y, Generation.size_sun);
 	}
 
 	

@@ -60,7 +60,7 @@ public class MouseListener {
 	            
 				for(Squad s : galaxy.getSquads()) {
 					if(s.squad_selected(orgSceneX, orgSceneY)) {
-						if(s.getRuler().getFaction() == Players.player) {
+						if(s.getRuler().getFaction() == Players.human_faction) {
 							selected_squad = s;
 						}
 					}
@@ -71,7 +71,7 @@ public class MouseListener {
 		            if(p.isInside(orgSceneX, orgSceneY)) {
 		            	selected_planets[0] = p;
 						if(selected_planets[0] == null) {	break;	}
-						if(p.getRuler().getFaction() == Players.player){
+						if(p.getRuler().getFaction() == Players.human_faction){
 							selected_planets[0].getRuler().setSource(p);
 							break;
 						}else {

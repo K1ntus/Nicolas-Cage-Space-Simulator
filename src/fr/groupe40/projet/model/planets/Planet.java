@@ -78,7 +78,7 @@ public abstract class Planet extends Sprite {
 	 * \brief update the garrison value of this planet if not neutral
 	 */
 	public void updateGarrison() {
-    	if(getRuler().getFaction() != Players.neutral) {
+    	if(getRuler().getFaction() != Players.neutral_faction) {
     		if(troups < PlanetsGarrison.max_troups) {
     			
     			troups = troups + produce_rate;	
