@@ -15,6 +15,7 @@ import fr.groupe40.projet.util.constants.Players;
  * @author Sarah Portejoie
  */
 public class PlanetSickness {
+	
 	/**
 	 *  contains the list of planet affected by sickness
 	 */
@@ -43,10 +44,7 @@ public class PlanetSickness {
 							System.out.println("One of your planet has been contaminated. Lowering his production by: " + Constants.planet_sickness_value);
 				}
 			}
-			
 		}
-		
-
 	}
 
 	private void addSickness(Planet p) {
@@ -69,10 +67,18 @@ public class PlanetSickness {
 		this.running = false;
 	}
 
+	/**
+	 * Return if this event is currently running
+	 * @return the running variable
+	 */
 	public boolean isRunning() {
 		return running;
 	}
 
+	/**
+	 * Set the event state 
+	 * @param running
+	 */
 	public void setRunning(boolean running) {
 		this.running = running;
 	}

@@ -442,7 +442,4 @@ public abstract class Sprite implements Serializable {
 	public void setRuler(User ruler) {
 		this.ruler = ruler;
 	}
-
-
-
 }

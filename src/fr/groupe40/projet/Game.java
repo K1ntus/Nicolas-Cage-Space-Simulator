@@ -37,15 +37,9 @@ import javafx.stage.StageStyle;
  *
  */
 public class Game extends Application {
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	/**
-	 *  get the OS type string, used to change the window style
-	 */
-	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	/**
 	 *  manage the user input, currently, only the mouse is managed there
@@ -57,13 +51,36 @@ public class Game extends Application {
 	 */
 	private Galaxy galaxy;
 	
-	private Windows.WindowType window_type = Windows.WindowType.MAIN_MENU;
+	/**
+	 * Main menu
+	 */
 	private MainMenu main_menu = new MainMenu();
+	
+	/**
+	 * Setting menu
+	 */
 	private SettingsMenu setting_menu = new SettingsMenu();
+	
+	/**
+	 * Graphic handler of the game
+	 */
 	private GraphicsContext gc;
+	
+	/**
+	 * Graphic scene of the game
+	 */
 	private Scene scene_game;
+	
+	/**
+	 * Saving/Loading manager
+	 */
 	private DataSerializer saver;
+	
+	/**
+	 * Is true if a game has been loaded
+	 */
 	private boolean game_loaded = false;
+	
 	
 	/**
 	 *  'main' method
@@ -75,6 +92,7 @@ public class Game extends Application {
 		 * So, if that's a windows OS, we re editing
 		 * the window style to remove it
 		 */
+		String OS = System.getProperty("os.name").toLowerCase();
 		if((OS.indexOf("win") >= 0)) {
 			if(Debugging.DEBUG)
 				System.out.println("OS type is windows");
@@ -98,13 +116,13 @@ public class Game extends Application {
 		root.getChildren().add(canvas_mainMenu);
 
 		Scene scene_main_menu = main_menu.getScene();
-        //scene_main_menu.setRoot(root);
+
 		stage.setScene(scene_main_menu);
 		stage.show();
 
 
 		
-		/**	KEYBOARD HANDLER	**/
+		/* KEYBOARD HANDLER */
 		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
 	
 			@Override
@@ -125,12 +143,10 @@ public class Game extends Application {
 				
 			}
 		};
+		
         
 		/*	Rendering, game initialisation, etc */
 		new AnimationTimer() {
-
-			
-			
 			
 			/**
 			 *  game_tick counter for events, etc
@@ -151,13 +167,34 @@ public class Game extends Application {
 			 */
 			private Music soundHandler = new Music(true);
 			
+			/**
+			 * Canvas of the game board
+			 */
 			private Canvas canvas_game;
 
+			/**
+			 * Equals to the current window displayed (ie. setting, main menu or game)
+			 */
+			private Windows.WindowType window_type = Windows.WindowType.MAIN_MENU;
+			
+			/**
+			 * Is true if the board has been pre-initialized
+			 */
 			private boolean game_pre_init_done = false;
+			
+			/**
+			 * Is true if the game has been initialized
+			 */
 			private boolean game_init_done = false;
 			
+			/**
+			 * Generate the planet over the board, used during pre-init to split the calculation
+			 */
 			private GalaxyGenerator gg;
 
+			/**
+			 * Pre-initialize the game board with few elements
+			 */
 			private void pre_init() {
 				
 				/* Initialize ships explosion sound */
@@ -171,6 +208,9 @@ public class Game extends Application {
 					System.out.println("-> Pre-Init done");
 			}
 			
+			/**
+			 * Initialize the game board
+			 */
 			private void init() {
 
 				canvas_game = new Canvas(Generation.width, Generation.height);
@@ -207,6 +247,9 @@ public class Game extends Application {
 					System.out.println("-> Init done");
 			}
 			
+			/**
+			 * Tick updater
+			 */
 			private void run() {
 				game_tick += 1;
 				
@@ -262,6 +305,9 @@ public class Game extends Application {
 				
 			}
 			
+			/**
+			 * Function called to display the setting menu
+			 */
 			private void display_settings_menu() {
 				main_menu.setSettings_menu(false);
 				Canvas canvas_settings = new Canvas(Generation.width, Generation.height);
@@ -277,6 +323,9 @@ public class Game extends Application {
 				stage.show();				
 			}
 			
+			/**
+			 * Apply the setting to the game board (need a total re-init of the game board)
+			 */
 			private void apply_settings_to_game() {
 				System.out.println("applied");
 				
@@ -292,6 +341,9 @@ public class Game extends Application {
 				
 			}
 			
+			/**
+			 * Manage each ticks and the differents screens displayed
+			 */
 			public void handle(long arg0) {	
 				if(window_type == Windows.WindowType.GAME) {
 					if(game_init_done) {

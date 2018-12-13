@@ -64,10 +64,8 @@ final class PirateAssault {
 				
 				pirate_squad.getShips().add(pirate_ship);				
 			}
-			
 		}
-		
 		galaxy.getSquads().add(pirate_squad);
 	}
-
+	
 }

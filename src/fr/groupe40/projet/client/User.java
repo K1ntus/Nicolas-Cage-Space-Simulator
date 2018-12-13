@@ -14,9 +14,6 @@ import fr.groupe40.projet.util.constants.Players;
  */
 public class User implements Serializable{
 	private static final long serialVersionUID = 8499986523207461968L;
-	/**
-	 * 
-	 */
 	
 	/**
 	 *  the faction of this user (-1 => AI, 0 => neutral, >1 => humain)

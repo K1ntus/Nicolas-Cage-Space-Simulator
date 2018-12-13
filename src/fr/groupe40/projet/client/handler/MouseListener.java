@@ -12,7 +12,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
 public class MouseListener {
+	
+	/**
+	 * Used to get the information from the game board on each position, etc
+	 */
 	private Galaxy galaxy;
+	
+	/**
+	 * Contains the scene that handle the mouse events
+	 */
 	private Scene scene;
 
 	/**
@@ -163,8 +171,6 @@ public class MouseListener {
 			}
 			
 		};
-		
-
 
 		scene.setOnScroll(scrollEvent);
 	    scene.setOnMousePressed(mousePressedEvent);

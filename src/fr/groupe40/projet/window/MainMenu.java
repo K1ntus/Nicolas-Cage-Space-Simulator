@@ -1,5 +1,6 @@
 package fr.groupe40.projet.window;
 
+import fr.groupe40.projet.client.Music;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
@@ -142,6 +143,7 @@ public class MainMenu {
 	 */
 	private void handlePlayButton() {
 		play_game = true;		
+		Music.getPlay_button_sound().play();
 	}
 	
 	/**
@@ -149,6 +151,7 @@ public class MainMenu {
 	 */
 	private void handleQuitButton() {
     	System.out.println("Bye !");
+		Music.getQuit_button_sound().play();
     	System.exit(0);		
 	}
 	
@@ -156,6 +159,7 @@ public class MainMenu {
 	 * Function summoned when the setting button is pressed
 	 */
 	private void handleSettingButton() {
+		Music.getSettings_button_sound().play();
     	settings_menu = true;		
 	}
 
