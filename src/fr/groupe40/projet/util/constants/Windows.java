@@ -4,6 +4,7 @@ public final class Windows {
 
     public static final String form_player_name = "Pseudo: ";
     public static final String button_play = 		"    Jouer    ";
+    public static final String button_apply = 		"  Appliquer ";
     public static final String button_settings = 	"  Options  ";
     public static final String button_close = 		"   Fermer  ";
     

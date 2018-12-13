@@ -24,8 +24,9 @@ public class MainMenu {
 	private GridPane grid = new GridPane();
 	
     //private TextField player_nickname_form = new TextField();
-    
+
     private boolean play_game = false;
+    private boolean settings_menu = false;
 	
 
 	public MainMenu() {
@@ -143,6 +144,7 @@ public class MainMenu {
 	
 	private void handleSettingButton() {
     	System.out.println("Not yet implemented");
+    	setSettings_menu(true);
 		// TODO Auto-generated method stub
 		
 	}
@@ -170,6 +172,20 @@ public class MainMenu {
 	 */
 	public void setPlay_game(boolean play_game) {
 		this.play_game = play_game;
+	}
+
+	/**
+	 * @return the settings_menu
+	 */
+	public boolean isSettings_menu() {
+		return settings_menu;
+	}
+
+	/**
+	 * @param settings_menu the settings_menu to set
+	 */
+	public void setSettings_menu(boolean settings_menu) {
+		this.settings_menu = settings_menu;
 	}
 
 }

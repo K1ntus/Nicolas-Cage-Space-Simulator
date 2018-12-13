@@ -62,13 +62,25 @@ public class Galaxy implements Serializable{
 	 * \brief state of the game
 	 */
 	private boolean game_is_over = false;
-	
+
 	/**
 	 * \brief Generate a game board with every parameters randomized
 	 */
 	public Galaxy(GraphicsContext gc) {
 		this.squads = new ArrayList<Squad>();
 		this.planets = generator.getPlanets();
+		this.generator = null;
+		this.gc = gc;
+		
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
+		
+	}
+	/**
+	 * \brief Generate a game board with every parameters randomized
+	 */
+	public Galaxy(GraphicsContext gc, GalaxyGenerator gg) {
+		this.squads = new ArrayList<Squad>();
+		this.planets = gg.getPlanets();
 		this.generator = null;
 		this.gc = gc;
 		
@@ -164,7 +176,7 @@ public class Galaxy implements Serializable{
 	 * \brief update the garrison value of each planets
 	 */
 	public void updateGarrison() {
-		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1) {
+		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
 
 	    	AudioClip sun_explosion_sound = new AudioClip(this.getClass().getResource(Resources.path_sound_sun_explosion).toExternalForm());
 	    	sun_explosion_sound.setVolume(Resources.sun_explosion_volume);
