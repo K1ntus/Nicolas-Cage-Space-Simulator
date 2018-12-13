@@ -152,10 +152,6 @@ public class Game extends Application {
 			 *  game_tick counter for events, etc
 			 */
 			private long game_tick = 0;	//long because counter, had to prevent the overflow case
-			/**
-			 *  contain the sound of a ship collision, set there to not worries about serialization for loading/saving
-			 */
-			private AudioClip mediaPlayer_ship_explosion;
 
 			/**
 			 *  manage the game events
@@ -198,7 +194,6 @@ public class Game extends Application {
 			private void pre_init() {
 				
 				/* Initialize ships explosion sound */
-				mediaPlayer_ship_explosion = soundHandler.generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 				
 				gg = new GalaxyGenerator();
 				
@@ -263,7 +258,7 @@ public class Game extends Application {
 				galaxy.render(gc);
 				
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
-					galaxy.updateSquadPosition(mediaPlayer_ship_explosion);
+					galaxy.updateSquadPosition(Music.getSound_ship_explosion());
 				
 				if(game_tick % Ticks.tick_per_produce == 0)
 					galaxy.updateGarrison();
@@ -287,7 +282,6 @@ public class Game extends Application {
 					galaxy.render(gc);
 					galaxy.renderDefeat(gc);
 					galaxy.setGame_is_over(true);
-					//System.exit(0);
 				}
 				
 				if(galaxy.isGame_is_over()) {

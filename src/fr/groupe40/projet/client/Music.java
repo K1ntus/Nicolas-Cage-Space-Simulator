@@ -14,9 +14,13 @@ public class Music {
 	private static AudioClip quit_button_sound;
 	private static AudioClip play_button_sound;
 	private static AudioClip settings_button_sound;
+	/**
+	 * contain the sound of a ship collision with his destination
+	 */
+	private static AudioClip sound_ship_explosion;
 
 	/**
-	 *  instanciate the music object, and launch or not the main_theme automatically
+	 * Instanciate the music object, and launch or not the main_theme automatically
 	 * @param launch_music Auto-launch main theme if true, else false
 	 */
     public Music(boolean launch_music) {
@@ -27,6 +31,8 @@ public class Music {
 		Music.play_button_sound = generateAudioClip(Resources.path_sound_play, 0.5);
 		Music.quit_button_sound = generateAudioClip(Resources.path_sound_quit, 0.5);
 		Music.settings_button_sound = generateAudioClip(Resources.path_sound_settings, 0.5);
+		Music.sound_ship_explosion = generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
+
 	}
 
     /**
@@ -103,5 +109,19 @@ public class Music {
 	 */
 	public static void setSettings_button_sound(AudioClip settings_button_sound) {
 		Music.settings_button_sound = settings_button_sound;
+	}
+
+	/**
+	 * @return the sound_ship_explosion
+	 */
+	public static AudioClip getSound_ship_explosion() {
+		return sound_ship_explosion;
+	}
+
+	/**
+	 * @param sound_ship_explosion the sound_ship_explosion to set
+	 */
+	public static void setSound_ship_explosion(AudioClip sound_ship_explosion) {
+		Music.sound_ship_explosion = sound_ship_explosion;
 	}
 }
