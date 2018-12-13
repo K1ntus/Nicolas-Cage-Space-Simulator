@@ -41,33 +41,6 @@ public class Game extends Application {
 	}
 	
 	/**
-	 * \brief Board object containing every sprites, etc
-	 */
-	
-	private Galaxy galaxy;
-	
-	
-	/**
-	 * \brief game_tick counter for events, etc
-	 */
-	private long game_tick = 0;	//long because counter, had to prevent the overflow case
-	
-	/**
-	 * \brief manage the game events
-	 */
-	private Events eventManager;	
-	
-	/**
-	 * \brief manage the background game sound + methods to simplify sounds usage
-	 */
-	private Music soundHandler = new Music(true);
-	
-	/**
-	 * \brief contain the sound of a ship collision, set there to not worries about serialization for loading/saving
-	 */
-	private AudioClip mediaPlayer_ship_explosion;
-	
-	/**
 	 * \brief get the OS type string, used to change the window style
 	 */
 	private static String OS = System.getProperty("os.name").toLowerCase();
@@ -76,16 +49,19 @@ public class Game extends Application {
 	 * \brief manage the user input, currently, only the mouse is managed there
 	 */
 	private InteractionHandler interactionHandler;
+
+	/**
+	 * \brief Board object containing every sprites, etc
+	 */
+	private Galaxy galaxy;
 	
 	private Windows.WindowType window_type = Windows.WindowType.MAIN_MENU;
-	private boolean game_pre_init_done = false;
-	private boolean game_init_done = false;
-	private boolean game_loaded = false;
-	
 	private MainMenu main_menu = new MainMenu();
 	private GraphicsContext gc;
 	private Scene scene_game;
 	private DataSerializer saver;
+	private boolean game_loaded = false;
+	
 	/**
 	 * \brief 'main' method
 	 */
@@ -104,9 +80,6 @@ public class Game extends Application {
 			if(Debugging.DEBUG)
 				System.out.println("Non windows OS");
 		}
-		
-		/* Initialize ships explosion sound */
-		mediaPlayer_ship_explosion = soundHandler.generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 
 		/* Window and game kernel creation */
 		stage.setTitle("Nicolas Cage Space Simulator");
@@ -143,6 +116,7 @@ public class Game extends Application {
 				if (e.getCode() == KeyCode.F6) {
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
+					saver = new DataSerializer(Constants.fileName_save, galaxy);
 					game_loaded = true;
 				}
 				
@@ -151,9 +125,40 @@ public class Game extends Application {
         
 		/*	Rendering, game initialisation, etc */
 		new AnimationTimer() {
+
+			
+			
+			
+			/**
+			 * \brief game_tick counter for events, etc
+			 */
+			private long game_tick = 0;	//long because counter, had to prevent the overflow case
+			/**
+			 * \brief contain the sound of a ship collision, set there to not worries about serialization for loading/saving
+			 */
+			private AudioClip mediaPlayer_ship_explosion;
+
+			/**
+			 * \brief manage the game events
+			 */
+			private Events eventManager;	
+			
+			/**
+			 * \brief manage the background game sound + methods to simplify sounds usage
+			 */
+			private Music soundHandler = new Music(true);
+			
 			private Canvas canvas_game;
 
+			private boolean game_pre_init_done = false;
+			private boolean game_init_done = false;
+
 			private void pre_init() {
+				
+				/* Initialize ships explosion sound */
+				mediaPlayer_ship_explosion = soundHandler.generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
+				
+				
 				galaxy = new Galaxy(gc);
 
 				saver = new DataSerializer(Constants.fileName_save, galaxy);

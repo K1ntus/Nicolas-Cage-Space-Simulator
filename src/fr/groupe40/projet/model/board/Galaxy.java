@@ -164,7 +164,7 @@ public class Galaxy implements Serializable{
 	 * \brief update the garrison value of each planets
 	 */
 	public void updateGarrison() {
-		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups && planets.get(0).getRuler().equals(Players.sun_user)) {
+		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1) {
 
 	    	AudioClip sun_explosion_sound = new AudioClip(this.getClass().getResource(Resources.path_sound_sun_explosion).toExternalForm());
 	    	sun_explosion_sound.setVolume(Resources.sun_explosion_volume);

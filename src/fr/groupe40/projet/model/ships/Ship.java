@@ -114,7 +114,7 @@ public class Ship extends Sprite implements Serializable {
 				if(difference >=1) {	//Difference > 1 => kamikaze
 					destination.setTroups(difference);					
 				} else {				//Else, negative or 0 => new leader
-					if(destination.getRuler() != Players.sun_user) {
+					if(!destination.getRuler().equals(Players.sun_user)) {
 							
 						destination.setRuler(this.getRuler());
 						

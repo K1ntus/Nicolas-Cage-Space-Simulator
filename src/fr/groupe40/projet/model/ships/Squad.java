@@ -229,10 +229,16 @@ public class Squad implements Serializable {
 	 */
 	public void updateImage() {
 		for(Ship s : ships) {
+			try {
 			if(destination.getRuler() == Players.human_user)
 				s.setImg_path(Resources.path_img_human_ships);
 			else if(destination.getRuler() == Players.ai_user)
 				s.setImg_path(Resources.path_img_AI_ships);
+			
+			}catch(NullPointerException e) {
+				//Do nothing, ship has reached destination
+			}
+			
 			s.updateImage();	
 		}	
 	}

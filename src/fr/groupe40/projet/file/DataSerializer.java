@@ -13,6 +13,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Players;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -132,28 +133,11 @@ public class DataSerializer {
 	 * @param g Galaxy to be reloaded
 	 */
 	public void reload_image_and_data(Galaxy g) {
-		new_game_loaded = false;
-		for(Planet p : g.getPlanets()) {
-			
-			User u = p.getRuler();
-			if (u.getFaction() == Players.ai) {
-				p.setRuler(Players.ai_user);
-			}else if (u.getFaction() == Players.player) {
-				p.setRuler(Players.human_user);
-			}else {
-				p.setRuler(Players.neutral_user);
-			}
 
-			p.getRuler().setDestination(null);
-			p.getRuler().setSource(null);
-			
-			p.updateImage();
-		}
-		
 		for(Squad s : g.getSquads()) {
 			ArrayList<Ship> ships = s.getShips();
 			try {
-				User u = ships.get(0).getRuler();
+				User u = ships.get(0).getRuler();	//Get the ruler of the first ship of the squad
 				if (u.getId() < 0) {
 					switch(u.getId()) {
 					case Players.event_id:
@@ -175,14 +159,47 @@ public class DataSerializer {
 					s.update_ruler(Players.neutral_user);
 				}
 			} catch (IndexOutOfBoundsException e) {
-				
+				continue;	//Every ships of the squad has reached dest, will be automatically removed by the game updater
 			}
-			
 			
 			s.updateImage();
 		}
 		
+		if(Debugging.DEBUG) {
+			System.out.println("Squads has been loaded ...");
+			System.out.println("Loading planets ...");			
+		}
+		
+		for(Planet p : g.getPlanets()) {		
+					
+			switch(p.getRuler().getId()) {
+				case Players.event_id:
+					p.setRuler(Players.event_user);
+					break;
+				case Players.sun_id:
+					System.out.println("sun");
+					p.setRuler(Players.sun_user);
+					break;
+				case Players.pirate_id:
+					p.setRuler(Players.pirate_user);
+					break;
+				case Players.player:
+					p.setRuler(Players.human_user);
+					break;
+				case Players.neutral:
+					p.setRuler(Players.neutral_user);
+					break;
+				default:
+					p.setRuler(Players.ai_user);
+					break;
+			}
 
+			
+			p.updateImage();
+		}
+		
+		if(Debugging.DEBUG) 
+			System.out.println("Planets has been loaded ...");
 	}
 
 	public boolean isNew_game_loaded() {

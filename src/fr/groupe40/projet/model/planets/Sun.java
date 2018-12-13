@@ -7,9 +7,9 @@ import java.util.Iterator;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -28,10 +28,10 @@ public class Sun extends Planet implements Serializable{
 	
 	@Override
 	public boolean isInside(double x, double y) {
-		if(isInside(x, y, 0, 0)) {
-			if(Debugging.DEBUG) {
+		if(isInside(x, y, 0, 0) && this.getRuler().equals(Players.sun_user)) {
+			//if(Debugging.DEBUG) {
 				System.out.println("Vous avez clique sur le soleil");
-			}
+			//}
 			return true;
 		}
 		return false;
@@ -66,7 +66,7 @@ public class Sun extends Planet implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Sun <" + getX() + ", " + getY() + "> ";
+		return "Sun <" + getX() + ", " + getY() + "> - Ruled by id: " +this.getRuler().getId();
 	}
 
 
