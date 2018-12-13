@@ -52,7 +52,7 @@ public class Music {
     }
     
     /**
-     *  return an audioclip from a path to the file and his volume
+     *  return an audio clip from a path to the file and his volume
      * @param path	path to the media file
      * @param volume	volume wanted of this sound (between 0 and 1, usually 0.5 is ok)
      * @return

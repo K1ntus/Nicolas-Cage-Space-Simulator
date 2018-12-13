@@ -26,7 +26,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -191,9 +190,8 @@ public class Game extends Application {
 			/**
 			 * Pre-initialize the game board with few elements
 			 */
-			private void pre_init() {
-				
-				/* Initialize ships explosion sound */
+			private void pre_init() {	
+				canvas_game = new Canvas(Generation.width, Generation.height);
 				
 				gg = new GalaxyGenerator();
 				
@@ -208,7 +206,6 @@ public class Game extends Application {
 			 */
 			private void init() {
 
-				canvas_game = new Canvas(Generation.width, Generation.height);
 				
 				root.getChildren().remove(canvas_mainMenu);
 				root.getChildren().add(canvas_game);
@@ -285,7 +282,9 @@ public class Game extends Application {
 				}
 				
 				if(galaxy.isGame_is_over()) {
-					System.out.println("Generating new board");
+					System.out.println(
+							"Partie terminée\n"
+							+ "Generating new board ...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
@@ -295,8 +294,6 @@ public class Game extends Application {
 					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 					interactionHandler.exec();					
 				}
-				
-				
 			}
 			
 			/**
@@ -320,9 +317,7 @@ public class Game extends Application {
 			/**
 			 * Apply the setting to the game board (need a total re-init of the game board)
 			 */
-			private void apply_settings_to_game() {
-				System.out.println("applied");
-				
+			private void apply_settings_to_game() {				
 				setting_menu.setApplied(false);
 				main_menu.setPlay_game(false);
 				main_menu.setSettings_menu(false);

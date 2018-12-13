@@ -167,19 +167,6 @@ public class MainMenu {
 	 * Function summoned when the howto button is pressed
 	 */
 	private void handleHowToPlayButton() {
-		/*
-		TextInputDialog dialog = new TextInputDialog("aaa");
-		dialog.setTitle("title bbb");
-		dialog.setHeaderText("Veuillez indiquer le nombre de matelas total");
-
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Comment Jouer");
-		alert.setHeaderText("Valeur invalide");
-		alert.setContentText("Vous avez indique un nombre de matelas trop faible");
-
-		alert.showAndWait();
-		*/
-
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         //dialog.initOwner(primaryStage);
@@ -196,7 +183,6 @@ public class MainMenu {
         dialog.setResizable(false);
         dialog.setTitle("How to play");
         dialog.show();
-
 	}
 
 	/**

@@ -48,7 +48,7 @@ public class User implements Serializable{
 	public User(int faction, int id) {
 		this.faction = faction;
 		this.id = id;
-		setLost(false);
+		this.lost = false;
 		percent_of_troups_to_send = 100;
 	}
 	
@@ -69,7 +69,7 @@ public class User implements Serializable{
 		}
 		percent_of_troups_to_send = 100;
 
-		setLost(false);
+		this.lost = false;
 		source = null;
 		destination = null;
 	}
