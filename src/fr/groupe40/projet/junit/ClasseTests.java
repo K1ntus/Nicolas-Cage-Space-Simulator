@@ -11,8 +11,13 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.RoundPlanet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
+<<<<<<< HEAD
 import fr.groupe40.projet.util.constants.Constants;
+=======
+import fr.groupe40.projet.util.constants.Generation;
+>>>>>>> masterrace
 
+@SuppressWarnings("deprecation")
 public class ClasseTests {
 
 	
@@ -113,7 +118,11 @@ public class ClasseTests {
 	@Test
 	public void testisInside2() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
+<<<<<<< HEAD
 		 assert false == tester.isInside(500,500, Constants.size_minimal_planets, Constants.size_minimal_planets);
+=======
+		 assertEquals(false ,tester.isInside(500,500, Generation.size_minimal_planets, Generation.size_minimal_planets));
+>>>>>>> masterrace
 		
 	}
 	
@@ -124,7 +133,11 @@ public class ClasseTests {
 	@Test
 	public void testisInside3() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
+<<<<<<< HEAD
 		 assert true == tester.isInside(1,1, Constants.size_minimal_planets, Constants.size_maximal_planets) ;
+=======
+		 assertEquals(true ,tester.isInside(1,1, Generation.size_minimal_planets, Generation.size_maximal_planets));
+>>>>>>> masterrace
 	}
 	
 	

@@ -3,7 +3,7 @@ package fr.groupe40.projet.model;
 import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Generation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -18,42 +18,42 @@ public abstract class Sprite implements Serializable {
 	private static final long serialVersionUID = 361050239890707789L;
 	
 	/**
-	 * \brief his image to display
+	 *  his image to display
 	 */
 	private transient Image image;	//unserializable
 	
 	/**
-	 * \brief his img path
+	 *  his img path
 	 */
 	private String img_path;
 	
 	/**
-	 * \brief his width & height
+	 *  his width & height
 	 */
 	private double width, height;
 	
 	/**
-	 * \brief x and y position
+	 *  x and y position
 	 */
 	private double x, y;
 	
 	/**
-	 * \brief maximal x and y position
+	 *  maximal x and y position
 	 */
 	private double maxX, maxY;
 	
 	/**
-	 * \brief minimal x and y position
+	 *  minimal x and y position
 	 */
 	private double minX, minY;
 
 	/**
-	 * \brief the ruler of this sprites (Planets, Ship, ...)
+	 *  the ruler of this sprites (Planets, Ship, ...)
 	 */
 	private User ruler;
 
 	/**
-	 * \brief Create a sprite from an image path, a ruler and if its a planets or not
+	 *  Create a sprite from an image path, a ruler and if its a planets or not
 	 * @param path Path to the image file
 	 * @param ruler Ruler of this sprite
 	 * @param isPlanet Its a planet or not
@@ -61,30 +61,30 @@ public abstract class Sprite implements Serializable {
 	public Sprite(String path, User ruler, boolean isPlanet) {
 		this.img_path = path;
 		
-		width = Constants.size_squads;
-		setMaxX(Constants.width - width);
-		setMaxY(Constants.height - height);
+		width = Generation.size_squads;
+		setMaxX(Generation.width - width);
+		setMaxY(Generation.height - height);
 
 		this.ruler = ruler;
 		
 		if(isPlanet) {
-			width = Math.random() * Constants.size_maximal_planets  + Constants.size_minimal_planets;
-			if(width > Constants.size_maximal_planets)
-				width = Constants.size_maximal_planets;
+			width = Math.random() * Generation.size_maximal_planets  + Generation.size_minimal_planets;
+			if(width > Generation.size_maximal_planets)
+				width = Generation.size_maximal_planets;
 
-			setMaxX(Constants.width - width - Constants.right_margin_size);
-			setMaxY(Constants.height - height - Constants.bottom_margin_size);
+			setMaxX(Generation.width - width - Generation.right_margin_size);
+			setMaxY(Generation.height - height - Generation.bottom_margin_size);
 		}
 
-		minY = Constants.top_margin_size - height;
-		minX = Constants.left_margin_size - width;
+		minY = Generation.top_margin_size - height;
+		minX = Generation.left_margin_size - width;
 		height = width;			
 		
 		updateImage();
 	}
 
 	/**
-	 * \brief Update the image linked to a sprite
+	 *  Update the image linked to a sprite
 	 */
 	public void updateImage() {
 		try {
@@ -95,7 +95,7 @@ public abstract class Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Set the x and y position of a sprite
+	 *  Set the x and y position of a sprite
 	 * @param x New x position
 	 * @param y New y position
 	 */
@@ -105,7 +105,7 @@ public abstract class Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Return the distance between a sprite and a 2d coord.
+	 *  Return the distance between a sprite and a 2d coord.
 	 * @param x 
 	 * @param y
 	 * @return Distance between those 2 positions
@@ -117,7 +117,7 @@ public abstract class Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Return the distance between 2 dots
+	 *  Return the distance between 2 dots
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -130,7 +130,7 @@ public abstract class Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Calculate the distance between 2 sprites
+	 *  Calculate the distance between 2 sprites
 	 * @param p Second sprite to compare with
 	 * @return The distance
 	 */
@@ -139,7 +139,7 @@ public abstract class Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Verify if a sprite is not out of bounds
+	 *  Verify if a sprite is not out of bounds
 	 */
 	public void validatePosition() {
 		if (x + width >= getMaxX()) {
@@ -152,7 +152,7 @@ public abstract class Sprite implements Serializable {
 		}
 
 		if (y + height >= getMaxY()) {
-			y = getMaxY() - height - Constants.bottom_margin_size;
+			y = getMaxY() - height - Generation.bottom_margin_size;
 		} else if (y <= minY) {
 			y = minY;
 		}else if (y < 0) {
@@ -161,7 +161,7 @@ public abstract class Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Check if a rectangle intersect a circle
+	 *  Check if a rectangle intersect a circle
 	 * @param x_left
 	 * @param y_top
 	 * @param x_right
@@ -201,7 +201,7 @@ public abstract class Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Check if a sprite intersect another circle from a sprite
+	 *  Check if a sprite intersect another circle from a sprite
 	 * In fact, we're generating a circle around a sprite to check the distance between each others
 	 * @param p a sprite
 	 * @return true if the sprite is in the circle else false
@@ -217,7 +217,7 @@ public abstract class Sprite implements Serializable {
 	}
 
 	/**
-	 * \brief Check if a rectangle is inside another
+	 *  Check if a rectangle is inside another
 	 * @param x	the x-top corner
 	 * @param y the y-top corner
 	 * @param width the width of the rectangle
@@ -227,7 +227,7 @@ public abstract class Sprite implements Serializable {
 	public abstract boolean isInside(double x, double y, double width, double height);
 	
 	/**
-	 * \brief Check if a pair of pos is inside another
+	 *  Check if a pair of pos is inside another
 	 * @param x
 	 * @param y
 	 * @return
@@ -235,13 +235,30 @@ public abstract class Sprite implements Serializable {
 	public abstract boolean isInside(double x, double y);
 	
 	/**
-	 * \brief Check if a sprite directly intersect another one
+	 *  Check if a sprite directly intersect another one
 	 * @param s the sprite to compare with
 	 * @return true if the sprite is inside, else false
 	 */
 	public abstract boolean isInside(Sprite s);
+	
+
 	/**
-	 * \brief Set the position of a sprite then validate his position
+	 *  check if two sprite are equals, should be abstract
+	 * @param s the sprite to compare with
+	 * @return true if both are the same
+	 */
+	public boolean equals(Sprite s) {
+		User user1 = this.getRuler();
+		User user2 = s.getRuler();
+		
+		if (!user1.equals(user2) || this.x != s.x || this.y != s.y) {
+			return false;
+		}
+		return false;
+	}
+	
+	/**
+	 *  Set the position of a sprite then validate his position
 	 * @param x
 	 * @param y
 	 */
@@ -252,7 +269,7 @@ public abstract class Sprite implements Serializable {
 	}
 
 	/**
-	 * \brief Render the image of this sprite
+	 *  Render the image of this sprite
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
@@ -263,7 +280,7 @@ public abstract class Sprite implements Serializable {
 	/* Getter & Setter */
 
 	/**
-	 * \brief convert the object to string with his 2D position
+	 *  convert the object to string with his 2D position
 	 */
 	public String toString() {
 		return "Sprite<" + x + ", " + y + ">";

@@ -6,90 +6,152 @@ import java.util.Iterator;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.RoundPlanet;
-
 import fr.groupe40.projet.model.planets.SquarePlanet;
+import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 
 /**
- * \brief Galaxy Planets Generator
+ *  Galaxy Planets Generator
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
  */
-@SuppressWarnings("unused")
 public class GalaxyGenerator {
 	/**
-	 * \brief the results planets array that has been generated
+	 *  the results planets array that has been generated
 	 */
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
 	
 	/**
-	 * \brief Create and Generate the board
+	 *  Create and Generate the board
 	 */
 	public GalaxyGenerator() {
+		if(Constants.sun_enabled)
+			generateSun();
 		generatePlanets();
 	}
 
-	/* Planets Generation */
 	/**
-	 * \brief Generate the planets for the galaxy initialization
+	 *  Generate a sun in the center of the board
+	 */
+	public void generateSun() {
+		Planet sun = new Sun(Resources.path_img_sun, Generation.width/2, Generation.height/2);
+		sun.updateImage();
+		sun.setX(sun.getX() - sun.width()/2);
+		sun.setY(sun.getY() - sun.width()/2);
+		sun.setTroups(PlanetsGarrison.sun_troups);
+		planets.add(sun);
+	}
+
+	/* Planets Generation */
+
+	/**
+	 *  return a randomly string path for round planet type
+	 * @return the path of this ressource
+	 */
+	private String getRandomRoundPlanetImgPath() {
+		double rand= Math.random();
+		
+		if(rand < 0.5)
+			return Resources.path_img_square_time_night;
+		return Resources.path_img_square_basic;
+	}
+	
+	/**
+	 *  return a randomly string path for square planet type
+	 * @return the path of this ressource
+	 */
+	private String getRandomSquarePlanetImgPath() {
+		double rand= Math.random();
+
+		if(rand < 0.25)
+			return Resources.path_img_round_planet2;
+		else if(rand < 0.5)
+			return Resources.path_img_round_doge;
+		else if(rand < 0.75)
+			return Resources.path_img_round_smoke;
+		return Resources.path_img_round_kfc_planet;
+	}
+	
+	/**
+	 *  return a randomly generated planet type (ie. round or square)
+	 * @return the planet generated
+	 */
+	private Planet getRandomPlanet() {
+		double rand = Math.random();
+		
+		if(rand < 0.5)
+			return new RoundPlanet(getRandomRoundPlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
+		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
+	}
+	
+	/**
+	 *  Generate the planets for the galaxy initialization
 	 */
 	public void generatePlanets() {
-		double width = Math.random() * Constants.size_maximal_planets *0.25 + Constants.size_minimal_planets;
+		double width = Math.random() * Generation.size_maximal_planets *0.25 + Generation.size_minimal_planets;
 		double height = width;
 		//Sprite(String path, double width, double height, double maxX, double maxY) 
 
 		
-		for(int i = 0; i < Constants.nb_planets_tentatives; i++) {
-			double y = (Math.random() * (Constants.height - (height + Constants.bottom_margin_size)));
+		for(int i = 0; i < Generation.nb_planets_tentatives; i++) {
+			double y = (Math.random() * (Generation.height - (height + Generation.bottom_margin_size)));
+			Planet p = getRandomPlanet();
+			/*
 			Planet p;
-			if(!Constants.DEBUG)
+			if(Constants.DEBUG)
 				p = new RoundPlanet(Constants.path_img_round_kfc_planet, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
 			else
 				p = new SquarePlanet(Constants.path_img_square_nicolas_cage, new User(Constants.neutral_user), (int) (Constants.left_margin_size + Constants.size_squads), 0);
-
+			 */
 			p.setY(y);
 			p.validatePosition();
 			
 			if(testPlacement(p)) {
-				getPlanets().add(p);
+				planets.add(p);
 			}
 		}
 		
-		if(getPlanets().size() < Constants.min_numbers_of_planets) {	//si moins de 2 planetes
+		if(planets.size() < Generation.min_numbers_of_planets) {	//si moins de 2 planetes
 			System.out.println("Impossible de generer un terrain minimal");
 			System.exit(-1);		//quitte le prgm
 		}else {		//On attribue 2 planetes, une a l'ia, une au joueur
-			getPlanets().get(1).setRuler(Constants.human_user);
-			if(Constants.is_ai)
-				getPlanets().get(2).setRuler(Constants.ai_user);
+			planets.get(1).setRuler(Players.human_user);
+			planets.get(1).setImg_path(Resources.path_img_planet_human);
+			planets.get(1).updateImage();
+			if(Constants.ai_enabled)
+				planets.get(2).setRuler(Players.ai_user);
 		}
 		
 		
 	}
 
 	/**
-	 * \brief Test the valid position of a planet compare to each others.
+	 *  Test the valid position of a planet compare to each others.
 	 * @param p The planet we are trying to generate
 	 * @return false if not able to generate this planet, else true
 	 */
 	private boolean testPlacement(Planet p) {
-		Iterator<Planet> it = getPlanets().iterator();
+		Iterator<Planet> it = planets.iterator();
 		
 		while (it.hasNext()) {
-			if(p.getY() > Constants.height - Constants.bottom_margin_size - Constants.size_squads - p.height()) {
+			if(p.getY() > Generation.height - Generation.bottom_margin_size - Generation.size_squads - p.height()) {
 				return false;
 			}
 			
 			Planet p_already_placed = it.next();
 			
-			if(p_already_placed.isInside(p) || p_already_placed.intersectCircle(p, p.width()/2 + Constants.minimal_distance_between_planets)) {
+			if(p_already_placed.isInside(p) || p_already_placed.intersectCircle(p, p.width()/2 + Generation.minimal_distance_between_planets)) {
 				if(p.updatePlanetePosition() == -1) {
 					System.out.println("unable to generate this planet");
 					return false;
 				}
 				
-				it = getPlanets().iterator();
+				it = planets.iterator();
 			}
 		}
 		

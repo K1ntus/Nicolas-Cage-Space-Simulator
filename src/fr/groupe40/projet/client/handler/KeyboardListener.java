@@ -2,21 +2,16 @@ package fr.groupe40.projet.client.handler;
 
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
-import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Constants;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 /**
- * \brief Manage the keyboard events
+ *  Manage the keyboard events
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
  */
 @Deprecated
+@SuppressWarnings("unused")
 public class KeyboardListener {
 	private Galaxy galaxy;
 	private Scene scene;
@@ -38,7 +33,7 @@ public class KeyboardListener {
 
 
 	/**
-	 * \brief Manage the saver/loader
+	 *  Manage the saver/loader
 	 */
 	public void launch() {
 	}

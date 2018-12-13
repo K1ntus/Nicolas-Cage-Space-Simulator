@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Constants;
-import javafx.scene.canvas.GraphicsContext;
+import fr.groupe40.projet.util.constants.Players;
 
 /**
  * 
@@ -20,32 +19,32 @@ public class User implements Serializable{
 	 */
 	
 	/**
-	 * \brief the faction of this user (-1 => AI, 0 => neutral, >1 => humain)
+	 *  the faction of this user (-1 => AI, 0 => neutral, >1 => humain)
 	 */
 	private int faction;
 	
 	/**
-	 * \brief the id of this user
+	 *  the id of this user
 	 */
 	private int id;
 	
 	/**
-	 * \brief percentage of troups to send per planet-launch
+	 *  percentage of troups to send per planet-launch
 	 */
 	private int percent_of_troups_to_send;
 	
 	/**
-	 * \brief his last fleet travel
+	 *  his last fleet travel
 	 */
 	private Planet source,destination;
 	
 	/**
-	 * \brief this user has lost or not
+	 *  this user has lost or not
 	 */
 	private boolean lost;
 	
 	/**
-	 * \brief Create a new user from a faction and an id
+	 *  Create a new user from a faction and an id
 	 * @param faction the faction of this user
 	 * @param id the id of this user
 	 */
@@ -57,19 +56,19 @@ public class User implements Serializable{
 	}
 	
 	/**
-	 * \brief Create a user only from his id
+	 *  Create a user only from his id
 	 * @param faction the faction of this player
 	 */
 	public User(int faction) {
 		this.faction = faction;
 		
 		switch(faction) {
-		case Constants.ai:
-			id = Constants.ai; break;
-		case Constants.neutral:
-			id = Constants.neutral; break;
-		case Constants.player:
-			id = Constants.player; break;
+		case Players.ai_faction:
+			id = Players.ai_faction; break;
+		case Players.neutral_faction:
+			id = Players.neutral_faction; break;
+		case Players.human_faction:
+			id = Players.human_faction; break;
 		}
 		percent_of_troups_to_send = 100;
 
@@ -79,7 +78,7 @@ public class User implements Serializable{
 	}
 
 	/**
-	 * \brief create an user from an user
+	 *  create an user from an user
 	 * @param user to copy parameters from
 	 */
 	public User(User user) {
@@ -91,7 +90,7 @@ public class User implements Serializable{
 	
 	/* AI handler */
 	/**
-	 * \brief send fleet automatization for ai user
+	 *  send fleet automatization for ai user
 	 * @param source the source planet
 	 * @param destination the destination planet
 	 * @return the squad that has been send, else null
@@ -113,7 +112,7 @@ public class User implements Serializable{
 	
 	
 	/**
-	 * \brief return the faction of an user
+	 *  return the faction of an user
 	 * @return faction
 	 */
 	public int getFaction() {
@@ -121,7 +120,7 @@ public class User implements Serializable{
 	}
 
 	/**
-	 * \brief set the faction of an user
+	 *  set the faction of an user
 	 * @param faction his new faction
 	 */
 	public void setFaction(int faction) {
@@ -129,7 +128,7 @@ public class User implements Serializable{
 	}
 
 	/**
-	 * \brief return the id of an user
+	 *  return the id of an user
 	 * @return id
 	 */
 	public int getId() {
@@ -137,7 +136,7 @@ public class User implements Serializable{
 	}
 
 	/**
-	 * \brief set a new id for an user
+	 *  set a new id for an user
 	 * @param id
 	 */
 	public void setId(int id) {
@@ -193,7 +192,7 @@ public class User implements Serializable{
 	}
 	
 	/**
-	 * \brief return if this user has lost or not
+	 *  return if this user has lost or not
 	 * @return lost
 	 */
 	public boolean isLost() {
@@ -201,7 +200,7 @@ public class User implements Serializable{
 	}
 	
 	/**
-	 * \brief set the lost state of an user
+	 *  set the lost state of an user
 	 * @param lost
 	 */
 	public void setLost(boolean lost) {
@@ -209,7 +208,7 @@ public class User implements Serializable{
 	}
 	
 	/**
-	 * \brief compare two user
+	 *  compare two user
 	 * @param u
 	 * @return true if they're both equals, else false
 	 */

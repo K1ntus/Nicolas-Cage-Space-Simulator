@@ -3,8 +3,9 @@ package fr.groupe40.projet.client.handler;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Direction;
+import fr.groupe40.projet.util.constants.Players;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -15,23 +16,23 @@ public class MouseListener {
 	private Scene scene;
 
 	/**
-	 * \brief for the drag&drop, the next x&y position
+	 *  for the drag&drop, the next x&y position
 	 */
 	private double orgSceneX, orgSceneY;
 	
 	/**
-	 * \brief the source and destination planets selected
+	 *  the source and destination planets selected
 	 */
 	private Planet[] selected_planets = {null, null};
 	
 	/**
-	 * \brief squads selected by the user
+	 *  squads selected by the user
 	 */
 	private Squad selected_squad;
 	
 	
 	/**
-	 * \brief create the object with the minimal requirement
+	 *  create the object with the minimal requirement
 	 * @param galaxy to check the elements in the board
 	 * @param scene linking the handler to this scene
 	 */
@@ -42,11 +43,11 @@ public class MouseListener {
 
 	
 	/**
-	 * \brief launch the mouse handler
+	 *  launch the mouse handler
 	 */
 	public void launch() {
 		/**
-		 * \brief Manage the initial mouse drag event
+		 *  Manage the initial mouse drag event
 		 */
 		EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
 	        @Override
@@ -59,7 +60,7 @@ public class MouseListener {
 	            
 				for(Squad s : galaxy.getSquads()) {
 					if(s.squad_selected(orgSceneX, orgSceneY)) {
-						if(s.getRuler().getFaction() == Constants.player) {
+						if(s.getRuler().getFaction() == Players.human_faction) {
 							selected_squad = s;
 						}
 					}
@@ -70,11 +71,11 @@ public class MouseListener {
 		            if(p.isInside(orgSceneX, orgSceneY)) {
 		            	selected_planets[0] = p;
 						if(selected_planets[0] == null) {	break;	}
-						if(p.getRuler().equals(Constants.human_user)){
+						if(p.getRuler().getFaction() == Players.human_faction){
 							selected_planets[0].getRuler().setSource(p);
 							break;
 						}else {
-							if(Constants.DEBUG) {
+							if(Debugging.DEBUG) {
 								System.out.println("Vous n'etes pas le dirigeant de cette colonie");
 							}
 						}
@@ -86,7 +87,7 @@ public class MouseListener {
 	    };
 
 		/**
-		 * \brief Manage the drop of the mouse
+		 *  Manage the drop of the mouse
 		 */
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override
@@ -131,10 +132,10 @@ public class MouseListener {
 						return;
 					}
 				}
-	        	if(selected_planets[0] == null || selected_planets[1] == null || selected_planets[0].getRuler() != Constants.human_user) {	
+	        	if(selected_planets[0] == null || selected_planets[1] == null || selected_planets[0].getRuler() != Players.human_user) {	
 	        		return;
 	        	}else {
-					Squad s = new Squad(Constants.human_user.getPercent_of_troups_to_send(), selected_planets[0], selected_planets[1]);
+					Squad s = new Squad(Players.human_user.getPercent_of_troups_to_send(), selected_planets[0], selected_planets[1]);
 					//s.sendFleet(source, destination, Constants.human_user.getPercent_of_troups_to_send());
 					galaxy.getSquads().add(s);
 
@@ -146,7 +147,7 @@ public class MouseListener {
 		};
 		
 		/**
-		 * \brief Manage the scroll event
+		 *  Manage the scroll event
 		 */
 		EventHandler<ScrollEvent> scrollEvent = new EventHandler<ScrollEvent>() {
 			@Override

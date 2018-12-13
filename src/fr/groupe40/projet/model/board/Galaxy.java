@@ -7,19 +7,25 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 /**
- * \brief 'Board' class. It contains the data of the game as ships, planets, ...
+ *  'Board' class. It contains the data of the game as ships, planets, ...
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -28,66 +34,91 @@ public class Galaxy implements Serializable{
 	private static final long serialVersionUID = 3668540725184418675L;
 
 	/**
-	 * \brief Array with every planet of the board
+	 *  Array with every planet of the board
 	 */
 	private ArrayList <Planet> planets;
 
 	/**
-	 * \brief Array with every squads of the board
+	 *  Array with every squads of the board
 	 */
 	private ArrayList <Squad> squads;
 
 	/**
-	 * \brief board generator
+	 *  board generator
 	 */
 	private GalaxyGenerator generator = new GalaxyGenerator();
 
 	/**
-	 * \brief background image
+	 *  background image
 	 */
 	private transient Image background;
 	
 	/**
-	 * \brief Generate a game board with every parameters randomized
+	 *  graphical environnement
 	 */
-	public Galaxy() {
+	private transient GraphicsContext gc;
+	
+	/**
+	 *  state of the game
+	 */
+	private boolean game_is_over = false;
+
+	/**
+	 *  Generate a game board with every parameters randomized
+	 */
+	public Galaxy(GraphicsContext gc) {
 		this.squads = new ArrayList<Squad>();
 		this.planets = generator.getPlanets();
 		this.generator = null;
+		this.gc = gc;
 		
-		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
+		
+	}
+	/**
+	 *  Generate a game board with every parameters randomized
+	 */
+	public Galaxy(GraphicsContext gc, GalaxyGenerator gg) {
+		this.squads = new ArrayList<Squad>();
+		this.planets = gg.getPlanets();
+		this.generator = null;
+		this.gc = gc;
+		
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
 		
 	}
 
 	/**
-	 * \brief Generate a game board from another
+	 *  Generate a game board from another
 	 * @param g The game board to copy from
 	 */
-	public Galaxy(Galaxy g) {
+	public Galaxy(Galaxy g, GraphicsContext gc) {
 		this.planets = g.planets;
 		this.squads = g.squads;
 		this.generator = null;
-		
-		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
+		this.gc = gc;
+
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
 	}
 
 	/**
-	 * \brief Generate a game board from an array of squads and planets
+	 *  Generate a game board from an array of squads and planets
 	 * @param planets Planets that we want to have
 	 * @param squads Squads already present
 	 */
-	public Galaxy(List<Planet> planets, List<Squad> squads) {
+	public Galaxy(List<Planet> planets, List<Squad> squads, GraphicsContext gc) {
 		this.squads = (ArrayList<Squad>) squads;
 		this.planets = generator.getPlanets();
 		this.generator = null;
+		this.gc = gc;
 		
-		setBackground(new Image(Constants.path_img_background, Constants.width, Constants.height, false, false, true));
+		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
 		
 	}
 	
 	/* Render & Game Update */
 	/**
-	 * \briefMain rendering function
+	 * Main rendering function
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
@@ -100,20 +131,23 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Main update function, manage AI, squads and hasLost
+	 *  Main update function, manage AI, squads and hasLost
 	 */
-	public void updateSquadPosition() {
+	public void updateSquadPosition(AudioClip mediaPlayer_boom) {
 		for(Squad s : squads) {
 			if(s==null) {	squads.remove(s);	continue;}
-			s.update_all_positions(planets);			
+			s.update_all_positions(planets, mediaPlayer_boom);			
 		}
 
-		userHasLost(Constants.ai_user);
+		if(userHasLost(Players.ai_user)) {
+			renderWinner(gc);		
+			game_is_over = true;
+		}
 	}
 	
 	/*	AI	*/
 	/**
-	 * \brief Manage the AI to send fleets
+	 *  Manage the AI to send fleets
 	 */
 	public void updateAI() {
 		Planet source, destination;
@@ -121,7 +155,7 @@ public class Galaxy implements Serializable{
 		for(Planet p : planets) {
 			User ruler = p.getRuler();
 			
-			if(ruler.getId() < 0) {	//0 = neutral, >0 human, <0 bot
+			if(ruler.getId() < 0 && ruler.getFaction() == Players.ai_faction) {	//0 = neutral, >0 human, <0 bot
 				source = p;
 				
 				for(Planet p2 : planets) {	//Check again the planets list
@@ -139,15 +173,25 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief update the garrison value of each planets
+	 *  update the garrison value of each planets
 	 */
 	public void updateGarrison() {
+		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
+
+	    	AudioClip sun_explosion_sound = new AudioClip(this.getClass().getResource(Resources.path_sound_sun_explosion).toExternalForm());
+	    	sun_explosion_sound.setVolume(Resources.sun_explosion_volume);
+
+	    	sun_explosion_sound.play(); 
+			Sun.sun_destroyed(planets, squads, gc);
+			planets.remove(0);
+		}
+		
 		for(Planet p : planets)
 			p.updateGarrison();	
 	}
 
 	/**
-	 * \brief send all a new wave if need for each squads
+	 *  send all a new wave if need for each squads
 	 */
 	public void updateWavesSending() {
 		for(Squad s : squads) {
@@ -158,34 +202,34 @@ public class Galaxy implements Serializable{
 	
 	/* Defeat handler */
 	/**
-	 * \brief Check if an user has lost
+	 *  Check if an user has lost
 	 * @param u the user to check
 	 * @return true if he has last, else false
 	 */
-	public boolean userHasLost(User u) {	//S il existe au moins une planete lui appartenant -> pas perdu
+	public boolean userHasLost(User u) {	
 		if(u.isLost()) {	//if user already registered has loser
+			System.out.println("ai: "+u.toString()+" has lost");
 			return true;
 		}
 		
 		int id = u.getId();
 		
-		for(Planet p : planets) {
+		for(Planet p : planets) { //if this user still have at least ONE planet, then doesnt has lost
 			int ruler_id = p.getRuler().getId();
 			if(ruler_id == id) {
 				return false;
 			}
 		}
 		
-		for(Squad s : squads) {
-			User ruler = s.getRuler();
-			int ruler_id = 0;
-			if(ruler != null)
-				ruler_id = ruler.getId();
-			else
+		for(Squad s : squads) {		//if this user still have at least ONE squad, then doesnt has lost	
+			try {
+				User ruler = s.getRuler();
+				int ruler_id = ruler.getId();
+				if(ruler_id == id) 
+					return false;
 				continue;
-			
-			if(ruler_id == id) {
-				return false;
+			}catch(NullPointerException e) {
+				continue;
 			}
 		}
 		
@@ -196,12 +240,13 @@ public class Galaxy implements Serializable{
 	
 	/* Client handler */
 	/**
-	 * \brief handle the scrolls event to change the percent of a fleet to send
+	 *  handle the scrolls event to change the percent of a fleet to send
 	 * @param action The scroll action (up or down case)
 	 */
 	public void clientScrollHandler(Direction direction) {
-		User u = Constants.human_user;
+		User u = Players.human_user;
 		int percent = u.getPercent_of_troups_to_send();
+		
 		switch(direction) {
 			case DOWN://lower
 				u.setPercent_of_troups_to_send(percent - 5); break;
@@ -214,7 +259,7 @@ public class Galaxy implements Serializable{
 	
 	/* Collisions Between Ships & Planets */
 	/**
-	 * \brief Manage the collisions between squads & intermediate planets
+	 *  Manage the collisions between squads & intermediate planets
 	 * @param s The squad to manage
 	 * @param p The planet to test collision with
 	 */
@@ -255,21 +300,22 @@ public class Galaxy implements Serializable{
 			}
 		}
 		
-		if(p.isInside(x+deltaX,y+deltaY,width,height))
+		if(p.isInside(x+deltaX,y+deltaY,width,height)) {
 			return;
+		}
 		s.setPosition(x+deltaX, y+deltaY);
 			
 	}
 
 	/**
-	 * \brief check if there s a collision between a squad and every planet on board
+	 *  check if there s a collision between a squad and every planet on board
 	 * @param s the squad to check
 	 * @return true if there s a collision, else false
 	 */
 	public boolean isCollision(Ship s) {
 		for(Planet p : planets) {
 			if(p != s.getDestination() && p != s.getSource()) {
-				collisionHandler(s, p);
+				this.collisionHandler(s, p);
 				return true;
 			}
 		}
@@ -281,15 +327,15 @@ public class Galaxy implements Serializable{
 	/* Rendering subfunction */
 
 	/**
-	 * \brief Render the background image
+	 *  Render the background image
 	 * @param gc
 	 */
 	public void renderBackground(GraphicsContext gc) {
-		gc.drawImage(getBackground(), 0, 0);
+		gc.drawImage(background, 0, 0);
 	}
 	
 	/**
-	 * \brief Render each planets image
+	 *  Render each planets image
 	 * @param gc
 	 */
 	public void renderPlanets(GraphicsContext gc) {
@@ -300,7 +346,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Render every squads on board
+	 *  Render every squads on board
 	 * @param gc
 	 */
 	public void renderSquads(GraphicsContext gc) {
@@ -323,7 +369,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Render the garrison amount of each planets on board
+	 *  Render the garrison amount of each planets on board
 	 * @param gc
 	 */
 	public void renderGarrison(GraphicsContext gc) {
@@ -333,11 +379,11 @@ public class Galaxy implements Serializable{
 			gc.setStroke(Color.BLACK);
 			
 			switch(p.getRuler().getFaction()) {
-				case Constants.player:
+				case Players.human_faction:
 					gc.setFill(Constants.color_player); break;
-				case Constants.ai:
+				case Players.ai_faction:
 					gc.setFill(Constants.color_ai); break;
-				case Constants.neutral:
+				case Players.neutral_faction:
 					gc.setFill(Constants.color_neutral); break;
 				default:
 					gc.setFill(Constants.color_default); break;
@@ -348,7 +394,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Render the percentage of troups to send selected by the player
+	 *  Render the percentage of troups to send selected by the player
 	 * @param gc
 	 */
 	public void renderPercentageSelected(GraphicsContext gc) {
@@ -358,23 +404,22 @@ public class Galaxy implements Serializable{
 		
 		for(Planet p :planets) {
 			User u = p.getRuler();
-			if (u.getFaction() == Constants.player) {
+			if (u.getFaction() == Players.human_faction) {
 				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
 				
-				gc.fillText(txt, Constants.width/7, 25);
-				gc.strokeText(txt, Constants.width/7, 25);
+				gc.fillText(txt, Generation.width/7, 25);
+				gc.strokeText(txt, Generation.width/7, 25);
 				
 				return;				
 			}
 		}
 		String txt = Constants.message_game_over;
-		gc.fillText(txt, Constants.width/5, 25);
-		gc.strokeText(txt, Constants.width/5, 25);
+		gc.fillText(txt, Generation.width/5, 25);
+		gc.strokeText(txt, Generation.width/5, 25);
 	}
 	
 	/**
-	 * \brief render in case of defeat 
-	 *	//TODO defeat rendering
+	 *  render in case of defeat 
 	 * @param gc the Graphics Context
 	 */
 	public void renderDefeat(GraphicsContext gc) {
@@ -383,22 +428,31 @@ public class Galaxy implements Serializable{
 		gc.setTextAlign(TextAlignment.CENTER);	
 
 		String txt = Constants.message_game_over;
-		gc.fillText(txt, Constants.width/2, 25);
-		gc.strokeText(txt, Constants.width/2, 25);
+		gc.fillText(txt, Generation.width/2, 25);
+		gc.strokeText(txt, Generation.width/2, 25);
+		
+	}
+
+	
+	/**
+	 *  render in case of victory 
+	 * @param gc the Graphics Context
+	 */
+	public void renderWinner(GraphicsContext gc) {
+		gc.setFill(Constants.color_default);
+		gc.setStroke(Color.RED);
+		gc.setTextAlign(TextAlignment.CENTER);	
+
+		String txt = Constants.message_winner;
+		gc.fillText(txt, Generation.width/2, 25);
+		gc.strokeText(txt, Generation.width/2, 25);
 		
 	}
 	
-	/**
-	 * \brief render a explosion when a ship reach his destination
-	 * @param gc
-	 */
-	public void renderExplosion(GraphicsContext gc) {
-		
-	}
 	
 	/* init the font type */
 	/**
-	 * \brief Init the default font style of the graphics context
+	 *  Init the default font style of the graphics context
 	 * @param gc
 	 */
 	public void initFont(GraphicsContext gc) {
@@ -411,7 +465,7 @@ public class Galaxy implements Serializable{
 	/* Getter & Setter */
 
 	/**
-	 * \brief Set the list containing every squads by another one
+	 *  Set the list containing every squads by another one
 	 * @param planets
 	 */
 	public ArrayList<Squad> getSquads() {
@@ -419,7 +473,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Return the list containing every squads on board
+	 *  Return the list containing every squads on board
 	 * @return
 	 */
 	public void setSquads(ArrayList<Squad> squads) {
@@ -427,7 +481,7 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Set the list containing every planet by another one
+	 *  Set the list containing every planet by another one
 	 * @param planets
 	 */
 	public void setPlanets(ArrayList<Planet> planets) {
@@ -435,7 +489,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Return the list containing every planets on board
+	 *  Return the list containing every planets on board
 	 * @return
 	 */
 	public ArrayList<Planet> getPlanets() {
@@ -443,7 +497,7 @@ public class Galaxy implements Serializable{
 	}
 	
 	/**
-	 * \brief Return the background image
+	 *  Return the background image
 	 * @return Image 
 	 */
 	public Image getBackground() {
@@ -451,11 +505,39 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 * \brief Set the background image
+	 *  Set the background image
 	 * @param background
 	 */
 	public void setBackground(Image background) {
 		this.background = background;
+	}
+
+	/**
+	 * @return the game_is_over
+	 */
+	public boolean isGame_is_over() {
+		return game_is_over;
+	}
+
+	/**
+	 * @param game_is_over the game_is_over to set
+	 */
+	public void setGame_is_over(boolean game_is_over) {
+		this.game_is_over = game_is_over;
+	}
+
+	/**
+	 * @return the gc
+	 */
+	public GraphicsContext getGraphicsContext() {
+		return gc;
+	}
+
+	/**
+	 * @param gc the gc to set
+	 */
+	public void setGraphicsContext(GraphicsContext gc) {
+		this.gc = gc;
 	}
 
 	

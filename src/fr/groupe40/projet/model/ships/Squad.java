@@ -8,12 +8,17 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.model.planets.SquarePlanet;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.AudioClip;
 
 
 /**
- * \brief Squad object
+ *  Squad object
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -22,32 +27,42 @@ public class Squad implements Serializable {
 	private static final long serialVersionUID = -6736174123976474099L;
 	
 	/**
-	 * \brief array with every ships of the squad
+	 *  array with every ships of the squad
 	 */
 	private ArrayList<Ship> ships = new ArrayList<Ship>();
 	
 	/**
-	 * \brief buffer with the number of ships waiting to be sent
+	 *  buffer with the number of ships waiting to be sent
 	 */
 	private int nb_ship;
 	
 	/**
-	 * \brief src and destination planets
+	 *  src and destination planets
 	 */
 	private Planet source, destination;
 	
 	/**
-	 * \brief x and y summoning position 
+	 *  x and y summoning position 
 	 */
 	private int summonX = 0, summonY = 0;
 	
 	/**
-	 * \brief value change if we re able to summon or not a wave
+	 *  value change if we re able to summon or not a wave
 	 */
 	private boolean summoning = true;
 	
 	/**
-	 * \brief constructor of this squad
+	 *  the player controlling this squad
+	 */
+	private User ruler;
+	
+	/**
+	 *  the img path of all his ships
+	 */
+	private String img_path;
+	
+	/**
+	 *  constructor of this squad
 	 * @param percent the percent of troups from a planet to send
 	 * @param src source planet
 	 * @param dest destination planet
@@ -56,10 +71,43 @@ public class Squad implements Serializable {
 		this.source = src;
 		this.destination = dest;
 		this.nb_ship = (int) (src.getTroups() * (percent / 100));
+		this.ruler = src.getRuler();
+		
+
+		if (ruler.equals(Players.ai_user)) {
+			img_path = Resources.path_img_AI_ships;
+		} else if (ruler.equals(Players.event_user)) {
+			img_path = Resources.path_img_event_ships;
+		} else {
+			img_path = Resources.path_img_human_ships;
+		}
+
+	}
+	
+
+	/**
+	 *  constructor of this squad for pirate event
+	 */
+	public Squad() {
+
+	}
+	
+	/**
+	 *  constructor of this squad
+	 * @param percent the percent of troups from a planet to send
+	 * @param src source planet
+	 * @param dest destination planet
+	 */
+	public Squad(String img_path, User ruler, double percent, Planet src, Planet dest) {
+		this.source = src;
+		this.destination = dest;
+		this.nb_ship = (int) (src.getTroups() * (percent / 100));
+		this.ruler = ruler;
+		this.img_path = img_path;
 	}
 
 	/**
-	 * \brief send a fleet, summoned when there s ships that had to be sent
+	 *  send a fleet, summoned when there s ships that had to be sent
 	 */
 	public void sendFleet() {
 		if(nb_ship <= 0)
@@ -67,23 +115,23 @@ public class Squad implements Serializable {
 		
 		
 		while(summoning) {
-			if(source.getTroups() -1 <= Constants.min_troups) {
+			if(source.getTroups() -1 <= PlanetsGarrison.min_troups) {
 				nb_ship = 0;
 				return;
 			}
-			
-			double x = this.decollageX(source);
-			double y = this.decollageY(source);
-			
-			User u = source.getRuler();
-			String img_path = Constants.path_img_human_ships;
-			if (u.equals(Constants.ai_user)) {
-				img_path = Constants.path_img_tender_ships;
+			double x,y;
+			if(source instanceof SquarePlanet) {	//Planet is a square
+				x = this.decollageX(source);
+				y = this.decollageY(source);						
+			} else {	//Planet is a circle
+				x = this.decollageX(source);
+				y = this.decollageY(source);							
 			}
+			
 			ships.add(
 			new Ship(
 					img_path,
-					source.getRuler(),
+					ruler,
 					destination,
 					source,
 					x,
@@ -100,14 +148,14 @@ public class Squad implements Serializable {
 	
 	
 	/**
-	 * \brief check if a squad has been selected or not
+	 *  check if a squad has been selected or not
 	 * @param x position to check
 	 * @param y position to check
 	 * @return true if a squad has been selected
 	 */
 	public boolean squad_selected(double x, double y) {
 		for(Ship s : ships) {
-			if(s.isInside(x, y, Constants.size_squads, Constants.size_squads)) {
+			if(s.isInside(x, y, Generation.size_squads, Generation.size_squads)) {
 				return true;
 			}
 		}
@@ -115,7 +163,7 @@ public class Squad implements Serializable {
 	}
 	
 	/**
-	 * \brief Render every ships of this squad
+	 *  Render every ships of this squad
 	 * @param gc GraphicsContext
 	 */
 	public void render_ships(GraphicsContext gc) {
@@ -129,7 +177,7 @@ public class Squad implements Serializable {
 	}
 
 	/**
-	 * \brief update destination planet of every ships of this squads
+	 *  update destination planet of every ships of this squads
 	 * @param destination the new destination
 	 */
 	public void update_destination(Planet destination) {
@@ -139,15 +187,16 @@ public class Squad implements Serializable {
 	}
 	
 	/**
-	 * \brief Update the position of every ships of this squad
+	 *  Update the position of every ships of this squad
 	 */
-	public void update_all_positions(List<Planet> planets) {
+	public void update_all_positions(List<Planet> planets, AudioClip mediaPlayer_boom) {
 		Iterator<Ship> it = ships.iterator();
 		
 		while (it.hasNext()) {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
+					renderCollisionSound(mediaPlayer_boom);
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -163,22 +212,39 @@ public class Squad implements Serializable {
 			}
 		}
 	}
+	
+	/**
+	 *  play sound when a ship of his squad reach his destination
+	 * @param mediaPlayer_boom the audio clip to play
+	 */
+	public void renderCollisionSound(AudioClip mediaPlayer_boom) {
+		if(mediaPlayer_boom == null) {
+			return;
+		}
+		mediaPlayer_boom.play();
+	}
 
 	/**
-	 * \brief updateImage of every ships of this squad
+	 *  updateImage of every ships of this squad
 	 */
 	public void updateImage() {
 		for(Ship s : ships) {
-			if(destination.getRuler() == Constants.human_user)
-				s.setImg_path(Constants.path_img_human_ships);
-			else if(destination.getRuler() == Constants.ai_user)
-				s.setImg_path(Constants.path_img_AI_ships);
-			s.updateImage();			
-		}		
+			try {
+			if(destination.getRuler() == Players.human_user)
+				s.setImg_path(Resources.path_img_human_ships);
+			else if(destination.getRuler() == Players.ai_user)
+				s.setImg_path(Resources.path_img_AI_ships);
+			
+			}catch(NullPointerException e) {
+				//Do nothing, ship has reached destination
+			}
+			
+			s.updateImage();	
+		}	
 	}
 	
 	/**
-	 * \brief update ruler of every ships of this squads
+	 *  update ruler of every ships of this squads
 	 * @param ruler the new ruler
 	 */
 	public void update_ruler(User ruler) {
@@ -189,16 +255,16 @@ public class Squad implements Serializable {
 
 	
 	/**
-	 * \brief Calculate the x Position for liftoff
+	 *  Calculate the x Position for liftoff
 	 * @param source the source planet
 	 * @return abscissa position
 	 */
 	private double decollageX(Planet source) {
-		if(summonX*Constants.size_squads + source.getX() < source.getX()+source.width()) {
+		if(summonX*Generation.size_squads + source.getX() < source.getX()+source.width()) {
 			summonX += 1;
 			
 			
-		} else if (summonX*Constants.size_squads + source.getX() >= source.getX()+source.width()) {
+		} else if (summonX*Generation.size_squads + source.getX() >= source.getX()+source.width()) {
 			summonX = 1;
 			if(summonY != -1)
 				summonY = -1;
@@ -208,17 +274,17 @@ public class Squad implements Serializable {
 			}
 		}
 
-		return (summonX*Constants.size_squads + (source.getX() - Constants.size_squads));
+		return (summonX*Generation.size_squads + (source.getX() - Generation.size_squads));
 	}
 	
 	/**
-	 * \brief Calculate the y Position for liftoff
+	 *  Calculate the y Position for liftoff
 	 * @param source the source planet
 	 * @return ordered position
 	 */
 	private double decollageY(Planet source) {
 		if(source.getY() > destination.getY())
-			return (source.getY() - Constants.size_squads-1);
+			return (source.getY() - Generation.size_squads-1);
 		else
 			return (source.width() + source.getY() + 1);		
 	}

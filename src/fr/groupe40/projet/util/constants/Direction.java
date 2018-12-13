@@ -2,7 +2,7 @@ package fr.groupe40.projet.util.constants;
 
 
 /**
- * \brief Different types of collision between SpaceShips and Planets.
+ *  Different types of collision between SpaceShips and Planets.
  * @author Jordane Masson
  * @author Sarah Portejoie
  *

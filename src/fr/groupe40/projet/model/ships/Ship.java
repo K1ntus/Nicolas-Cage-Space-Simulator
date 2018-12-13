@@ -9,10 +9,12 @@ import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Direction;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+import fr.groupe40.projet.util.constants.Players;
+import fr.groupe40.projet.util.constants.Resources;
 
 /**
- * \brief Ship of a squad, contains the destination, src, ...
+ *  Ship of a squad, contains the destination, src, ...
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -21,27 +23,27 @@ public class Ship extends Sprite implements Serializable {
 	private static final long serialVersionUID = -1872446628467348036L;
 
 	/**
-	 * \brief ship type of this ship
+	 *  ship type of this ship
 	 */
 	private ShipType ship_type = new ShipType();	
 	
 	/**
-	 * 	\brief Source and Destination planets
+	 * 	 Source and Destination planets
 	 */
 	private Planet destination, source;
 	
 	/**
-	 * \brief If this ships has reacher or not his destination
+	 *  If this ships has reacher or not his destination
 	 */
 	private boolean reached;
 	
 	/**
-	 * \brief The planet where there's a collision during his path in the board
+	 *  The planet where there's a collision during his path in the board
 	 */
 	private Planet collision;
 
 	/**
-	 * \brief constructor of the ship object
+	 *  constructor of the ship object
 	 * @param path image path of this ship
 	 * @param ruler ruler of this ship
 	 * @param destination his destination planet
@@ -97,7 +99,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 
 	/**
-	 * \brief Check if the ship has reached his destination, and handle this case
+	 *  Check if the ship has reached his destination, and handle this case
 	 */
 	public boolean reached_destination() {
 
@@ -105,27 +107,30 @@ public class Ship extends Sprite implements Serializable {
 			return true;
 		
 		if(destination.isInside(this)) {	//Case if the squads reach the destination	
-			this.setImage(Constants.path_gfx_ship_explosion);
+			this.setImage(Resources.path_gfx_ship_explosion);
 			if(this.getRuler() != destination.getRuler()) {	//If the faction are differents, then BOOM
-				int difference = destination.getTroups() - 1;
+				int difference = (int) (destination.getTroups() - ship_type.power);
 				
 				if(difference >=1) {	//Difference > 1 => kamikaze
 					destination.setTroups(difference);					
 				} else {				//Else, negative or 0 => new leader
-					destination.setRuler(this.getRuler());
-					
-					difference = Math.abs(difference);
-					if(difference >= Constants.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-						destination.setTroups(Constants.max_troups);					
-					} else {	//Else, renforcement
-						destination.setTroups(difference + 1);
+					if(!destination.getRuler().equals(Players.sun_user)) {
+							
+						destination.setRuler(this.getRuler());
+						
+						difference = Math.abs(difference);
+						if(difference >= PlanetsGarrison.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
+							destination.setTroups(PlanetsGarrison.max_troups);					
+						} else {	//Else, reinforcement
+							destination.setTroups(difference + 1);
+						}
 					}
 				}
 			}else if(this.getRuler() == destination.getRuler()) {	//Same faction
 				int sum = 1 + destination.getTroups();	//Sum of defense + squad
-				if(sum >= Constants.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
-					destination.setTroups(Constants.max_troups);					
-				} else {	//Else, renforcement
+				if(sum >= PlanetsGarrison.max_troups) {	//Sum > 100, we lower the amount to stay at the limit
+					destination.setTroups(PlanetsGarrison.max_troups);					
+				} else {	//Else, reinforcement
 					destination.setTroups(sum);
 				}
 			}
@@ -137,7 +142,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Calculate the next position and provides collision handler
+	 *  Calculate the next position and provides collision handler
 	 * @param planets
 	 */
 	public void calc_next_position(List<Planet> planets) {
@@ -172,7 +177,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief return where is the collision between a ship and every planets of a list
+	 *  return where is the collision between a ship and every planets of a list
 	 * @param x horizontal position of the ship
 	 * @param y vertical position of the ship
 	 * @param speed speed of the sheep
@@ -212,7 +217,7 @@ public class Ship extends Sprite implements Serializable {
 
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the upper side
+	 *  Next position calculation when there s a collision in the upper side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -236,7 +241,7 @@ public class Ship extends Sprite implements Serializable {
 
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the bottom side
+	 *  Next position calculation when there s a collision in the bottom side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -260,7 +265,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the left side
+	 *  Next position calculation when there s a collision in the left side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -284,7 +289,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief Next position calculation when there s a collision in the right side
+	 *  Next position calculation when there s a collision in the right side
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -308,7 +313,7 @@ public class Ship extends Sprite implements Serializable {
 	}	
 	
 	/**
-	 * \brief calculate the angle between a ship and his destination
+	 *  calculate the angle between a ship and his destination
 	 * @return angle in degrees
 	 */
 	public double destination_angle() {
@@ -321,7 +326,7 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief case when there s no collision for a ship
+	 *  case when there s no collision for a ship
 	 * @param x current x position
 	 * @param y current y position
 	 * @param centre_x destination x
@@ -347,7 +352,7 @@ public class Ship extends Sprite implements Serializable {
 	
 	
 	/**
-	 * \brief Update the position of this ship
+	 *  Update the position of this ship
 	 * @param planets
 	 */
 	public void update_position(List<Planet> planets) {
@@ -359,11 +364,11 @@ public class Ship extends Sprite implements Serializable {
 	}
 	
 	/**
-	 * \brief prepare his removal from the squad list
+	 *  prepare his removal from the squad list
 	 */
 	public void remove() {
-		this.setRuler(Constants.neutral_user);
-		this.setImage(Constants.path_gfx_ship_explosion);
+		this.setRuler(Players.neutral_user);
+		this.setImage(Resources.path_gfx_ship_explosion);
 		this.reached = true;
 	}
 
@@ -443,6 +448,13 @@ public class Ship extends Sprite implements Serializable {
 	public double getSpeed() {
 		return ship_type.speed;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Ships <" + this.getX() + ", " + this.getY() + "> - Ruled by id: " +this.getRuler().getId()+ "\nCaracteristics: "+this.getShip_type();
+	}
+
 
 	
 	
