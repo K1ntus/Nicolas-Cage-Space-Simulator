@@ -8,16 +8,11 @@ import org.junit.Test;
 
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.planets.RoundPlanet;
+import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
-<<<<<<< HEAD
 import fr.groupe40.projet.util.constants.Constants;
-=======
-import fr.groupe40.projet.util.constants.Generation;
->>>>>>> masterrace
 
-@SuppressWarnings("deprecation")
 public class ClasseTests {
 
 	
@@ -96,7 +91,7 @@ public class ClasseTests {
 	@Test
 	public void testisInsideRoundPlanet() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null); // MyClass is tested
-		 RoundPlanet p = new RoundPlanet(null, null, 900, 900);
+		 SquarePlanet p = new SquarePlanet(null, null, 900, 900);
 		 assert false ==  tester.isInside(p);
 	}
 	
@@ -107,7 +102,7 @@ public class ClasseTests {
 	@Test
 	public void testisInsideRoundPlanet2() {
 		 Ship tester = new Ship(null, null, null, null, 10, 10, null); // MyClass is tested
-		 RoundPlanet p = new RoundPlanet(null, null, 10, 10);
+		 SquarePlanet p = new SquarePlanet(null, null, 10, 10);
 		 assert true ==  tester.isInside(p);
 	}
 	
@@ -118,11 +113,7 @@ public class ClasseTests {
 	@Test
 	public void testisInside2() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
-<<<<<<< HEAD
 		 assert false == tester.isInside(500,500, Constants.size_minimal_planets, Constants.size_minimal_planets);
-=======
-		 assertEquals(false ,tester.isInside(500,500, Generation.size_minimal_planets, Generation.size_minimal_planets));
->>>>>>> masterrace
 		
 	}
 	
@@ -133,11 +124,7 @@ public class ClasseTests {
 	@Test
 	public void testisInside3() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
-<<<<<<< HEAD
 		 assert true == tester.isInside(1,1, Constants.size_minimal_planets, Constants.size_maximal_planets) ;
-=======
-		 assertEquals(true ,tester.isInside(1,1, Generation.size_minimal_planets, Generation.size_maximal_planets));
->>>>>>> masterrace
 	}
 	
 	
@@ -174,7 +161,7 @@ public class ClasseTests {
 	@Test
 	public void testdistance3() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
-		RoundPlanet p = new RoundPlanet(null, null, 100, 200);
+		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		double x = 100.0 - (Constants.size_squads /2);
 		double y = 200.0 - (Constants.size_squads /2);
 		double c = Math.sqrt((x * x) + (y * y));
@@ -206,7 +193,7 @@ public class ClasseTests {
 	@Test
 	public void TestWhereis_collision() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
-		RoundPlanet p = new RoundPlanet(null, null, 100, 200);
+		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		List<Planet> planets = new ArrayList();
 		planets.add(p);
 		double speed = Constants.min_ship_speed;
@@ -221,7 +208,7 @@ public class ClasseTests {
 	@Test
 	public void TestCalc_next_position() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
-		RoundPlanet p = new RoundPlanet(null, null, 100, 200);
+		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		List<Planet> planets = new ArrayList();
 		planets.add(p);
 		

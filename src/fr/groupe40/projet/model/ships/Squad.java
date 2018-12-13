@@ -189,14 +189,13 @@ public class Squad implements Serializable {
 	/**
 	 *  Update the position of every ships of this squad
 	 */
-	public void update_all_positions(List<Planet> planets, AudioClip mediaPlayer_boom) {
+	public void update_all_positions(List<Planet> planets) {
 		Iterator<Ship> it = ships.iterator();
 		
 		while (it.hasNext()) {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
-					renderCollisionSound(mediaPlayer_boom);
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -213,17 +212,6 @@ public class Squad implements Serializable {
 		}
 	}
 	
-	/**
-	 *  play sound when a ship of his squad reach his destination
-	 * @param mediaPlayer_boom the audio clip to play
-	 */
-	public void renderCollisionSound(AudioClip mediaPlayer_boom) {
-		if(mediaPlayer_boom == null) {
-			return;
-		}
-		mediaPlayer_boom.play();
-	}
-
 	/**
 	 *  updateImage of every ships of this squad
 	 */

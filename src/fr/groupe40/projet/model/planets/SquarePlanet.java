@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
-import fr.groupe40.projet.util.constants.Debugging;
+import fr.groupe40.projet.util.constants.Constants;
 
 /**
- *  Square planet
+ * \brief Square planet
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -20,12 +20,7 @@ public class SquarePlanet extends Planet  implements Serializable{
 
 	@Override
 	public boolean isInside(double x, double y) {
-		if(this.isInside(x, y, 0, 0)) {
-			if(Debugging.DEBUG) {
-				System.out.println("Vous avez clique sur une planete avec "+this.getTroups());
-				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
-				System.out.println("et de type: "+ this.getRuler().getFaction());
-			}
+		if(isInside(x, y, 0, 0)) {
 			return true;
 		}
 		return false;
@@ -58,6 +53,6 @@ public class SquarePlanet extends Planet  implements Serializable{
 	}
 	
 	public String toString() {
-		return "SquaredPlanet <" + this.getX() + ", " + this.getY() + "> - Ruled by id: " +this.getRuler().getId();
+		return "SquarePlanet <" + getX() + ", " + getY() + "> - Ruled by : " + this.getRuler().toString();
 	}
 }

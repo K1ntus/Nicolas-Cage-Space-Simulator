@@ -5,12 +5,9 @@ import java.util.Iterator;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.planets.RoundPlanet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
-import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
-import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 
@@ -30,22 +27,9 @@ public class GalaxyGenerator {
 	 *  Create and Generate the board
 	 */
 	public GalaxyGenerator() {
-		if(Constants.sun_enabled)
-			generateSun();
 		generatePlanets();
 	}
 
-	/**
-	 *  Generate a sun in the center of the board
-	 */
-	public void generateSun() {
-		Planet sun = new Sun(Resources.path_img_sun, Generation.width/2, Generation.height/2);
-		sun.updateImage();
-		sun.setX(sun.getX() - sun.width()/2);
-		sun.setY(sun.getY() - sun.width()/2);
-		sun.setTroups(PlanetsGarrison.sun_troups);
-		planets.add(sun);
-	}
 
 	/* Planets Generation */
 
@@ -82,10 +66,6 @@ public class GalaxyGenerator {
 	 * @return the planet generated
 	 */
 	private Planet getRandomPlanet() {
-		double rand = Math.random();
-		
-		if(rand < 0.5)
-			return new RoundPlanet(getRandomRoundPlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
 		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
 	}
 	

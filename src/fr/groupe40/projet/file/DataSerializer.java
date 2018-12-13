@@ -104,7 +104,7 @@ public class DataSerializer {
 		*/
 		
 		FileInputStream file;
-		Galaxy loaded = new Galaxy(gc);
+		Galaxy loaded = null;
 		try {
 			file = new FileInputStream(name + ".save");
 			ObjectInputStream ois = new ObjectInputStream(file);
@@ -137,26 +137,18 @@ public class DataSerializer {
 			ArrayList<Ship> ships = s.getShips();
 			try {
 				User u = ships.get(0).getRuler();	//Get the ruler of the first ship of the squad
-				if (u.getId() < 0) {
-					switch(u.getId()) {
-					case Players.event_id:
-						s.update_ruler(Players.event_user);
-						break;
-					case Players.sun_id:
-						s.update_ruler(Players.sun_user);
-						break;
-					case Players.pirate_id:
-						s.update_ruler(Players.pirate_user);
-						break;
-					default:
-						s.update_ruler(Players.ai_user);
-						break;
-					}
-				}else if (u.getFaction() == Players.human_faction) {
-					s.update_ruler(Players.human_user);
-				}else {
-					s.update_ruler(Players.neutral_user);
+				
+				switch (u.getFaction()) {
+				case Players.human_faction:
+					s.update_ruler(Players.human_user); break;
+				case Players.ai_faction:
+					s.update_ruler(Players.ai_user); break;
+				case Players.neutral_faction:
+					s.update_ruler(Players.neutral_user); break;
+				default:
+					break;
 				}
+				
 			} catch (IndexOutOfBoundsException e) {
 				continue;	//Every ships of the squad has reached dest, will be automatically removed by the game updater
 			}
@@ -170,34 +162,19 @@ public class DataSerializer {
 		}
 		
 		for(Planet p : g.getPlanets()) {		
-					
-			switch(p.getRuler().getId()) {
-				case Players.event_id:
-					System.out.println("** event user");
-					p.setRuler(Players.event_user);
-					break;
-				case Players.sun_id:
-					System.out.println("** sun");
-					p.setRuler(Players.sun_user);
-					break;
-				case Players.pirate_id:
-					System.out.println("** pirate user");
-					p.setRuler(Players.pirate_user);
-					break;
+			User u = p.getRuler();
+
+			switch (u.getFaction()) {
 				case Players.human_faction:
-					System.out.println("** human user");
-					p.setRuler(Players.human_user);
-					break;
+					System.out.println("human set: " + p.toString());
+					p.setRuler(Players.human_user); break;
+				case Players.ai_faction:
+					p.setRuler(Players.ai_user); break;
 				case Players.neutral_faction:
-					System.out.println("** neutral user");
-					p.setRuler(Players.neutral_user);
-					break;
+					p.setRuler(Players.neutral_user); break;
 				default:
-					System.out.println("** ai user");
-					p.setRuler(Players.ai_user);
 					break;
 			}
-
 			
 			p.updateImage();
 		}

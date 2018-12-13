@@ -7,13 +7,11 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Generation;
-import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
@@ -133,10 +131,10 @@ public class Galaxy implements Serializable{
 	/**
 	 *  Main update function, manage AI, squads and hasLost
 	 */
-	public void updateSquadPosition(AudioClip mediaPlayer_boom) {
+	public void updateSquadPosition() {
 		for(Squad s : squads) {
 			if(s==null) {	squads.remove(s);	continue;}
-			s.update_all_positions(planets, mediaPlayer_boom);			
+			s.update_all_positions(planets);			
 		}
 
 		if(userHasLost(Players.ai_user)) {
@@ -176,16 +174,6 @@ public class Galaxy implements Serializable{
 	 *  update the garrison value of each planets
 	 */
 	public void updateGarrison() {
-		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
-
-	    	AudioClip sun_explosion_sound = new AudioClip(this.getClass().getResource(Resources.path_sound_sun_explosion).toExternalForm());
-	    	sun_explosion_sound.setVolume(Resources.sun_explosion_volume);
-
-	    	sun_explosion_sound.play(); 
-			Sun.sun_destroyed(planets, squads, gc);
-			planets.remove(0);
-		}
-		
 		for(Planet p : planets)
 			p.updateGarrison();	
 	}
