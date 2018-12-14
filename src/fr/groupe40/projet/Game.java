@@ -18,7 +18,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -39,17 +38,18 @@ public class Game extends Application {
 	 * \brief Board object containing every sprites, etc
 	 */
 	private Galaxy galaxy;
-	//private InteractionHandler interactionHandler;
-	
 	
 	/**
 	 * \brief game_tick counter for events, etc
 	 */
 	private long game_tick = 0;	//long because counter, had to prevent the overflow case
-	
-	private static String OS = System.getProperty("os.name").toLowerCase();
-	
+		
+	/**
+	 * Manage the mouse interactions
+	 */
 	private InteractionHandler interactionHandler;
+	
+	
 	public void start(Stage stage) {
 		/* 	---| OS check |---	
 		 * Doing that because there s a little white
@@ -57,10 +57,12 @@ public class Game extends Application {
 		 * So, if that's a windows OS, we re editing
 		 * the window style to remove it
 		 */
+		
+		String OS = System.getProperty("os.name").toLowerCase();
 		if((OS.indexOf("win") >= 0)) {
 			if(Debugging.DEBUG)
 				System.out.println("OS type is windows");
-			stage.initStyle(StageStyle.UTILITY);
+			stage.initStyle(StageStyle.UNIFIED);
 		}else {
 			if(Debugging.DEBUG)
 				System.out.println("Non windows OS");

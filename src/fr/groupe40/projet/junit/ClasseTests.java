@@ -6,16 +6,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
-import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
-import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.ShipsParameters;
 
+@SuppressWarnings("unchecked")
 public class ClasseTests {
-
-	
 	/**
 	 * \brief test of the function setX() with case 0.0
 	 */
@@ -113,7 +111,7 @@ public class ClasseTests {
 	@Test
 	public void testisInside2() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
-		 assert false == tester.isInside(500,500, Constants.size_minimal_planets, Constants.size_minimal_planets);
+		 assert false == tester.isInside(500,500, Generation.size_minimal_planets, Generation.size_minimal_planets);
 		
 	}
 	
@@ -124,7 +122,7 @@ public class ClasseTests {
 	@Test
 	public void testisInside3() {
 		 Ship tester = new Ship(null, null, null, null, 11, 12, null);
-		 assert true == tester.isInside(1,1, Constants.size_minimal_planets, Constants.size_maximal_planets) ;
+		 assert true == tester.isInside(1,1, Generation.size_minimal_planets, Generation.size_maximal_planets) ;
 	}
 	
 	
@@ -148,8 +146,8 @@ public class ClasseTests {
 	public void testdistance2() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
-		double x = 100.0 - (Constants.size_squads /2);
-		double y = 200.0 - (Constants.size_squads /2);
+		double x = 100.0 - (Generation.size_squads /2);
+		double y = 200.0 - (Generation.size_squads /2);
 		double c = Math.sqrt((x * x) + (y * y));
 		assert c == tester.distance(p);
 		
@@ -162,8 +160,8 @@ public class ClasseTests {
 	public void testdistance3() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
-		double x = 100.0 - (Constants.size_squads /2);
-		double y = 200.0 - (Constants.size_squads /2);
+		double x = 100.0 - (Generation.size_squads /2);
+		double y = 200.0 - (Generation.size_squads /2);
 		double c = Math.sqrt((x * x) + (y * y));
 		assert c == tester.distance(p);
 		
@@ -196,7 +194,7 @@ public class ClasseTests {
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		List<Planet> planets = new ArrayList();
 		planets.add(p);
-		double speed = Constants.min_ship_speed;
+		double speed = ShipsParameters.min_ship_speed;
 		tester.whereis_collision(tester.getX(), tester.getY(),speed,planets);
 		
 	}
