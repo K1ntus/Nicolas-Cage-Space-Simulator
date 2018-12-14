@@ -1,6 +1,7 @@
 package fr.groupe40.projet.window;
 
 import fr.groupe40.projet.client.Sound;
+import fr.groupe40.projet.util.ResourcesManager;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
@@ -62,7 +63,7 @@ public class MainMenu {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		// Top title
-		Image title = new Image(Resources.path_img_menu_title);
+		Image title = new Image(ResourcesManager.getRessourcePathByName(Resources.path_img_menu_title));
 		ImageView title_img = new ImageView();
 		title_img.setImage(title);
 		title_img.setFitWidth(Generation.width / 2);
@@ -71,7 +72,7 @@ public class MainMenu {
 		title_img.setTranslateX(Generation.width / 5);
 
 		// Nicolas cage pict
-		Image nicolassse_cage = new Image(Resources.path_img_sun);
+		Image nicolassse_cage = new Image(ResourcesManager.getRessourcePathByName(Resources.path_img_sun));
 		ImageView nicolas_cage_img = new ImageView();
 		nicolas_cage_img.setImage(nicolassse_cage);
 		nicolas_cage_img.setFitWidth(Generation.width / 5);

@@ -1,5 +1,6 @@
 package fr.groupe40.projet.client;
 
+import fr.groupe40.projet.util.ResourcesManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.media.AudioClip;
@@ -25,7 +26,7 @@ public class Sound {
 	 */
     public Sound(boolean launch_music) {
     	this.main_theme = this.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
-		if(Constants.main_theme_enabled && launch_music)
+		if(Constants.main_theme_enabled && launch_music && this.main_theme != null)
     		main_theme.play();
 		
 		Sound.play_button_sound = generateAudioClip(Resources.path_sound_play, 0.5);
@@ -59,11 +60,11 @@ public class Sound {
      */
     public AudioClip generateAudioClip(String path, double volume) {
 		try {
-	    	AudioClip res = new AudioClip(this.getClass().getResource(path).toExternalForm());
+	    	AudioClip res = new AudioClip(ResourcesManager.getRessourcePathByName(path));
 	    	res.setVolume(volume);
 			return res;
 		} catch (NullPointerException e) {
-			System.out.println("Unable to load explosion sounds of ships");
+			System.out.println("Unable to load sounds: "+ path);
 			return null;
 		}   	
     	
