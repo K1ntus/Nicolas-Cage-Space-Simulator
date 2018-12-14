@@ -7,20 +7,7 @@ import javafx.scene.image.Image;
 
 public final class ResourcesManager extends Thread{
 	private static Image loading_image;
-	
-	private static Image main_menu_background;
-	private static Image game_background;
-	
-	private static Image ai_ship;
-	private static Image humain_ship;
-	private static Image pirate_ship;
-	private static Image event_ship;
-	
-	private Image sun_image;
-	
-	private static Image round_planet_doge;
-	
-	
+		
 	public ResourcesManager() {
 		ResourcesManager.loading_image = new Image(
 				getRessourcePathByName(Resources.path_img_loading), 

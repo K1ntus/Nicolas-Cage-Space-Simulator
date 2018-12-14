@@ -25,7 +25,7 @@ public class Sound {
 	 * @param launch_music Auto-launch main theme if true, else false
 	 */
     public Sound(boolean launch_music) {
-    	this.main_theme = this.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
+    	this.main_theme = Sound.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
 		if(Constants.main_theme_enabled && launch_music && this.main_theme != null)
     		main_theme.play();
 		
@@ -56,9 +56,9 @@ public class Sound {
      *  return an audio clip from a path to the file and his volume
      * @param path	path to the media file
      * @param volume	volume wanted of this sound (between 0 and 1, usually 0.5 is ok)
-     * @return
+     * @return the audioclip
      */
-    public AudioClip generateAudioClip(String path, double volume) {
+    public static AudioClip generateAudioClip(String path, double volume) {
 		try {
 	    	AudioClip res = new AudioClip(ResourcesManager.getRessourcePathByName(path));
 	    	res.setVolume(volume);

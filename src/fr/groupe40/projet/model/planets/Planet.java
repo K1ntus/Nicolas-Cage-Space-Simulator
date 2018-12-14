@@ -187,38 +187,79 @@ public abstract class Planet extends Sprite {
 		}
 		return false;
 	}
-	
-
+	/**
+	 * @return the summonX
+	 */
+	public double getSummonX() {
+		return summonX;
+	}
+	/**
+	 * @return the summonY
+	 */
+	public double getSummonY() {
+		return summonY;
+	}
+	/**
+	 * @return the produce_rate
+	 */
 	public int getProduce_rate() {
 		return produce_rate;
 	}
-
-	public void setProduce_rate(int produce_rate) {
-		this.produce_rate = produce_rate;
-	}
-
+	/**
+	 * @return the troups
+	 */
 	public int getTroups() {
 		return troups;
 	}
-
-	public void setTroups(int troups) {
-		this.troups = troups;
-	}
-
+	/**
+	 * @return the ships_type
+	 */
 	public ShipType getShips_type() {
 		return ships_type;
 	}
-
-	public void setShips_type(ShipType ships_type) {
-		this.ships_type = ships_type;
-	}
-
+	/**
+	 * @return the selected
+	 */
 	public boolean isSelected() {
 		return selected;
 	}
-
+	/**
+	 * @param summonX the summonX to set
+	 */
+	public void setSummonX(double summonX) {
+		this.summonX = summonX;
+	}
+	/**
+	 * @param summonY the summonY to set
+	 */
+	public void setSummonY(double summonY) {
+		this.summonY = summonY;
+	}
+	/**
+	 * @param produce_rate the produce_rate to set
+	 */
+	public void setProduce_rate(int produce_rate) {
+		this.produce_rate = produce_rate;
+	}
+	/**
+	 * @param troups the troups to set
+	 */
+	public void setTroups(int troups) {
+		this.troups = troups;
+	}
+	/**
+	 * @param ships_type the ships_type to set
+	 */
+	public void setShips_type(ShipType ships_type) {
+		this.ships_type = ships_type;
+	}
+	/**
+	 * @param selected the selected to set
+	 */
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
+	
+
 
 }

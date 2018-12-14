@@ -31,6 +31,7 @@ public class SettingsMenu {
 	 */
 	private GridPane grid = new GridPane();
 
+	//TODO COMMENTS
 	private TextField max_numbers_of_planets, gui_size;
 	private TextField parameters_ships_min_speed, parameters_ships_max_speed;
 
@@ -179,6 +180,9 @@ public class SettingsMenu {
 		this.applied = true;
 	}
 
+	/**
+	 * Exit the program when called
+	 */
 	private void handleQuitButton() {
 		try {
 			Sound.getQuit_button_sound().play();

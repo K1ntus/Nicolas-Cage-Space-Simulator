@@ -7,6 +7,7 @@ import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
+import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.ResourcesManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
@@ -157,7 +158,7 @@ public class Game extends Application {
 		};
 		
         
-		/*	Rendering, game initialisation, etc */
+		/*	Rendering, game initialization, etc */
 		new AnimationTimer() {
 			
 			/**
@@ -290,7 +291,7 @@ public class Game extends Application {
 				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
 					System.out.println("Vous avez perdu");
 					galaxy.render(gc);
-					galaxy.renderDefeat(gc);
+					GalaxyRenderer.renderDefeat(gc);
 					galaxy.setGame_is_over(true);
 				}
 				

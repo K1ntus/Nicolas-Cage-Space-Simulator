@@ -2,9 +2,9 @@ package fr.groupe40.projet.model.board;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import fr.groupe40.projet.client.Sound;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.Sun;
@@ -22,7 +22,6 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 
 /**
  *  'Board' class. It contains the data of the game as ships, planets, ...
@@ -122,12 +121,7 @@ public class Galaxy implements Serializable{
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
-		renderBackground(gc);
-		renderPlanets(gc);
-		for(Squad s : squads)
-			s.render_ships(gc);	
-		renderGarrison(gc);
-		renderPercentageSelected(gc);
+		GalaxyRenderer.run(this, gc, background);
 	}
 	
 	/**
@@ -140,7 +134,6 @@ public class Galaxy implements Serializable{
 		}
 
 		if(userHasLost(Players.ai_user)) {
-			renderWinner(gc);		
 			game_is_over = true;
 		}
 	}
@@ -178,8 +171,7 @@ public class Galaxy implements Serializable{
 	public void updateGarrison() {
 		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
 
-	    	AudioClip sun_explosion_sound = new AudioClip(this.getClass().getResource(Resources.path_sound_sun_explosion).toExternalForm());
-	    	sun_explosion_sound.setVolume(Resources.sun_explosion_volume);
+	    	AudioClip sun_explosion_sound = Sound.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
 
 	    	sun_explosion_sound.play(); 
 			Sun.sun_destroyed(planets, squads, gc);
@@ -328,132 +320,6 @@ public class Galaxy implements Serializable{
 
 		return false;
 	}
-	
-	/* Rendering subfunction */
-
-	/**
-	 *  Render the background image
-	 * @param gc
-	 */
-	public void renderBackground(GraphicsContext gc) {
-		gc.drawImage(background, 0, 0);
-	}
-	
-	/**
-	 *  Render each planets image
-	 * @param gc
-	 */
-	public void renderPlanets(GraphicsContext gc) {
-		for(Planet p : planets) {
-			if(p != null)
-				p.render(gc);					
-		}
-	}
-	
-	/**
-	 *  Render every squads on board
-	 * @param gc
-	 */
-	public void renderSquads(GraphicsContext gc) {
-		Iterator<Squad> it = squads.iterator();
-		while (it.hasNext()) {
-			Squad ss = it.next();		
-			if(ss == null) {	continue;	}
-			
-			for (Ship ship : ss.getShips()) {
-				if(ship.isReached()) {
-					ss.getShips().remove(ship);
-					continue;					
-				}else {
-					//isCollision(ss);
-					ss.render_ships(gc);	
-					
-				}
-			}
-		}
-	}
-	
-	/**
-	 *  Render the garrison amount of each planets on board
-	 * @param gc
-	 */
-	public void renderGarrison(GraphicsContext gc) {
-		for (Planet p : planets) {
-			String txt = Integer.toString(p.getTroups());
-			gc.setTextAlign(TextAlignment.CENTER);	
-			gc.setStroke(Color.BLACK);
-			
-			switch(p.getRuler().getFaction()) {
-				case Players.human_faction:
-					gc.setFill(Constants.color_player); break;
-				case Players.ai_faction:
-					gc.setFill(Constants.color_ai); break;
-				case Players.neutral_faction:
-					gc.setFill(Constants.color_neutral); break;
-				default:
-					gc.setFill(Constants.color_default); break;
-			}
-			gc.fillText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
-			gc.strokeText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
-		}
-	}
-
-	/**
-	 *  Render the percentage of troups to send selected by the player
-	 * @param gc
-	 */
-	public void renderPercentageSelected(GraphicsContext gc) {
-		gc.setFill(Constants.color_default);
-		gc.setStroke(Color.RED);
-		gc.setTextAlign(TextAlignment.CENTER);	
-		
-		for(Planet p :planets) {
-			User u = p.getRuler();
-			if (u.getFaction() == Players.human_faction) {
-				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
-				
-				gc.fillText(txt, Generation.width/7, 25);
-				gc.strokeText(txt, Generation.width/7, 25);
-				
-				return;				
-			}
-		}
-		String txt = Constants.message_game_over;
-		gc.fillText(txt, Generation.width/5, 25);
-		gc.strokeText(txt, Generation.width/5, 25);
-	}
-	
-	/**
-	 *  render in case of defeat 
-	 * @param gc the Graphics Context
-	 */
-	public void renderDefeat(GraphicsContext gc) {
-		gc.setFill(Constants.color_default);
-		gc.setStroke(Color.RED);
-		gc.setTextAlign(TextAlignment.CENTER);	
-
-		String txt = Constants.message_game_over;
-		gc.fillText(txt, Generation.width/2, 25);
-		gc.strokeText(txt, Generation.width/2, 25);
-		
-	}
-
-	
-	/**
-	 *  render in case of victory 
-	 * @param gc the Graphics Context
-	 */
-	public void renderWinner(GraphicsContext gc) {
-		gc.setFill(Constants.color_default);
-		gc.setStroke(Color.RED);
-		gc.setTextAlign(TextAlignment.CENTER);	
-
-		String txt = Constants.message_winner;
-		gc.fillText(txt, Generation.width/2, 25);
-		gc.strokeText(txt, Generation.width/2, 25);
-		
-	}
-	
 	
 	/* init the font type */
 	/**
