@@ -1,6 +1,6 @@
 package fr.groupe40.projet.window;
 
-import fr.groupe40.projet.client.Sound;
+import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.ShipsParameters;
@@ -145,7 +145,7 @@ public class SettingsMenu {
 	 */
 	private void handleApplyButton() {
 		try {
-			Sound.getPlay_button_sound().play();
+			SoundManager.getPlay_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}
@@ -185,7 +185,7 @@ public class SettingsMenu {
 	 */
 	private void handleQuitButton() {
 		try {
-			Sound.getQuit_button_sound().play();
+			SoundManager.getQuit_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}

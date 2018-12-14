@@ -1,11 +1,9 @@
 package fr.groupe40.projet.model.board;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
@@ -15,9 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
+//TODO COMMENTS
 public final class GalaxyRenderer {
-	
-	
 	
 	protected static void run(Galaxy galaxy, GraphicsContext gc, Image background) {
 		GalaxyRenderer.renderBackground(background, gc);
@@ -27,8 +24,6 @@ public final class GalaxyRenderer {
 		GalaxyRenderer.renderGarrison(galaxy, gc);
 		GalaxyRenderer.renderPercentageSelected(galaxy, gc);
 	}
-
-	/* Rendering subfunction */
 
 	/**
 	 *  Render the background image
@@ -49,30 +44,7 @@ public final class GalaxyRenderer {
 				p.render(gc);					
 		}
 	}
-	
-	/**
-	 *  Render every squads on board
-	 * @param gc
-	 */
-	private void renderSquads(Galaxy galaxy, GraphicsContext gc) {
-		ArrayList<Squad> squads = galaxy.getSquads();
-		Iterator<Squad> it = squads.iterator();
-		while (it.hasNext()) {
-			Squad ss = it.next();		
-			if(ss == null) {	continue;	}
-			
-			for (Ship ship : ss.getShips()) {
-				if(ship.isReached()) {
-					ss.getShips().remove(ship);
-					continue;					
-				}else {
-					//isCollision(ss);
-					ss.render_ships(gc);	
-					
-				}
-			}
-		}
-	}
+
 	
 	/**
 	 *  Render the garrison amount of each planets on board

@@ -1,7 +1,6 @@
 package fr.groupe40.projet;
 
 
-import fr.groupe40.projet.client.Sound;
 import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
@@ -9,6 +8,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.ResourcesManager;
+import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
@@ -174,7 +174,7 @@ public class Game extends Application {
 			/**
 			 *  manage the background game sound + methods to simplify sounds usage
 			 */
-			private Sound soundHandler = new Sound(true);
+			private SoundManager soundHandler = new SoundManager(true);
 			
 			/**
 			 * Canvas of the game board
@@ -269,7 +269,7 @@ public class Game extends Application {
 				galaxy.render(gc);
 				
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
-					galaxy.updateSquadPosition(Sound.getSound_ship_explosion());
+					galaxy.updateSquadPosition(SoundManager.getSound_ship_explosion());
 				
 				if(game_tick % Ticks.tick_per_produce == 0)
 					galaxy.updateGarrison();
@@ -306,7 +306,9 @@ public class Game extends Application {
 						galaxy.resetEveryUsersLostState();
 						galaxy = new Galaxy(gc);
 						interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
-						interactionHandler.exec();					
+						interactionHandler.exec();
+
+						game_tick = 0;
 				}
 			}
 			
@@ -354,12 +356,12 @@ public class Game extends Application {
 					}else {
 						init();
 					}
-				} else if(window_type == Windows.WindowType.SETTINGS && setting_menu.isApplied()) {
-					apply_settings_to_game();
 				} else if(window_type == Windows.WindowType.MAIN_MENU && !main_menu.isPlay_game() && !main_menu.isSettings_menu()) {
 					if(!game_pre_init_done) {
 						pre_init();
-					}
+					} 
+				} else if(window_type == Windows.WindowType.SETTINGS && setting_menu.isApplied()) {
+					apply_settings_to_game();
 				} else if (main_menu.isPlay_game()) {
 					if(!game_pre_init_done) {
 						pre_init();

@@ -5,6 +5,8 @@ import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+
+//TODO COMMENTS
 public final class ResourcesManager extends Thread{
 	private static Image loading_image;
 		

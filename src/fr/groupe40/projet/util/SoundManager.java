@@ -1,11 +1,11 @@
-package fr.groupe40.projet.client;
+package fr.groupe40.projet.util;
 
-import fr.groupe40.projet.util.ResourcesManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.media.AudioClip;
 
-public class Sound {
+//TODO COMMENTS
+public class SoundManager {
 
 	/**
 	 *  contains the main theme audio clip
@@ -24,15 +24,15 @@ public class Sound {
 	 * Instanciate the music object, and launch or not the main_theme automatically
 	 * @param launch_music Auto-launch main theme if true, else false
 	 */
-    public Sound(boolean launch_music) {
-    	this.main_theme = Sound.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
+    public SoundManager(boolean launch_music) {
+    	this.main_theme = SoundManager.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
 		if(Constants.main_theme_enabled && launch_music && this.main_theme != null)
     		main_theme.play();
 		
-		Sound.play_button_sound = generateAudioClip(Resources.path_sound_play, 0.5);
-		Sound.quit_button_sound = generateAudioClip(Resources.path_sound_quit, 0.5);
-		Sound.settings_button_sound = generateAudioClip(Resources.path_sound_settings, 0.5);
-		Sound.sound_ship_explosion = generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
+		SoundManager.play_button_sound = generateAudioClip(Resources.path_sound_play, 0.5);
+		SoundManager.quit_button_sound = generateAudioClip(Resources.path_sound_quit, 0.5);
+		SoundManager.settings_button_sound = generateAudioClip(Resources.path_sound_settings, 0.5);
+		SoundManager.sound_ship_explosion = generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 
 	}
 
@@ -81,7 +81,7 @@ public class Sound {
 	 * @param play_button_sound the play_button_sound to set
 	 */
 	public static void setPlay_button_sound(AudioClip play_button_sound) {
-		Sound.play_button_sound = play_button_sound;
+		SoundManager.play_button_sound = play_button_sound;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class Sound {
 	 * @param quit_button_sound the quit_button_sound to set
 	 */
 	public static void setQuit_button_sound(AudioClip quit_button_sound) {
-		Sound.quit_button_sound = quit_button_sound;
+		SoundManager.quit_button_sound = quit_button_sound;
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class Sound {
 	 * @param settings_button_sound the settings_button_sound to set
 	 */
 	public static void setSettings_button_sound(AudioClip settings_button_sound) {
-		Sound.settings_button_sound = settings_button_sound;
+		SoundManager.settings_button_sound = settings_button_sound;
 	}
 
 	/**
@@ -123,6 +123,6 @@ public class Sound {
 	 * @param sound_ship_explosion the sound_ship_explosion to set
 	 */
 	public static void setSound_ship_explosion(AudioClip sound_ship_explosion) {
-		Sound.sound_ship_explosion = sound_ship_explosion;
+		SoundManager.sound_ship_explosion = sound_ship_explosion;
 	}
 }

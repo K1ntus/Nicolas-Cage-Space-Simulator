@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.groupe40.projet.client.Sound;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.Sun;
-import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Generation;
@@ -171,7 +170,7 @@ public class Galaxy implements Serializable{
 	public void updateGarrison() {
 		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
 
-	    	AudioClip sun_explosion_sound = Sound.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
+	    	AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
 
 	    	sun_explosion_sound.play(); 
 			Sun.sun_destroyed(planets, squads, gc);
@@ -254,72 +253,7 @@ public class Galaxy implements Serializable{
 		}
 	}
 	
-	/* Collisions Between Ships & Planets */
-	/**
-	 *  Manage the collisions between squads & intermediate planets
-	 * @param s The squad to manage
-	 * @param p The planet to test collision with
-	 */
-	public void collisionHandler(Ship s, Planet p) {
-		double deltaY = 0, deltaX = 0;
-		double x = s.getX(), y = s.getY();
-		double width = s.width(), height = s.height();
-		double speed = s.getSpeed();
 
-		double xCenter = p.getX() + p.width() /2;
-		double yCenter = p.getY() + p.height()/2;
-		
-		if(p.isInside(x-2*speed, y, width, height)) {	
-			if(yCenter > y) {
-				deltaY -= speed;		
-			} else {
-				deltaY += speed;
-			}			
-		} else if(p.isInside(x+2*speed, y, width, height)) {
-			if(yCenter > y) {
-				deltaY -= speed;		
-			} else {
-				deltaY += speed;
-			}
-		}
-		
-		if(p.isInside(x, y-2*speed, width, height)) {
-			if(xCenter > x) {
-				deltaX += speed;
-			} else {
-				deltaX -= speed;	
-			}
-		} else if(p.isInside(x, y+2*speed, width, height)) {
-			if(xCenter > x) {	
-				deltaX += speed;
-			} else {
-				deltaX -= speed;	
-			}
-		}
-		
-		if(p.isInside(x+deltaX,y+deltaY,width,height)) {
-			return;
-		}
-		s.setPosition(x+deltaX, y+deltaY);
-			
-	}
-
-	/**
-	 *  check if there s a collision between a squad and every planet on board
-	 * @param s the squad to check
-	 * @return true if there s a collision, else false
-	 */
-	public boolean isCollision(Ship s) {
-		for(Planet p : planets) {
-			if(p != s.getDestination() && p != s.getSource()) {
-				this.collisionHandler(s, p);
-				return true;
-			}
-		}
-		s.update_position(planets);
-
-		return false;
-	}
 	
 	/* init the font type */
 	/**
