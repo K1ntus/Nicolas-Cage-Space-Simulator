@@ -32,6 +32,7 @@ public final class Resources {
 	public static final String path_img_gui_percent_background = "/resources/images/gui/background_progressbar.png";
 	public static final String path_img_gui_percent = "/resources/images/gui/progress_bar.png";
 	public static final String path_img_gui_logo = "/resources/images/gui/logo.png";
+	public static final String path_img_loading = "/resources/images/gui/loading.gif";
 
 	public static final String path_gfx_ship_explosion = "/resources/images/fx/blast.gif";
 

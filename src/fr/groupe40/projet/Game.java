@@ -7,6 +7,7 @@ import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
+import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
@@ -128,12 +129,14 @@ public class Game extends Application {
 			public void handle(KeyEvent e) {
 					
 				if (e.getCode() == KeyCode.F5) {
+					ImageManager.render_loading_pict(gc);
 					System.out.println("Saving game ...");
 					//OPEN POPUP ?
 					saver.save_game();
 				}
 					
 				if (e.getCode() == KeyCode.F6) {
+					ImageManager.render_loading_pict(gc);
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
 					saver = new DataSerializer(Constants.fileName_save, galaxy);
@@ -282,6 +285,8 @@ public class Game extends Application {
 				}
 				
 				if(galaxy.isGame_is_over()) {
+					ImageManager.render_loading_pict(gc);
+					
 					if(Debugging.DEBUG)
 						System.out.println(
 								"Partie terminee\n"
