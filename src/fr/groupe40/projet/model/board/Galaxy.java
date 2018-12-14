@@ -160,7 +160,7 @@ public class Galaxy implements Serializable{
 				
 				for(Planet p2 : planets) {	//Check again the planets list
 					destination = p2;
-					if(p2.getTroups() < source.getTroups()) {
+					if(p2.getTroups() < source.getTroups() || p2.getTroups() >= PlanetsGarrison.max_troups) {
 						Squad s = ruler.sendFleetAI(source, destination);
 						if(s != null)
 							squads.add(s);
@@ -233,8 +233,13 @@ public class Galaxy implements Serializable{
 			}
 		}
 		
-		u.setLost(false);
+		u.setLost(true);
 		return true;
+	}
+	
+	public void resetEveryUsersLostState() {
+		Players.ai_user.setLost(false);
+		Players.human_user.setLost(false);
 	}
 	
 	

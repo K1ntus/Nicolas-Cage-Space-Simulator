@@ -283,13 +283,14 @@ public class Game extends Application {
 				
 				if(galaxy.isGame_is_over()) {
 					System.out.println(
-							"Partie terminée\n"
+							"Partie terminee\n"
 							+ "Generating new board ...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					galaxy.resetEveryUsersLostState();
 					galaxy = new Galaxy(gc);
 					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 					interactionHandler.exec();					
