@@ -69,6 +69,19 @@ public class SoundManager {
 		}   	
     	
     }
+    
+
+	/**
+	 *  play sound when a ship of his squad reach his destination
+	 * @param mediaPlayer_boom the audio clip to play
+	 */
+	public static void renderCollisionSound() {
+		
+		if(SoundManager.sound_ship_explosion == null) {
+			return;
+		}
+		SoundManager.sound_ship_explosion.play();
+	}
 
 	/**
 	 * @return the play_button_sound

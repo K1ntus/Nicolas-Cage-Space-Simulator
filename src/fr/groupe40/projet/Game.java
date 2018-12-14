@@ -269,7 +269,7 @@ public class Game extends Application {
 				galaxy.render(gc);
 				
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
-					galaxy.updateSquadPosition(SoundManager.getSound_ship_explosion());
+					galaxy.updateSquadPosition();
 				
 				if(game_tick % Ticks.tick_per_produce == 0)
 					galaxy.updateGarrison();

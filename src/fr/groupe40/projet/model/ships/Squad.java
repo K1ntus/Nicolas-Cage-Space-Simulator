@@ -9,6 +9,7 @@ import java.util.List;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
@@ -286,14 +287,14 @@ public class Squad implements Serializable {
 	/**
 	 *  Update the position of every ships of this squad
 	 */
-	public void update_all_positions(List<Planet> planets, AudioClip mediaPlayer_boom) {
+	public void update_all_positions(List<Planet> planets) {
 		Iterator<Ship> it = ships.iterator();
 		
 		while (it.hasNext()) {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
-					renderCollisionSound(mediaPlayer_boom);
+					SoundManager.renderCollisionSound();
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -310,16 +311,6 @@ public class Squad implements Serializable {
 		}
 	}
 	
-	/**
-	 *  play sound when a ship of his squad reach his destination
-	 * @param mediaPlayer_boom the audio clip to play
-	 */
-	public void renderCollisionSound(AudioClip mediaPlayer_boom) {
-		if(mediaPlayer_boom == null) {
-			return;
-		}
-		mediaPlayer_boom.play();
-	}
 
 	/**
 	 *  updateImage of every ships of this squad

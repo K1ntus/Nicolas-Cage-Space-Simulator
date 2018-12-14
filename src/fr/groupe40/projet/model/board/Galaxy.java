@@ -126,10 +126,10 @@ public class Galaxy implements Serializable{
 	/**
 	 *  Main update function, manage AI, squads and hasLost
 	 */
-	public void updateSquadPosition(AudioClip mediaPlayer_boom) {
+	public void updateSquadPosition() {
 		for(Squad s : squads) {
 			if(s==null) {	squads.remove(s);	continue;}
-			s.update_all_positions(planets, mediaPlayer_boom);			
+			s.update_all_positions(planets);			
 		}
 
 		if(userHasLost(Players.ai_user)) {
