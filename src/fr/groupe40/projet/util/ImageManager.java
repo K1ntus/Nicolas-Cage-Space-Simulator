@@ -15,11 +15,19 @@ public final class ImageManager extends Thread{
 	
 	
 	public static void render_loading_pict(GraphicsContext gc) {
-		//Add threads to display gif
-		gc.drawImage(loading_image, Generation.width/2, Generation.height-Generation.height/4);
-		
-		
-		//thread.run();
+		render_animated_pict(gc, loading_image);
+	}
+	
+	public static void render_animated_pict(GraphicsContext gc, Image img) {
+		new Thread(
+			new Runnable() {
+				@Override
+				public void run() {
+					gc.drawImage(loading_image, Generation.width/2, Generation.height-Generation.height/4);
+					
+				}
+			}
+		);
 	}
 
 }

@@ -72,7 +72,6 @@ public class MouseListener {
 							selected_squad = s;
 						}
 					}
-
 				}
 				
 	            for(Planet p : galaxy.getPlanets()) {

@@ -112,7 +112,6 @@ public class Game extends Application {
 		gc = canvas_mainMenu.getGraphicsContext2D();
         Image background_image = new Image(Resources.path_img_menu_background, Generation.width, Generation.height, true, true, true);
         gc.drawImage(background_image, 0, 0);
-		
 		root.getChildren().add(canvas_mainMenu);
 
 		Scene scene_main_menu = main_menu.getScene();
@@ -289,14 +288,13 @@ public class Game extends Application {
 					
 					if(Debugging.DEBUG)
 						System.out.println(
-								"Partie terminee\n"
-								+ "Generating new board ...");
-					
-
-					galaxy.resetEveryUsersLostState();
-					galaxy = new Galaxy(gc);
-					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
-					interactionHandler.exec();					
+							"Partie terminee\n"
+							+ "Generating new board ...");
+						
+						galaxy.resetEveryUsersLostState();
+						galaxy = new Galaxy(gc);
+						interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
+						interactionHandler.exec();					
 				}
 			}
 			
