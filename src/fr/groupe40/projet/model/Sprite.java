@@ -124,7 +124,7 @@ public abstract class Sprite implements Serializable {
 	 * @param y2
 	 * @return A distance
 	 */
-	public double distance(double x1, double y1, double x2, double y2) {
+	public static double distance(double x1, double y1, double x2, double y2) {
 		double res = Math.hypot(x1-x2, y1-y2); 
 		return res;
 	}
