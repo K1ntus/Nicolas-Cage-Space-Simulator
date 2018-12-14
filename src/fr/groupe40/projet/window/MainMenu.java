@@ -143,7 +143,11 @@ public class MainMenu {
 	 */
 	private void handlePlayButton() {
 		play_game = true;
-		Music.getPlay_button_sound().play();
+		try {
+			Music.getPlay_button_sound().play();
+		} catch(NullPointerException e) {
+			
+		}
 	}
 
 	/**
@@ -151,7 +155,11 @@ public class MainMenu {
 	 */
 	private void handleQuitButton() {
 		System.out.println("Bye !");
-		Music.getQuit_button_sound().play();
+		try {
+			Music.getQuit_button_sound().play();
+		} catch(NullPointerException e) {
+			
+		}
 		System.exit(0);
 	}
 
@@ -159,7 +167,11 @@ public class MainMenu {
 	 * Function summoned when the setting button is pressed
 	 */
 	private void handleSettingButton() {
+		try {
 		Music.getSettings_button_sound().play();
+		} catch(NullPointerException e) {
+			
+		}
 		settings_menu = true;
 	}
 
@@ -172,9 +184,9 @@ public class MainMenu {
         //dialog.initOwner(primaryStage);
         VBox dialogVbox = new VBox(20);
         dialogVbox.getChildren().add(new Text("Commandes:\n"
-        		+ "* Déplacer des troupes: Drag&Drop\n"
-        		+ "** Les vaisseaux peuvent être redirigés\n\n"
-        		+ "* Modifier le pourcentage de troupe à envoyer: Molette\n\n"
+        		+ "* Deplacer des troupes: Drag&Drop\n"
+        		+ "** Les vaisseaux peuvent etre rediriges\n\n"
+        		+ "* Modifier le pourcentage de troupe a envoyer: Molette\n\n"
         		+ "* Sauvegarde rapide: F5\n"
         		+ "* Chargement rapide: F6\n"));
         Scene dialogScene = new Scene(dialogVbox, 300, 200);

@@ -143,7 +143,12 @@ public class SettingsMenu {
 	 * Function called when the apply button is pressed
 	 */
 	private void handleApplyButton() {
-		Music.getPlay_button_sound().play();
+		try {
+			Music.getPlay_button_sound().play();
+		} catch(NullPointerException e) {
+			
+		}
+		
 		double ship_max_speed = ShipsParameters.max_ship_speed, ship_min_speed;
 		if ((parameters_ships_max_speed.getText() != null && !parameters_ships_max_speed.getText().isEmpty())) {
 			ship_max_speed = Double.parseDouble(parameters_ships_max_speed.getText());
@@ -175,7 +180,12 @@ public class SettingsMenu {
 	}
 
 	private void handleQuitButton() {
-		Music.getQuit_button_sound().play();
+		try {
+			Music.getQuit_button_sound().play();
+		} catch(NullPointerException e) {
+			
+		}
+		
 		System.out.println("Bye !");
 		System.exit(0);
 	}
