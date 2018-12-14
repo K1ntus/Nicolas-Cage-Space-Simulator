@@ -235,6 +235,9 @@ public class Ship extends Sprite implements Serializable {
 		else
 			deltaX = -speed;
 
+		if(destination.getY() < y)
+			deltaY = -speed;
+		
 		this.setX(x+deltaX);
 		this.setY(y+deltaY);
 	}
@@ -258,8 +261,10 @@ public class Ship extends Sprite implements Serializable {
 			deltaX = +speed;
 		else
 			deltaX = -speed;
-		
 
+		if(destination.getY() > y)
+			deltaY = speed;
+		
 		this.setX(x+deltaX);
 		this.setY(y+deltaY);
 	}
@@ -283,7 +288,6 @@ public class Ship extends Sprite implements Serializable {
 		else
 			deltaY = -speed;
 		
-
 		this.setX(x+deltaX);
 		this.setY(y+deltaY);
 	}
