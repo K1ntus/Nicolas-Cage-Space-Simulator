@@ -1,7 +1,7 @@
 package fr.groupe40.projet;
 
 
-import fr.groupe40.projet.client.Music;
+import fr.groupe40.projet.client.Sound;
 import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
@@ -160,7 +160,7 @@ public class Game extends Application {
 			/**
 			 *  manage the background game sound + methods to simplify sounds usage
 			 */
-			private Music soundHandler = new Music(true);
+			private Sound soundHandler = new Sound(true);
 			
 			/**
 			 * Canvas of the game board
@@ -255,7 +255,7 @@ public class Game extends Application {
 				galaxy.render(gc);
 				
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
-					galaxy.updateSquadPosition(Music.getSound_ship_explosion());
+					galaxy.updateSquadPosition(Sound.getSound_ship_explosion());
 				
 				if(game_tick % Ticks.tick_per_produce == 0)
 					galaxy.updateGarrison();
