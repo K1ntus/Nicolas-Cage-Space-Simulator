@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.Sun;
@@ -11,7 +12,6 @@ import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
-import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
@@ -68,8 +68,8 @@ public class Galaxy implements Serializable{
 		this.squads = new ArrayList<Squad>();
 		this.generator = null;
 		this.gc = gc;
-		
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
+
+		this.background = Game.RESOURCES_CONTAINER.getGame_background();
 		
 	}
 	/**
@@ -80,8 +80,8 @@ public class Galaxy implements Serializable{
 		this.planets = gg.getPlanets();
 		this.generator = null;
 		this.gc = gc;
-		
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
+
+		this.background = Game.RESOURCES_CONTAINER.getGame_background();
 		
 	}
 
@@ -95,7 +95,7 @@ public class Galaxy implements Serializable{
 		this.generator = null;
 		this.gc = gc;
 
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
+		this.background = Game.RESOURCES_CONTAINER.getGame_background();
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class Galaxy implements Serializable{
 		this.planets = generator.getPlanets();
 		this.generator = null;
 		this.gc = gc;
-		
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
+
+		this.background = Game.RESOURCES_CONTAINER.getGame_background();
 		
 	}
 	
@@ -119,6 +119,7 @@ public class Galaxy implements Serializable{
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
+		this.background = Game.RESOURCES_CONTAINER.getGame_background();
 		GalaxyRenderer.run(this, gc, background);
 	}
 	

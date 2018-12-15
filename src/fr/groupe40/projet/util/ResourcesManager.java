@@ -2,6 +2,10 @@ package fr.groupe40.projet.util;
 
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -10,29 +14,62 @@ import javafx.scene.layout.HBox;
 
 
 //TODO COMMENTS
-public final class ResourcesManager extends Thread{
+public final class ResourcesManager {
 	private static Image loading_image;
+
 		
 	public ResourcesManager() {
-		ResourcesManager.loading_image = new Image(
+		loading_image = new Image(
 				getRessourcePathByName(Resources.path_img_loading), 
 				Generation.width/4, 
 				Generation.height/4, 
 				false, 
 				false
 			);
+
 	}
 	
 
 	public static String getRessourcePathByName(String name) {
 		return ResourcesManager.class.getResource('/' + name).toString();
 	}
-	
+
 	public static Image getImageByPath(String path, double size) {
-		Image res = new Image(path, size, size, false, false);
-		return res;
+		return new Image(path, size, size, false, false);
 	}
 	
+	
+	private static Image result = null;
+	public static Image getImageByPath_dynamic(String path, double size) {
+		final Service<Image> imageLoadingService = new Service<Image>(){
+
+			  @Override
+			  protected Task<Image> createTask() {
+			    return new Task<Image>(){
+
+			     @Override
+			     protected Image call() throws Exception {
+			        // Charger l'image ici.
+			 		return new Image(path, size, size, false, false);
+			      }
+			    };
+			  }
+			};
+
+			imageLoadingService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			    @Override
+			    public void handle(WorkerStateEvent t) {
+			        result = imageLoadingService.getValue();
+			    }
+			});
+			imageLoadingService.start();
+			if(result != null)
+				return result;
+			else
+				return new Image(path, size, size, false, false);
+	}
+
+
 	public static void render_loading_pict(Group root, Canvas canvas) {
 		render_animated_pict(root, canvas, loading_image);
 	}
@@ -62,5 +99,9 @@ public final class ResourcesManager extends Thread{
 		root.getChildren().add(box);
 		//root.getChildren().addAll(canvas, gif);
 	}
+
+
+
+
 
 }

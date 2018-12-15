@@ -7,13 +7,13 @@ import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
+import fr.groupe40.projet.util.ResourcesContainer;
 import fr.groupe40.projet.util.ResourcesManager;
 import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
-import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Ticks;
 import fr.groupe40.projet.util.constants.Windows;
 import fr.groupe40.projet.window.MainMenu;
@@ -41,6 +41,7 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	public static ResourcesContainer RESOURCES_CONTAINER = new ResourcesContainer();
 	
 	/**
 	 *  manage the user input, currently, only the mouse is managed there
@@ -115,7 +116,7 @@ public class Game extends Application {
 		
 		Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
 		gc = canvas_mainMenu.getGraphicsContext2D();
-        Image background_image = new Image(Resources.path_img_menu_background, Generation.width, Generation.height, true, true, true);
+        Image background_image = RESOURCES_CONTAINER.getMain_menu_background();
         gc.drawImage(background_image, 0, 0);
 		root.getChildren().add(canvas_mainMenu);
 
@@ -219,7 +220,8 @@ public class Game extends Application {
 			 */
 			private void init() {
 
-				
+
+				root.getChildren().remove(canvas_game);
 				root.getChildren().remove(canvas_mainMenu);
 				root.getChildren().add(canvas_game);
 
@@ -234,8 +236,11 @@ public class Game extends Application {
 				galaxy.setGraphicsContext(gc);
 				galaxy.initFont(gc);
 				
-				scene_game = new Scene(root);
-				
+				try {
+					scene_game = new Scene(root);
+				} catch(IllegalArgumentException e) {
+					//Nothing, root already set
+				}
 				interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 				interactionHandler.exec();			
 
@@ -303,9 +308,8 @@ public class Game extends Application {
 							+ "Generating new board ...");
 						
 						galaxy.resetEveryUsersLostState();
-						galaxy = new Galaxy(gc);
-						interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
-						interactionHandler.exec();
+						game_init_done = false;
+						game_pre_init_done = false;
 
 						game_tick = 0;
 				}
@@ -352,8 +356,10 @@ public class Game extends Application {
 				if(window_type == Windows.WindowType.GAME) {
 					if(game_init_done) {
 						run();
-					}else {
+					} else if(game_pre_init_done){
 						init();
+					} else {
+						pre_init();
 					}
 				} else if(window_type == Windows.WindowType.MAIN_MENU && !main_menu.isPlay_game() && !main_menu.isSettings_menu()) {
 					if(!game_pre_init_done) {

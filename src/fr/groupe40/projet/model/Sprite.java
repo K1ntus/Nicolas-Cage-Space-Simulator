@@ -2,8 +2,11 @@ package fr.groupe40.projet.model;
 
 import java.io.Serializable;
 
+import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
+import fr.groupe40.projet.util.ResourcesManager;
 import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -88,7 +91,20 @@ public abstract class Sprite implements Serializable {
 	 */
 	public void updateImage() {
 		try {
-			image = new Image(this.img_path, width, height, false, false);
+			switch(img_path) {
+			case Resources.path_img_human_ships:
+				image = Game.RESOURCES_CONTAINER.getGame_human_ships();
+				break;
+			case Resources.path_img_AI_ships:
+				image = Game.RESOURCES_CONTAINER.getGame_ai_ships();
+				break;
+			case Resources.path_img_event_pirate_ships:
+				image = Game.RESOURCES_CONTAINER.getGame_pirate_ships();
+				break;
+			default:
+				image = ResourcesManager.getImageByPath(this.img_path, width);
+				break;
+			}
 		} catch(NullPointerException e) {
 			//No image
 		}
