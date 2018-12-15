@@ -5,6 +5,7 @@ import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
+//TODO COMMENTS
 public class ResourcesContainer {
 	private Image main_menu_background;
 	private Image game_background;
@@ -13,14 +14,13 @@ public class ResourcesContainer {
 	private Image game_ai_ships;
 	private Image game_pirate_ships;
 	
-
-	private AudioClip quit_button_sound;
-	private AudioClip play_button_sound;
-	private AudioClip settings_button_sound;
 	/**
 	 * contain the sound of a ship collision with his destination
 	 */
 	private AudioClip sound_ship_explosion;
+	private AudioClip quit_button_sound;
+	private AudioClip play_button_sound;
+	private AudioClip settings_button_sound;
 
 	
 	public ResourcesContainer(){

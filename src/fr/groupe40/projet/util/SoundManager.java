@@ -6,7 +6,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
 //TODO COMMENTS

@@ -41,6 +41,10 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	/**
+	 * Contains few image data for better memory (but cost more memory)
+	 */
 	public static ResourcesContainer RESOURCES_CONTAINER = new ResourcesContainer();
 	
 	/**

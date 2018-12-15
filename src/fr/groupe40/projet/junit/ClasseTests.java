@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.util.constants.Generation;
@@ -66,6 +67,6 @@ public class ClasseTests {
 		double a = 100.0;
 		double b = 200.0;
 		double c = Math.sqrt((a * a) + (b * b));
-		assertEquals(c, tester.distance(tester.getX(), tester.getY(),a,b));
+		assertEquals(c, Sprite.distance(tester.getX(), tester.getY(),a,b));
 	}
 }

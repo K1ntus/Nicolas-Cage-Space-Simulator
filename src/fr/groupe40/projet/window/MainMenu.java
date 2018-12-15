@@ -2,7 +2,6 @@ package fr.groupe40.projet.window;
 
 import fr.groupe40.projet.Game;
 import fr.groupe40.projet.util.ImageManager;
-import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
