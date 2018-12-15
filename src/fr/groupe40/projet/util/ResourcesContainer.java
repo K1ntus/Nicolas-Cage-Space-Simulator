@@ -3,6 +3,7 @@ package fr.groupe40.projet.util;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 public class ResourcesContainer {
 	private Image main_menu_background;
@@ -12,17 +13,29 @@ public class ResourcesContainer {
 	private Image game_ai_ships;
 	private Image game_pirate_ships;
 	
-	
+
+	private AudioClip quit_button_sound;
+	private AudioClip play_button_sound;
+	private AudioClip settings_button_sound;
+	/**
+	 * contain the sound of a ship collision with his destination
+	 */
+	private AudioClip sound_ship_explosion;
+
 	
 	public ResourcesContainer(){
-		main_menu_background = ResourcesManager.getImageByPath_dynamic(ResourcesManager.getRessourcePathByName(Resources.path_img_menu_background), Generation.width);
-		game_background = ResourcesManager.getImageByPath_dynamic(ResourcesManager.getRessourcePathByName(Resources.path_img_game_background), Generation.width);
+		main_menu_background = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_menu_background), Generation.width);
+		game_background = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_game_background), Generation.width);
 
-		game_human_ships = ResourcesManager.getImageByPath_dynamic(ResourcesManager.getRessourcePathByName(Resources.path_img_human_ships), Generation.size_squads);
-		game_ai_ships = ResourcesManager.getImageByPath_dynamic(ResourcesManager.getRessourcePathByName(Resources.path_img_AI_ships), Generation.size_squads);
-		game_pirate_ships = ResourcesManager.getImageByPath_dynamic(ResourcesManager.getRessourcePathByName(Resources.path_img_event_pirate_ships), Generation.size_squads);
+		game_human_ships = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_human_ships), Generation.size_squads);
+		game_ai_ships = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_AI_ships), Generation.size_squads);
+		game_pirate_ships = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_event_pirate_ships), Generation.size_squads);
 		
-		
+
+		play_button_sound = SoundManager.getAudioByPath_dynamic(Resources.path_sound_play, 0.5);
+		quit_button_sound = SoundManager.getAudioByPath_dynamic(Resources.path_sound_quit, 0.5);
+		settings_button_sound = SoundManager.getAudioByPath_dynamic(Resources.path_sound_settings, 0.5);
+		sound_ship_explosion = SoundManager.getAudioByPath_dynamic(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 		
 	}
 
@@ -99,4 +112,71 @@ public class ResourcesContainer {
 		this.game_pirate_ships = game_pirate_ships;
 	}
 
+	/**
+	 *  play sound when a ship of his squad reach his destination
+	 * @param mediaPlayer_boom the audio clip to play
+	 */
+	public void renderCollisionSound() {
+		
+		if(sound_ship_explosion == null) {
+			return;
+		}
+		sound_ship_explosion.play();
+	}
+
+	/**
+	 * @return the play_button_sound
+	 */
+	public AudioClip getPlay_button_sound() {
+		return play_button_sound;
+	}
+
+	/**
+	 * @param play_button_sound the play_button_sound to set
+	 */
+	public void setPlay_button_sound(AudioClip play_button_sound) {
+		this.play_button_sound = play_button_sound;
+	}
+
+	/**
+	 * @return the quit_button_sound
+	 */
+	public AudioClip getQuit_button_sound() {
+		return quit_button_sound;
+	}
+
+	/**
+	 * @param quit_button_sound the quit_button_sound to set
+	 */
+	public void setQuit_button_sound(AudioClip quit_button_sound) {
+		this.quit_button_sound = quit_button_sound;
+	}
+
+	/**
+	 * @return the settings_button_sound
+	 */
+	public AudioClip getSettings_button_sound() {
+		return settings_button_sound;
+	}
+
+	/**
+	 * @param settings_button_sound the settings_button_sound to set
+	 */
+	public void setSettings_button_sound(AudioClip settings_button_sound) {
+		this.settings_button_sound = settings_button_sound;
+	}
+
+	/**
+	 * @return the sound_ship_explosion
+	 */
+	public AudioClip getSound_ship_explosion() {
+		return sound_ship_explosion;
+	}
+
+	/**
+	 * @param sound_ship_explosion the sound_ship_explosion to set
+	 */
+	public void setSound_ship_explosion(AudioClip sound_ship_explosion) {
+		this.sound_ship_explosion = sound_ship_explosion;
+	}
 }

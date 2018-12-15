@@ -6,6 +6,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
@@ -294,7 +295,7 @@ public class Squad implements Serializable {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
-					SoundManager.renderCollisionSound();
+					Game.RESOURCES_CONTAINER.renderCollisionSound();
 					ships.remove(ship);
 					it = ships.iterator();
 				}

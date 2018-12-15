@@ -8,7 +8,7 @@ import java.util.List;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.util.ResourcesManager;
+import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
@@ -57,7 +57,7 @@ public class Ship extends Sprite implements Serializable {
 	 */
 	public Ship(String path, User ruler, Planet destination, Planet source, double x_init, double y_init,
 			ShipType ship_type) {
-		super(ResourcesManager.getRessourcePathByName(path), ruler, false);
+		super(ImageManager.getRessourcePathByName(path), ruler, false);
 		this.destination = destination;
 		this.source = source;
 		this.setX(x_init);

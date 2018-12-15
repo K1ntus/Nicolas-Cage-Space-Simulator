@@ -8,7 +8,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.ResourcesContainer;
-import fr.groupe40.projet.util.ResourcesManager;
+import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
@@ -134,14 +134,14 @@ public class Game extends Application {
 			public void handle(KeyEvent e) {
 					
 				if (e.getCode() == KeyCode.F5) {
-					ResourcesManager.render_loading_pict(root, canvas_game);
+					ImageManager.render_loading_pict(root, canvas_game);
 					System.out.println("Saving game ...");
 					//OPEN POPUP ?
 					saver.save_game();
 				}
 					
 				if (e.getCode() == KeyCode.F6) {
-					ResourcesManager.render_loading_pict(root, canvas_game);
+					ImageManager.render_loading_pict(root, canvas_game);
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
 					saver = new DataSerializer(Constants.fileName_save, galaxy);
@@ -300,7 +300,7 @@ public class Game extends Application {
 				}
 				
 				if(galaxy.isGame_is_over()) {
-					ResourcesManager.render_loading_pict(root, canvas_game);
+					ImageManager.render_loading_pict(root, canvas_game);
 					
 					if(Debugging.DEBUG)
 						System.out.println(

@@ -14,11 +14,11 @@ import javafx.scene.layout.HBox;
 
 
 //TODO COMMENTS
-public final class ResourcesManager {
+public final class ImageManager {
 	private static Image loading_image;
 
 		
-	public ResourcesManager() {
+	public ImageManager() {
 		loading_image = new Image(
 				getRessourcePathByName(Resources.path_img_loading), 
 				Generation.width/4, 
@@ -31,7 +31,7 @@ public final class ResourcesManager {
 	
 
 	public static String getRessourcePathByName(String name) {
-		return ResourcesManager.class.getResource('/' + name).toString();
+		return ImageManager.class.getResource('/' + name).toString();
 	}
 
 	public static Image getImageByPath(String path, double size) {
@@ -49,7 +49,6 @@ public final class ResourcesManager {
 
 			     @Override
 			     protected Image call() throws Exception {
-			        // Charger l'image ici.
 			 		return new Image(path, size, size, false, false);
 			      }
 			    };

@@ -1,6 +1,7 @@
 package fr.groupe40.projet.window;
 
-import fr.groupe40.projet.util.ResourcesManager;
+import fr.groupe40.projet.Game;
+import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
@@ -63,7 +64,7 @@ public class MainMenu {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		// Top title
-		Image title = new Image(ResourcesManager.getRessourcePathByName(Resources.path_img_menu_title));
+		Image title = new Image(ImageManager.getRessourcePathByName(Resources.path_img_menu_title));
 		ImageView title_img = new ImageView();
 		title_img.setImage(title);
 		title_img.setFitWidth(Generation.width / 2);
@@ -72,7 +73,7 @@ public class MainMenu {
 		title_img.setTranslateX(Generation.width / 5);
 
 		// Nicolas cage pict
-		Image nicolassse_cage = new Image(ResourcesManager.getRessourcePathByName(Resources.path_img_sun));
+		Image nicolassse_cage = new Image(ImageManager.getRessourcePathByName(Resources.path_img_sun));
 		ImageView nicolas_cage_img = new ImageView();
 		nicolas_cage_img.setImage(nicolassse_cage);
 		nicolas_cage_img.setFitWidth(Generation.width / 5);
@@ -145,7 +146,7 @@ public class MainMenu {
 	private void handlePlayButton() {
 		play_game = true;
 		try {
-			SoundManager.getPlay_button_sound().play();
+			Game.RESOURCES_CONTAINER.getPlay_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}
@@ -157,7 +158,7 @@ public class MainMenu {
 	private void handleQuitButton() {
 		System.out.println("Bye !");
 		try {
-			SoundManager.getQuit_button_sound().play();
+			Game.RESOURCES_CONTAINER.getQuit_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}
@@ -169,7 +170,7 @@ public class MainMenu {
 	 */
 	private void handleSettingButton() {
 		try {
-		SoundManager.getSettings_button_sound().play();
+			Game.RESOURCES_CONTAINER.getSettings_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}

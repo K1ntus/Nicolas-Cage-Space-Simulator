@@ -2,6 +2,11 @@ package fr.groupe40.projet.util;
 
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
 //TODO COMMENTS
@@ -12,27 +17,15 @@ public class SoundManager {
 	 */
 	private AudioClip main_theme;
 
-	private static AudioClip quit_button_sound;
-	private static AudioClip play_button_sound;
-	private static AudioClip settings_button_sound;
-	/**
-	 * contain the sound of a ship collision with his destination
-	 */
-	private static AudioClip sound_ship_explosion;
-
 	/**
 	 * Instanciate the music object, and launch or not the main_theme automatically
 	 * @param launch_music Auto-launch main theme if true, else false
 	 */
     public SoundManager(boolean launch_music) {
-    	this.main_theme = SoundManager.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
+    	this.main_theme = SoundManager.getAudioByPath_dynamic(Resources.path_sound_main_theme, Resources.main_theme_volume);
 		if(Constants.main_theme_enabled && launch_music && this.main_theme != null)
     		main_theme.play();
 		
-		SoundManager.play_button_sound = generateAudioClip(Resources.path_sound_play, 0.5);
-		SoundManager.quit_button_sound = generateAudioClip(Resources.path_sound_quit, 0.5);
-		SoundManager.settings_button_sound = generateAudioClip(Resources.path_sound_settings, 0.5);
-		SoundManager.sound_ship_explosion = generateAudioClip(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 
 	}
 
@@ -60,7 +53,7 @@ public class SoundManager {
      */
     public static AudioClip generateAudioClip(String path, double volume) {
 		try {
-	    	AudioClip res = new AudioClip(ResourcesManager.getRessourcePathByName(path));
+	    	AudioClip res = new AudioClip(ImageManager.getRessourcePathByName(path));
 	    	res.setVolume(volume);
 			return res;
 		} catch (NullPointerException e) {
@@ -70,72 +63,32 @@ public class SoundManager {
     	
     }
     
+    private static AudioClip result = null;
+	public static AudioClip getAudioByPath_dynamic(String path, double volume) {
+		final Service<AudioClip> imageLoadingService = new Service<AudioClip>(){
 
-	/**
-	 *  play sound when a ship of his squad reach his destination
-	 * @param mediaPlayer_boom the audio clip to play
-	 */
-	public static void renderCollisionSound() {
-		
-		if(SoundManager.sound_ship_explosion == null) {
-			return;
-		}
-		SoundManager.sound_ship_explosion.play();
-	}
+			  @Override
+			  protected Task<AudioClip> createTask() {
+			    return new Task<AudioClip>(){
 
-	/**
-	 * @return the play_button_sound
-	 */
-	public static AudioClip getPlay_button_sound() {
-		return play_button_sound;
-	}
+			     @Override
+			     protected AudioClip call() throws Exception {
+			 		return generateAudioClip(path, volume);
+			      }
+			    };
+			  }
+			};
 
-	/**
-	 * @param play_button_sound the play_button_sound to set
-	 */
-	public static void setPlay_button_sound(AudioClip play_button_sound) {
-		SoundManager.play_button_sound = play_button_sound;
-	}
-
-	/**
-	 * @return the quit_button_sound
-	 */
-	public static AudioClip getQuit_button_sound() {
-		return quit_button_sound;
-	}
-
-	/**
-	 * @param quit_button_sound the quit_button_sound to set
-	 */
-	public static void setQuit_button_sound(AudioClip quit_button_sound) {
-		SoundManager.quit_button_sound = quit_button_sound;
-	}
-
-	/**
-	 * @return the settings_button_sound
-	 */
-	public static AudioClip getSettings_button_sound() {
-		return settings_button_sound;
-	}
-
-	/**
-	 * @param settings_button_sound the settings_button_sound to set
-	 */
-	public static void setSettings_button_sound(AudioClip settings_button_sound) {
-		SoundManager.settings_button_sound = settings_button_sound;
-	}
-
-	/**
-	 * @return the sound_ship_explosion
-	 */
-	public static AudioClip getSound_ship_explosion() {
-		return sound_ship_explosion;
-	}
-
-	/**
-	 * @param sound_ship_explosion the sound_ship_explosion to set
-	 */
-	public static void setSound_ship_explosion(AudioClip sound_ship_explosion) {
-		SoundManager.sound_ship_explosion = sound_ship_explosion;
+			imageLoadingService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			    @Override
+			    public void handle(WorkerStateEvent t) {
+			        result = imageLoadingService.getValue();
+			    }
+			});
+			imageLoadingService.start();
+			if(result != null)
+				return result;
+			else
+		 		return generateAudioClip(path, volume);
 	}
 }

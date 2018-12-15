@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.util.ResourcesManager;
+import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
@@ -102,7 +102,7 @@ public abstract class Sprite implements Serializable {
 				image = Game.RESOURCES_CONTAINER.getGame_pirate_ships();
 				break;
 			default:
-				image = ResourcesManager.getImageByPath(this.img_path, width);
+				image = ImageManager.getImageByPath(this.img_path, width);
 				break;
 			}
 		} catch(NullPointerException e) {
