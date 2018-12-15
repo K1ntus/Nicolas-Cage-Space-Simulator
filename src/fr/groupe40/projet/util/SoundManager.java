@@ -21,7 +21,7 @@ public class SoundManager {
 	 * @param launch_music Auto-launch main theme if true, else false
 	 */
     public SoundManager(boolean launch_music) {
-    	this.main_theme = SoundManager.getAudioByPath_dynamic(Resources.path_sound_main_theme, Resources.main_theme_volume);
+    	this.main_theme = SoundManager.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
 		if(Constants.main_theme_enabled && launch_music && this.main_theme != null)
     		main_theme.play();
 		
@@ -34,12 +34,19 @@ public class SoundManager {
     public void run() {
     	if(main_theme == null || !Constants.main_theme_enabled) { 
     		System.out.println("Unable to load main-theme music");
-    		return; 
+    		main_theme.stop();
     	}
-    	main_theme.setVolume(Resources.main_theme_volume);
+    	
+    	//main_theme.setVolume(Resources.main_theme_volume);
+    	
     	if(main_theme.isPlaying()){
     		//DO nothing, music is already playing
-    	} else{ //Replay the music
+    	} else if (main_theme.isPlaying() && !Constants.main_theme_enabled) {
+    		System.out.println("stopping");
+    		main_theme.stop();
+    	} else {
+   		 //Replay the music
+    		System.out.println("replay");
     		main_theme.play(); 
     	}
     }

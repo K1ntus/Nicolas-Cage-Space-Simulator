@@ -115,7 +115,7 @@ public class Game extends Application {
 		/* Window and game kernel creation */
 		stage.setTitle("Nicolas Cage Space Simulator");
 		stage.setResizable(false);
-
+		
 		Group root = new Group();
 		
 		Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
@@ -151,7 +151,7 @@ public class Game extends Application {
 					saver = new DataSerializer(Constants.fileName_save, galaxy);
 					game_loaded = true;
 				}
-				
+
 				if (e.getCode() == KeyCode.ESCAPE) {
 					game_loaded = false;
 					galaxy = null;
@@ -209,6 +209,7 @@ public class Game extends Application {
 			 * Pre-initialize the game board with few elements
 			 */
 			private void pre_init() {	
+				soundHandler.run();
 				canvas_game = new Canvas(Generation.width, Generation.height);
 				
 				gg = new GalaxyGenerator();

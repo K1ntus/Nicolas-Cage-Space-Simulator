@@ -36,17 +36,20 @@ public final class Resources {
 
 	public static final String path_gfx_ship_explosion = "images/fx/blast.gif";
 
+	public static final String path_sound_main_theme = "sounds/musics/main_theme.mp3";
+	public static final String path_sound_cage_bees = "sounds/musics/NCage_bees.mp3";
+	public static final String path_sound_cage_train = "sounds/musics/NCage_train.mp3";
+	
 	public static final String path_sound_explosion = "sounds/explosion.mp3";
 	public static final String path_sound_sun_explosion = "sounds/sun_explosion.mp3";
-	public static final String path_sound_main_theme = "sounds/main_theme.mp3";
 
 	public static final String path_sound_play = "sounds/play_sound.mp3";
 	public static final String path_sound_quit = "sounds/exit_sound.mp3";
 	public static final String path_sound_settings = "sounds/settings_sound.mp3";
 	
-	public static final double main_theme_volume = 0.05; //Between 0 (cut the music) and 1
+	public static final double main_theme_volume = 0.1; //Between 0 (cut the music) and 1
 	public static final double ship_explosion_volume = 0.5;
-	public static final double sun_explosion_volume = 0.5;
+	public static final double sun_explosion_volume = 0.25;
 
 
 

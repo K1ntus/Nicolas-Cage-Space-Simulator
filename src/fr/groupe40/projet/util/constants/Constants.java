@@ -51,7 +51,7 @@ public final class Constants {
 
 	public static final boolean events_enabled = true;
 	public static final boolean sun_enabled = true;
-	public static final boolean main_theme_enabled = true;
+	public static boolean main_theme_enabled = true;
 	
 	/* AI */
 	public static final boolean ai_enabled = true;
