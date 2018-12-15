@@ -1,36 +1,15 @@
 package fr.groupe40.projet.util;
 
-import fr.groupe40.projet.util.constants.Generation;
-import fr.groupe40.projet.util.constants.Resources;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 //TODO COMMENTS
 public final class ImageManager {
-	private static Image loading_image;
-	
 
-		
-	public ImageManager() {
-		loading_image = new Image(
-				getRessourcePathByName(Resources.path_img_loading), 
-				Generation.width/4, 
-				Generation.height/4, 
-				false, 
-				false
-			);
-
-	}
-	
 
 	public static String getRessourcePathByName(String name) {
 		return ImageManager.class.getResource('/' + name).toString();

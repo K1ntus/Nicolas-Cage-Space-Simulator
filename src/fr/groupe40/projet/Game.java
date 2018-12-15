@@ -7,7 +7,6 @@ import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
@@ -48,7 +47,7 @@ public class Game extends Application {
 	/**
 	 *  manage the background game sound + methods to simplify sounds usage
 	 */
-	private SoundManager soundHandler;
+	private SoundManager soundHandler = new SoundManager(true);
 	
 	/**
 	 *  Board object containing every sprites, etc
@@ -138,6 +137,7 @@ public class Game extends Application {
 
 		Scene scene_main_menu = main_menu.getScene();
 		Scene scene_settings_menu = setting_menu.getScene();
+		scene_game = new Scene(root);
 
 		stage.setScene(scene_main_menu);
 		stage.show();
@@ -208,16 +208,13 @@ public class Game extends Application {
 			 * Is true if the game has been initialized
 			 */
 			private boolean game_init_done = false;
-						
+			
 			/**
 			 * Pre-initialize the game board with few elements
 			 */
 			private void pre_init() {	
-				long startTime = System.currentTimeMillis();
-				
-				soundHandler = new SoundManager(true);
-				soundHandler.run();
-				
+				long startTime = System.currentTimeMillis();				
+
 				
 				long endTime = System.currentTimeMillis();
 				if(Debugging.DEBUG) 
@@ -232,17 +229,11 @@ public class Game extends Application {
 			 */
 			private void init() {
 				long startTime = System.currentTimeMillis();
+				
 
+				
 				galaxy = new Galaxy(gc, new GalaxyGenerator());
-				
 				saver = new DataSerializer(Constants.fileName_save, galaxy);
-				
-				try {
-					clear_root();
-					root.getChildren().add(canvas_game);
-				} catch (IllegalArgumentException e) {
-					
-				}
 
 				if(Constants.events_enabled) 
 					eventManager = new Events(galaxy, gc, true, true);	
@@ -252,12 +243,18 @@ public class Game extends Application {
 				galaxy.setGraphicsContext(gc);
 				galaxy.initFont(gc);
 
-				scene_game = new Scene(root);
 				interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 				interactionHandler.exec();			
 
 				scene_game.setOnKeyPressed(keyboardHandler);
 
+				try {
+					clear_root();
+					root.getChildren().add(canvas_game);
+				} catch (IllegalArgumentException e) {
+					
+				}
+				
 				window_type = Windows.WindowType.GAME;
 				
 				stage.setScene(scene_game);
@@ -269,6 +266,9 @@ public class Game extends Application {
 				long endTime = System.currentTimeMillis();
 				if(Debugging.DEBUG)
 					System.out.println("Init done in " + (endTime - startTime) +" ms");
+				
+
+
 			}
 			
 			/**

@@ -1,6 +1,5 @@
 package fr.groupe40.projet.window;
 
-import fr.groupe40.projet.Game;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.ResourcesContainer;
