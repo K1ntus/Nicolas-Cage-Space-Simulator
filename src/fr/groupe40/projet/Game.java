@@ -81,7 +81,11 @@ public class Game extends Application {
 	 * Is true if a game has been loaded
 	 */
 	private boolean game_loaded = false;
-	
+
+	/**
+	 * Canvas of the game board
+	 */
+	private Canvas canvas_game;
 	
 	/**
 	 *  'main' method
@@ -129,14 +133,14 @@ public class Game extends Application {
 			public void handle(KeyEvent e) {
 					
 				if (e.getCode() == KeyCode.F5) {
-					ResourcesManager.render_loading_pict(gc);
+					ResourcesManager.render_loading_pict(root, canvas_game);
 					System.out.println("Saving game ...");
 					//OPEN POPUP ?
 					saver.save_game();
 				}
 					
 				if (e.getCode() == KeyCode.F6) {
-					ResourcesManager.render_loading_pict(gc);
+					ResourcesManager.render_loading_pict(root, canvas_game);
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
 					saver = new DataSerializer(Constants.fileName_save, galaxy);
@@ -175,11 +179,6 @@ public class Game extends Application {
 			 *  manage the background game sound + methods to simplify sounds usage
 			 */
 			private SoundManager soundHandler = new SoundManager(true);
-			
-			/**
-			 * Canvas of the game board
-			 */
-			private Canvas canvas_game;
 
 			/**
 			 * Equals to the current window displayed (ie. setting, main menu or game)
@@ -200,7 +199,7 @@ public class Game extends Application {
 			 * Generate the planet over the board, used during pre-init to split the calculation
 			 */
 			private GalaxyGenerator gg;
-
+			
 			/**
 			 * Pre-initialize the game board with few elements
 			 */
@@ -296,7 +295,7 @@ public class Game extends Application {
 				}
 				
 				if(galaxy.isGame_is_over()) {
-					ResourcesManager.render_loading_pict(gc);
+					ResourcesManager.render_loading_pict(root, canvas_game);
 					
 					if(Debugging.DEBUG)
 						System.out.println(

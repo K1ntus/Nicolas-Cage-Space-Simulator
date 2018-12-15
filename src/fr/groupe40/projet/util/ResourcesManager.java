@@ -2,8 +2,11 @@ package fr.groupe40.projet.util;
 
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 
 //TODO COMMENTS
@@ -30,11 +33,12 @@ public final class ResourcesManager extends Thread{
 		return res;
 	}
 	
-	public static void render_loading_pict(GraphicsContext gc) {
-		render_animated_pict(gc, loading_image);
+	public static void render_loading_pict(Group root, Canvas canvas) {
+		render_animated_pict(root, canvas, loading_image);
 	}
 	
-	public static void render_animated_pict(GraphicsContext gc, Image img) {
+	public static void render_animated_pict(Group root, Canvas canvas, Image img) {
+		/*
 		new Thread(
 			new Runnable() {
 				@Override
@@ -44,6 +48,19 @@ public final class ResourcesManager extends Thread{
 				}
 			}
 		);
+		*/
+		ImageView gif = new ImageView();
+
+		gif.setImage(img);
+		gif.setFitWidth(100);
+		gif.setPreserveRatio(true);
+		gif.setSmooth(true);
+		gif.setCache(true);
+
+        HBox box = new HBox();
+        box.getChildren().add(gif);
+		root.getChildren().add(box);
+		//root.getChildren().addAll(canvas, gif);
 	}
 
 }

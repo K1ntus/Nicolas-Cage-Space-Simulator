@@ -66,7 +66,6 @@ public class Galaxy implements Serializable{
 	 */
 	public Galaxy(GraphicsContext gc) {
 		this.squads = new ArrayList<Squad>();
-		this.planets = generator.getPlanets();
 		this.generator = null;
 		this.gc = gc;
 		

@@ -13,6 +13,7 @@ import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
+import javafx.concurrent.Task;
 
 /**
  *  Galaxy Planets Generator
@@ -20,7 +21,7 @@ import fr.groupe40.projet.util.constants.Resources;
  * @author Sarah Portejoie
  *
  */
-public class GalaxyGenerator {
+public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	/**
 	 *  the results planets array that has been generated
 	 */
@@ -30,10 +31,27 @@ public class GalaxyGenerator {
 	 *  Create and Generate the board
 	 */
 	public GalaxyGenerator() {
+		try {
+			this.call();
+		} catch (Exception e) {
+			System.out.println("******************************");
+			System.out.println("* Unable to generate a board *");
+			System.out.println("******************************");
+			e.printStackTrace();
+		}
+	}
+	
+
+
+	@Override
+	protected ArrayList<Planet> call() throws Exception {
 		if(Constants.sun_enabled)
 			generateSun();
 		generatePlanets();
+		return planets;
 	}
+	
+	/*	Sun generation	*/
 
 	/**
 	 *  Generate a sun in the center of the board
