@@ -24,7 +24,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -64,18 +63,17 @@ public class Game extends Application {
 	/**
 	 * Setting menu
 	 */
-	private SettingsMenu setting_menu;
+	private SettingsMenu setting_menu = new SettingsMenu();
 	
 	/**
 	 * Graphic handler of the game
 	 */
 	private GraphicsContext gc;
-	
+
 	/**
 	 * Graphic scene of the game
 	 */
 	private Scene scene_game;
-	
 	/**
 	 * Saving/Loading manager
 	 */
@@ -89,7 +87,23 @@ public class Game extends Application {
 	/**
 	 * Canvas of the game board
 	 */
-	private Canvas canvas_game;
+	private Canvas canvas_game = new Canvas(Generation.width, Generation.height);
+	
+	/**
+	 * Canvas of the setting menu
+	 */
+	private Canvas canvas_settings = new Canvas(Generation.width, Generation.height);
+
+	/**
+	 * Canvas of the main menu
+	 */
+	private Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
+	
+	
+	/**
+	 * Javafx root
+	 */
+	Group root = new Group();
 	
 	/**
 	 *  'main' method
@@ -111,23 +125,22 @@ public class Game extends Application {
 			if(Debugging.DEBUG)
 				System.out.println("Non windows OS");
 		}
+		
 
 		/* Window and game kernel creation */
 		stage.setTitle("Nicolas Cage Space Simulator");
 		stage.setResizable(false);
 		
-		Group root = new Group();
 		
-		Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
 		gc = canvas_mainMenu.getGraphicsContext2D();
 
 		root.getChildren().add(canvas_mainMenu);
 
 		Scene scene_main_menu = main_menu.getScene();
+		Scene scene_settings_menu = setting_menu.getScene();
 
 		stage.setScene(scene_main_menu);
 		stage.show();
-
 
 		
 		/* KEYBOARD HANDLER */
@@ -137,14 +150,12 @@ public class Game extends Application {
 			public void handle(KeyEvent e) {
 					
 				if (e.getCode() == KeyCode.F5) {
-					ImageManager.render_loading_pict(root, canvas_game);
 					System.out.println("Saving game ...");
 					//OPEN POPUP ?
 					saver.save_game();
 				}
 					
 				if (e.getCode() == KeyCode.F6) {
-					ImageManager.render_loading_pict(root, canvas_game);
 					System.out.println("Loading game ...");
 					galaxy = saver.load_game(gc);
 					saver = new DataSerializer(Constants.fileName_save, galaxy);
@@ -168,6 +179,8 @@ public class Game extends Application {
 		long endTime = System.currentTimeMillis();
 		if(Debugging.DEBUG)
 			System.out.println("Game window done in " + (endTime - startTime) +" ms");
+		
+		
 		/*	Rendering, game initialization, etc */
 		new AnimationTimer() {
 			
@@ -221,26 +234,25 @@ public class Game extends Application {
 				long startTime = System.currentTimeMillis();
 
 				galaxy = new Galaxy(gc, new GalaxyGenerator());
-				canvas_game = new Canvas(Generation.width, Generation.height);
-
+				
 				saver = new DataSerializer(Constants.fileName_save, galaxy);
+				
+				try {
+					clear_root();
+					root.getChildren().add(canvas_game);
+				} catch (IllegalArgumentException e) {
+					
+				}
 
 				if(Constants.events_enabled) 
 					eventManager = new Events(galaxy, gc, true, true);	
 				
-				try {
-					root.getChildren().remove(canvas_game);
-					root.getChildren().remove(canvas_mainMenu);
-					root.getChildren().add(canvas_game);
-					scene_game = new Scene(root);
-				} catch(IllegalArgumentException e) {
-					//Nothing, root already set
-				}
-				
+
 				gc = canvas_game.getGraphicsContext2D();
 				galaxy.setGraphicsContext(gc);
 				galaxy.initFont(gc);
-				
+
+				scene_game = new Scene(root);
 				interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 				interactionHandler.exec();			
 
@@ -302,7 +314,6 @@ public class Game extends Application {
 				}
 				
 				if(galaxy.isGame_is_over()) {
-					ImageManager.render_loading_pict(root, canvas_game);
 					
 					if(Debugging.DEBUG)
 						System.out.println(
@@ -322,15 +333,10 @@ public class Game extends Application {
 			 */
 			private void display_settings_menu() {
 				main_menu.setSettings_menu(false);
-				Canvas canvas_settings = new Canvas(Generation.width, Generation.height);
 				gc = canvas_settings.getGraphicsContext2D();
-				
-				root.getChildren().add(canvas_settings);
-
 				window_type = Windows.WindowType.SETTINGS;
-				Scene scene_settings = setting_menu.getScene();
-				
-				stage.setScene(scene_settings);
+
+				stage.setScene(scene_settings_menu);
 				stage.show();				
 			}
 			
@@ -342,6 +348,7 @@ public class Game extends Application {
 				main_menu.setPlay_game(false);
 				main_menu.setSettings_menu(false);
 				window_type = Windows.WindowType.MAIN_MENU;
+
 				game_init_done = false;
 				game_pre_init_done = false;
 
@@ -377,7 +384,6 @@ public class Game extends Application {
 						run();
 					}
 				} else if (main_menu.isSettings_menu() && window_type == Windows.WindowType.MAIN_MENU) {
-					setting_menu = new SettingsMenu();
 					display_settings_menu();
 				}
 			}
@@ -385,5 +391,11 @@ public class Game extends Application {
 
 	}
 
+	private void clear_root() {
+		root.getChildren().remove(canvas_game);
+		root.getChildren().remove(canvas_settings);
+		root.getChildren().remove(canvas_mainMenu);
+		
+	}
 	
 }

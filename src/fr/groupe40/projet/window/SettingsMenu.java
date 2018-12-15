@@ -184,12 +184,13 @@ public class SettingsMenu {
 	 * Exit the program when called
 	 */
 	private void handleQuitButton() {
+		/*
 		try {
 			GalaxyRenderer.getRESOURCES_CONTAINER().getQuit_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}
-		
+		*/
 		System.out.println("Bye !");
 		System.exit(0);
 	}
@@ -199,9 +200,7 @@ public class SettingsMenu {
 	}
 
 	public Scene getScene() {
-		Scene res = new Scene(grid, Generation.width, Generation.height);
-
-		return res;
+		return new Scene(grid, Generation.width, Generation.height);
 	}
 
 	/**

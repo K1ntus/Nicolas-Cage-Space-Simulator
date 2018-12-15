@@ -163,11 +163,7 @@ public class MainMenu {
 	 */
 	private void handleQuitButton() {
 		System.out.println("Bye !");
-		try {
-			GalaxyRenderer.getRESOURCES_CONTAINER().getQuit_button_sound().play();
-		} catch(NullPointerException e) {
-			
-		}
+		
 		System.exit(0);
 	}
 

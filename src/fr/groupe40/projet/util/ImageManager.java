@@ -7,10 +7,11 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 //TODO COMMENTS
@@ -68,40 +69,5 @@ public final class ImageManager {
 			else
 				return new Image(path, size, size, false, false);
 	}
-
-
-	public static void render_loading_pict(Group root, Canvas canvas) {
-		render_animated_pict(root, canvas, loading_image);
-	}
-	
-	public static void render_animated_pict(Group root, Canvas canvas, Image img) {
-		/*
-		new Thread(
-			new Runnable() {
-				@Override
-				public void run() {
-					gc.drawImage(loading_image, Generation.width/2, Generation.height-Generation.height/4);
-					
-				}
-			}
-		);
-		*/
-		ImageView gif = new ImageView();
-
-		gif.setImage(img);
-		gif.setFitWidth(100);
-		gif.setPreserveRatio(true);
-		gif.setSmooth(true);
-		gif.setCache(true);
-
-        HBox box = new HBox();
-        box.getChildren().add(gif);
-		root.getChildren().add(box);
-		//root.getChildren().addAll(canvas, gif);
-	}
-
-
-
-
 
 }
