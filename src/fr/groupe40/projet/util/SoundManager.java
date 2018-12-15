@@ -34,7 +34,7 @@ public class SoundManager {
     public void run() {
     	if(main_theme == null || !Constants.main_theme_enabled) { 
     		System.out.println("Unable to load main-theme music");
-    		main_theme.stop();
+    		return;
     	}
     	
     	//main_theme.setVolume(Resources.main_theme_volume);
