@@ -8,7 +8,12 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.media.AudioClip;
 
-//TODO COMMENTS
+
+/**
+ * Offers many sounds tweaks and manage the background music
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ */
 public class SoundManager {
 
 	/**
@@ -68,8 +73,18 @@ public class SoundManager {
 		}   	
     	
     }
-    
+
+	/**
+	 * Will contain the result of function 'getAudioByPath_dynamic'
+	 */
     private static AudioClip result = null;
+
+	/**
+	 * Load an AudioClip using another processus
+	 * @param path the sound path
+	 * @param the volume of the AudioClip (Should be between 0 & 1, recommend 0.5 by default)
+	 * @return the image loaded
+	 */
 	public static AudioClip getAudioByPath_dynamic(String path, double volume) {
 		final Service<AudioClip> imageLoadingService = new Service<AudioClip>(){
 

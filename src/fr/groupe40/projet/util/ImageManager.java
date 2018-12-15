@@ -7,20 +7,43 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 
 
-//TODO COMMENTS
+/**
+ * Manage image loading, and offer an image loading from threads
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ */
 public final class ImageManager {
 
-
+	/**
+	 * Return the string reformatted to get the correct path
+	 * @param name the file name/initial path
+	 * @return the corrected path string
+	 */
 	public static String getRessourcePathByName(String name) {
 		return ImageManager.class.getResource('/' + name).toString();
 	}
 
+	/**
+	 * Load an image using main processus
+	 * @param path the image path
+	 * @param size the width and height of the image (so, only available for squared pict)
+	 * @return the image loaded
+	 */
 	public static Image getImageByPath(String path, double size) {
 		return new Image(path, size, size, false, false);
 	}
 	
-	
+	/**
+	 * Will contain the result of function 'getImageByPath_dynamic'
+	 */
 	private static Image result = null;
+	
+	/**
+	 * Load an image using another processus
+	 * @param path the image path
+	 * @param size the width and height of the image (so, only available for squared pict)
+	 * @return the image loaded
+	 */
 	public static Image getImageByPath_dynamic(String path, double size) {
 		final Service<Image> imageLoadingService = new Service<Image>(){
 

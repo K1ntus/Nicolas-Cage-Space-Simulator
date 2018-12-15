@@ -31,8 +31,15 @@ public class SettingsMenu {
 	 */
 	private GridPane grid = new GridPane();
 
-	//TODO COMMENTS
+	/**
+	 * Text field to enter the maximum tentatives of planets to generate
+	 * And the gui_size in pixels of a ship (every others shapes get upgraded by that)
+	 */
 	private TextField max_numbers_of_planets, gui_size;
+	
+	/**
+	 * TextField to enter the integer value for the minimal & maximal ships speed on board
+	 */
 	private TextField parameters_ships_min_speed, parameters_ships_max_speed;
 
 	/**
@@ -40,6 +47,9 @@ public class SettingsMenu {
 	 */
 	private boolean applied = false;
 
+	/**
+	 * Initialize the setting menu
+	 */
 	public SettingsMenu() {
 		this.init();
 	}
@@ -184,13 +194,6 @@ public class SettingsMenu {
 	 * Exit the program when called
 	 */
 	private void handleQuitButton() {
-		/*
-		try {
-			GalaxyRenderer.getRESOURCES_CONTAINER().getQuit_button_sound().play();
-		} catch(NullPointerException e) {
-			
-		}
-		*/
 		System.out.println("Bye !");
 		System.exit(0);
 	}

@@ -17,6 +17,7 @@ import fr.groupe40.projet.util.constants.Windows;
 import fr.groupe40.projet.window.MainMenu;
 import fr.groupe40.projet.window.SettingsMenu;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -27,6 +28,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 /**
  *  Main class. Currently managing users interactions and display
@@ -38,6 +40,7 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	private Stage preloader_stage;
 		
 	/**
 	 *  manage the user input, currently, only the mouse is managed there
@@ -47,7 +50,7 @@ public class Game extends Application {
 	/**
 	 *  manage the background game sound + methods to simplify sounds usage
 	 */
-	private SoundManager soundHandler = new SoundManager(true);
+	private SoundManager soundHandler;
 	
 	/**
 	 *  Board object containing every sprites, etc
@@ -57,12 +60,12 @@ public class Game extends Application {
 	/**
 	 * Main menu
 	 */
-	private MainMenu main_menu = new MainMenu();
+	private MainMenu main_menu;
 	
 	/**
 	 * Setting menu
 	 */
-	private SettingsMenu setting_menu = new SettingsMenu();
+	private SettingsMenu setting_menu;
 	
 	/**
 	 * Graphic handler of the game
@@ -105,95 +108,54 @@ public class Game extends Application {
 	Group root = new Group();
 	
 	/**
+	 * The scene for the setting part
+	 */
+	private Scene scene_settings_menu;
+	
+	/**
+	 * The scene for the main menu
+	 */
+	private Scene scene_main_menu;
+
+	/**
+	 * Handle keyboard I/O. (Save/Load & Escape)
+	 */
+	private EventHandler<KeyEvent> keyboardHandler;
+	
+	@Override
+	public void init() throws Exception{
+		main_menu = new MainMenu();
+		setting_menu = new SettingsMenu();
+		soundHandler = new SoundManager(true);
+	}
+	
+	/**
 	 *  'main' method
 	 */
 	public void start(Stage stage) {
-		long startTime = System.currentTimeMillis();
-		/* 	---| OS check |---	
-		 * Doing that because there s a little white
-		 * margin under Windows (only tested under win 7 btw)
-		 * So, if that's a windows OS, we re editing
-		 * the window style to remove it
-		 */
-		String OS = System.getProperty("os.name").toLowerCase();
-		if((OS.indexOf("win") >= 0)) {
-			if(Debugging.DEBUG)
-				System.out.println("OS type is windows");
-			stage.initStyle(StageStyle.UNDECORATED);
-		}else {
-			if(Debugging.DEBUG)
-				System.out.println("Non windows OS");
-		}
+		this.preloader_stage = stage;
 		
+		init_window(stage);
 
-		/* Window and game kernel creation */
-		stage.setTitle("Nicolas Cage Space Simulator");
-		stage.setResizable(false);
-		
-		
-		gc = canvas_mainMenu.getGraphicsContext2D();
-
-		root.getChildren().add(canvas_mainMenu);
-
-		Scene scene_main_menu = main_menu.getScene();
-		Scene scene_settings_menu = setting_menu.getScene();
-		scene_game = new Scene(root);
-
-		stage.setScene(scene_main_menu);
-		stage.show();
-
-		
-		/* KEYBOARD HANDLER */
-		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
-	
-			@Override
-			public void handle(KeyEvent e) {
-					
-				if (e.getCode() == KeyCode.F5) {	
-					System.out.println("Saving game ...");
-					long startTime = System.currentTimeMillis();
-					
-					//OPEN POPUP ?
-					saver.save_game();
-
-					long endTime = System.currentTimeMillis();
-					if(Debugging.DEBUG) 
-						System.out.println("Saving done in " + (endTime - startTime) +" ms");
-				}
-					
-				if (e.getCode() == KeyCode.F6) {	
-					System.out.println("Loading game ...");
-					long startTime = System.currentTimeMillis();
-					
-					galaxy = saver.load_game(gc);
-					saver = new DataSerializer(Constants.fileName_save, galaxy);
-					game_loaded = true;
-					
-					long endTime = System.currentTimeMillis();
-					if(Debugging.DEBUG) 
-						System.out.println("Loading done in " + (endTime - startTime) +" ms");
-				}
-
-				if (e.getCode() == KeyCode.ESCAPE) {
-					game_loaded = false;
-					galaxy = null;
-					interactionHandler = null;
-					main_menu = null;
-					setting_menu = null;
-					
-					System.out.println("Coward !");
-					System.exit(0);
-				}
-				
-			}
-		};
-
-		long endTime = System.currentTimeMillis();
-		if(Debugging.DEBUG)
-			System.out.println("Game window done in " + (endTime - startTime) +" ms");
-		
-		
 		/*	Rendering, game initialization, etc */
+		clock_updater(stage);
+	}
+
+	/**
+	 * Remove every canvas from the root Node
+	 */
+	private void clear_root() {
+		root.getChildren().remove(canvas_game);
+		root.getChildren().remove(canvas_settings);
+		root.getChildren().remove(canvas_mainMenu);
+		
+	}
+	
+	/**
+	 * Function that handle the game generation, ticks update, etc ...
+	 * @param stage the programe main stage
+	 */
+	private void clock_updater(Stage stage) {
 		new AnimationTimer() {
 			
 			/**
@@ -215,24 +177,18 @@ public class Game extends Application {
 			 * Is true if the board has been pre-initialized
 			 */
 			private boolean game_pre_init_done = false;
-			
 			/**
-			 * Prevent multiples threads running at the same time for preinit
+			 * Is true if the game has been initialized
 			 */
 			private boolean game_pre_init_running = false;
-			
+
 			/**
 			 * Is true if the game has been initialized
 			 */
 			private boolean game_init_done = false;
-			
+						
 			/**
-			 * 
-			 */
-			private Thread pre_init_thread;
-			
-			/**
-			 * 
+			 * Pre-generate the galaxy list of planets
 			 */
 			private GalaxyGenerator gg;
 			
@@ -243,8 +199,9 @@ public class Game extends Application {
 				if(game_pre_init_running) {
 					return;
 				}
-				long startTime = System.currentTimeMillis();				
-				pre_init_thread = new Thread(new Runnable() {
+				long startTime = System.currentTimeMillis();	
+				
+				Thread pre_init_thread = new Thread(new Runnable() {
 			        @Override
 			        public void run() {
 			        	game_pre_init_running = true;
@@ -269,10 +226,11 @@ public class Game extends Application {
 					pre_init_thread.join(2000);
 				} catch (InterruptedException e) {
 					gg = null;
+					long endTime = System.currentTimeMillis();
 					System.out.println("Pre-Init failed after " + (endTime - startTime) +" ms");
+		        	game_pre_init_running = false;
 					e.printStackTrace();
 				}
-	        	game_pre_init_running = false;
 			
 			
 			}
@@ -446,14 +404,102 @@ public class Game extends Application {
 				}
 			}
 		}.start();
-
-	}
-
-	private void clear_root() {
-		root.getChildren().remove(canvas_game);
-		root.getChildren().remove(canvas_settings);
-		root.getChildren().remove(canvas_mainMenu);
 		
+	}
+	
+	/**
+	 * Initialize the first properties of the game window
+	 * @param stage the application stage
+	 */
+	private void init_window(Stage stage) {
+		long startTime = System.currentTimeMillis();
+		/* 	---| OS check |---	
+		 * Doing that because there s a little white
+		 * margin under Windows (only tested under win 7 btw)
+		 * So, if that's a windows OS, we re editing
+		 * the window style to remove it
+		 */
+		String OS = System.getProperty("os.name").toLowerCase();
+		if((OS.indexOf("win") >= 0)) {
+			if(Debugging.DEBUG)
+				System.out.println("OS type is windows");
+			stage.initStyle(StageStyle.UNDECORATED);
+		}else {
+			if(Debugging.DEBUG)
+				System.out.println("Non windows OS");
+		}
+		
+
+		/* Window and game kernel creation */
+		stage.setTitle("Nicolas Cage Space Simulator");
+		stage.setResizable(false);
+		
+		
+		gc = canvas_mainMenu.getGraphicsContext2D();
+
+		root.getChildren().add(canvas_mainMenu);
+
+		scene_main_menu = main_menu.getScene();
+		scene_settings_menu = setting_menu.getScene();
+		
+		scene_game = new Scene(root);
+
+		stage.setScene(scene_main_menu);
+		stage.show();
+
+		
+		keyboardHandler = new EventHandler<KeyEvent>() {
+	
+			@Override
+			public void handle(KeyEvent e) {
+					
+				if (e.getCode() == KeyCode.F5) {	
+					System.out.println("Saving game ...");
+					long startTime = System.currentTimeMillis();
+					
+					//OPEN POPUP ?
+					saver.save_game();
+
+					long endTime = System.currentTimeMillis();
+					if(Debugging.DEBUG) 
+						System.out.println("Saving done in " + (endTime - startTime) +" ms");
+				}
+					
+				if (e.getCode() == KeyCode.F6) {	
+					System.out.println("Loading game ...");
+					long startTime = System.currentTimeMillis();
+					
+					galaxy = saver.load_game(gc);
+					saver = new DataSerializer(Constants.fileName_save, galaxy);
+					game_loaded = true;
+					
+					long endTime = System.currentTimeMillis();
+					if(Debugging.DEBUG) 
+						System.out.println("Loading done in " + (endTime - startTime) +" ms");
+				}
+
+				if (e.getCode() == KeyCode.ESCAPE) {
+					game_loaded = false;
+					galaxy = null;
+					interactionHandler = null;
+					main_menu = null;
+					setting_menu = null;
+
+					FadeTransition fade_out = new FadeTransition(Duration.millis(3000), root);
+					fade_out.setFromValue(1.0);
+					fade_out.setToValue(0.0);
+					fade_out.play();
+					
+					System.out.println("Coward !");
+					System.exit(0);
+				}
+				
+			}
+		};
+
+		long endTime = System.currentTimeMillis();
+		if(Debugging.DEBUG)
+			System.out.println("Game window done in " + (endTime - startTime) +" ms");
 	}
 	
 }

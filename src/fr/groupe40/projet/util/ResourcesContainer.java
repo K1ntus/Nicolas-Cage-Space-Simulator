@@ -5,24 +5,60 @@ import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
-//TODO COMMENTS
+/**
+ * Save multiple resources file for performance and speed of the application
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ */
 public class ResourcesContainer {
+	/**
+	 * contain the Image of the main menu background
+	 */
 	private static Image main_menu_background;
+	
+	/**
+	 * contain the Image of the game background
+	 */
 	private static Image game_background;
 
+	/**
+	 * contain the Image of human ships saved
+	 */
 	private Image game_human_ships;
+	
+	/**
+	 * contain the Image of ai ships saved
+	 */
 	private Image game_ai_ships;
+	
+	/**
+	 * contain the Image of pirate ships saved
+	 */
 	private Image game_pirate_ships;
 	
 	/**
 	 * contain the sound of a ship collision with his destination
 	 */
 	private AudioClip sound_ship_explosion;
+	
+	/**
+	 * contain the sound played when leaving the game
+	 */
 	private AudioClip quit_button_sound;
+	
+	/**
+	 * contain the sound played when pressing the play button
+	 */
 	private AudioClip play_button_sound;
+	
+	/**
+	 * contain the sound played when pressing the setting button
+	 */
 	private AudioClip settings_button_sound;
 
-	
+	/**
+	 * Load and Save every stable pictures and sounds that could be used in the game
+	 */
 	public ResourcesContainer(){
 		main_menu_background = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_menu_background), Generation.width);
 		game_background = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_game_background), Generation.width);

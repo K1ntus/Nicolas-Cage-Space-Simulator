@@ -13,7 +13,6 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Players;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -40,9 +39,6 @@ public class DataSerializer {
 	 *  variable that handle the object saving in file
 	 */
 	private ObjectOutputStream oos;
-	
-	@Deprecated
-	private boolean new_game_loaded = false;
 	
 	/**
 	 *  create the structure containing the data and the fileName
@@ -124,7 +120,6 @@ public class DataSerializer {
 			e.printStackTrace();
 		}	
 		Galaxy res = new Galaxy(loaded, gc);
-		setNew_game_loaded(true);
 		return res;
 	}
 	/**
@@ -199,11 +194,4 @@ public class DataSerializer {
 		
 	}
 
-	public boolean isNew_game_loaded() {
-		return new_game_loaded;
-	}
-
-	public void setNew_game_loaded(boolean new_game_loaded) {
-		this.new_game_loaded = new_game_loaded;
-	}
 }

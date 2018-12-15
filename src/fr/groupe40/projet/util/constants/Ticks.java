@@ -11,8 +11,4 @@ public final class Ticks {
 	public static final long tick_per_main_theme_check = 500;
 	public static final long tick_per_garbage_check = 15000;
 	
-	@Deprecated
-	public static final long tick_before_counter_reset = 500;
-	
-
 }
