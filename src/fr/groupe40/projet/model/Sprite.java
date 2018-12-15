@@ -2,7 +2,6 @@ package fr.groupe40.projet.model;
 
 import java.io.Serializable;
 
-import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.ImageManager;

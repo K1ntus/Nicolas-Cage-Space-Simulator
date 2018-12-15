@@ -164,36 +164,31 @@ public class DataSerializer {
 			s.updateImage();
 		}
 		
-		if(Debugging.DEBUG) {
-			System.out.println("Squads has been loaded ...");
-			System.out.println("Loading planets ...");			
-		}
-		
 		for(Planet p : g.getPlanets()) {		
 					
 			switch(p.getRuler().getId()) {
 				case Players.event_id:
-					System.out.println("** event user");
+					//System.out.println("** event user");
 					p.setRuler(Players.event_user);
 					break;
 				case Players.sun_id:
-					System.out.println("** sun");
+					//System.out.println("** sun");
 					p.setRuler(Players.sun_user);
 					break;
 				case Players.pirate_id:
-					System.out.println("** pirate user");
+					//System.out.println("** pirate user");
 					p.setRuler(Players.pirate_user);
 					break;
 				case Players.human_faction:
-					System.out.println("** human user");
+					//System.out.println("** human user");
 					p.setRuler(Players.human_user);
 					break;
 				case Players.neutral_faction:
-					System.out.println("** neutral user");
+					//System.out.println("** neutral user");
 					p.setRuler(Players.neutral_user);
 					break;
 				default:
-					System.out.println("** ai user");
+					//System.out.println("** ai user");
 					p.setRuler(Players.ai_user);
 					break;
 			}
@@ -202,8 +197,6 @@ public class DataSerializer {
 			p.updateImage();
 		}
 		
-		if(Debugging.DEBUG) 
-			System.out.println("Planets has been loaded ...");
 	}
 
 	public boolean isNew_game_loaded() {

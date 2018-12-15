@@ -149,17 +149,29 @@ public class Game extends Application {
 			@Override
 			public void handle(KeyEvent e) {
 					
-				if (e.getCode() == KeyCode.F5) {
+				if (e.getCode() == KeyCode.F5) {	
 					System.out.println("Saving game ...");
+					long startTime = System.currentTimeMillis();
+					
 					//OPEN POPUP ?
 					saver.save_game();
+
+					long endTime = System.currentTimeMillis();
+					if(Debugging.DEBUG) 
+						System.out.println("Saving done in " + (endTime - startTime) +" ms");
 				}
 					
-				if (e.getCode() == KeyCode.F6) {
+				if (e.getCode() == KeyCode.F6) {	
 					System.out.println("Loading game ...");
+					long startTime = System.currentTimeMillis();
+					
 					galaxy = saver.load_game(gc);
 					saver = new DataSerializer(Constants.fileName_save, galaxy);
 					game_loaded = true;
+					
+					long endTime = System.currentTimeMillis();
+					if(Debugging.DEBUG) 
+						System.out.println("Loading done in " + (endTime - startTime) +" ms");
 				}
 
 				if (e.getCode() == KeyCode.ESCAPE) {
@@ -205,20 +217,38 @@ public class Game extends Application {
 			private boolean game_pre_init_done = false;
 			
 			/**
+			 * Prevent multiples threads running at the same time for preinit
+			 */
+			private boolean game_pre_init_running = false;
+			
+			/**
 			 * Is true if the game has been initialized
 			 */
 			private boolean game_init_done = false;
 			
+			/**
+			 * 
+			 */
 			private Thread pre_init_thread;
+			
+			/**
+			 * 
+			 */
 			private GalaxyGenerator gg;
+			
 			/**
 			 * Pre-initialize the game board with few elements
 			 */
 			private void pre_init() {	
+				if(game_pre_init_running) {
+					return;
+				}
 				long startTime = System.currentTimeMillis();				
 				pre_init_thread = new Thread(new Runnable() {
 			        @Override
 			        public void run() {
+			        	game_pre_init_running = true;
+			        	
 			        	gg = new GalaxyGenerator();
 
 						long endTime = System.currentTimeMillis();
@@ -227,6 +257,7 @@ public class Game extends Application {
 						
 						
 						game_pre_init_done = true;
+			        	game_pre_init_running = false;
 						return;
 			        }
 			      });
@@ -241,6 +272,7 @@ public class Game extends Application {
 					System.out.println("Pre-Init failed after " + (endTime - startTime) +" ms");
 					e.printStackTrace();
 				}
+	        	game_pre_init_running = false;
 			
 			
 			}
@@ -296,6 +328,7 @@ public class Game extends Application {
 			 * Tick updater
 			 */
 			private void run() {
+				
 				game_tick += 1;
 				
 				if(game_loaded) {
@@ -327,11 +360,15 @@ public class Game extends Application {
 				if(game_tick % Ticks.tick_per_main_theme_check == 0)
 					soundHandler.run();
 								
+				if(game_tick % Ticks.tick_per_garbage_check == 0)
+					System.gc();
+				
 				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
 					System.out.println("Vous avez perdu");
 					galaxy.render(gc);
 					GalaxyRenderer.renderDefeat(gc);
 					galaxy.setGame_is_over(true);
+					
 				}
 				
 				if(galaxy.isGame_is_over()) {

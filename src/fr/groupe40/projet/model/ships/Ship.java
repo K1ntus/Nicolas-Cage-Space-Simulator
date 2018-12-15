@@ -385,7 +385,6 @@ public class Ship extends Sprite implements Serializable {
 				deltaY = -speed * angle;
 		} 
 
-
 		this.setY(y+deltaY);
 		this.setX(x+deltaX);
 	}
