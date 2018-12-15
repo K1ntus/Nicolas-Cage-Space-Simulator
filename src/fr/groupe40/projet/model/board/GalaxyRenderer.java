@@ -91,20 +91,18 @@ public final class GalaxyRenderer {
 		gc.setStroke(Color.RED);
 		gc.setTextAlign(TextAlignment.CENTER);	
 		
-		for(Planet p :planets) {
-			User u = p.getRuler();
-			if (u.getFaction() == Players.human_faction) {
-				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
-				
-				gc.fillText(txt, Generation.width/7, 25);
-				gc.strokeText(txt, Generation.width/7, 25);
-				
-				return;				
+		if(!galaxy.isGame_is_over())
+			for(Planet p :planets) {
+				User u = p.getRuler();
+				if (u.getFaction() == Players.human_faction) {
+					String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
+					
+					gc.fillText(txt, Generation.width/7, 25);
+					gc.strokeText(txt, Generation.width/7, 25);
+					
+					return;				
+				}
 			}
-		}
-		String txt = Constants.message_game_over;
-		gc.fillText(txt, Generation.width/5, 25);
-		gc.strokeText(txt, Generation.width/5, 25);
 	}
 	
 	/**

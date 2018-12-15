@@ -20,8 +20,8 @@ public final class Constants {
 	public static final int max_squads_for_ai = 2;	//max number of squads from an ai player at the same time. -1 to disable this limit
 	
 
-	public static final String message_game_over = "Vous avez perdu !";
-	public static final String message_winner = "Vous avez gagne !";
+	public static final String message_game_over = "You Lose !";
+	public static final String message_winner = "You Won !";
 
 	//4 ship types, attributed to a specific amount of ships
 	/*	Type of Squads */

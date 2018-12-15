@@ -40,7 +40,6 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	private Stage preloader_stage;
 		
 	/**
 	 *  manage the user input, currently, only the mouse is managed there
@@ -50,7 +49,7 @@ public class Game extends Application {
 	/**
 	 *  manage the background game sound + methods to simplify sounds usage
 	 */
-	private SoundManager soundHandler;
+	private SoundManager soundHandler = new SoundManager(true);;
 	
 	/**
 	 *  Board object containing every sprites, etc
@@ -60,12 +59,12 @@ public class Game extends Application {
 	/**
 	 * Main menu
 	 */
-	private MainMenu main_menu;
+	private MainMenu main_menu = new MainMenu();
 	
 	/**
 	 * Setting menu
 	 */
-	private SettingsMenu setting_menu;
+	private SettingsMenu setting_menu = new SettingsMenu();
 	
 	/**
 	 * Graphic handler of the game
@@ -121,20 +120,11 @@ public class Game extends Application {
 	 * Handle keyboard I/O. (Save/Load & Escape)
 	 */
 	private EventHandler<KeyEvent> keyboardHandler;
-	
-	@Override
-	public void init() throws Exception{
-		main_menu = new MainMenu();
-		setting_menu = new SettingsMenu();
-		soundHandler = new SoundManager(true);
-	}
-	
+
 	/**
 	 *  'main' method
 	 */
-	public void start(Stage stage) {
-		this.preloader_stage = stage;
-		
+	public void start(Stage stage) {		
 		init_window(stage);
 
 		/*	Rendering, game initialization, etc */
@@ -321,15 +311,20 @@ public class Game extends Application {
 				if(game_tick % Ticks.tick_per_garbage_check == 0)
 					System.gc();
 				
-				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
-					System.out.println("Vous avez perdu");
-					galaxy.render(gc);
-					GalaxyRenderer.renderDefeat(gc);
-					galaxy.setGame_is_over(true);
-					
-				}
 				
 				if(galaxy.isGame_is_over()) {
+					if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
+						System.out.println("Vous avez perdu");
+						galaxy.render(gc);
+						GalaxyRenderer.renderDefeat(gc);
+						galaxy.setGame_is_over(true);
+						
+					}else {
+						System.out.println("Vous avez gagne");
+						galaxy.render(gc);
+						GalaxyRenderer.renderWinner(gc);
+						galaxy.setGame_is_over(true);
+					}
 					
 					if(Debugging.DEBUG)
 						System.out.println(

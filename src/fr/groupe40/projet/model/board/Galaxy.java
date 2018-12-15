@@ -114,7 +114,7 @@ public class Galaxy implements Serializable{
 			s.update_all_positions(planets);			
 		}
 
-		if(userHasLost(Players.ai_user)) {
+		if(userHasLost(Players.ai_user) || userHasLost(Players.human_user)) {
 			game_is_over = true;
 		}
 	}
