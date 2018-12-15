@@ -49,14 +49,20 @@ public class MouseListener {
 		this.scene = scene;
 	}
 
-	
 	/**
 	 *  launch the mouse handler
 	 */
 	public void launch() {
-		/**
-		 *  Manage the initial mouse drag event
-		 */
+	    scene.setOnMousePressed(init_mouse_pressed());
+	    scene.setOnMouseDragged(init_mouse_dragged());	
+		scene.setOnScroll(init_mouse_scrolled());
+	}
+	
+	/**
+	 *  Manage the initial mouse drag event
+	 * @return 
+	 */
+	private EventHandler<MouseEvent> init_mouse_pressed() {
 		EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent) {
@@ -92,10 +98,13 @@ public class MouseListener {
 	        }
 	        
 	    };
+	    return mousePressedEvent;
+	}
 
-		/**
-		 *  Manage the drop of the mouse
-		 */
+	/**
+	 *  Manage the drop of the mouse
+	 */
+	private EventHandler<MouseEvent> init_mouse_dragged(){
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent){
@@ -153,9 +162,13 @@ public class MouseListener {
 	        }
 		};
 		
-		/**
-		 *  Manage the scroll event
-		 */
+		return mouseDraggedEvent;
+	}
+
+	/**
+	 *  Manage the scroll event
+	 */
+	private EventHandler<ScrollEvent> init_mouse_scrolled() {
 		EventHandler<ScrollEvent> scrollEvent = new EventHandler<ScrollEvent>() {
 			@Override
 			public void handle(ScrollEvent event) {
@@ -170,9 +183,8 @@ public class MouseListener {
 			}
 			
 		};
-
-		scene.setOnScroll(scrollEvent);
-	    scene.setOnMousePressed(mousePressedEvent);
-	    scene.setOnMouseDragged(mouseDraggedEvent);	
+		
+		return scrollEvent;
 	}
+	
 }

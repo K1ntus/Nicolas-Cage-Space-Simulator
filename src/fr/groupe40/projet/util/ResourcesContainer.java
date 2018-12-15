@@ -7,8 +7,8 @@ import javafx.scene.media.AudioClip;
 
 //TODO COMMENTS
 public class ResourcesContainer {
-	private Image main_menu_background;
-	private Image game_background;
+	private static Image main_menu_background;
+	private static Image game_background;
 
 	private Image game_human_ships;
 	private Image game_ai_ships;
@@ -51,14 +51,14 @@ public class ResourcesContainer {
 	 * @param game_background the game_background to set
 	 */
 	public void setGame_background(Image game_background) {
-		this.game_background = game_background;
+		ResourcesContainer.game_background = game_background;
 	}
 
 
 	/**
 	 * @return the main_menu_background
 	 */
-	public Image getMain_menu_background() {
+	public static Image getMain_menu_background() {
 		return main_menu_background;
 	}
 
@@ -67,7 +67,7 @@ public class ResourcesContainer {
 	 * @param main_menu_background the main_menu_background to set
 	 */
 	public void setMain_menu_background(Image main_menu_background) {
-		this.main_menu_background = main_menu_background;
+		ResourcesContainer.main_menu_background = main_menu_background;
 	}
 
 	/**

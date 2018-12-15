@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
+import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
@@ -93,13 +94,13 @@ public abstract class Sprite implements Serializable {
 		try {
 			switch(img_path) {
 			case Resources.path_img_human_ships:
-				image = Game.RESOURCES_CONTAINER.getGame_human_ships();
+				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_human_ships();
 				break;
 			case Resources.path_img_AI_ships:
-				image = Game.RESOURCES_CONTAINER.getGame_ai_ships();
+				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_ai_ships();
 				break;
 			case Resources.path_img_event_pirate_ships:
-				image = Game.RESOURCES_CONTAINER.getGame_pirate_ships();
+				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_pirate_ships();
 				break;
 			default:
 				image = ImageManager.getImageByPath(this.img_path, width);

@@ -7,7 +7,6 @@ import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.util.ResourcesContainer;
 import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
@@ -41,12 +40,7 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	/**
-	 * Contains few image data for better memory (but cost more memory)
-	 */
-	public static ResourcesContainer RESOURCES_CONTAINER = new ResourcesContainer();
-	
+		
 	/**
 	 *  manage the user input, currently, only the mouse is managed there
 	 */
@@ -55,7 +49,7 @@ public class Game extends Application {
 	/**
 	 *  manage the background game sound + methods to simplify sounds usage
 	 */
-	private SoundManager soundHandler = new SoundManager(true);
+	private SoundManager soundHandler;
 	
 	/**
 	 *  Board object containing every sprites, etc
@@ -70,7 +64,7 @@ public class Game extends Application {
 	/**
 	 * Setting menu
 	 */
-	private SettingsMenu setting_menu = new SettingsMenu();
+	private SettingsMenu setting_menu;
 	
 	/**
 	 * Graphic handler of the game
@@ -101,6 +95,7 @@ public class Game extends Application {
 	 *  'main' method
 	 */
 	public void start(Stage stage) {
+		long startTime = System.currentTimeMillis();
 		/* 	---| OS check |---	
 		 * Doing that because there s a little white
 		 * margin under Windows (only tested under win 7 btw)
@@ -125,7 +120,7 @@ public class Game extends Application {
 		
 		Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
 		gc = canvas_mainMenu.getGraphicsContext2D();
-        Image background_image = RESOURCES_CONTAINER.getMain_menu_background();
+        Image background_image = GalaxyRenderer.getRESOURCES_CONTAINER().getMain_menu_background();
         gc.drawImage(background_image, 0, 0);
 		root.getChildren().add(canvas_mainMenu);
 
@@ -170,8 +165,10 @@ public class Game extends Application {
 				
 			}
 		};
-		
-        
+
+		long endTime = System.currentTimeMillis();
+		if(Debugging.DEBUG)
+			System.out.println("Game window done in " + (endTime - startTime) +" ms");
 		/*	Rendering, game initialization, etc */
 		new AnimationTimer() {
 			
@@ -199,51 +196,55 @@ public class Game extends Application {
 			 * Is true if the game has been initialized
 			 */
 			private boolean game_init_done = false;
-			
-			/**
-			 * Generate the planet over the board, used during pre-init to split the calculation
-			 */
+						
 			private GalaxyGenerator gg;
-			
 			/**
 			 * Pre-initialize the game board with few elements
 			 */
 			private void pre_init() {	
-				soundHandler.run();
-				canvas_game = new Canvas(Generation.width, Generation.height);
+				long startTime = System.currentTimeMillis();
 				
 				gg = new GalaxyGenerator();
 				
-				game_pre_init_done = true;
+				soundHandler = new SoundManager(true);
+				soundHandler.run();
+				canvas_game = new Canvas(Generation.width, Generation.height);
 				
-				if(Debugging.DEBUG)
-					System.out.println("-> Pre-Init done");
+				
+				long endTime = System.currentTimeMillis();
+				if(Debugging.DEBUG) 
+					System.out.println("Pre-Init done in " + (endTime - startTime) +" ms");
+				
+				
+				game_pre_init_done = true;
 			}
 			
 			/**
 			 * Initialize the game board
 			 */
 			private void init() {
-				root.getChildren().remove(canvas_game);
-				root.getChildren().remove(canvas_mainMenu);
-				root.getChildren().add(canvas_game);
+				long startTime = System.currentTimeMillis();
 
 				galaxy = new Galaxy(gc, gg);
 
 				saver = new DataSerializer(Constants.fileName_save, galaxy);
-				
+
 				if(Constants.events_enabled) 
 					eventManager = new Events(galaxy, gc, true, true);	
+				
+				try {
+					root.getChildren().remove(canvas_game);
+					root.getChildren().remove(canvas_mainMenu);
+					root.getChildren().add(canvas_game);
+					scene_game = new Scene(root);
+				} catch(IllegalArgumentException e) {
+					//Nothing, root already set
+				}
 				
 				gc = canvas_game.getGraphicsContext2D();
 				galaxy.setGraphicsContext(gc);
 				galaxy.initFont(gc);
 				
-				try {
-					scene_game = new Scene(root);
-				} catch(IllegalArgumentException e) {
-					//Nothing, root already set
-				}
 				interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
 				interactionHandler.exec();			
 
@@ -255,9 +256,11 @@ public class Game extends Application {
 				stage.show();	
 				
 				game_init_done = true;
+
 				
+				long endTime = System.currentTimeMillis();
 				if(Debugging.DEBUG)
-					System.out.println("-> Init done");
+					System.out.println("Init done in " + (endTime - startTime) +" ms");
 			}
 			
 			/**
@@ -379,6 +382,7 @@ public class Game extends Application {
 						run();
 					}
 				} else if (main_menu.isSettings_menu() && window_type == Windows.WindowType.MAIN_MENU) {
+					setting_menu = new SettingsMenu();
 					display_settings_menu();
 				}
 			}

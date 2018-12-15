@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 //TODO COMMENTS
 public final class ImageManager {
 	private static Image loading_image;
+	
 
 		
 	public ImageManager() {

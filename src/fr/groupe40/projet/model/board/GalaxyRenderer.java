@@ -6,6 +6,7 @@ import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.ResourcesContainer;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
@@ -16,6 +17,11 @@ import javafx.scene.text.TextAlignment;
 
 //TODO COMMENTS
 public final class GalaxyRenderer {
+
+	/**
+	 * Contains few image data for better memory (but cost more memory)
+	 */
+	private static ResourcesContainer RESOURCES_CONTAINER = new ResourcesContainer();
 	
 	protected static void run(Galaxy galaxy, GraphicsContext gc) {
 		GalaxyRenderer.renderBackground(gc);
@@ -32,7 +38,7 @@ public final class GalaxyRenderer {
 	 */
 	private static void renderBackground(GraphicsContext gc) {
 		gc.drawImage(
-				Game.RESOURCES_CONTAINER.getGame_background(), 
+				RESOURCES_CONTAINER.getGame_background(), 
 				0, 
 				0
 			);
@@ -132,6 +138,20 @@ public final class GalaxyRenderer {
 		gc.fillText(txt, Generation.width/2, 25);
 		gc.strokeText(txt, Generation.width/2, 25);
 		
+	}
+
+	/**
+	 * @return the rESOURCES_CONTAINER
+	 */
+	public static ResourcesContainer getRESOURCES_CONTAINER() {
+		return RESOURCES_CONTAINER;
+	}
+
+	/**
+	 * @param rESOURCES_CONTAINER the rESOURCES_CONTAINER to set
+	 */
+	public static void setRESOURCES_CONTAINER(ResourcesContainer rESOURCES_CONTAINER) {
+		RESOURCES_CONTAINER = rESOURCES_CONTAINER;
 	}
 	
 	

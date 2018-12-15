@@ -1,6 +1,6 @@
 package fr.groupe40.projet.window;
 
-import fr.groupe40.projet.Game;
+import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.ShipsParameters;
@@ -145,7 +145,7 @@ public class SettingsMenu {
 	 */
 	private void handleApplyButton() {
 		try {
-			Game.RESOURCES_CONTAINER.getPlay_button_sound().play();
+			GalaxyRenderer.getRESOURCES_CONTAINER().getPlay_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}
@@ -185,7 +185,7 @@ public class SettingsMenu {
 	 */
 	private void handleQuitButton() {
 		try {
-			Game.RESOURCES_CONTAINER.getQuit_button_sound().play();
+			GalaxyRenderer.getRESOURCES_CONTAINER().getQuit_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}

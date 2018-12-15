@@ -9,6 +9,7 @@ import java.util.List;
 import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
+import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Generation;
@@ -221,6 +222,7 @@ public class Squad implements Serializable {
 	private Direction summoningSide() {
 		double min = Generation.width;
 		Direction res = Direction.BOTTOM;
+		
 		if(Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2) < min) {
 			min = Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2);
 			res = Direction.LEFT;
@@ -293,7 +295,7 @@ public class Squad implements Serializable {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
-					Game.RESOURCES_CONTAINER.renderCollisionSound();
+					GalaxyRenderer.getRESOURCES_CONTAINER().renderCollisionSound();
 					ships.remove(ship);
 					it = ships.iterator();
 				}
