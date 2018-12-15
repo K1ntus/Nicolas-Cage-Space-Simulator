@@ -45,11 +45,6 @@ public class Galaxy implements Serializable{
 	 *  board generator
 	 */
 	private GalaxyGenerator generator = new GalaxyGenerator();
-
-	/**
-	 *  background image
-	 */
-	private transient Image background;
 	
 	/**
 	 *  graphical environnement
@@ -68,9 +63,6 @@ public class Galaxy implements Serializable{
 		this.squads = new ArrayList<Squad>();
 		this.generator = null;
 		this.gc = gc;
-
-		this.background = Game.RESOURCES_CONTAINER.getGame_background();
-		
 	}
 	/**
 	 *  Generate a game board with every parameters randomized
@@ -80,9 +72,6 @@ public class Galaxy implements Serializable{
 		this.planets = gg.getPlanets();
 		this.generator = null;
 		this.gc = gc;
-
-		this.background = Game.RESOURCES_CONTAINER.getGame_background();
-		
 	}
 
 	/**
@@ -94,8 +83,6 @@ public class Galaxy implements Serializable{
 		this.squads = g.squads;
 		this.generator = null;
 		this.gc = gc;
-
-		this.background = Game.RESOURCES_CONTAINER.getGame_background();
 	}
 
 	/**
@@ -108,8 +95,6 @@ public class Galaxy implements Serializable{
 		this.planets = generator.getPlanets();
 		this.generator = null;
 		this.gc = gc;
-
-		this.background = Game.RESOURCES_CONTAINER.getGame_background();
 		
 	}
 	
@@ -119,8 +104,7 @@ public class Galaxy implements Serializable{
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
-		this.background = Game.RESOURCES_CONTAINER.getGame_background();
-		GalaxyRenderer.run(this, gc, background);
+		GalaxyRenderer.run(this, gc);
 	}
 	
 	/**
@@ -301,21 +285,6 @@ public class Galaxy implements Serializable{
 		return planets;
 	}
 	
-	/**
-	 *  Return the background image
-	 * @return Image 
-	 */
-	public Image getBackground() {
-		return background;
-	}
-
-	/**
-	 *  Set the background image
-	 * @param background
-	 */
-	public void setBackground(Image background) {
-		this.background = background;
-	}
 
 	/**
 	 * @return the game_is_over

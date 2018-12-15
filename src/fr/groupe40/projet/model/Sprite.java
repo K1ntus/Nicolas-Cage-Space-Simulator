@@ -184,7 +184,7 @@ public abstract class Sprite implements Serializable {
 	 * @param y_bottom
 	 * @return true if there s a collision, else false
 	 */
-	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom, double radius) {
+	public final boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom, double radius) {
 
 		double circle_x = this.x + this.width/2;
 		double circle_y = this.y + this.height/2;

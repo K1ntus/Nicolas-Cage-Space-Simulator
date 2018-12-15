@@ -53,6 +53,11 @@ public class Game extends Application {
 	private InteractionHandler interactionHandler;
 
 	/**
+	 *  manage the background game sound + methods to simplify sounds usage
+	 */
+	private SoundManager soundHandler = new SoundManager(true);
+	
+	/**
 	 *  Board object containing every sprites, etc
 	 */
 	private Galaxy galaxy;
@@ -179,11 +184,6 @@ public class Game extends Application {
 			 *  manage the game events
 			 */
 			private Events eventManager;	
-			
-			/**
-			 *  manage the background game sound + methods to simplify sounds usage
-			 */
-			private SoundManager soundHandler = new SoundManager(true);
 
 			/**
 			 * Equals to the current window displayed (ie. setting, main menu or game)
@@ -224,8 +224,6 @@ public class Game extends Application {
 			 * Initialize the game board
 			 */
 			private void init() {
-
-
 				root.getChildren().remove(canvas_game);
 				root.getChildren().remove(canvas_mainMenu);
 				root.getChildren().add(canvas_game);

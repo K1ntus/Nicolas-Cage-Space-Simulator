@@ -2,6 +2,7 @@ package fr.groupe40.projet.model.board;
 
 import java.util.ArrayList;
 
+import fr.groupe40.projet.Game;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
@@ -16,8 +17,8 @@ import javafx.scene.text.TextAlignment;
 //TODO COMMENTS
 public final class GalaxyRenderer {
 	
-	protected static void run(Galaxy galaxy, GraphicsContext gc, Image background) {
-		GalaxyRenderer.renderBackground(background, gc);
+	protected static void run(Galaxy galaxy, GraphicsContext gc) {
+		GalaxyRenderer.renderBackground(gc);
 		GalaxyRenderer.renderPlanets(galaxy, gc);
 		for(Squad s : galaxy.getSquads())
 			s.render_ships(gc);	
@@ -29,8 +30,12 @@ public final class GalaxyRenderer {
 	 *  Render the background image
 	 * @param gc
 	 */
-	private static void renderBackground(Image background, GraphicsContext gc) {
-		gc.drawImage(background, 0, 0);
+	private static void renderBackground(GraphicsContext gc) {
+		gc.drawImage(
+				Game.RESOURCES_CONTAINER.getGame_background(), 
+				0, 
+				0
+			);
 	}
 	
 	/**
