@@ -120,8 +120,7 @@ public class Game extends Application {
 		
 		Canvas canvas_mainMenu = new Canvas(Generation.width, Generation.height);
 		gc = canvas_mainMenu.getGraphicsContext2D();
-        Image background_image = GalaxyRenderer.getRESOURCES_CONTAINER().getMain_menu_background();
-        gc.drawImage(background_image, 0, 0);
+
 		root.getChildren().add(canvas_mainMenu);
 
 		Scene scene_main_menu = main_menu.getScene();
@@ -197,18 +196,14 @@ public class Game extends Application {
 			 */
 			private boolean game_init_done = false;
 						
-			private GalaxyGenerator gg;
 			/**
 			 * Pre-initialize the game board with few elements
 			 */
 			private void pre_init() {	
 				long startTime = System.currentTimeMillis();
 				
-				gg = new GalaxyGenerator();
-				
 				soundHandler = new SoundManager(true);
 				soundHandler.run();
-				canvas_game = new Canvas(Generation.width, Generation.height);
 				
 				
 				long endTime = System.currentTimeMillis();
@@ -225,7 +220,8 @@ public class Game extends Application {
 			private void init() {
 				long startTime = System.currentTimeMillis();
 
-				galaxy = new Galaxy(gc, gg);
+				galaxy = new Galaxy(gc, new GalaxyGenerator());
+				canvas_game = new Canvas(Generation.width, Generation.height);
 
 				saver = new DataSerializer(Constants.fileName_save, galaxy);
 
@@ -328,7 +324,6 @@ public class Game extends Application {
 				main_menu.setSettings_menu(false);
 				Canvas canvas_settings = new Canvas(Generation.width, Generation.height);
 				gc = canvas_settings.getGraphicsContext2D();
-		        gc.drawImage(background_image, 0, 0);
 				
 				root.getChildren().add(canvas_settings);
 

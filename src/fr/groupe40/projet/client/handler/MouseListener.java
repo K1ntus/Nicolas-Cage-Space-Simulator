@@ -112,7 +112,9 @@ public class MouseListener {
 	        	
 	            double offsetX = mouseEvent.getSceneX();
 	            double offsetY = mouseEvent.getSceneY();
-
+	            if(selected_squad == null && selected_planets[0] == null)
+	            	return;
+	            
 	            //Move launched squads
 	        	if(selected_squad != null) {	
 	    			for(Planet p : galaxy.getPlanets()) {

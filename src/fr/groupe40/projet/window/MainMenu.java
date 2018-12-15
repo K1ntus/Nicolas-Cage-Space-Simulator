@@ -64,14 +64,7 @@ public class MainMenu {
 		grid.setVgap(20);
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
-		// Top title
-		Image title = new Image(ImageManager.getRessourcePathByName(Resources.path_img_menu_title));
-		ImageView title_img = new ImageView();
-		title_img.setImage(title);
-		title_img.setFitWidth(Generation.width / 2);
-		title_img.setPreserveRatio(true);
-		grid.add((title_img), 2, 0);
-		title_img.setTranslateX(Generation.width / 5);
+		display_title(grid);
 
 		// Nicolas cage pict
 		Image nicolassse_cage = ResourcesContainer.getMain_menu_background();
@@ -139,6 +132,18 @@ public class MainMenu {
 				null, BackgroundPosition.DEFAULT,
 				new BackgroundSize(Generation.width, 0.0, true, false, false, true))));
 
+	}
+	
+	private void display_title(GridPane grid) {
+		// Top title
+		Image title = new Image(ImageManager.getRessourcePathByName(Resources.path_img_menu_title));
+		ImageView title_img = new ImageView();
+		title_img.setImage(title);
+		title_img.setFitWidth(Generation.width / 2);
+		title_img.setPreserveRatio(true);
+		grid.add((title_img), 2, 0);
+		title_img.setTranslateX(Generation.width / 5);
+		
 	}
 
 	/**
