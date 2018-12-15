@@ -358,19 +358,36 @@ public class Ship extends Sprite implements Serializable {
 	 * @param speed    speed of this ship
 	 */
 	public void no_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
-		// double angle = destination_angle()/90;
+		double deltaX = 0, deltaY = 0;
 		double angle = 1;
+		
 		if (x < centre_x) {
-			setX(x + speed * angle);
-		} else {
-			setX(x - speed * angle);
-		}
+			if(x+speed > centre_x)
+				deltaX = 0;
+			else
+				deltaX = speed * angle;
+		} else if (x > centre_x){
+			if(x-speed < centre_x)
+				deltaX = 0;
+			else
+				deltaX = -speed * angle;
+		} 
 
 		if (y < centre_y) {
-			setY(y + speed * angle);
-		} else {
-			setY(y - speed * angle);
-		}
+			if(y+speed >= centre_y)
+				deltaY = 0;
+			else
+				deltaY = speed * angle;
+		} else if (y > centre_y){
+			if(y-speed <= centre_y)
+				deltaY = 0;
+			else
+				deltaY = -speed * angle;
+		} 
+
+
+		this.setY(y+deltaY);
+		this.setX(x+deltaX);
 	}
 
 	/**

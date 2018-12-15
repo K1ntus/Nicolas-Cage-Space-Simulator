@@ -209,19 +209,40 @@ public class Game extends Application {
 			 */
 			private boolean game_init_done = false;
 			
+			private Thread pre_init_thread;
+			private GalaxyGenerator gg;
 			/**
 			 * Pre-initialize the game board with few elements
 			 */
 			private void pre_init() {	
 				long startTime = System.currentTimeMillis();				
+				pre_init_thread = new Thread(new Runnable() {
+			        @Override
+			        public void run() {
+			        	gg = new GalaxyGenerator();
 
-				
-				long endTime = System.currentTimeMillis();
-				if(Debugging.DEBUG) 
-					System.out.println("Pre-Init done in " + (endTime - startTime) +" ms");
-				
-				
-				game_pre_init_done = true;
+						long endTime = System.currentTimeMillis();
+						if(Debugging.DEBUG) 
+							System.out.println("Pre-Init done in " + (endTime - startTime) +" ms");
+						
+						
+						game_pre_init_done = true;
+						return;
+			        }
+			      });
+
+				pre_init_thread.setPriority(pre_init_thread.getPriority());
+				pre_init_thread.setDaemon(true);
+				try {
+					pre_init_thread.start();
+					pre_init_thread.join(2000);
+				} catch (InterruptedException e) {
+					gg = null;
+					System.out.println("Pre-Init failed after " + (endTime - startTime) +" ms");
+					e.printStackTrace();
+				}
+			
+			
 			}
 			
 			/**
@@ -230,9 +251,9 @@ public class Game extends Application {
 			private void init() {
 				long startTime = System.currentTimeMillis();
 				
-
-				
-				galaxy = new Galaxy(gc, new GalaxyGenerator());
+				if(gg == null)
+					gg = new GalaxyGenerator();
+				galaxy = new Galaxy(gc, gg);
 				saver = new DataSerializer(Constants.fileName_save, galaxy);
 
 				if(Constants.events_enabled) 
