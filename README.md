@@ -30,7 +30,7 @@ If you want a specific version, feel free to check the different release tag.
 
 * Console way
 ```
-  $ java -jar ./NCSS
+  $ java -jar ./NCSS.jar
 ```
 *  or make it executable
 ```
@@ -126,6 +126,7 @@ When one ship reach is destination, few situations can happens :
 * Board Generation
 	* A problem when you are generating the game board which others gui size than default can happens because the generator do not find any convenient board 'ie. at least 2 planets)
 	* Generation time can take a long time because of his exponential complexity. Check for another algorithm, probably just check the distance between the center of each others planets
+		* Problem should be fixed, more test should be conducted to confirm that.
 * Display
 	* Currently unable to display animated image (like GIF) while playing because it's getting override by the background rendering. May be looking for thread running frames per frame, or superposition of canvas.
 *  Ships
