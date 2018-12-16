@@ -30,7 +30,7 @@ If you want a specific version, feel free to check the different release tag.
 
 * Console way
 ```
-  $ java -jar ./NCSS
+  $ java -jar ./NCSS.jar
 ```
 *  or make it executable
 ```
