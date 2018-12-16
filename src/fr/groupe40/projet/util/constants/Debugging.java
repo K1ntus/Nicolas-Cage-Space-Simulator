@@ -7,23 +7,29 @@ public final class Debugging {
 	 * Used for planet generation.
 	 * Get this value when the x position of the planet is out of bounds
 	 */
+	@Deprecated
 	public static final int error_greater_x = 2;
+	
 	/**
 	 * Used for planet generation.
 	 * Get this value when the x position of the planet is out of bounds
 	 */
+	@Deprecated
 	public static final int error_greater_y = 1;
+	
 	/**
 	 * Used for planet generation.
 	 * Returned when the x position of the planet is too small (because use of margins)
 	 */
+	@Deprecated
 	public static final int error_lower_x = -1;	
+	
 	/**
 	 * Used for planet generation
 	 * Returned when the y position of the planet is too small (because use of margins)
 	 */
+	@Deprecated
 	public static final int error_lower_y = -2;
-
 	/*	**************	*/
 	
 	/**
@@ -37,3 +43,4 @@ public final class Debugging {
 	public static final boolean DEBUG_TROUPS = false;
 
 }
+
