@@ -32,7 +32,7 @@ public final class Constants {
 	/**
 	 * The save name without the extension
 	 */
-	public static final String fileName_save = "01";
+	public static final String fileName_extension = "save";
 	
 	/* Event */
 	/**

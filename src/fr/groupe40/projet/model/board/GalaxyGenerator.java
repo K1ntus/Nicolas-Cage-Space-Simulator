@@ -153,6 +153,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * @param p The planet we are trying to generate
 	 * @return false if not able to generate this planet, else true
 	 */
+	@SuppressWarnings("unused")
 	@Deprecated
 	private boolean testPlacement(Planet p) {
 		Iterator<Planet> it = planets.iterator();

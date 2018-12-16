@@ -234,7 +234,7 @@ public class Game extends Application {
 				if(gg == null)
 					gg = new GalaxyGenerator();
 				galaxy = new Galaxy(gc, gg);
-				saver = new DataSerializer(Constants.fileName_save, galaxy);
+				saver = new DataSerializer(galaxy);
 
 				if(Constants.events_enabled) 
 					eventManager = new Events(galaxy, gc, true, true);	
@@ -474,7 +474,7 @@ public class Game extends Application {
 					
 					try {
 						galaxy = saver.load_game(gc, stage);
-						saver = new DataSerializer(Constants.fileName_save, galaxy);
+						saver = new DataSerializer(galaxy);
 						game_loaded = true;
 					} catch (Exception e1) {
 						//Save not found, do nothing

@@ -16,9 +16,11 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Players;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 
@@ -29,11 +31,6 @@ import javafx.stage.Stage;
  *
  */
 public class DataSerializer {
-	
-	/**
-	 *  the fileName of the save
-	 */
-	private String name;
 	
 	/**
 	 *  the object containing all the data to save
@@ -54,8 +51,7 @@ public class DataSerializer {
 	 * @param name save fileName
 	 * @param data game data
 	 */
-	public DataSerializer(String name, Galaxy data) {
-		this.name = name;
+	public DataSerializer(Galaxy data) {
 		this.data = data;		
 	}
 	
@@ -69,6 +65,9 @@ public class DataSerializer {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save game");
+		fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension),
+				new ExtensionFilter("All Files", "*.*"));
 		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
 		File file_raw = fileChooser.showSaveDialog(stage);
@@ -78,7 +77,7 @@ public class DataSerializer {
 			if(file_raw != null)
 				file = new FileOutputStream(file_raw);
 			else
-				file = new FileOutputStream(name + ".save");
+				file = new FileOutputStream("default" + "."+Constants.fileName_extension);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -129,6 +128,9 @@ public class DataSerializer {
 		fileChooser.setTitle("Load Game");
 		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
+		fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension),
+				new ExtensionFilter("All Files", "*.*"));
 		File file_raw = fileChooser.showOpenDialog(stage);
 		FileInputStream file = null;
 
@@ -242,6 +244,8 @@ public class DataSerializer {
 		
 	}
 	
+	@SuppressWarnings("unused")
+	@Deprecated
     private void openFile(File file) {
         try {
             desktop.open(file);
