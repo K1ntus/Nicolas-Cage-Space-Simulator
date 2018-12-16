@@ -164,9 +164,9 @@ public class DataSerializer {
 		for(Planet p : g.getPlanets()) {		
 			User u = p.getRuler();
 
+			//Shall be done using id + faction if more players
 			switch (u.getFaction()) {
 				case Players.human_faction:
-					System.out.println("human set: " + p.toString());
 					p.setRuler(Players.human_user); break;
 				case Players.ai_faction:
 					p.setRuler(Players.ai_user); break;

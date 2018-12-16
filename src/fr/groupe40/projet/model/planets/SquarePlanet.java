@@ -7,7 +7,7 @@ import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.util.constants.Constants;
 
 /**
- * \brief Square planet
+ * Square planet
  * @author Jordane Masson
  * @author Sarah Portejoie
  *

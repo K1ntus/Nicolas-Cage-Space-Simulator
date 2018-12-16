@@ -5,7 +5,6 @@ import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.util.constants.Constants;
-import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Ticks;
@@ -19,11 +18,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 
 /**
- * \brief Main class. Currently managing users interactions and display
+ * Main class. Currently managing users interactions and display
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -35,14 +33,10 @@ public class Game extends Application {
 	}
 	
 	/**
-	 * \brief Board object containing every sprites, etc
+	 * Board object containing every sprites, etc
 	 */
 	private Galaxy galaxy;
 	
-	/**
-	 * \brief game_tick counter for events, etc
-	 */
-	private long game_tick = 0;	//long because counter, had to prevent the overflow case
 		
 	/**
 	 * Manage the mouse interactions
@@ -51,23 +45,6 @@ public class Game extends Application {
 	
 	
 	public void start(Stage stage) {
-		/* 	---| OS check |---	
-		 * Doing that because there s a little white
-		 * margin under Windows (only tested under win 7 btw)
-		 * So, if that's a windows OS, we re editing
-		 * the window style to remove it
-		 */
-		
-		String OS = System.getProperty("os.name").toLowerCase();
-		if((OS.indexOf("win") >= 0)) {
-			if(Debugging.DEBUG)
-				System.out.println("OS type is windows");
-			stage.initStyle(StageStyle.UNIFIED);
-		}else {
-			if(Debugging.DEBUG)
-				System.out.println("Non windows OS");
-		}
-		
 
 		/* Window and game kernel creation */
 		stage.setTitle("Nicolas Cage Space Simulator");
@@ -121,6 +98,14 @@ public class Game extends Application {
         
 		/*	Rendering */
 		new AnimationTimer() {
+			/**
+			 * game_tick counter for events, etc
+			 */
+			private long game_tick = 0;	//long as counter, but BigInteger could be used (9trillion trillion)
+			
+			/**
+			 * Manage the board updater & renderer
+			 */
 			public void handle(long arg0) {	
 				game_tick += 1;
 
@@ -139,21 +124,23 @@ public class Game extends Application {
 					galaxy.updateAI();
 
 								
-				if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
-					System.out.println("Vous avez perdu");
-					galaxy.render(gc);
-					galaxy.renderDefeat(gc);
-					galaxy.setGame_is_over(true);
-					//System.exit(0);
-				}
 				
-				if(galaxy.isGame_is_over()) {
-					System.out.println("Generating new board");
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				//Generate new board and play again
+				if(galaxy.isGame_is_over()) {	
+					if(galaxy.userHasLost(Players.human_user)) {	//The human has lost
+						System.out.println("you lose");
+						galaxy.render(gc);
+						galaxy.renderDefeat(gc);
+						galaxy.setGame_is_over(true);
+						//System.exit(0);
+					} else if(galaxy.userHasLost(Players.ai_user)) {
+						System.out.println("you won");
+						galaxy.render(gc);
+						galaxy.renderWinner(gc);
+						galaxy.setGame_is_over(true);
 					}
+					
+					System.out.println("Generating new board");
 					galaxy = new Galaxy(gc);
 					interactionHandler = new InteractionHandler(galaxy, scene, saver);
 					interactionHandler.exec();					

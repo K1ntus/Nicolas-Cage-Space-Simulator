@@ -401,9 +401,6 @@ public class Galaxy implements Serializable{
 				return;				
 			}
 		}
-		String txt = Constants.message_game_over;
-		gc.fillText(txt, Generation.width/5, 25);
-		gc.strokeText(txt, Generation.width/5, 25);
 	}
 	
 	/**

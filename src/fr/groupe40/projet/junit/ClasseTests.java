@@ -15,7 +15,7 @@ import fr.groupe40.projet.util.constants.ShipsParameters;
 @SuppressWarnings("unchecked")
 public class ClasseTests {
 	/**
-	 * \brief test of the function setX() with case 0.0
+	 * test of the function setX() with case 0.0
 	 */
 	@Test
 	 public void testSetX() {
@@ -23,10 +23,10 @@ public class ClasseTests {
 		 tester.setX(0.0);
 		 assert 0.0 == tester.getX();
 		 //assertEquals(0.0, tester.getX(), 0);
-	} 
+	}
 	
 	/**
-	 * \brief test of the function setY() with case 5.0
+	 * test of the function setY() with case 5.0
 	 */
 	@Test
 	public void testSetY() {
@@ -37,7 +37,7 @@ public class ClasseTests {
 	}
 	
 	/**
-	 * \brief test of the function setmMinX() with case 0.0
+	 * test of the function setmMinX() with case 0.0
 	 */
 	@Test
 	public void testSetMinX() {
@@ -48,7 +48,7 @@ public class ClasseTests {
 	}
 	
 	/**
-	 * \brief test of the function setMinY() with case 1.0
+	 * test of the function setMinY() with case 1.0
 	 */
 	@Test
 	public void testSetMinY() {
@@ -59,7 +59,7 @@ public class ClasseTests {
 	}
 	
 	/**
-	 * \brief test of the function isInside(Sprite s) with SquarePlanet objects, case true
+	 * test of the function isInside(Sprite s) with SquarePlanet objects, case true
 	 */
 	@Test
 	public void testisInsideSquarePlanet() {
@@ -71,7 +71,7 @@ public class ClasseTests {
 	
 	
 	/**
-	 * \brief test of the function isInside(Sprite s) with SquarePlanet objects, case false
+	 * test of the function isInside(Sprite s) with SquarePlanet objects, case false
 	 */
 	@Test
 	public void testisInsideSquarePlanet2() {
@@ -84,7 +84,7 @@ public class ClasseTests {
 	
 	
 	/**
-	 * \brief test of the function isInside(Sprite s) with RoundPlanet objects, case false
+	 * test of the function isInside(Sprite s) with RoundPlanet objects, case false
 	 */
 	@Test
 	public void testisInsideRoundPlanet() {
@@ -95,7 +95,7 @@ public class ClasseTests {
 	
 
 	/**
-	 * \brief test of the function isInside(Sprite s) with RoundPlanet objects, case true
+	 * test of the function isInside(Sprite s) with RoundPlanet objects, case true
 	 */
 	@Test
 	public void testisInsideRoundPlanet2() {
@@ -106,7 +106,7 @@ public class ClasseTests {
 	
 	
 	/**
-	 * \brief test of the function isInside(double x, double y, double width, double height) case false
+	 * test of the function isInside(double x, double y, double width, double height) case false
 	 */
 	@Test
 	public void testisInside2() {
@@ -117,7 +117,7 @@ public class ClasseTests {
 	
 	
 	/**
-	 * \brief test of the function isInside(double x, double y, double width, double height) case true
+	 * test of the function isInside(double x, double y, double width, double height) case true
 	 */
 	@Test
 	public void testisInside3() {
@@ -127,7 +127,7 @@ public class ClasseTests {
 	
 	
 	/**
-	 * \brief test of the function distance(double x, double y)
+	 * test of the function distance(double x, double y)
 	 */
 	@Test
 	public void testdistance() {
@@ -139,7 +139,7 @@ public class ClasseTests {
 	}
 	
 	/**
-	 * \brief test of the function distance(Sprite p) with an object at a pos of (0,0)
+	 * test of the function distance(Sprite p) with an object at a pos of (0,0)
 	 * \ and a SquarePlanet with a pos of (100,200)
 	 */
 	@Test
@@ -153,7 +153,7 @@ public class ClasseTests {
 		
 	}
 	/**
-	 * \brief test of the function distance(Sprite p) with a ship at a pos of (0,0)
+	 * test of the function distance(Sprite p) with a ship at a pos of (0,0)
 	 * \ and a RoundPlanet with a pos of (100,200)
 	 */
 	@Test
@@ -168,7 +168,7 @@ public class ClasseTests {
 	}
 	
 	/**
-	 * \brief test of the function validatePosition() with a RoundPlanet at a pos of (-10,-10)
+	 * test of the function validatePosition() with a RoundPlanet at a pos of (-10,-10)
 	 */
 	/*
 	@Test
@@ -185,7 +185,7 @@ public class ClasseTests {
 	*/
 	
 	/**
-	 * \brief test of the function whereis_collision(double x, double y, double speed, List<Planet> planets) with a RoundPlanet at a pos of (150,150)
+	 * test of the function whereis_collision(double x, double y, double speed, List<Planet> planets) with a RoundPlanet at a pos of (150,150)
 	 * \and a ship
 	 */
 	@Test
@@ -200,7 +200,7 @@ public class ClasseTests {
 	}
 	
 	/**
-	 * \brief test of the function calc_next_position with a RoundPlanet at a pos of (150,150)
+	 * test of the function calc_next_position with a RoundPlanet at a pos of (150,150)
 	 * \and a ship
 	 */
 	@Test
