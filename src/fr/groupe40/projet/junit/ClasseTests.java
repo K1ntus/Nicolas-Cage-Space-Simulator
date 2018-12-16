@@ -197,7 +197,7 @@ public class ClasseTests {
 		double speed = ShipsParameters.min_ship_speed;
 		tester.whereis_collision(tester.getX(), tester.getY(),speed,planets);
 		
-	}
+	} 
 	
 	/**
 	 * test of the function calc_next_position with a RoundPlanet at a pos of (150,150)
