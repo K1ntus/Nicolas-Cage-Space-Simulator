@@ -135,7 +135,7 @@ public abstract class Planet extends Sprite {
 			return Debugging.error_lower_x;
 		}
 
-		if (this.getY() + this.height() >= Generation.height) {
+		if (this.getY() + this.height() >= Generation.height - 2*Generation.bottom_margin_size) {
 			return Debugging.error_greater_y;
 		} else if (this.getY() < Generation.top_margin_size  + Generation.size_squads) {
 			return Debugging.error_lower_y;
