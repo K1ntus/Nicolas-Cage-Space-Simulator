@@ -35,7 +35,7 @@ final class PirateAssault {
 	/**
 	 *  run the pirate assault event
 	 * @param galaxy the board that will invoke this event
-	 * @param gc the graphics environnement
+	 * @param gc the graphics environment
 	 */
 	protected static void start(Galaxy galaxy, GraphicsContext gc) {
 		
