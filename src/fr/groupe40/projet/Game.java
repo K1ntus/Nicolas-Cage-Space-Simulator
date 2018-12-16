@@ -274,6 +274,9 @@ public class Game extends Application {
 			 */
 			private void run() {
 				//TODO Complexity upgrade if possible
+				if(saver.isBox_opened()) {
+					return;
+				}
 				
 				game_tick += 1;
 				
@@ -451,24 +454,37 @@ public class Game extends Application {
 					long startTime = System.currentTimeMillis();
 					
 					//OPEN POPUP ?
-					saver.save_game();
+					try {
+						saver.save_game(stage);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
 					long endTime = System.currentTimeMillis();
 					if(Debugging.DEBUG) 
 						System.out.println("Saving done in " + (endTime - startTime) +" ms");
+
+					saver.setBox_opened(false);
 				}
 					
 				if (e.getCode() == KeyCode.F6) {	
 					System.out.println("Loading game ...");
 					long startTime = System.currentTimeMillis();
 					
-					galaxy = saver.load_game(gc);
-					saver = new DataSerializer(Constants.fileName_save, galaxy);
-					game_loaded = true;
+					try {
+						galaxy = saver.load_game(gc, stage);
+						saver = new DataSerializer(Constants.fileName_save, galaxy);
+						game_loaded = true;
+					} catch (Exception e1) {
+						//Save not found, do nothing
+					}
 					
 					long endTime = System.currentTimeMillis();
 					if(Debugging.DEBUG) 
 						System.out.println("Loading done in " + (endTime - startTime) +" ms");
+
+					saver.setBox_opened(false);
 				}
 
 				if (e.getCode() == KeyCode.ESCAPE) {

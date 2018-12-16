@@ -1,11 +1,14 @@
 package fr.groupe40.projet.file;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import fr.groupe40.projet.client.User;
@@ -15,6 +18,8 @@ import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Players;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 /**
@@ -40,6 +45,10 @@ public class DataSerializer {
 	 */
 	private ObjectOutputStream oos;
 	
+	private Desktop desktop = Desktop.getDesktop();
+	
+	private boolean box_opened = false;
+	
 	/**
 	 *  create the structure containing the data and the fileName
 	 * @param name save fileName
@@ -53,15 +62,36 @@ public class DataSerializer {
 	/**
 	 *  Save the current game state in a file
 	 * @return true if the game has been saved, else false
+	 * @throws Exception 
 	 */
-	public boolean save_game() {
+	public boolean save_game(Stage stage) throws Exception {
+		box_opened = true;
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save game");
+		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+		fileChooser.setInitialDirectory(new File(currentPath));
+		File file_raw = fileChooser.showSaveDialog(stage);
+		FileOutputStream file = null;
+
 		try {
-			final FileOutputStream file = new FileOutputStream(name + ".save");
+			if(file_raw != null)
+				file = new FileOutputStream(file_raw);
+			else
+				file = new FileOutputStream(name + ".save");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		if(file == null)
+			throw new Exception("ErrorSavingGame");
+
+		
+		/*	**************	*/
+		
+		
+		try {
 			oos = new ObjectOutputStream(file);
-			
-			//oos.writeObject(data.getPlanets());
-			//oos.writeObject(data.getSquads());
-			//oos.writeObject(data.getUsers());
 			
 			oos.writeObject(data);
 			
@@ -90,19 +120,37 @@ public class DataSerializer {
 	/**
 	 *  Load a game from a save and apply it to the current game start
 	 * @return the galaxy loaded from the save file
+	 * @throws Exception 
 	 */
-	public Galaxy load_game(GraphicsContext gc) {
-		/*
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Select your game save");
-		fileChooser.showOpenDialog(stage);
-		fileChooser.setInitialDirectory(new File("\""));
-		*/
+	public Galaxy load_game(GraphicsContext gc, Stage stage) throws Exception {
+		box_opened = true;
 		
-		FileInputStream file;
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Load Game");
+		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+		fileChooser.setInitialDirectory(new File(currentPath));
+		File file_raw = fileChooser.showOpenDialog(stage);
+		FileInputStream file = null;
+
+		try {
+			if(file_raw != null)
+				file = new FileInputStream(file_raw);
+			else
+				throw new Exception("FileNotFoundException");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		if(file == null)
+			throw new Exception("SaveNotFound");
+		
+
+		/*	**************	*/
+		
+		
 		Galaxy loaded = new Galaxy(gc);
 		try {
-			file = new FileInputStream(name + ".save");
+			
 			ObjectInputStream ois = new ObjectInputStream(file);
 			
 			loaded = (Galaxy) ois.readObject();
@@ -192,6 +240,28 @@ public class DataSerializer {
 			p.updateImage();
 		}
 		
+	}
+	
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+            
+        }
+    }
+
+	/**
+	 * @return the box_opened
+	 */
+	public boolean isBox_opened() {
+		return box_opened;
+	}
+
+	/**
+	 * @param box_opened the box_opened to set
+	 */
+	public void setBox_opened(boolean box_opened) {
+		this.box_opened = box_opened;
 	}
 
 }
