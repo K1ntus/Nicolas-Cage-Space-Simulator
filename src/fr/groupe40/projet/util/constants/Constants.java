@@ -30,7 +30,7 @@ public final class Constants {
 	public static final String path_save = "/saves";
 	
 	/**
-	 * The save name without the extension
+	 * The save extension
 	 */
 	public static final String fileName_extension = "save";
 	
