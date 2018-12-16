@@ -1,4 +1,4 @@
-package fr.groupe40.projet.util;
+package fr.groupe40.projet.util.resources;
 
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;

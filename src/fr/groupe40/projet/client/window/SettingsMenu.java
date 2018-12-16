@@ -1,4 +1,4 @@
-package fr.groupe40.projet.window;
+package fr.groupe40.projet.client.window;
 
 import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.constants.Generation;

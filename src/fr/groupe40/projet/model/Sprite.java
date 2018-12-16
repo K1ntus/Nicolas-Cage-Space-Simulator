@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.util.ImageManager;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
+import fr.groupe40.projet.util.resources.ImageManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

@@ -8,7 +8,7 @@ public final class Debugging {
 	public static final int error_lower_y = -2;
 
 	
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	public static final boolean DEBUG_TROUPS = false;
 
 }

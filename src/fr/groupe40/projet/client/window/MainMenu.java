@@ -1,11 +1,11 @@
-package fr.groupe40.projet.window;
+package fr.groupe40.projet.client.window;
 
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.util.ImageManager;
-import fr.groupe40.projet.util.ResourcesContainer;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
+import fr.groupe40.projet.util.resources.ImageManager;
+import fr.groupe40.projet.util.resources.ResourcesContainer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

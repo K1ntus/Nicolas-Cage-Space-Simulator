@@ -1,4 +1,4 @@
-package fr.groupe40.projet.util;
+package fr.groupe40.projet.util.resources;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;

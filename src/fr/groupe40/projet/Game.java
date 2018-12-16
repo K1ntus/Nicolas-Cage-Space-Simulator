@@ -2,20 +2,20 @@ package fr.groupe40.projet;
 
 
 import fr.groupe40.projet.client.handler.InteractionHandler;
+import fr.groupe40.projet.client.window.MainMenu;
+import fr.groupe40.projet.client.window.SettingsMenu;
 import fr.groupe40.projet.events.Events;
 import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.util.SoundManager;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Ticks;
 import fr.groupe40.projet.util.constants.Windows;
-import fr.groupe40.projet.window.MainMenu;
-import fr.groupe40.projet.window.SettingsMenu;
+import fr.groupe40.projet.util.resources.SoundManager;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
