@@ -267,15 +267,13 @@ public class Game extends Application {
 				long endTime = System.currentTimeMillis();
 				if(Debugging.DEBUG)
 					System.out.println("Init done in " + (endTime - startTime) +" ms");
-				
-
-
 			}
 			
 			/**
 			 * Tick updater
 			 */
 			private void run() {
+				//TODO Complexity upgrade if possible
 				
 				game_tick += 1;
 				

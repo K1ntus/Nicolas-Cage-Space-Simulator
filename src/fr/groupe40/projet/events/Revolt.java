@@ -21,6 +21,7 @@ final class Revolt {
 	 * @param galaxy
 	 */
 	protected static void start(Galaxy galaxy) {
+		//TODO Complexity upgrade
 		boolean ai = false, user = false;
 		for(Planet src: galaxy.getPlanets()) {
 			User u = src.getRuler();

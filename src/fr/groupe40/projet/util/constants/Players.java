@@ -2,6 +2,13 @@ package fr.groupe40.projet.util.constants;
 
 import fr.groupe40.projet.client.User;
 
+/**
+ * Contains many constants about players, for usage.
+ * But in a later version, it could be nice to change the way that users are managed
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public final class Players {
 
 	public static final int neutral_faction = 0, human_faction = 1, ai_faction = -1;

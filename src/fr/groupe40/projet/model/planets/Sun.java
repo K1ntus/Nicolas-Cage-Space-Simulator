@@ -14,30 +14,35 @@ import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Sun extends Planet implements Serializable{
 
-	/**
-	 * 
-	 */
+/**
+ * A special planet, work a bit like a planet, but instead of getting ruled by a new player
+ * It's exploding and remove every squad on board
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
+public class Sun extends Planet implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Generate the Sun 'planet'
+	 * @param pathImgPlanets the string path to the image of the sun
+	 * @param x his x
+	 * @param y his y
+	 */
 	public Sun(String pathImgPlanets, int x, int y) {
 		super(pathImgPlanets, Players.sun_user, x, y, Generation.size_sun);
 	}
 
-	
-	@Override
-	public boolean isInside(double x, double y) {
-		if(isInside(x, y, 0, 0) && this.getRuler().equals(Players.sun_user)) {
-			if(Debugging.DEBUG) {
-				System.out.println("Vous avez clique sur le soleil");
-			}
-			return true;
-		}
-		return false;
-			
-	}
-	
+	/**
+	 *  Check if a rectangle is inside another
+	 * @param x	the x-top corner
+	 * @param y the y-top corner
+	 * @param width the width of the rectangle
+	 * @param height the height of the rectangle
+	 * @return true if inside else false
+	 */
 	@Override
 	public boolean isInside(double x, double y, double width, double height) {
 		double x2 = this.getX(), y2 = this.getY(), width2 = this.width(), height2 = this.height();
@@ -50,7 +55,30 @@ public class Sun extends Planet implements Serializable{
 		}
 		return true;
 	}
-	
+
+	/**
+	 *  Check if a pair of pos is inside another
+	 * @param x position of the second object
+	 * @param y position of the second object
+	 * @return true if inside, else false
+	 */
+	@Override
+	public boolean isInside(double x, double y) {
+		if(isInside(x, y, 0, 0) && this.getRuler().equals(Players.sun_user)) {
+			if(Debugging.DEBUG) {
+				System.out.println("Vous avez clique sur le soleil");
+			}
+			return true;
+		}
+		return false;
+			
+	}
+
+	/**
+	 *  Check if a sprite directly intersect another one
+	 * @param s the sprite to compare with
+	 * @return true if the sprite is inside, else false
+	 */
 	@Override
 	public boolean isInside(Sprite s) {
 		double x = this.getX(), y = this.getY();
@@ -70,28 +98,29 @@ public class Sun extends Planet implements Serializable{
 	}
 
 
+	/**
+	 * Summoned when the sun got destroyed.
+	 * The gif image rendering isnt working because of the sprite superposition by the background.
+	 * We remove the sun from the planet list, render a sound and remove every squads + reset every garrison on board
+	 * @param planets the list of planets that will get edited
+	 * @param squads the list of squads that will be clean
+	 * @param gc the graphics context to draw the image
+	 */
 	public static void sun_destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads, GraphicsContext gc) {
 		Image explosion = new Image(Resources.path_gfx_ship_explosion, Generation.size_sun, Generation.size_sun, false, false, true);
+		gc.drawImage(explosion, planets.get(0).getX(), planets.get(0).getY());
 		
-
-
-		renderExplosion(gc, planets.get(0).getX(), planets.get(0).getY() , explosion);
 		
 		for(Planet p : planets) {
 			p.setTroups(PlanetsGarrison.min_troups);
 		}
 
-		Iterator<Squad> it = squads.iterator();
 		
+		Iterator<Squad> it = squads.iterator();
 		while (it.hasNext()) {
 			squads.remove(it.next());
 			it = squads.iterator();
 		}
-		
-	}
-
-	public static void renderExplosion(GraphicsContext gc, double x, double y, Image explosion) {
-		gc.drawImage(explosion, x, y);
 		
 	}
 }

@@ -11,6 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
+/**
+ * Manage the mouse interaction with the game board
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class MouseListener {
 	
 	/**
@@ -106,6 +112,7 @@ public class MouseListener {
 	 * @return the event to handle on the scene
 	 */
 	private EventHandler<MouseEvent> init_mouse_dragged(){
+		//TODO Complexity upgrade
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent){
