@@ -142,7 +142,7 @@ public abstract class Planet extends Sprite {
 			return GenerationErrorSide.LOWER_Y;
 		}
 		
-		return GenerationErrorSide.GREATER_Y;
+		return GenerationErrorSide.NO_PROBLEM;
 	}
 	
 	/**

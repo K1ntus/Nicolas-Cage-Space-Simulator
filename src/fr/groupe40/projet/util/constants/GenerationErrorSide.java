@@ -23,4 +23,6 @@ public enum GenerationErrorSide {
 	 * LEFT collision between a ship and a planet
 	 */
 	LOWER_Y,
+	
+	NO_PROBLEM
 }
