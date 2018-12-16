@@ -12,7 +12,6 @@ import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.ShipsParameters;
 
-@SuppressWarnings("unchecked")
 public class ClasseTests {
 	/**
 	 * test of the function setX() with case 0.0
@@ -192,7 +191,7 @@ public class ClasseTests {
 	public void TestWhereis_collision() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
-		List<Planet> planets = new ArrayList();
+		List<Planet> planets = new ArrayList<Planet>();
 		planets.add(p);
 		double speed = ShipsParameters.min_ship_speed;
 		tester.whereis_collision(tester.getX(), tester.getY(),speed,planets);
@@ -207,7 +206,7 @@ public class ClasseTests {
 	public void TestCalc_next_position() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
-		List<Planet> planets = new ArrayList();
+		List<Planet> planets = new ArrayList<Planet>();
 		planets.add(p);
 		
 		tester.setDestination(p);
@@ -215,5 +214,20 @@ public class ClasseTests {
 		tester.calc_next_position(planets);
 		
 	}
+	/**
+	 * \brief test of the function Top_collision_mover with a RoundPlanet at a pos of (100,200)
+	 * \and a ship
+	 */
+	@Test
+	public void TestTop_collision_mover() {
+		Ship tester = new Ship(null, null, null, null, 0, 0, null);
+		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
+		double x = tester.getX();
+		double y = tester.getY();
+		tester.top_collision_mover(p.getX(), p.getY(),  p.getX() + p.width()/2,  p.getY() + p.height()/2, tester.getSpeed());
+		assert x != tester.getX();
+		assert y == tester.getY();
+	}
+
 	
 }
