@@ -16,7 +16,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 8499986523207461968L;
 	
 	/**
-	 *  the faction of this user (-1 => AI, 0 => neutral, >1 => humain)
+	 *  the faction of this user (-1 => AI, 0 => neutral, >1 => human)
 	 */
 	private int faction;
 	
@@ -26,7 +26,7 @@ public class User implements Serializable{
 	private int id;
 	
 	/**
-	 *  percentage of troups to send per planet-launch
+	 *  percentage of troops to send per planet-launch
 	 */
 	private int percent_of_troups_to_send;
 	

@@ -1,6 +1,8 @@
 package fr.groupe40.projet;
 
 
+import java.io.File;
+
 import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.client.window.MainMenu;
 import fr.groupe40.projet.client.window.SettingsMenu;
@@ -38,6 +40,9 @@ import javafx.util.Duration;
  */
 public class Game extends Application {
 	public static void main(String[] args) {
+		File dir = new File(Constants.path_save);
+		dir.mkdir();
+		
 		launch(args);
 	}
 		

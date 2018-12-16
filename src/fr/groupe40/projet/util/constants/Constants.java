@@ -27,7 +27,7 @@ public final class Constants {
 	/**
 	 * Path for the save file, currently in the local eclipse workspace/jar position
 	 */
-	public static final String path_save = "";
+	public static final String path_save = "/saves";
 	
 	/**
 	 * The save name without the extension

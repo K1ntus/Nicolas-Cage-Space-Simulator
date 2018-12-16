@@ -68,7 +68,7 @@ public class DataSerializer {
 		fileChooser.getExtensionFilters().addAll(
 				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension),
 				new ExtensionFilter("All Files", "*.*"));
-		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+		String currentPath = Paths.get("."+Constants.path_save).toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
 		File file_raw = fileChooser.showSaveDialog(stage);
 		FileOutputStream file = null;
@@ -126,7 +126,7 @@ public class DataSerializer {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Load Game");
-		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+		String currentPath = Paths.get("."+Constants.path_save).toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
 		fileChooser.getExtensionFilters().addAll(
 				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension),
