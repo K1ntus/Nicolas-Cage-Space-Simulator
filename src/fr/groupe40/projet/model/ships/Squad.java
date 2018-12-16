@@ -14,11 +14,10 @@ import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.AudioClip;
 
 
 /**
- *  Squad object
+ * Squad object. A squad is made to contains a various amount of ships
  * @author Jordane Masson
  * @author Sarah Portejoie
  *

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
-import fr.groupe40.projet.util.constants.Constants;
 
 /**
  * Square planet
@@ -18,6 +17,12 @@ public class SquarePlanet extends Planet  implements Serializable{
 		super(path, ruler, x, y);
 	}
 
+	/**
+	 *  Check if a pair of pos is inside another
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	@Override
 	public boolean isInside(double x, double y) {
 		if(isInside(x, y, 0, 0)) {
@@ -26,7 +31,15 @@ public class SquarePlanet extends Planet  implements Serializable{
 		return false;
 			
 	}
-	
+
+	/**
+	 *  Check if a rectangle is inside another
+	 * @param x	the x-top corner
+	 * @param y the y-top corner
+	 * @param width the width of the rectangle
+	 * @param height the height of the rectangle
+	 * @return true if inside else false
+	 */
 	@Override
 	public boolean isInside(double x, double y, double width, double height) {
 		double x2 = this.getX(), y2 = this.getY(), width2 = this.width(), height2 = this.height();
@@ -39,7 +52,12 @@ public class SquarePlanet extends Planet  implements Serializable{
 		}
 		return true;
 	}
-	
+
+	/**
+	 *  Check if a sprite directly intersect another one
+	 * @param s the sprite to compare with
+	 * @return true if the sprite is inside, else false
+	 */
 	@Override
 	public boolean isInside(Sprite s) {
 		double x = this.getX(), y = this.getY();

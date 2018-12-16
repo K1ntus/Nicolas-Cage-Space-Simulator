@@ -31,42 +31,13 @@ public class GalaxyGenerator {
 	}
 
 
-	/* Planets Generation */
-
-	/**
-	 *  return a randomly string path for round planet type
-	 * @return the path of this ressource
-	 */
-	private String getRandomRoundPlanetImgPath() {
-		double rand= Math.random();
-		
-		if(rand < 0.5)
-			return Resources.path_img_square_time_night;
-		return Resources.path_img_square_basic;
-	}
-	
-	/**
-	 *  return a randomly string path for square planet type
-	 * @return the path of this ressource
-	 */
-	private String getRandomSquarePlanetImgPath() {
-		double rand= Math.random();
-
-		if(rand < 0.25)
-			return Resources.path_img_round_planet2;
-		else if(rand < 0.5)
-			return Resources.path_img_round_doge;
-		else if(rand < 0.75)
-			return Resources.path_img_round_smoke;
-		return Resources.path_img_round_kfc_planet;
-	}
-	
+	/* Planets Generation */	
 	/**
 	 *  return a randomly generated planet type (ie. round or square)
 	 * @return the planet generated
 	 */
 	private Planet getRandomPlanet() {
-		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
+		return new SquarePlanet(Resources.path_img_square_basic, new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
 	}
 	
 	/**

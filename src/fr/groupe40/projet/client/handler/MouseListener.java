@@ -88,6 +88,7 @@ public class MouseListener {
 
 		/**
 		 *  Manage the drop of the mouse
+		 *  Shall be optimized, currently have a crazy complexity
 		 */
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override

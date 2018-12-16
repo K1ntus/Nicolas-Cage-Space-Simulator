@@ -63,10 +63,6 @@ public class DataSerializer {
 			final FileOutputStream file = new FileOutputStream(name + ".save");
 			oos = new ObjectOutputStream(file);
 			
-			//oos.writeObject(data.getPlanets());
-			//oos.writeObject(data.getSquads());
-			//oos.writeObject(data.getUsers());
-			
 			oos.writeObject(data);
 			
 			oos.flush();
@@ -95,14 +91,7 @@ public class DataSerializer {
 	 *  Load a game from a save and apply it to the current game start
 	 * @return the galaxy loaded from the save file
 	 */
-	public Galaxy load_game(GraphicsContext gc) {
-		/*
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Select your game save");
-		fileChooser.showOpenDialog(stage);
-		fileChooser.setInitialDirectory(new File("\""));
-		*/
-		
+	public Galaxy load_game(GraphicsContext gc) {		
 		FileInputStream file;
 		Galaxy loaded = null;
 		try {
@@ -128,7 +117,7 @@ public class DataSerializer {
 		return res;
 	}
 	/**
-	 *  Reload the game to apply the loading
+	 * Reload the game to apply the loading
 	 * @param g Galaxy to be reloaded
 	 */
 	public void reload_image_and_data(Galaxy g) {
