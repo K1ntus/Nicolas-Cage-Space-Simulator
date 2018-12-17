@@ -12,7 +12,7 @@ import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.ShipsParameters;
 import junit.framework.TestCase;
 
-public class ClasseTests extends TestCase{
+public class TestShip extends TestCase{
 	/**
 	 * test of the function setX() with case 0.0
 	 */
@@ -231,10 +231,18 @@ public class ClasseTests extends TestCase{
 	@Test
 	public void testTop_collision_mover() {
 		ShipType t = new ShipType();
-		Ship tester = new Ship(null, null, null, null, 0, 0, t);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
+		Ship tester = new Ship(null, null, p, null, 0, 0, t);
 		double x = tester.getX();
 		double y = tester.getY();
+		System.out.println("debug: " + x);
+		System.out.println("debug: " + y);
+
+		List<Planet> planets = new ArrayList<Planet>();
+		planets.add(p);
+		while(tester.reached_destination()) {
+			tester.calc_next_position(planets);
+		}
 		System.out.println("debug: " + x);
 		System.out.println("debug: " + y);
 		tester.top_collision_mover(tester.getX(), tester.getY(),  p.getX() + Generation.width /2,  p.getY() + + Generation.height /2, tester.getSpeed());
@@ -249,7 +257,7 @@ public class ClasseTests extends TestCase{
 	 * \and a ship
 	 */
 	@Test
-	public void testbottom_collision_mover() {
+	public void testBottom_collision_mover() {
 		ShipType t = new ShipType();
 		Ship tester = new Ship(null, null, null, null, 0, 0, t);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
@@ -261,13 +269,21 @@ public class ClasseTests extends TestCase{
 		assert y != tester.getY();
 	}
 	
+	
+	/**
+	 * \brief test of the function Reached_destination with a SquarePlanet at a pos of (100,200)
+	 * \and a ship
+	 */
 	@Test
-	public void testRemove() {
-		Ship tester = new Ship(null, null, null, null, 0, 0, null);
+	public void testReached_destination() {
+		ShipType t = new ShipType();
+		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
+		Ship tester = new Ship(null, null, p, null, 0, 0, t);
 		boolean b = false;
-		tester.remove();
-		
-		assert b = tester.reached_destination();
+		System.out.println(tester.reached_destination());
+		assert b == tester.reached_destination();
 	}
+	
+	
 
 }
