@@ -3,7 +3,6 @@ package fr.groupe40.projet.model.planets;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.ShipType;
-import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.GenerationErrorSide;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;

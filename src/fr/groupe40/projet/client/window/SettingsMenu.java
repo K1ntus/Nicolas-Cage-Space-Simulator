@@ -7,6 +7,7 @@ import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.ShipsParameters;
 import fr.groupe40.projet.util.constants.Windows;
+import fr.groupe40.projet.util.window.GridElement;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,7 +30,6 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -78,62 +78,32 @@ public class SettingsMenu {
 		// grid.add(player_nickname_form, 1, 1);
 
 		// Top title
-		Image title = new Image(Resources.path_img_menu_title);
-		ImageView title_img = new ImageView();
-		title_img.setImage(title);
-		title_img.setFitWidth(Generation.width / 2);
-		title_img.setPreserveRatio(true);
-		grid.add((title_img), 2, 0);
+		ImageView title_img = GridElement.add_image_to_gridpane(Resources.path_img_menu_title, Generation.width/2, true, 2, 0, grid);
 		title_img.setTranslateX(Generation.width / 3);
 
 		// Nicolas cage pict
-		Image nicolassse_cage = new Image(Resources.path_img_sun);
-		ImageView nicolas_cage_img = new ImageView();
-		nicolas_cage_img.setImage(nicolassse_cage);
-		nicolas_cage_img.setFitWidth(Generation.width / 5);
-		nicolas_cage_img.setPreserveRatio(true);
-		grid.add((nicolas_cage_img), 2, 10);
+		GridElement.add_image_to_gridpane(Resources.path_img_sun, Generation.width/5, true, 2, 10, grid);
 
 		// Buttons
-		Button btn_apply = new Button(Windows.button_apply);
-		HBox hbbtn_apply = new HBox(50);
-		hbbtn_apply.setAlignment(Pos.TOP_LEFT);
-		hbbtn_apply.getChildren().add(btn_apply);
-		grid.add(btn_apply, 4, 10);
-
-		Button btn_exit = new Button(Windows.button_close);
-		HBox hbBtn_exit = new HBox(50);
-		hbBtn_exit.setAlignment(Pos.TOP_LEFT);
-		hbBtn_exit.getChildren().add(btn_exit);
-		grid.add(btn_exit, 4, 11);
+		Button btn_apply = GridElement.add_button_to_gridpane(Windows.button_apply, 4, 10, grid);
+		Button btn_exit = GridElement.add_button_to_gridpane(Windows.button_close, 4, 11, grid);
 
 		// Generation parameters
-		Label label_max_nb_planets = new Label("Maximal number of planets");
-		label_max_nb_planets.setFont((new Font("Arial", 30)));
-		label_max_nb_planets.setTextFill(Color.ANTIQUEWHITE);
-		grid.add(label_max_nb_planets, 2, 2);
+		GridElement.add_label_to_gridpane("Maximal number of planets", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 2, grid);
 		max_numbers_of_planets = new TextField();
 		grid.add(max_numbers_of_planets, 3, 2);
+		
 
-		Label label_gui_size = new Label("Gui size (pixels)");
-		label_gui_size.setFont((new Font("Arial", 30)));
-		label_gui_size.setTextFill(Color.ANTIQUEWHITE);
-		grid.add(label_gui_size, 2, 3);
+		GridElement.add_label_to_gridpane("Gui size (pixels)", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 3, grid);
 		gui_size = new TextField();
 		grid.add(gui_size, 3, 3);
 
 		// Ships parameters
-		Label label_ship_min_speed = new Label("Minimal ship speed");
-		label_ship_min_speed.setFont((new Font("Arial", 30)));
-		label_ship_min_speed.setTextFill(Color.ANTIQUEWHITE);
-		grid.add(label_ship_min_speed, 2, 5);
+		GridElement.add_label_to_gridpane("Minimal ship speed", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 5, grid);
 		parameters_ships_min_speed = new TextField();
 		grid.add(parameters_ships_min_speed, 3, 5);
 
-		Label label_ship_max_speed = new Label("Maximal ship speed");
-		label_ship_max_speed.setFont((new Font("Arial", 30)));
-		label_ship_max_speed.setTextFill(Color.ANTIQUEWHITE);
-		grid.add(label_ship_max_speed, 2, 6);
+		GridElement.add_label_to_gridpane("Maximal ship speed", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 6, grid);
 		parameters_ships_max_speed = new TextField();
 		grid.add(parameters_ships_max_speed, 3, 6);
 		

@@ -8,10 +8,10 @@ import java.util.List;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
-import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.resources.ImageManager;
 
 /**
@@ -405,9 +405,10 @@ public class Ship extends Sprite implements Serializable {
 	/**
 	 * prepare his removal from the squad list
 	 */
+	@TODO(comment="Render the ship explosion")
 	public void remove() {
 		this.setRuler(Players.neutral_user);
-		this.setImage(Resources.path_gfx_ship_explosion);
+		//this.setImage(Resources.path_gfx_ship_explosion);
 		this.reached = true;
 	}
 

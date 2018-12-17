@@ -56,6 +56,18 @@ public final class Resources {
 	public static final String path_sound_quit = "sounds/exit_sound.mp3";
 	public static final String path_sound_settings = "sounds/settings_sound.mp3";
 	
+	//GUI
+	public static final String path_img_gui_play_unselected = "images/gui/play_unselected.jpg";
+	public static final String path_img_gui_settings_unselected = "images/gui/settings_unselected.jpg";
+	public static final String path_img_gui_exit_unselected = "images/gui/exit_unselected.jpg";
+
+	public static final String path_img_gui_play_selected = "images/gui/play_selected.jpg";
+	public static final String path_img_gui_settings_selected = "images/gui/settings_selected.jpg";
+	public static final String path_img_gui_exit_selected = "images/gui/exit_selected.jpg";
+	
+	
+	
+	/*	******************	*/
 	public static final double main_theme_volume = 0.1; //Between 0 (cut the music) and 1
 	public static final double ship_explosion_volume = 0.5;
 	public static final double sun_explosion_volume = 0.25;

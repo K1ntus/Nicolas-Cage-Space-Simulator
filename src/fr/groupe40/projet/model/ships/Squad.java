@@ -121,7 +121,7 @@ public class Squad implements Serializable {
 				return;
 			}
 			double x, y;
-			//if(source instanceof SquarePlanet) {	//Planet is a square
+			//if(source instance of SquarePlanet) {	//Planet is a square
 				switch(summoningSide()) {
 					case TOP:
 						x = this.horizontalSummoning();
@@ -174,7 +174,7 @@ public class Squad implements Serializable {
 	 * @return the y position
 	 */
 	private double verticalSummoning() {
-		//Y*taille +y(source) greater than y(source+height(source))
+		//Y*size +y(source) greater than y(source+height(source))
 		if(summonY*Generation.size_squads + source.getY() < source.getY()+source.height()) {
 			summonY += 1;	//Reset summon y
 			

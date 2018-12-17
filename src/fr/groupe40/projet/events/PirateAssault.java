@@ -5,6 +5,7 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.ShipType;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
@@ -25,6 +26,8 @@ final class PirateAssault {
 	 * @param y the y position on board
 	 * @param gc the graphics context to display it
 	 */
+	@TODO(comment="Render the pirate_ship summoning")
+	@SuppressWarnings({ "deprecation" })
 	private static void renderSummoning(double x, double y, GraphicsContext gc) {
 		Image portal = new Image(Resources.path_gfx_ship_explosion, Generation.size_squads, Generation.size_squads, false, false, true);
 

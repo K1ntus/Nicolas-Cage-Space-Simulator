@@ -1,11 +1,13 @@
 package fr.groupe40.projet.client.window;
 
 import fr.groupe40.projet.model.board.GalaxyRenderer;
+import fr.groupe40.projet.util.annot.WorkInProgress;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
 import fr.groupe40.projet.util.resources.ImageManager;
 import fr.groupe40.projet.util.resources.ResourcesContainer;
+import fr.groupe40.projet.util.window.GridElement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,7 +22,6 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -66,46 +67,32 @@ public class MainMenu {
 		display_title(grid);
 
 		// Nicolas cage pict
-		Image nicolassse_cage = ResourcesContainer.getMain_menu_background();
-		ImageView nicolas_cage_img = new ImageView();
-		nicolas_cage_img.setImage(nicolassse_cage);
-		nicolas_cage_img.setFitWidth(Generation.width / 5);
-		nicolas_cage_img.setPreserveRatio(true);
-		grid.add((nicolas_cage_img), 3, 6);
-		nicolas_cage_img.setTranslateX(-Generation.width / 2 + Generation.width / 3);
+		GridElement.add_image_to_gridpane(Resources.path_img_sun, Generation.width/5, true, 2, 10, grid);
+		
+		//Background
+		GridElement.add_image_to_gridpane(ResourcesContainer.getMain_menu_background(), Generation.width/5, true, 3, 6, grid);
 
 		// Buttons
-		Button btn_play = new Button(Windows.button_play);
-		HBox hbbtn_play = new HBox(50);
-		hbbtn_play.setAlignment(Pos.TOP_LEFT);
-		hbbtn_play.getChildren().add(btn_play);
-		grid.add(btn_play, 1, 1);
+		Button btn_how_to_play = GridElement.add_button_to_gridpane(Windows.button_how_to_play, 1, 2, grid);
+		Button btn_settings = GridElement.add_button_to_gridpane(Windows.button_settings, 1, 3, grid);
+		Button btn_exit = GridElement.add_button_to_gridpane(Windows.button_close, 1, 4, grid);
 
-		Button btn_how_to_play = new Button(Windows.button_how_to_play);
-		HBox hbBtn_how_to_play = new HBox(50);
-		hbBtn_how_to_play.setAlignment(Pos.TOP_LEFT);
-		hbBtn_how_to_play.getChildren().add(btn_how_to_play);
-		grid.add(btn_how_to_play, 1, 2);
+		//ImageButton btn_play = new ImageButton(ResourcesContainer.gui_play_selected, ResourcesContainer.gui_play_unselected);
 
-		Button btn_settings = new Button(Windows.button_settings);
-		HBox hbBtn_settings = new HBox(50);
-		hbBtn_settings.setAlignment(Pos.TOP_LEFT);
-		hbBtn_settings.getChildren().add(btn_settings);
-		grid.add(btn_settings, 1, 3);
+        //grid.add(btn_play.getIv(), 1, 1);
 
-		Button btn_exit = new Button(Windows.button_close);
-		HBox hbBtn_exit = new HBox(50);
-		hbBtn_exit.setAlignment(Pos.TOP_LEFT);
-		hbBtn_exit.getChildren().add(btn_exit);
-		grid.add(btn_exit, 1, 4);
+        init_play_btn();
 
+		Button btn_play = GridElement.add_button_to_gridpane("", 1, 1, grid);
+		
 		btn_play.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
+				//btn_play.setGraphic(null);
 				handlePlayButton();
 			}
 		});
-
+        
 		btn_settings.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -131,6 +118,22 @@ public class MainMenu {
 				null, BackgroundPosition.DEFAULT,
 				new BackgroundSize(Generation.width, 0.0, true, false, false, true))));
 
+	}
+
+	@WorkInProgress(comment = "Menu image bouton")
+	private void init_play_btn() {
+		//btn_play.setGraphic(ImageButton.get_image_view_for_button(Resources.path_img_gui_play_unselected));
+		/*
+		btn_play.setOnMouseEntered((event) -> {
+				btn_play.setGraphic(ImageButton.get_image_view_for_button(Resources.path_img_gui_play_selected));
+			}
+		);
+		
+		btn_play.setOnMouseExited((event) -> {
+				btn_play.setGraphic(ImageButton.get_image_view_for_button(Resources.path_img_gui_play_unselected));
+			}
+		);*/
+		
 	}
 	
 	private void display_title(GridPane grid) {
@@ -181,6 +184,7 @@ public class MainMenu {
 	/**
 	 * Function summoned when the howto button is pressed
 	 */
+	@WorkInProgress(comment="Had to make a better window + add explanation about game goals, ... ?")
 	private void handleHowToPlayButton() {
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);

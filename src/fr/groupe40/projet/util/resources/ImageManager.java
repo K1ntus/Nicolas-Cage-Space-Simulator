@@ -37,7 +37,7 @@ public final class ImageManager {
 	 * Will contain the result of function 'getImageByPath_dynamic'
 	 */
 	private static Image result = null;
-	
+
 	/**
 	 * Load an image using another processus
 	 * @param path the image path
@@ -45,6 +45,17 @@ public final class ImageManager {
 	 * @return the image loaded
 	 */
 	public static Image getImageByPath_dynamic(String path, double size) {
+		return getImageByPath_dynamic(path, size, size);
+	}
+
+	/**
+	 * Load an image using another processus
+	 * @param path the image path
+	 * @param width of the img
+	 * @param height of the image
+	 * @return the image loaded
+	 */
+	public static Image getImageByPath_dynamic(String path, double width, double height) {
 		final Service<Image> imageLoadingService = new Service<Image>(){
 
 			  @Override
@@ -53,7 +64,7 @@ public final class ImageManager {
 
 			     @Override
 			     protected Image call() throws Exception {
-			 		return new Image(path, size, size, false, false);
+			 		return new Image(path, width, height, true, false);
 			      }
 			    };
 			  }
@@ -69,7 +80,7 @@ public final class ImageManager {
 			if(result != null)
 				return result;
 			else
-				return new Image(path, size, size, false, false);
+		 		return new Image(path, width, height, true, false);
 	}
 
 }

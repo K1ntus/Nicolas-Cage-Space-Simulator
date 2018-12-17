@@ -6,13 +6,12 @@ import java.util.Iterator;
 
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
-import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 
 /**
@@ -106,9 +105,10 @@ public class Sun extends Planet implements Serializable{
 	 * @param squads the list of squads that will be clean
 	 * @param gc the graphics context to draw the image
 	 */
+	@TODO(comment="Render sun explosion")
 	public static void sun_destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads, GraphicsContext gc) {
-		Image explosion = new Image(Resources.path_gfx_ship_explosion, Generation.size_sun, Generation.size_sun, false, false, true);
-		gc.drawImage(explosion, planets.get(0).getX(), planets.get(0).getY());
+		//Image explosion = new Image(Resources.path_gfx_ship_explosion, Generation.size_sun, Generation.size_sun, false, false, true);
+		//gc.drawImage(explosion, planets.get(0).getX(), planets.get(0).getY());
 		
 		
 		for(Planet p : planets) {

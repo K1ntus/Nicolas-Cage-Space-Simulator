@@ -11,6 +11,7 @@ import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
@@ -124,6 +125,7 @@ public class Game extends Application {
 	/**
 	 * Handle keyboard I/O. (Save/Load & Escape)
 	 */
+	@TODO(comment="Put the keyboard handler into another class")
 	private EventHandler<KeyEvent> keyboardHandler;
 
 	/**
@@ -449,9 +451,8 @@ public class Game extends Application {
 		stage.setScene(scene_main_menu);
 		stage.show();
 
-		
+
 		keyboardHandler = new EventHandler<KeyEvent>() {
-	
 			@Override
 			public void handle(KeyEvent e) {
 					

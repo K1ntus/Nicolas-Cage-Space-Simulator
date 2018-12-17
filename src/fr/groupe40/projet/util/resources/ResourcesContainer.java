@@ -1,5 +1,6 @@
 package fr.groupe40.projet.util.resources;
 
+import fr.groupe40.projet.util.annot.WorkInProgress;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.image.Image;
@@ -35,6 +36,19 @@ public class ResourcesContainer {
 	 * contain the Image of pirate ships saved
 	 */
 	private Image game_pirate_ships;
+
+	@WorkInProgress(comment = "Menu image bouton")
+	public static Image gui_play_unselected;
+	@WorkInProgress(comment = "Menu image bouton")
+	public static Image gui_play_selected;
+	@WorkInProgress(comment = "Menu image bouton")
+	public static Image gui_setting_unselected;
+	@WorkInProgress(comment = "Menu image bouton")
+	public static Image gui_setting_selected;
+	@WorkInProgress(comment = "Menu image bouton")
+	public static Image gui_exit_unselected;
+	@WorkInProgress(comment = "Menu image bouton")
+	public static Image gui_exit_selected;
 	
 	/**
 	 * contain the sound of a ship collision with his destination
@@ -73,6 +87,18 @@ public class ResourcesContainer {
 		settings_button_sound = SoundManager.getAudioByPath_dynamic(Resources.path_sound_settings, 0.5);
 		sound_ship_explosion = SoundManager.getAudioByPath_dynamic(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 		
+		init_gui_buttons();
+	}
+
+	@WorkInProgress(comment = "Menu image bouton")
+	private void init_gui_buttons() {
+		double button_width = 167;
+		gui_play_unselected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_play_unselected), button_width, 0);
+		gui_play_selected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_play_selected), button_width, 0);
+		gui_setting_unselected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_settings_unselected), button_width, 0);
+		gui_setting_selected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_settings_selected), button_width, 0);
+		gui_exit_unselected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_exit_unselected), button_width, 0);
+		gui_exit_selected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_exit_selected), button_width, 0);		
 	}
 
 	/**
