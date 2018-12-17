@@ -1,18 +1,26 @@
 package fr.groupe40.projet.client.window;
 
 import fr.groupe40.projet.model.board.GalaxyRenderer;
+import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Difficulty;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.ShipsParameters;
 import fr.groupe40.projet.util.constants.Windows;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,6 +30,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -104,14 +113,14 @@ public class SettingsMenu {
 		label_max_nb_planets.setTextFill(Color.ANTIQUEWHITE);
 		grid.add(label_max_nb_planets, 2, 2);
 		max_numbers_of_planets = new TextField();
-		grid.add(max_numbers_of_planets, 4, 2);
+		grid.add(max_numbers_of_planets, 3, 2);
 
 		Label label_gui_size = new Label("Gui size (pixels)");
 		label_gui_size.setFont((new Font("Arial", 30)));
 		label_gui_size.setTextFill(Color.ANTIQUEWHITE);
 		grid.add(label_gui_size, 2, 3);
 		gui_size = new TextField();
-		grid.add(gui_size, 4, 3);
+		grid.add(gui_size, 3, 3);
 
 		// Ships parameters
 		Label label_ship_min_speed = new Label("Minimal ship speed");
@@ -119,14 +128,16 @@ public class SettingsMenu {
 		label_ship_min_speed.setTextFill(Color.ANTIQUEWHITE);
 		grid.add(label_ship_min_speed, 2, 5);
 		parameters_ships_min_speed = new TextField();
-		grid.add(parameters_ships_min_speed, 4, 5);
+		grid.add(parameters_ships_min_speed, 3, 5);
 
 		Label label_ship_max_speed = new Label("Maximal ship speed");
 		label_ship_max_speed.setFont((new Font("Arial", 30)));
 		label_ship_max_speed.setTextFill(Color.ANTIQUEWHITE);
 		grid.add(label_ship_max_speed, 2, 6);
 		parameters_ships_max_speed = new TextField();
-		grid.add(parameters_ships_max_speed, 4, 6);
+		grid.add(parameters_ships_max_speed, 3, 6);
+		
+		difficulty_selector();
 
 		btn_apply.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -148,6 +159,49 @@ public class SettingsMenu {
 				null, BackgroundPosition.DEFAULT,
 				new BackgroundSize(Generation.width * 1.0, 0.0, true, false, false, true))));
 
+	}
+
+	/**
+	 * Source: https://examples.javacodegeeks.com/desktop-java/javafx/listview-javafx/javafx-listview-example/#intro_code
+	 */
+	private void difficulty_selector() {
+        Label difficultyLabel = new Label("Select Difficulty: ");
+		ObservableList<String> difficultyList = FXCollections.<String>observableArrayList("Initie", "Space Marine", "Praetor", "Primarque");
+
+        // Create the ListView for the seasons
+        ListView<String> difficulties = new ListView<>(difficultyList);
+        // Set the Orientation of the ListView
+        difficulties.setOrientation(Orientation.VERTICAL);
+        // Set the Size of the ListView
+        difficulties.setPrefSize(200, 150);
+        
+		// Update the TextArea when the selected season changes
+        difficulties.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
+		{
+		    public void changed(ObservableValue<? extends String> ov,
+		            final String old_value, final String new_value) 
+		    {
+		    	if(new_value.indexOf("Init") >= 0) {
+		    		Constants.difficulty = Difficulty.INITIE;		    	
+		    	} else if(new_value.indexOf("Space") >= 0) {
+		    		Constants.difficulty = Difficulty.SPACE_MARINE;		    	
+		    	} else if(new_value.indexOf("Prae") >= 0) {
+		    		Constants.difficulty = Difficulty.PRAETOR;		    	
+		    	} else {
+		    		Constants.difficulty = Difficulty.PRIMARQUE;	
+		    	}
+        }});
+        
+		
+		// Create the Season VBox
+		VBox difficulty_selection = new VBox();
+		// Set Spacing to 10 pixels
+		difficulty_selection.setSpacing(25);
+		// Add the Label and the List to the VBox
+		difficulty_selection.getChildren().addAll(difficultyLabel, difficulties);
+
+		//grid.add((difficultyLabel), 7, 2);
+		grid.add((difficulty_selection), 3, 10);
 	}
 
 	/**
