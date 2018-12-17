@@ -16,7 +16,7 @@ public final class Generation {
 	/*	Generation parameters */
 	public static int nb_planets_tentatives = 10;	//<-> max planets available	//Exponential complexity | Usually 10 is ok
 	public static final int min_numbers_of_planets = 3;
-	public static final int minimal_distance_between_planets = 200;	//Distance in pixels required between each planets
+	public static final int minimal_distance_between_planets = 100;	//Distance in pixels required between each planets
 	
 	//Nb of ai squads generated from the beginning
 	//Currently for debugging and not working anymore

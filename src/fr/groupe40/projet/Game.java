@@ -177,7 +177,7 @@ public class Game extends Application {
 			/**
 			 * Is true if the game has been initialized
 			 */
-			private boolean game_pre_init_running = false;
+			private boolean game_pre_init_running, game_init_running = false;
 
 			/**
 			 * Is true if the game has been initialized
@@ -204,8 +204,14 @@ public class Game extends Application {
 			        	game_pre_init_running = true;
 			        	
 			        	gg = new GalaxyGenerator();
+
+						long endTime = System.currentTimeMillis();
+						if(Debugging.DEBUG || Debugging.DEBUG_TIMER) 
+							System.out.println("Pre-Init done in " + (endTime - startTime) +" ms");
+						
 						
 						game_pre_init_done = true;
+			        	game_pre_init_running = false;
 						return;
 			        }
 			      });
@@ -217,15 +223,10 @@ public class Game extends Application {
 					pre_init_thread.join(2000);
 				} catch (InterruptedException e) {
 					gg = null;
-					e.printStackTrace();
-				} finally {
 					long endTime = System.currentTimeMillis();
-					System.out.println("Pre-Init done after " + (endTime - startTime) +" ms");
-					if(!game_pre_init_done)
-						System.out.println("  -> Pre-Init has failed.");
-						
+					System.out.println("Pre-Init failed after " + (endTime - startTime) +" ms");
 		        	game_pre_init_running = false;
-					
+					e.printStackTrace();
 				}
 			
 			
@@ -235,7 +236,11 @@ public class Game extends Application {
 			 * Initialize the game board
 			 */
 			private void init() {
+				if(game_init_running)
+					return;
 				long startTime = System.currentTimeMillis();
+				
+				game_init_running = true;
 				
 				if(gg == null)
 					gg = new GalaxyGenerator();
@@ -268,6 +273,7 @@ public class Game extends Application {
 				stage.show();	
 				
 				game_init_done = true;
+				game_init_running = false;
 
 				
 				long endTime = System.currentTimeMillis();

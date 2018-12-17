@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
  *
  */
 public final class Constants {
-	public static Difficulty difficulty = Difficulty.PRIMARQUE;
+	public static Difficulty difficulty = Difficulty.INITIE;
 	
 	/**
 	 * String message to send when the player lost the current game

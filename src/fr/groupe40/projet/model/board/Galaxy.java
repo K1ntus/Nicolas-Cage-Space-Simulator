@@ -46,7 +46,7 @@ public class Galaxy implements Serializable{
 	private GalaxyGenerator generator = new GalaxyGenerator();
 	
 	/**
-	 *  graphical environnement
+	 *  graphical environment
 	 */
 	private transient GraphicsContext gc;
 	
@@ -135,7 +135,7 @@ public class Galaxy implements Serializable{
 				
 				for(Planet p2 : planets) {	//Check again the planets list
 					destination = p2;
-					if(p2.getTroups() < source.getTroups() || p2.getTroups() >= PlanetsGarrison.max_troups) {
+					if(p2.getTroups() < source.getTroups() || p.getTroups() >= PlanetsGarrison.max_troups-PlanetsGarrison.max_troups/4) {
 						Squad s = ruler.sendFleetAI(source, destination);
 						if(s != null)
 							squads.add(s);
