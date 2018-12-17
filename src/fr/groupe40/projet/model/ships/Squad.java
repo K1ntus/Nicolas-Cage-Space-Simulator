@@ -19,7 +19,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 
 /**
- * Squad object. A squad is made to contains a various amount of ships
+ *  Squad object
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -294,10 +294,7 @@ public class Squad implements Serializable {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
-<<<<<<< HEAD
-=======
 					GalaxyRenderer.getRESOURCES_CONTAINER().renderCollisionSound();
->>>>>>> masterrace
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -314,10 +311,7 @@ public class Squad implements Serializable {
 		}
 	}
 	
-<<<<<<< HEAD
-=======
 
->>>>>>> masterrace
 	/**
 	 *  updateImage of every ships of this squad
 	 */

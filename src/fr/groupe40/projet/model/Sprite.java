@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 
 
 /**
- * Primary class managing every displayed object on board
+ * 
  * @author Jordane Masson
  * @author Sarah Portejoie
  *

@@ -6,9 +6,12 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.planets.RoundPlanet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
+import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.concurrent.Task;
@@ -29,8 +32,6 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 *  Create and Generate the board
 	 */
 	public GalaxyGenerator() {
-<<<<<<< HEAD
-=======
 		try {
 			this.call();
 		} catch (Exception e) {
@@ -47,21 +48,64 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	protected ArrayList<Planet> call() throws Exception {
 		if(Constants.sun_enabled)
 			generateSun();
->>>>>>> masterrace
 		generatePlanets();
 		return planets;
 	}
 	
 	/*	Sun generation	*/
 
+	/**
+	 *  Generate a sun in the center of the board
+	 */
+	public void generateSun() {
+		Planet sun = new Sun(Resources.path_img_sun, Generation.width/2, Generation.height/2);
+		sun.updateImage();
+		sun.setX(sun.getX() - sun.width()/2);
+		sun.setY(sun.getY() - sun.width()/2);
+		sun.setTroups(PlanetsGarrison.sun_troups);
+		planets.add(sun);
+	}
 
-	/* Planets Generation */	
+	/* Planets Generation */
+
+	/**
+	 *  return a randomly string path for round planet type
+	 * @return the path of this ressource
+	 */
+	private String getRandomRoundPlanetImgPath() {
+		double rand= Math.random();
+		
+		if(rand < 0.5)
+			return Resources.path_img_square_time_night;
+		return Resources.path_img_square_basic;
+	}
+	
+	/**
+	 *  return a randomly string path for square planet type
+	 * @return the path of this ressource
+	 */
+	private String getRandomSquarePlanetImgPath() {
+		double rand= Math.random();
+
+		if(rand < 0.25)
+			return Resources.path_img_round_planet2;
+		else if(rand < 0.5)
+			return Resources.path_img_round_doge;
+		else if(rand < 0.75)
+			return Resources.path_img_round_smoke;
+		return Resources.path_img_round_kfc_planet;
+	}
+	
 	/**
 	 *  return a randomly generated planet type (ie. round or square)
 	 * @return the planet generated
 	 */
 	private Planet getRandomPlanet() {
-		return new SquarePlanet(Resources.path_img_square_basic, new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
+		double rand = Math.random();
+		
+		if(rand < 0.5)
+			return new RoundPlanet(getRandomRoundPlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
+		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Players.neutral_user), (int) (Generation.left_margin_size + Generation.size_squads), 0);
 	}
 	
 	/**

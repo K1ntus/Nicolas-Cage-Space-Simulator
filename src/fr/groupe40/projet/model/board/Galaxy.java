@@ -6,29 +6,17 @@ import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
-<<<<<<< HEAD
-import fr.groupe40.projet.model.ships.Ship;
-=======
 import fr.groupe40.projet.model.planets.Sun;
->>>>>>> masterrace
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Direction;
-<<<<<<< HEAD
-import fr.groupe40.projet.util.constants.Generation;
-=======
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
->>>>>>> masterrace
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.resources.SoundManager;
 import javafx.scene.canvas.GraphicsContext;
-<<<<<<< HEAD
-import javafx.scene.image.Image;
-=======
 import javafx.scene.media.AudioClip;
->>>>>>> masterrace
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -163,8 +151,6 @@ public class Galaxy implements Serializable{
 	 *  update the garrison value of each planets
 	 */
 	public void updateGarrison() {
-<<<<<<< HEAD
-=======
 		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
 
 	    	AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
@@ -174,7 +160,6 @@ public class Galaxy implements Serializable{
 			planets.remove(0);
 		}
 		
->>>>>>> masterrace
 		for(Planet p : planets)
 			p.updateGarrison();	
 	}
@@ -252,181 +237,6 @@ public class Galaxy implements Serializable{
 		}
 	}
 	
-<<<<<<< HEAD
-	/* Collisions Between Ships & Planets */
-	/**
-	 *  Manage the collisions between squads & intermediate planets
-	 * @param s The squad to manage
-	 * @param p The planet to test collision with
-	 */
-	public void collisionHandler(Ship s, Planet p) {
-		double deltaY = 0, deltaX = 0;
-		double x = s.getX(), y = s.getY();
-		double width = s.width(), height = s.height();
-		double speed = s.getSpeed();
-
-		double xCenter = p.getX() + p.width() /2;
-		double yCenter = p.getY() + p.height()/2;
-		
-		if(p.isInside(x-2*speed, y, width, height)) {	
-			if(yCenter > y) {
-				deltaY -= speed;		
-			} else {
-				deltaY += speed;
-			}			
-		} else if(p.isInside(x+2*speed, y, width, height)) {
-			if(yCenter > y) {
-				deltaY -= speed;		
-			} else {
-				deltaY += speed;
-			}
-		}
-		
-		if(p.isInside(x, y-2*speed, width, height)) {
-			if(xCenter > x) {
-				deltaX += speed;
-			} else {
-				deltaX -= speed;	
-			}
-		} else if(p.isInside(x, y+2*speed, width, height)) {
-			if(xCenter > x) {	
-				deltaX += speed;
-			} else {
-				deltaX -= speed;	
-			}
-		}
-		
-		if(p.isInside(x+deltaX,y+deltaY,width,height)) {
-			return;
-		}
-		s.setPosition(x+deltaX, y+deltaY);
-			
-	}
-
-	/**
-	 *  check if there s a collision between a squad and every planet on board
-	 * @param s the squad to check
-	 * @return true if there s a collision, else false
-	 */
-	public boolean isCollision(Ship s) {
-		for(Planet p : planets) {
-			if(p != s.getDestination() && p != s.getSource()) {
-				this.collisionHandler(s, p);
-				return true;
-			}
-		}
-		s.update_position(planets);
-
-		return false;
-	}
-	
-	/* Rendering subfunction */
-
-	/**
-	 *  Render the background image
-	 * @param gc
-	 */
-	public void renderBackground(GraphicsContext gc) {
-		gc.drawImage(background, 0, 0);
-	}
-	
-	/**
-	 *  Render each planets image
-	 * @param gc
-	 */
-	public void renderPlanets(GraphicsContext gc) {
-		for(Planet p : planets) {
-			if(p != null)
-				p.render(gc);					
-		}
-	}
-	
-	/**
-	 *  Render every squads on board
-	 * @param gc
-	 */
-	public void renderSquads(GraphicsContext gc) {
-		Iterator<Squad> it = squads.iterator();
-		while (it.hasNext()) {
-			Squad ss = it.next();		
-			if(ss == null) {	continue;	}
-			
-			for (Ship ship : ss.getShips()) {
-				if(ship.isReached()) {
-					ss.getShips().remove(ship);
-					continue;					
-				}else {
-					//isCollision(ss);
-					ss.render_ships(gc);	
-					
-				}
-			}
-		}
-	}
-	
-	/**
-	 *  Render the garrison amount of each planets on board
-	 * @param gc
-	 */
-	public void renderGarrison(GraphicsContext gc) {
-		for (Planet p : planets) {
-			String txt = Integer.toString(p.getTroups());
-			gc.setTextAlign(TextAlignment.CENTER);	
-			gc.setStroke(Color.BLACK);
-			
-			switch(p.getRuler().getFaction()) {
-				case Players.human_faction:
-					gc.setFill(Constants.color_player); break;
-				case Players.ai_faction:
-					gc.setFill(Constants.color_ai); break;
-				case Players.neutral_faction:
-					gc.setFill(Constants.color_neutral); break;
-				default:
-					gc.setFill(Constants.color_default); break;
-			}
-			gc.fillText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
-			gc.strokeText(txt, p.getX() + (p.width()/2), p.getY() + (p.height()/2));
-		}
-	}
-
-	/**
-	 *  Render the percentage of troups to send selected by the player
-	 * @param gc
-	 */
-	public void renderPercentageSelected(GraphicsContext gc) {
-		gc.setFill(Constants.color_default);
-		gc.setStroke(Color.RED);
-		gc.setTextAlign(TextAlignment.CENTER);	
-		
-		for(Planet p :planets) {
-			User u = p.getRuler();
-			if (u.getFaction() == Players.human_faction) {
-				String txt = "Troupes: "+u.getPercent_of_troups_to_send()+"%";
-				
-				gc.fillText(txt, Generation.width/7, 25);
-				gc.strokeText(txt, Generation.width/7, 25);
-				
-				return;				
-			}
-		}
-	}
-	
-	/**
-	 *  render in case of defeat 
-	 * @param gc the Graphics Context
-	 */
-	public void renderDefeat(GraphicsContext gc) {
-		gc.setFill(Constants.color_default);
-		gc.setStroke(Color.RED);
-		gc.setTextAlign(TextAlignment.CENTER);	
-
-		String txt = Constants.message_game_over;
-		gc.fillText(txt, Generation.width/2, 25);
-		gc.strokeText(txt, Generation.width/2, 25);
-		
-	}
-=======
->>>>>>> masterrace
 
 	
 	/* init the font type */

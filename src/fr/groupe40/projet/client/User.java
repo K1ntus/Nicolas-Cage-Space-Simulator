@@ -215,12 +215,5 @@ public class User implements Serializable{
 		}
 		return false;
 	}
-	
-	/**
-	 * Casual to string function
-	 */
-	public String toString() {
-		return "Ruler number: "+ id +" - Faction="+faction;
-	}
 
 }

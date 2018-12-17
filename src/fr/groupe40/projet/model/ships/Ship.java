@@ -66,14 +66,6 @@ public class Ship extends Sprite implements Serializable {
 		this.collision = source;
 	}
 
-<<<<<<< HEAD
-	/**
-	 *  Check if a sprite directly intersect another one
-	 * @param s the sprite to compare with
-	 * @return true if the sprite is inside, else false
-	 */
-=======
->>>>>>> masterrace
 	@Override
 	public boolean isInside(Sprite s) {
 		double x = this.getX(), y = this.getY();
@@ -86,17 +78,6 @@ public class Ship extends Sprite implements Serializable {
 				&& ((y >= y2 && y <= y2 + height2) || (y2 >= y && y2 <= y + height));
 	}
 
-<<<<<<< HEAD
-
-
-	/**
-	 *  Check if a pair of pos is inside another
-	 * @param x
-	 * @param y
-	 * @return true if the sprite is inside, else false
-	 */
-=======
->>>>>>> masterrace
 	@Override
 	public boolean isInside(double x, double y) {
 		if (isInside(x, y, 1, 1)) {
@@ -106,17 +87,6 @@ public class Ship extends Sprite implements Serializable {
 
 	}
 
-<<<<<<< HEAD
-	/**
-	 *  Check if a rectangle is inside another
-	 * @param x	the x-top corner
-	 * @param y the y-top corner
-	 * @param width the width of the rectangle
-	 * @param height the height of the rectangle
-	 * @return true if inside else false
-	 */
-=======
->>>>>>> masterrace
 	@Override
 	public boolean isInside(double x, double y, double width, double height) {
 		double x2 = this.getX(), y2 = this.getY(), width2 = this.width(), height2 = this.height();
@@ -273,19 +243,11 @@ public class Ship extends Sprite implements Serializable {
 		else
 			deltaX = -speed;
 
-<<<<<<< HEAD
-		if(destination.getY() < y)
-			deltaY = -speed;
-		
-		this.setX(x+deltaX);
-		this.setY(y+deltaY);
-=======
 		if (destination.getY() < y)
 			deltaY = -speed;
 
 		this.setX(x + deltaX);
 		this.setY(y + deltaY);
->>>>>>> masterrace
 	}
 
 	/**
@@ -309,19 +271,11 @@ public class Ship extends Sprite implements Serializable {
 		else
 			deltaX = -speed;
 
-<<<<<<< HEAD
-		if(destination.getY() > y)
-			deltaY = speed;
-		
-		this.setX(x+deltaX);
-		this.setY(y+deltaY);
-=======
 		if (destination.getY() > y)
 			deltaY = speed;
 
 		this.setX(x + deltaX);
 		this.setY(y + deltaY);
->>>>>>> masterrace
 	}
 
 	/**
@@ -344,18 +298,12 @@ public class Ship extends Sprite implements Serializable {
 			deltaY = +speed;
 		else
 			deltaY = -speed;
-<<<<<<< HEAD
-		
-		this.setX(x+deltaX);
-		this.setY(y+deltaY);
-=======
 
 		if (destination.getX() < x)
 			deltaX = -speed;
 
 		this.setX(x + deltaX);
 		this.setY(y + deltaY);
->>>>>>> masterrace
 	}
 
 	/**

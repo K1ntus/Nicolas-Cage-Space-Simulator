@@ -1,11 +1,6 @@
 package fr.groupe40.projet;
 
 
-<<<<<<< HEAD
-import fr.groupe40.projet.client.handler.InteractionHandler;
-import fr.groupe40.projet.file.DataSerializer;
-import fr.groupe40.projet.model.board.Galaxy;
-=======
 import java.io.File;
 
 import fr.groupe40.projet.client.handler.InteractionHandler;
@@ -16,16 +11,13 @@ import fr.groupe40.projet.file.DataSerializer;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
->>>>>>> masterrace
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Ticks;
-<<<<<<< HEAD
-=======
 import fr.groupe40.projet.util.constants.Windows;
 import fr.groupe40.projet.util.resources.SoundManager;
->>>>>>> masterrace
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -37,15 +29,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-<<<<<<< HEAD
-
-=======
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
->>>>>>> masterrace
 
 /**
- * Main class. Currently managing users interactions and display
+ *  Main class. Currently managing users interactions and display
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
@@ -57,25 +45,11 @@ public class Game extends Application {
 		
 		launch(args);
 	}
-<<<<<<< HEAD
-	
-	/**
-	 * Board object containing every sprites, etc
-	 */
-	private Galaxy galaxy;
-	
-=======
->>>>>>> masterrace
 		
 	/**
-	 * Manage the mouse interactions
+	 *  manage the user input, currently, only the mouse is managed there
 	 */
 	private InteractionHandler interactionHandler;
-<<<<<<< HEAD
-	
-	
-	public void start(Stage stage) {
-=======
 
 	/**
 	 *  manage the background game sound + methods to simplify sounds usage
@@ -125,7 +99,6 @@ public class Game extends Application {
 	 * Canvas of the setting menu
 	 */
 	private Canvas canvas_settings = new Canvas(Generation.width, Generation.height);
->>>>>>> masterrace
 
 	/**
 	 * Canvas of the main menu
@@ -148,56 +121,6 @@ public class Game extends Application {
 	 */
 	private Scene scene_main_menu;
 
-<<<<<<< HEAD
-		Group root = new Group();
-		Scene scene = new Scene(root);
-		Canvas canvas = new Canvas(Generation.width, Generation.height);
-		root.getChildren().add(canvas);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		
-
-		galaxy = new Galaxy(gc);
-		galaxy.initFont(gc);
-
-		DataSerializer saver = new DataSerializer(Constants.fileName_save, galaxy);
-		
-
-		interactionHandler = new InteractionHandler(galaxy, scene, saver);
-		interactionHandler.exec();
-		
-		
-		stage.setScene(scene);
-		stage.show();
-
-		/**	KEYBOARD HANDLER	**/
-		EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>() {
-	
-			@Override
-			public void handle(KeyEvent e) {
-					
-				if (e.getCode() == KeyCode.F5) {
-					System.out.println("Saving game ...");
-					//OPEN POPUP ?
-					saver.save_game();
-				}
-					
-				if (e.getCode() == KeyCode.F6) {
-					System.out.println("Loading game ...");
-					galaxy = saver.load_game(gc);
-					saver.reload_image_and_data(galaxy);
-
-					interactionHandler = new InteractionHandler(galaxy, scene, saver);
-					interactionHandler.exec();
-				}
-				
-			}
-		};
-		
-		scene.setOnKeyPressed(keyboardHandler);
-        
-		/*	Rendering */
-		new AnimationTimer() {
-=======
 	/**
 	 * Handle keyboard I/O. (Save/Load & Escape)
 	 */
@@ -235,18 +158,9 @@ public class Game extends Application {
 			 */
 			private long game_tick = 0;	//long because counter, had to prevent the overflow case
 
->>>>>>> masterrace
 			/**
-			 * game_tick counter for events, etc
+			 *  manage the game events
 			 */
-<<<<<<< HEAD
-			private long game_tick = 0;	//long as counter, but BigInteger could be used (9trillion trillion)
-			
-			/**
-			 * Manage the board updater & renderer
-			 */
-			public void handle(long arg0) {	
-=======
 			private Events eventManager;	
 
 			/**
@@ -369,9 +283,15 @@ public class Game extends Application {
 					return;
 				}
 				
->>>>>>> masterrace
 				game_tick += 1;
-
+				
+				if(game_loaded) {
+					saver.reload_image_and_data(galaxy);
+					interactionHandler = new InteractionHandler(galaxy, scene_game, saver);
+					interactionHandler.exec();
+					game_loaded = false;
+				}
+				
 				galaxy.render(gc);
 				
 				if(game_tick % Ticks.tick_per_squad_position_update == 0)
@@ -386,34 +306,14 @@ public class Game extends Application {
 				if(game_tick % Ticks.tick_per_ai_attack == 0)
 					galaxy.updateAI();
 
+				
+				if(game_tick % Ticks.tick_per_events == 0)
+					if(Constants.events_enabled)
+						eventManager.event_randomizer();
+				
+				if(game_tick % Ticks.tick_per_main_theme_check == 0)
+					soundHandler.run();
 								
-<<<<<<< HEAD
-				
-				//Generate new board and play again
-				if(galaxy.isGame_is_over()) {	
-					if(galaxy.userHasLost(Players.human_user)) {	//The human has lost
-						System.out.println("you lose");
-						galaxy.render(gc);
-						galaxy.renderDefeat(gc);
-						galaxy.setGame_is_over(true);
-						//System.exit(0);
-					} else if(galaxy.userHasLost(Players.ai_user)) {
-						System.out.println("you won");
-						galaxy.render(gc);
-						galaxy.renderWinner(gc);
-						galaxy.setGame_is_over(true);
-					}
-					
-					System.out.println("Generating new board");
-					galaxy = new Galaxy(gc);
-					interactionHandler = new InteractionHandler(galaxy, scene, saver);
-					interactionHandler.exec();					
-				}
-				
-			}
-		}.start();
-	}
-=======
 				//Just for fun, LOL
 				if(game_tick % Ticks.tick_per_garbage_check == 0)
 					System.gc();
@@ -616,7 +516,5 @@ public class Game extends Application {
 		if(Debugging.DEBUG || Debugging.DEBUG_TIMER)
 			System.out.println("Game window done in " + (endTime - startTime) +" ms");
 	}
->>>>>>> masterrace
-	
 	
 }

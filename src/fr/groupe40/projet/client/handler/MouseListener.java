@@ -107,19 +107,12 @@ public class MouseListener {
 	    return mousePressedEvent;
 	}
 
-<<<<<<< HEAD
-		/**
-		 *  Manage the drop of the mouse
-		 *  Shall be optimized, currently have a crazy complexity
-		 */
-=======
 	/**
 	 * Manage the mouse drop action
 	 * @return the event to handle on the scene
 	 */
 	private EventHandler<MouseEvent> init_mouse_dragged(){
 		//TODO Complexity upgrade
->>>>>>> masterrace
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent){

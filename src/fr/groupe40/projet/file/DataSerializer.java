@@ -122,11 +122,6 @@ public class DataSerializer {
 	 * @return the galaxy loaded from the save file
 	 * @throws Exception 
 	 */
-<<<<<<< HEAD
-	public Galaxy load_game(GraphicsContext gc) {		
-		FileInputStream file;
-		Galaxy loaded = null;
-=======
 	public Galaxy load_game(GraphicsContext gc, Stage stage) throws Exception {
 		box_opened = true;
 		
@@ -158,7 +153,6 @@ public class DataSerializer {
 		
 		
 		Galaxy loaded = new Galaxy(gc);
->>>>>>> masterrace
 		try {
 			
 			ObjectInputStream ois = new ObjectInputStream(file);
@@ -181,7 +175,7 @@ public class DataSerializer {
 		return res;
 	}
 	/**
-	 * Reload the game to apply the loading
+	 *  Reload the game to apply the loading
 	 * @param g Galaxy to be reloaded
 	 */
 	public void reload_image_and_data(Galaxy g) {
@@ -190,18 +184,26 @@ public class DataSerializer {
 			ArrayList<Ship> ships = s.getShips();
 			try {
 				User u = ships.get(0).getRuler();	//Get the ruler of the first ship of the squad
-				
-				switch (u.getFaction()) {
-				case Players.human_faction:
-					s.update_ruler(Players.human_user); break;
-				case Players.ai_faction:
-					s.update_ruler(Players.ai_user); break;
-				case Players.neutral_faction:
-					s.update_ruler(Players.neutral_user); break;
-				default:
-					break;
+				if (u.getId() < 0) {
+					switch(u.getId()) {
+					case Players.event_id:
+						s.update_ruler(Players.event_user);
+						break;
+					case Players.sun_id:
+						s.update_ruler(Players.sun_user);
+						break;
+					case Players.pirate_id:
+						s.update_ruler(Players.pirate_user);
+						break;
+					default:
+						s.update_ruler(Players.ai_user);
+						break;
+					}
+				}else if (u.getFaction() == Players.human_faction) {
+					s.update_ruler(Players.human_user);
+				}else {
+					s.update_ruler(Players.neutral_user);
 				}
-				
 			} catch (IndexOutOfBoundsException e) {
 				continue;	//Every ships of the squad has reached dest, will be automatically removed by the game updater
 			}
@@ -210,19 +212,6 @@ public class DataSerializer {
 		}
 		
 		for(Planet p : g.getPlanets()) {		
-<<<<<<< HEAD
-			User u = p.getRuler();
-
-			//Shall be done using id + faction if more players
-			switch (u.getFaction()) {
-				case Players.human_faction:
-					p.setRuler(Players.human_user); break;
-				case Players.ai_faction:
-					p.setRuler(Players.ai_user); break;
-				case Players.neutral_faction:
-					p.setRuler(Players.neutral_user); break;
-				default:
-=======
 					
 			switch(p.getRuler().getId()) {
 				case Players.event_id:
@@ -248,9 +237,9 @@ public class DataSerializer {
 				default:
 					//System.out.println("** ai user");
 					p.setRuler(Players.ai_user);
->>>>>>> masterrace
 					break;
 			}
+
 			
 			p.updateImage();
 		}

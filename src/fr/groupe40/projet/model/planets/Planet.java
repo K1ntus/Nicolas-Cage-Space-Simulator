@@ -171,9 +171,7 @@ public abstract class Planet extends Sprite {
 		return 0;
 	}
 
-	/**
-	 * Casual toString function, converting an object to a string 
-	 */
+
 	public abstract String toString();
 
 	/**
