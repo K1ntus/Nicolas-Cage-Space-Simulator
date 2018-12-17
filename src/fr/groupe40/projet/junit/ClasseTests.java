@@ -7,6 +7,7 @@ import org.junit.Test;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
+import fr.groupe40.projet.model.ships.ShipType;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.ShipsParameters;
 import junit.framework.TestCase;
@@ -179,26 +180,22 @@ public class ClasseTests extends TestCase{
 	/**
 	 * test of the function validatePosition() with a SquarePlanet at a pos of (-10,-10)
 	 */
-	/*
+	
 	@Test
 	public void testValidatePosition() {
-		RoundPlanet p = new RoundPlanet(null, null, -10, -10);
-		System.out.println(p.getMaxX());
-		System.out.println(p.getMaxY());
+		SquarePlanet p = new SquarePlanet(null, null, -10, -10);
 		p.validatePosition();
-		System.out.println(p.getX());
-		System.out.println(p.getY());
-		assert 0 != p.getX() && 0 != p.getY();
+		assert 0 == p.getX() && 0 != p.getY();
 				
 	}
-	*/
+
 	
 	/**
 	 * test of the function whereis_collision(double x, double y, double speed, List<Planet> planets) with a SquarePlanet at a pos of (150,150)
 	 * \and a ship
 	 */
 	@Test
-	public void TestWhereis_collision() {
+	public void testWhereis_collision() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		List<Planet> planets = new ArrayList<Planet>();
@@ -213,7 +210,7 @@ public class ClasseTests extends TestCase{
 	 * \and a ship
 	 */
 	@Test
-	public void TestCalc_next_position() {
+	public void testCalc_next_position() {
 		Ship tester = new Ship(null, null, null, null, 0, 0, null);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		List<Planet> planets = new ArrayList<Planet>();
@@ -232,13 +229,17 @@ public class ClasseTests extends TestCase{
 	 * \and a ship
 	 */
 	@Test
-	public void TestTop_collision_mover() {
-		Ship tester = new Ship(null, null, null, null, 0, 0, null);
+	public void testTop_collision_mover() {
+		ShipType t = new ShipType();
+		Ship tester = new Ship(null, null, null, null, 0, 0, t);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		double x = tester.getX();
 		double y = tester.getY();
-		tester.top_collision_mover(p.getX(), p.getY(),  p.getX() + p.width()/2,  p.getY() + p.height()/2, tester.getSpeed());
-		
+		System.out.println("debug: " + x);
+		System.out.println("debug: " + y);
+		tester.top_collision_mover(tester.getX(), tester.getY(),  p.getX() + Generation.width /2,  p.getY() + + Generation.height /2, tester.getSpeed());
+		System.out.println("debug2: " + x);
+		System.out.println("debug2: " + y);
 		assert x != tester.getX();
 		assert y != tester.getY();
 	}
@@ -248,15 +249,25 @@ public class ClasseTests extends TestCase{
 	 * \and a ship
 	 */
 	@Test
-	public void Testbottom_collision_mover() {
-		Ship tester = new Ship(null, null, null, null, 0, 0, null);
+	public void testbottom_collision_mover() {
+		ShipType t = new ShipType();
+		Ship tester = new Ship(null, null, null, null, 0, 0, t);
 		SquarePlanet p = new SquarePlanet(null, null, 100, 200);
 		double x = tester.getX();
 		double y = tester.getY();
-		tester.bottom_collision_mover(p.getX(), p.getY(),  p.getX() + p.width()/2,  p.getY() + p.height()/2, tester.getSpeed());
+		tester.bottom_collision_mover(tester.getX(), tester.getY(),  p.getX() + Generation.width /2,  p.getY() + + Generation.height /2, tester.getSpeed());
 		
 		assert x != tester.getX();
 		assert y != tester.getY();
+	}
+	
+	@Test
+	public void testRemove() {
+		Ship tester = new Ship(null, null, null, null, 0, 0, null);
+		boolean b = false;
+		tester.remove();
+		
+		assert b = tester.reached_destination();
 	}
 
 }
