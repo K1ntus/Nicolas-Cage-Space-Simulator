@@ -1,8 +1,12 @@
 package fr.groupe40.projet.util.constants;
 
+import fr.groupe40.projet.util.annot.WorkInProgress;
+
 public final class Windows {
 
+	@WorkInProgress
     public static final String form_player_name = "Pseudo: ";
+	
     public static final String button_play = 		"    Jouer    ";
     public static final String button_apply = 		"  Appliquer ";
     public static final String button_settings = 	"  Options  ";

@@ -14,7 +14,7 @@ public final class Generation {
 	public static final double right_margin_size = 50;
 
 	/*	Generation parameters */
-	public static int nb_planets_tentatives = 20;	//<-> max planets available	//Exponential complexity
+	public static int nb_planets_tentatives = 10;	//<-> max planets available	//Exponential complexity | Usually 10 is ok
 	public static final int min_numbers_of_planets = 3;
 	public static final int minimal_distance_between_planets = 200;	//Distance in pixels required between each planets
 	

@@ -73,17 +73,15 @@ public class MainMenu {
 		GridElement.add_image_to_gridpane(ResourcesContainer.getMain_menu_background(), Generation.width/5, true, 3, 6, grid);
 
 		// Buttons
+		Button btn_play = GridElement.add_button_to_gridpane(Windows.button_play, 1, 1, grid);
 		Button btn_how_to_play = GridElement.add_button_to_gridpane(Windows.button_how_to_play, 1, 2, grid);
 		Button btn_settings = GridElement.add_button_to_gridpane(Windows.button_settings, 1, 3, grid);
 		Button btn_exit = GridElement.add_button_to_gridpane(Windows.button_close, 1, 4, grid);
 
 		//ImageButton btn_play = new ImageButton(ResourcesContainer.gui_play_selected, ResourcesContainer.gui_play_unselected);
-
         //grid.add(btn_play.getIv(), 1, 1);
+        //init_play_btn();
 
-        init_play_btn();
-
-		Button btn_play = GridElement.add_button_to_gridpane("", 1, 1, grid);
 		
 		btn_play.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -136,6 +134,10 @@ public class MainMenu {
 		
 	}
 	
+	/**
+	 * Display the title in grid
+	 * @param grid
+	 */
 	private void display_title(GridPane grid) {
 		// Top title
 		Image title = new Image(ImageManager.getRessourcePathByName(Resources.path_img_menu_title));

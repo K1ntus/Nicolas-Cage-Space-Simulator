@@ -1,5 +1,7 @@
 package fr.groupe40.projet.util.constants;
 
+import fr.groupe40.projet.util.annot.WorkInProgress;
+
 public final class Resources {
 	
 	/*	Square Planets */
@@ -57,12 +59,18 @@ public final class Resources {
 	public static final String path_sound_settings = "sounds/settings_sound.mp3";
 	
 	//GUI
+	@WorkInProgress
 	public static final String path_img_gui_play_unselected = "images/gui/play_unselected.jpg";
+	@WorkInProgress
 	public static final String path_img_gui_settings_unselected = "images/gui/settings_unselected.jpg";
+	@WorkInProgress
 	public static final String path_img_gui_exit_unselected = "images/gui/exit_unselected.jpg";
 
+	@WorkInProgress
 	public static final String path_img_gui_play_selected = "images/gui/play_selected.jpg";
+	@WorkInProgress
 	public static final String path_img_gui_settings_selected = "images/gui/settings_selected.jpg";
+	@WorkInProgress
 	public static final String path_img_gui_exit_selected = "images/gui/exit_selected.jpg";
 	
 	
