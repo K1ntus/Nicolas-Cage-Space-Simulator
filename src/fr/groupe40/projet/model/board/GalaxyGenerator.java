@@ -9,6 +9,7 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.RoundPlanet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.planets.Sun;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
@@ -70,8 +71,9 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 
 	/**
 	 *  return a randomly string path for round planet type
-	 * @return the path of this ressource
+	 * @return the path of this resource
 	 */
+	@TODO(comment="replace this function by a random picker from a collection")
 	private String getRandomRoundPlanetImgPath() {
 		double rand= Math.random();
 		
@@ -82,8 +84,9 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	
 	/**
 	 *  return a randomly string path for square planet type
-	 * @return the path of this ressource
+	 * @return the path of this resource
 	 */
+	@TODO(comment="replace this function by a random picker from a collection")
 	private String getRandomSquarePlanetImgPath() {
 		double rand= Math.random();
 
@@ -145,6 +148,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		
 		ArrayList<Planet> planet_ai = new ArrayList<Planet>();
 		planet_ai.add(planets.get(2));
+		
 		normalize_beginning_troups(planets.get(1), planet_ai);
 	}
 
@@ -156,18 +160,18 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		}
 		
 		switch(Constants.difficulty) {
-		case INITIE:
-			planet_human.setTroups((int)(max_troups_from_ai*1.5));			
-			break;
-		case SPACE_MARINE:
-			planet_human.setTroups((int)(max_troups_from_ai*1));			
-			break;
-		case PRAETOR:
-			planet_human.setTroups((int)(max_troups_from_ai*0.75));			
-			break;
-		case PRIMARQUE:
-			planet_human.setTroups((int)(max_troups_from_ai*0.5));			
-			break;
+			case INITIE:
+				planet_human.setTroups((int)(max_troups_from_ai*1.5));			
+				break;
+			case SPACE_MARINE:
+				planet_human.setTroups((int)(max_troups_from_ai*1));			
+				break;
+			case PRAETOR:
+				planet_human.setTroups((int)(max_troups_from_ai*0.75));			
+				break;
+			case PRIMARQUE:
+				planet_human.setTroups((int)(max_troups_from_ai*0.5));			
+				break;
 		}
 	}
 	/**
@@ -175,6 +179,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 *  
 	 *  Please, do not use this function anymore
 	 *  Really high complexity for the job he's doing
+	 * @deprecated use isFarEnought function
 	 * @param p The planet we are trying to generate
 	 * @return false if not able to generate this planet, else true
 	 */

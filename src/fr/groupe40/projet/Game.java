@@ -17,7 +17,7 @@ import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Ticks;
-import fr.groupe40.projet.util.constants.Windows;
+import static fr.groupe40.projet.util.constants.Windows.*;
 import fr.groupe40.projet.util.resources.SoundManager;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -145,13 +145,13 @@ public class Game extends Application {
 		root.getChildren().remove(canvas_game);
 		root.getChildren().remove(canvas_settings);
 		root.getChildren().remove(canvas_mainMenu);
-		
 	}
 	
 	/**
 	 * Function that handle the game generation, ticks update, etc ...
-	 * @param stage the programe main stage
+	 * @param stage the program main stage
 	 */
+	@TODO(comment="Fix his complexity and create a specific updating class")
 	private void clock_updater(Stage stage) {
 		new AnimationTimer() {
 			
@@ -168,7 +168,7 @@ public class Game extends Application {
 			/**
 			 * Equals to the current window displayed (ie. setting, main menu or game)
 			 */
-			private Windows.WindowType window_type = Windows.WindowType.MAIN_MENU;
+			private WindowType window_type = WindowType.MAIN_MENU;
 			
 			/**
 			 * Is true if the board has been pre-initialized
@@ -204,14 +204,8 @@ public class Game extends Application {
 			        	game_pre_init_running = true;
 			        	
 			        	gg = new GalaxyGenerator();
-
-						long endTime = System.currentTimeMillis();
-						if(Debugging.DEBUG || Debugging.DEBUG_TIMER) 
-							System.out.println("Pre-Init done in " + (endTime - startTime) +" ms");
-						
 						
 						game_pre_init_done = true;
-			        	game_pre_init_running = false;
 						return;
 			        }
 			      });
@@ -223,10 +217,15 @@ public class Game extends Application {
 					pre_init_thread.join(2000);
 				} catch (InterruptedException e) {
 					gg = null;
-					long endTime = System.currentTimeMillis();
-					System.out.println("Pre-Init failed after " + (endTime - startTime) +" ms");
-		        	game_pre_init_running = false;
 					e.printStackTrace();
+				} finally {
+					long endTime = System.currentTimeMillis();
+					System.out.println("Pre-Init done after " + (endTime - startTime) +" ms");
+					if(!game_pre_init_done)
+						System.out.println("  -> Pre-Init has failed.");
+						
+		        	game_pre_init_running = false;
+					
 				}
 			
 			
@@ -263,7 +262,7 @@ public class Game extends Application {
 					
 				}
 				
-				window_type = Windows.WindowType.GAME;
+				window_type = WindowType.GAME;
 				
 				stage.setScene(scene_game);
 				stage.show();	
@@ -280,7 +279,6 @@ public class Game extends Application {
 			 * Tick updater
 			 */
 			private void run() {
-				//TODO Complexity upgrade if possible
 				if(saver.isBox_opened()) {
 					return;
 				}
@@ -354,7 +352,7 @@ public class Game extends Application {
 			private void display_settings_menu() {
 				main_menu.setSettings_menu(false);
 				gc = canvas_settings.getGraphicsContext2D();
-				window_type = Windows.WindowType.SETTINGS;
+				window_type = WindowType.SETTINGS;
 
 				stage.setScene(scene_settings_menu);
 				stage.show();				
@@ -367,21 +365,20 @@ public class Game extends Application {
 				setting_menu.setApplied(false);
 				main_menu.setPlay_game(false);
 				main_menu.setSettings_menu(false);
-				window_type = Windows.WindowType.MAIN_MENU;
+				window_type = WindowType.MAIN_MENU;
 
 				game_init_done = false;
 				game_pre_init_done = false;
 
 				stage.setScene(scene_main_menu);
 				stage.show();
-				
 			}
 			
 			/**
 			 * Manage each ticks and the differents screens displayed
 			 */
 			public void handle(long arg0) {	
-				if(window_type == Windows.WindowType.GAME) {
+				if(window_type == WindowType.GAME) {
 					if(game_init_done) {
 						run();
 					} else if(game_pre_init_done){
@@ -389,11 +386,11 @@ public class Game extends Application {
 					} else {
 						pre_init();
 					}
-				} else if(window_type == Windows.WindowType.MAIN_MENU && !main_menu.isPlay_game() && !main_menu.isSettings_menu()) {
+				} else if(window_type == WindowType.MAIN_MENU && !main_menu.isPlay_game() && !main_menu.isSettings_menu()) {
 					if(!game_pre_init_done) {
 						pre_init();
 					} 
-				} else if(window_type == Windows.WindowType.SETTINGS && setting_menu.isApplied()) {
+				} else if(window_type == WindowType.SETTINGS && setting_menu.isApplied()) {
 					apply_settings_to_game();
 				} else if (main_menu.isPlay_game()) {
 					if(!game_pre_init_done) {
@@ -403,7 +400,7 @@ public class Game extends Application {
 					} else {
 						run();
 					}
-				} else if (main_menu.isSettings_menu() && window_type == Windows.WindowType.MAIN_MENU) {
+				} else if (main_menu.isSettings_menu() && window_type == WindowType.MAIN_MENU) {
 					display_settings_menu();
 				}
 			}
@@ -427,7 +424,7 @@ public class Game extends Application {
 		if((OS.indexOf("win") >= 0)) {
 			if(Debugging.DEBUG)
 				System.out.println("OS type is windows");
-			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initStyle(StageStyle.DECORATED);
 		}else {
 			if(Debugging.DEBUG || Debugging.DEBUG_TIMER)
 				System.out.println("Non windows OS");
@@ -437,7 +434,6 @@ public class Game extends Application {
 		/* Window and game kernel creation */
 		stage.setTitle("Nicolas Cage Space Simulator");
 		stage.setResizable(false);
-		
 		
 		gc = canvas_mainMenu.getGraphicsContext2D();
 

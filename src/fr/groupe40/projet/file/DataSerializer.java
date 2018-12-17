@@ -245,16 +245,7 @@ public class DataSerializer {
 		}
 		
 	}
-	
-	@SuppressWarnings("unused")
-	@Deprecated
-    private void openFile(File file) {
-        try {
-            desktop.open(file);
-        } catch (IOException ex) {
-            
-        }
-    }
+
 
 	/**
 	 * @return the box_opened
