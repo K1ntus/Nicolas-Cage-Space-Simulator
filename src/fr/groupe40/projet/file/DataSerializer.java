@@ -66,8 +66,9 @@ public class DataSerializer {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save game");
 		fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension),
-				new ExtensionFilter("All Files", "*.*"));
+				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension)
+				//new ExtensionFilter("All Files", "*.*")
+			);
 		String currentPath = Paths.get("."+Constants.path_save).toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
 		File file_raw = fileChooser.showSaveDialog(stage);
@@ -129,8 +130,9 @@ public class DataSerializer {
 		String currentPath = Paths.get("."+Constants.path_save).toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
 		fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension),
-				new ExtensionFilter("All Files", "*.*"));
+				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension)
+				//new ExtensionFilter("All Files", "*.*")
+			);
 		File file_raw = fileChooser.showOpenDialog(stage);
 		FileInputStream file = null;
 
