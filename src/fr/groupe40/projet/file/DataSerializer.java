@@ -78,7 +78,7 @@ public class DataSerializer {
 			if(file_raw != null)
 				file = new FileOutputStream(file_raw);
 			else
-				file = new FileOutputStream("default" + "."+Constants.fileName_extension);
+				file = new FileOutputStream(currentPath + "/default."+Constants.fileName_extension);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
