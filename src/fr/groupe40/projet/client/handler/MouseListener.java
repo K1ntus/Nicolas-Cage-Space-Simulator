@@ -11,8 +11,22 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
+/**
+ * Manage the mouse interaction with the game board
+ * @author Jordane Masson
+ * @author Sarah Portejoie
+ *
+ */
 public class MouseListener {
+	
+	/**
+	 * Used to get the information from the game board on each position, etc
+	 */
 	private Galaxy galaxy;
+	
+	/**
+	 * Contains the scene that handle the mouse events
+	 */
 	private Scene scene;
 
 	/**
@@ -41,14 +55,20 @@ public class MouseListener {
 		this.scene = scene;
 	}
 
-	
 	/**
 	 *  launch the mouse handler
 	 */
 	public void launch() {
-		/**
-		 *  Manage the initial mouse drag event
-		 */
+	    scene.setOnMousePressed(init_mouse_pressed());
+	    scene.setOnMouseDragged(init_mouse_dragged());	
+		scene.setOnScroll(init_mouse_scrolled());
+	}
+
+	/**
+	 * Manage the initial mouse drag event
+	 * @return the event to handle on the scene
+	 */
+	private EventHandler<MouseEvent> init_mouse_pressed() {
 		EventHandler<MouseEvent> mousePressedEvent = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent) {
@@ -64,7 +84,6 @@ public class MouseListener {
 							selected_squad = s;
 						}
 					}
-
 				}
 				
 	            for(Planet p : galaxy.getPlanets()) {
@@ -85,11 +104,22 @@ public class MouseListener {
 	        }
 	        
 	    };
+	    return mousePressedEvent;
+	}
 
+<<<<<<< HEAD
 		/**
 		 *  Manage the drop of the mouse
 		 *  Shall be optimized, currently have a crazy complexity
 		 */
+=======
+	/**
+	 * Manage the mouse drop action
+	 * @return the event to handle on the scene
+	 */
+	private EventHandler<MouseEvent> init_mouse_dragged(){
+		//TODO Complexity upgrade
+>>>>>>> masterrace
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent){
@@ -97,7 +127,9 @@ public class MouseListener {
 	        	
 	            double offsetX = mouseEvent.getSceneX();
 	            double offsetY = mouseEvent.getSceneY();
-
+	            if(selected_squad == null && selected_planets[0] == null)
+	            	return;
+	            
 	            //Move launched squads
 	        	if(selected_squad != null) {	
 	    			for(Planet p : galaxy.getPlanets()) {
@@ -147,9 +179,14 @@ public class MouseListener {
 	        }
 		};
 		
-		/**
-		 *  Manage the scroll event
-		 */
+		return mouseDraggedEvent;
+	}
+
+	/**
+	 *  Manage the scroll event
+	 * @return the event to handle on the scene
+	 */
+	private EventHandler<ScrollEvent> init_mouse_scrolled() {
 		EventHandler<ScrollEvent> scrollEvent = new EventHandler<ScrollEvent>() {
 			@Override
 			public void handle(ScrollEvent event) {
@@ -165,10 +202,7 @@ public class MouseListener {
 			
 		};
 		
-
-
-		scene.setOnScroll(scrollEvent);
-	    scene.setOnMousePressed(mousePressedEvent);
-	    scene.setOnMouseDragged(mouseDraggedEvent);	
+		return scrollEvent;
 	}
+	
 }

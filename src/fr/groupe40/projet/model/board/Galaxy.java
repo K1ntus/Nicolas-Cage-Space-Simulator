@@ -2,24 +2,36 @@ package fr.groupe40.projet.model.board;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
+<<<<<<< HEAD
 import fr.groupe40.projet.model.ships.Ship;
+=======
+import fr.groupe40.projet.model.planets.Sun;
+>>>>>>> masterrace
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Direction;
+<<<<<<< HEAD
 import fr.groupe40.projet.util.constants.Generation;
+=======
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
+>>>>>>> masterrace
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.Resources;
+import fr.groupe40.projet.util.resources.SoundManager;
 import javafx.scene.canvas.GraphicsContext;
+<<<<<<< HEAD
 import javafx.scene.image.Image;
+=======
+import javafx.scene.media.AudioClip;
+>>>>>>> masterrace
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 
 /**
  *  'Board' class. It contains the data of the game as ships, planets, ...
@@ -44,11 +56,6 @@ public class Galaxy implements Serializable{
 	 *  board generator
 	 */
 	private GalaxyGenerator generator = new GalaxyGenerator();
-
-	/**
-	 *  background image
-	 */
-	private transient Image background;
 	
 	/**
 	 *  graphical environnement
@@ -65,12 +72,8 @@ public class Galaxy implements Serializable{
 	 */
 	public Galaxy(GraphicsContext gc) {
 		this.squads = new ArrayList<Squad>();
-		this.planets = generator.getPlanets();
 		this.generator = null;
 		this.gc = gc;
-		
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
-		
 	}
 	/**
 	 *  Generate a game board with every parameters randomized
@@ -80,9 +83,6 @@ public class Galaxy implements Serializable{
 		this.planets = gg.getPlanets();
 		this.generator = null;
 		this.gc = gc;
-		
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
-		
 	}
 
 	/**
@@ -94,8 +94,6 @@ public class Galaxy implements Serializable{
 		this.squads = g.squads;
 		this.generator = null;
 		this.gc = gc;
-
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
 	}
 
 	/**
@@ -109,8 +107,6 @@ public class Galaxy implements Serializable{
 		this.generator = null;
 		this.gc = gc;
 		
-		this.background = new Image(Resources.path_img_game_background, Generation.width, Generation.height, false, false, true);
-		
 	}
 	
 	/* Render & Game Update */
@@ -119,12 +115,7 @@ public class Galaxy implements Serializable{
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
-		renderBackground(gc);
-		renderPlanets(gc);
-		for(Squad s : squads)
-			s.render_ships(gc);	
-		renderGarrison(gc);
-		renderPercentageSelected(gc);
+		GalaxyRenderer.run(this, gc);
 	}
 	
 	/**
@@ -136,8 +127,7 @@ public class Galaxy implements Serializable{
 			s.update_all_positions(planets);			
 		}
 
-		if(userHasLost(Players.ai_user)) {
-			renderWinner(gc);		
+		if(userHasLost(Players.ai_user) || userHasLost(Players.human_user)) {
 			game_is_over = true;
 		}
 	}
@@ -157,7 +147,7 @@ public class Galaxy implements Serializable{
 				
 				for(Planet p2 : planets) {	//Check again the planets list
 					destination = p2;
-					if(p2.getTroups() < source.getTroups()) {
+					if(p2.getTroups() < source.getTroups() || p2.getTroups() >= PlanetsGarrison.max_troups) {
 						Squad s = ruler.sendFleetAI(source, destination);
 						if(s != null)
 							squads.add(s);
@@ -173,6 +163,18 @@ public class Galaxy implements Serializable{
 	 *  update the garrison value of each planets
 	 */
 	public void updateGarrison() {
+<<<<<<< HEAD
+=======
+		if(planets.get(0).getTroups() <= PlanetsGarrison.min_troups+1 && planets.get(0).getRuler().getId() == Players.sun_id) {
+
+	    	AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
+
+	    	sun_explosion_sound.play(); 
+			Sun.sun_destroyed(planets, squads, gc);
+			planets.remove(0);
+		}
+		
+>>>>>>> masterrace
 		for(Planet p : planets)
 			p.updateGarrison();	
 	}
@@ -195,7 +197,8 @@ public class Galaxy implements Serializable{
 	 */
 	public boolean userHasLost(User u) {	
 		if(u.isLost()) {	//if user already registered has loser
-			System.out.println("ai: "+u.toString()+" has lost");
+			if(Debugging.DEBUG)
+				System.out.println("ai: "+u.toString()+" has lost");
 			return true;
 		}
 		
@@ -220,8 +223,13 @@ public class Galaxy implements Serializable{
 			}
 		}
 		
-		u.setLost(false);
+		u.setLost(true);
 		return true;
+	}
+	
+	public void resetEveryUsersLostState() {
+		Players.ai_user.setLost(false);
+		Players.human_user.setLost(false);
 	}
 	
 	
@@ -244,6 +252,7 @@ public class Galaxy implements Serializable{
 		}
 	}
 	
+<<<<<<< HEAD
 	/* Collisions Between Ships & Planets */
 	/**
 	 *  Manage the collisions between squads & intermediate planets
@@ -416,23 +425,9 @@ public class Galaxy implements Serializable{
 		gc.strokeText(txt, Generation.width/2, 25);
 		
 	}
+=======
+>>>>>>> masterrace
 
-	
-	/**
-	 *  render in case of victory 
-	 * @param gc the Graphics Context
-	 */
-	public void renderWinner(GraphicsContext gc) {
-		gc.setFill(Constants.color_default);
-		gc.setStroke(Color.RED);
-		gc.setTextAlign(TextAlignment.CENTER);	
-
-		String txt = Constants.message_winner;
-		gc.fillText(txt, Generation.width/2, 25);
-		gc.strokeText(txt, Generation.width/2, 25);
-		
-	}
-	
 	
 	/* init the font type */
 	/**
@@ -480,21 +475,6 @@ public class Galaxy implements Serializable{
 		return planets;
 	}
 	
-	/**
-	 *  Return the background image
-	 * @return Image 
-	 */
-	public Image getBackground() {
-		return background;
-	}
-
-	/**
-	 *  Set the background image
-	 * @param background
-	 */
-	public void setBackground(Image background) {
-		this.background = background;
-	}
 
 	/**
 	 * @return the game_is_over

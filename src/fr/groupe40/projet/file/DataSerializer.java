@@ -1,11 +1,14 @@
 package fr.groupe40.projet.file;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import fr.groupe40.projet.client.User;
@@ -13,9 +16,12 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Debugging;
+import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Players;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 
 /**
@@ -27,11 +33,6 @@ import javafx.scene.canvas.GraphicsContext;
 public class DataSerializer {
 	
 	/**
-	 *  the fileName of the save
-	 */
-	private String name;
-	
-	/**
 	 *  the object containing all the data to save
 	 */
 	private Galaxy data;
@@ -41,26 +42,55 @@ public class DataSerializer {
 	 */
 	private ObjectOutputStream oos;
 	
-	@Deprecated
-	private boolean new_game_loaded = false;
+	private Desktop desktop = Desktop.getDesktop();
+	
+	private boolean box_opened = false;
 	
 	/**
 	 *  create the structure containing the data and the fileName
 	 * @param name save fileName
 	 * @param data game data
 	 */
-	public DataSerializer(String name, Galaxy data) {
-		this.name = name;
+	public DataSerializer(Galaxy data) {
 		this.data = data;		
 	}
 	
 	/**
 	 *  Save the current game state in a file
 	 * @return true if the game has been saved, else false
+	 * @throws Exception 
 	 */
-	public boolean save_game() {
+	public boolean save_game(Stage stage) throws Exception {
+		box_opened = true;
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save game");
+		fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension)
+				//new ExtensionFilter("All Files", "*.*")
+			);
+		String currentPath = Paths.get("."+Constants.path_save).toAbsolutePath().normalize().toString();
+		fileChooser.setInitialDirectory(new File(currentPath));
+		File file_raw = fileChooser.showSaveDialog(stage);
+		FileOutputStream file = null;
+
 		try {
-			final FileOutputStream file = new FileOutputStream(name + ".save");
+			if(file_raw != null)
+				file = new FileOutputStream(file_raw);
+			else
+				file = new FileOutputStream(currentPath + "/default."+Constants.fileName_extension);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		if(file == null)
+			throw new Exception("ErrorSavingGame");
+
+		
+		/*	**************	*/
+		
+		
+		try {
 			oos = new ObjectOutputStream(file);
 			
 			oos.writeObject(data);
@@ -90,12 +120,47 @@ public class DataSerializer {
 	/**
 	 *  Load a game from a save and apply it to the current game start
 	 * @return the galaxy loaded from the save file
+	 * @throws Exception 
 	 */
+<<<<<<< HEAD
 	public Galaxy load_game(GraphicsContext gc) {		
 		FileInputStream file;
 		Galaxy loaded = null;
+=======
+	public Galaxy load_game(GraphicsContext gc, Stage stage) throws Exception {
+		box_opened = true;
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Load Game");
+		String currentPath = Paths.get("."+Constants.path_save).toAbsolutePath().normalize().toString();
+		fileChooser.setInitialDirectory(new File(currentPath));
+		fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension)
+				//new ExtensionFilter("All Files", "*.*")
+			);
+		File file_raw = fileChooser.showOpenDialog(stage);
+		FileInputStream file = null;
+
 		try {
-			file = new FileInputStream(name + ".save");
+			if(file_raw != null)
+				file = new FileInputStream(file_raw);
+			else
+				throw new Exception("FileNotFoundException");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		if(file == null)
+			throw new Exception("SaveNotFound");
+		
+
+		/*	**************	*/
+		
+		
+		Galaxy loaded = new Galaxy(gc);
+>>>>>>> masterrace
+		try {
+			
 			ObjectInputStream ois = new ObjectInputStream(file);
 			
 			loaded = (Galaxy) ois.readObject();
@@ -113,7 +178,6 @@ public class DataSerializer {
 			e.printStackTrace();
 		}	
 		Galaxy res = new Galaxy(loaded, gc);
-		setNew_game_loaded(true);
 		return res;
 	}
 	/**
@@ -145,12 +209,8 @@ public class DataSerializer {
 			s.updateImage();
 		}
 		
-		if(Debugging.DEBUG) {
-			System.out.println("Squads has been loaded ...");
-			System.out.println("Loading planets ...");			
-		}
-		
 		for(Planet p : g.getPlanets()) {		
+<<<<<<< HEAD
 			User u = p.getRuler();
 
 			//Shall be done using id + faction if more players
@@ -162,21 +222,63 @@ public class DataSerializer {
 				case Players.neutral_faction:
 					p.setRuler(Players.neutral_user); break;
 				default:
+=======
+					
+			switch(p.getRuler().getId()) {
+				case Players.event_id:
+					//System.out.println("** event user");
+					p.setRuler(Players.event_user);
+					break;
+				case Players.sun_id:
+					//System.out.println("** sun");
+					p.setRuler(Players.sun_user);
+					break;
+				case Players.pirate_id:
+					//System.out.println("** pirate user");
+					p.setRuler(Players.pirate_user);
+					break;
+				case Players.human_faction:
+					//System.out.println("** human user");
+					p.setRuler(Players.human_user);
+					break;
+				case Players.neutral_faction:
+					//System.out.println("** neutral user");
+					p.setRuler(Players.neutral_user);
+					break;
+				default:
+					//System.out.println("** ai user");
+					p.setRuler(Players.ai_user);
+>>>>>>> masterrace
 					break;
 			}
 			
 			p.updateImage();
 		}
 		
-		if(Debugging.DEBUG) 
-			System.out.println("Planets has been loaded ...");
+	}
+	
+	@SuppressWarnings("unused")
+	@Deprecated
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+            
+        }
+    }
+
+	/**
+	 * @return the box_opened
+	 */
+	public boolean isBox_opened() {
+		return box_opened;
 	}
 
-	public boolean isNew_game_loaded() {
-		return new_game_loaded;
+	/**
+	 * @param box_opened the box_opened to set
+	 */
+	public void setBox_opened(boolean box_opened) {
+		this.box_opened = box_opened;
 	}
 
-	public void setNew_game_loaded(boolean new_game_loaded) {
-		this.new_game_loaded = new_game_loaded;
-	}
 }

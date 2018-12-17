@@ -14,12 +14,9 @@ import fr.groupe40.projet.util.constants.Players;
  */
 public class User implements Serializable{
 	private static final long serialVersionUID = 8499986523207461968L;
-	/**
-	 * 
-	 */
 	
 	/**
-	 *  the faction of this user (-1 => AI, 0 => neutral, >1 => humain)
+	 *  the faction of this user (-1 => AI, 0 => neutral, >1 => human)
 	 */
 	private int faction;
 	
@@ -29,7 +26,7 @@ public class User implements Serializable{
 	private int id;
 	
 	/**
-	 *  percentage of troups to send per planet-launch
+	 *  percentage of troops to send per planet-launch
 	 */
 	private int percent_of_troups_to_send;
 	
@@ -51,7 +48,7 @@ public class User implements Serializable{
 	public User(int faction, int id) {
 		this.faction = faction;
 		this.id = id;
-		setLost(false);
+		this.lost = false;
 		percent_of_troups_to_send = 100;
 	}
 	
@@ -72,7 +69,7 @@ public class User implements Serializable{
 		}
 		percent_of_troups_to_send = 100;
 
-		setLost(false);
+		this.lost = false;
 		source = null;
 		destination = null;
 	}

@@ -5,6 +5,7 @@ import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.ships.ShipType;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.GenerationErrorSide;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 import fr.groupe40.projet.util.constants.ShipsParameters;
@@ -127,21 +128,21 @@ public abstract class Planet extends Sprite {
 	 *  find his place in the universe
 	 * @return 0 if his position is correct, else error value
 	 */
-	public int calculateNextPosition() {
+	public GenerationErrorSide calculateNextPosition() {
 		
 		if (this.getX() + this.width() >= Generation.width -  Generation.right_margin_size + Generation.size_squads) {
-			return Debugging.error_greater_x;
+			return GenerationErrorSide.GREATER_X;
 		} else if (this.getX() < Generation.left_margin_size  + Generation.size_squads ) {
-			return Debugging.error_lower_x;
+			return GenerationErrorSide.LOWER_X;
 		}
 
-		if (this.getY() + this.height() >= Generation.height) {
-			return Debugging.error_greater_y;
+		if (this.getY() + this.height() >= Generation.height - 2*Generation.bottom_margin_size) {
+			return GenerationErrorSide.GREATER_Y;
 		} else if (this.getY() < Generation.top_margin_size  + Generation.size_squads) {
-			return Debugging.error_lower_y;
+			return GenerationErrorSide.LOWER_Y;
 		}
 		
-		return 0;
+		return GenerationErrorSide.NO_PROBLEM;
 	}
 	
 	/**
@@ -151,16 +152,16 @@ public abstract class Planet extends Sprite {
 	public int updatePlanetePosition() {
 		this.setX(this.getX() + this.width()/5);
 		switch(this.calculateNextPosition()) {
-			case Debugging.error_greater_x:
+			case GREATER_X:
 				this.setY(this.getY() + Generation.height / 10);
 				this.setX(Generation.left_margin_size  + Generation.size_squads);
 				break;
-			case Debugging.error_lower_x:
+			case LOWER_X:
 				this.setX(Generation.left_margin_size  + Generation.size_squads);
 				break;
-			case Debugging.error_greater_y:
+			case GREATER_Y:
 				return -1;
-			case Debugging.error_lower_y:
+			case LOWER_Y:
 				this.setX(Generation.top_margin_size  + Generation.size_squads);
 				this.setY(Generation.top_margin_size  + Generation.size_squads + 1);
 				break;
@@ -261,5 +262,7 @@ public abstract class Planet extends Sprite {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
+	
+
 
 }

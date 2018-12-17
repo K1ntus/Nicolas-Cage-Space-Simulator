@@ -6,7 +6,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+<<<<<<< HEAD
 import fr.groupe40.projet.model.planets.Planet;
+=======
+import fr.groupe40.projet.model.Sprite;
+>>>>>>> masterrace
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.util.constants.Generation;
@@ -135,7 +139,11 @@ public class ClasseTests {
 		double a = 100.0;
 		double b = 200.0;
 		double c = Math.sqrt((a * a) + (b * b));
+<<<<<<< HEAD
 		assert c == tester.distance(tester.getX(), tester.getY(),a,b);
+=======
+		assertEquals(c, Sprite.distance(tester.getX(), tester.getY(),a,b));
+>>>>>>> masterrace
 	}
 	
 	/**

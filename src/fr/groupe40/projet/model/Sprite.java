@@ -3,7 +3,10 @@ package fr.groupe40.projet.model;
 import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
+import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.constants.Generation;
+import fr.groupe40.projet.util.constants.Resources;
+import fr.groupe40.projet.util.resources.ImageManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -62,8 +65,8 @@ public abstract class Sprite implements Serializable {
 		this.img_path = path;
 		
 		width = Generation.size_squads;
-		setMaxX(Generation.width - width);
-		setMaxY(Generation.height - height);
+		maxX = (Generation.width - width);
+		maxY = (Generation.height - height);
 
 		this.ruler = ruler;
 		
@@ -72,8 +75,8 @@ public abstract class Sprite implements Serializable {
 			if(width > Generation.size_maximal_planets)
 				width = Generation.size_maximal_planets;
 
-			setMaxX(Generation.width - width - Generation.right_margin_size);
-			setMaxY(Generation.height - height - Generation.bottom_margin_size);
+			maxX = (Generation.width - width - Generation.right_margin_size);
+			maxY = (Generation.height - height - Generation.bottom_margin_size);
 		}
 
 		minY = Generation.top_margin_size - height;
@@ -88,7 +91,20 @@ public abstract class Sprite implements Serializable {
 	 */
 	public void updateImage() {
 		try {
-			image = new Image(getImg_path(), width, height, false, false);
+			switch(img_path) {
+			case Resources.path_img_human_ships:
+				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_human_ships();
+				break;
+			case Resources.path_img_AI_ships:
+				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_ai_ships();
+				break;
+			case Resources.path_img_event_pirate_ships:
+				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_pirate_ships();
+				break;
+			default:
+				image = ImageManager.getImageByPath(this.img_path, width);
+				break;
+			}
 		} catch(NullPointerException e) {
 			//No image
 		}
@@ -124,7 +140,7 @@ public abstract class Sprite implements Serializable {
 	 * @param y2
 	 * @return A distance
 	 */
-	public double distance(double x1, double y1, double x2, double y2) {
+	public static double distance(double x1, double y1, double x2, double y2) {
 		double res = Math.hypot(x1-x2, y1-y2); 
 		return res;
 	}
@@ -142,8 +158,8 @@ public abstract class Sprite implements Serializable {
 	 *  Verify if a sprite is not out of bounds
 	 */
 	public void validatePosition() {
-		if (x + width >= getMaxX()) {
-			x = getMaxX() - width;
+		if (x + width >= maxX) {
+			x = maxX - width;
 		} else if (x <= minX) {
 			x = minX;
 		}
@@ -151,8 +167,8 @@ public abstract class Sprite implements Serializable {
 			x = 0;
 		}
 
-		if (y + height >= getMaxY()) {
-			y = getMaxY() - height - Generation.bottom_margin_size;
+		if (y + height >= maxY) {
+			y = maxY - height - Generation.bottom_margin_size;
 		} else if (y <= minY) {
 			y = minY;
 		}else if (y < 0) {
@@ -168,7 +184,7 @@ public abstract class Sprite implements Serializable {
 	 * @param y_bottom
 	 * @return true if there s a collision, else false
 	 */
-	public boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom, double radius) {
+	public final boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom, double radius) {
 
 		double circle_x = this.x + this.width/2;
 		double circle_y = this.y + this.height/2;
@@ -228,9 +244,9 @@ public abstract class Sprite implements Serializable {
 	
 	/**
 	 *  Check if a pair of pos is inside another
-	 * @param x
-	 * @param y
-	 * @return
+	 * @param x position of the second object
+	 * @param y position of the second object
+	 * @return true if inside, else false
 	 */
 	public abstract boolean isInside(double x, double y);
 	
@@ -442,7 +458,4 @@ public abstract class Sprite implements Serializable {
 	public void setRuler(User ruler) {
 		this.ruler = ruler;
 	}
-
-
-
 }

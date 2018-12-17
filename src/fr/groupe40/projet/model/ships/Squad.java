@@ -7,8 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.groupe40.projet.client.User;
+import fr.groupe40.projet.model.Sprite;
+import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.planets.SquarePlanet;
+import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
@@ -111,32 +113,54 @@ public class Squad implements Serializable {
 	public void sendFleet() {
 		if(nb_ship <= 0)
 			return;
-		
+
 		
 		while(summoning) {
 			if(source.getTroups() -1 <= PlanetsGarrison.min_troups) {
 				nb_ship = 0;
 				return;
 			}
-			double x,y;
-			if(source instanceof SquarePlanet) {	//Planet is a square
-				x = this.decollageX(source);
-				y = this.decollageY(source);						
+			double x, y;
+			//if(source instanceof SquarePlanet) {	//Planet is a square
+				switch(summoningSide()) {
+					case TOP:
+						x = this.horizontalSummoning();
+						y = source.getY() - Generation.size_squads*1.5;
+						break;
+					case BOTTOM:
+						x = this.horizontalSummoning();
+						y = source.getY() + source.height() + 0.5*Generation.size_squads;
+						break;
+					case LEFT:
+						y = this.verticalSummoning();
+						x = source.getX() - Generation.size_squads*1.5;
+						break;
+					case RIGHT:
+						y = this.verticalSummoning();
+						x = source.getX() + source.width() + 0.5*Generation.size_squads;
+						break;
+					default:
+						x = this.decollageX(source);
+						y = this.decollageY(source);	
+						break;
+				}
+				/*
 			} else {	//Planet is a circle
 				x = this.decollageX(source);
 				y = this.decollageY(source);							
 			}
+			*/
 			
 			ships.add(
-			new Ship(
-					img_path,
-					ruler,
-					destination,
-					source,
-					x,
-					y,
-					source.getShips_type()
-				)
+				new Ship(
+						img_path,
+						ruler,
+						destination,
+						source,
+						x,
+						y,
+						source.getShips_type()
+					)
 			);
 			source.setTroups(source.getTroups()-1);
 				
@@ -145,6 +169,81 @@ public class Squad implements Serializable {
 		summoning = true;
 	}
 	
+	/**
+	 * Calculate the summon y position
+	 * @return the y position
+	 */
+	private double verticalSummoning() {
+		//Y*taille +y(source) greater than y(source+height(source))
+		if(summonY*Generation.size_squads + source.getY() < source.getY()+source.height()) {
+			summonY += 1;	//Reset summon y
+			
+			
+		} else if (summonY*Generation.size_squads + source.getY() >= source.getY()+source.height()) {
+			summonY = 1;
+			if(summonX != -1)
+				summonX = -1;
+			if(summonX == -1) {
+				summoning = false;
+				summonX = 1;				
+			}
+		}
+
+		return (summonY*Generation.size_squads + (source.getY() - Generation.size_squads));
+	}
+	
+	/**
+	 * Calculate the summon x position
+	 * @return the x position
+	 */
+	private double horizontalSummoning() {
+		if(summonX*Generation.size_squads + source.getX() < source.getX()+source.width()) {
+			summonX += 1;
+			
+			
+		} else if (summonX*Generation.size_squads + source.getX() >= source.getX()+source.width()) {
+			summonX = 1;
+			if(summonY != -1)
+				summonY = -1;
+			if(summonY == -1) {
+				summoning = false;
+				summonY = 1;				
+			}
+		}
+
+		return (summonX*Generation.size_squads + (source.getX() - Generation.size_squads));
+	}
+	
+	/**
+	 * Return the nearby side of his destination
+	 * @return enum type destination
+	 */
+	private Direction summoningSide() {
+		double min = Generation.width;
+		Direction res = Direction.BOTTOM;
+		
+		if(Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2) < min) {
+			min = Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2);
+			res = Direction.LEFT;
+		}
+
+		if(Sprite.distance(source.getX()/2, source.getY()+source.height(), destination.getX()/2, destination.getY()/2) < min) {
+			min = Sprite.distance(source.getX()/2, source.getY()+source.height(), destination.getX()/2, destination.getY()/2);
+			res = Direction.BOTTOM;
+		}
+
+		if(Sprite.distance(source.getX(), source.getY()/2, destination.getX()/2, destination.getY()/2) < min) {
+			min = Sprite.distance(source.getX(), source.getY()/2, destination.getX()/2, destination.getY()/2);
+			res = Direction.TOP;
+		}
+
+		if(Sprite.distance(source.getX()+source.width(), source.getY()/2, destination.getX()/2, destination.getY()/2) < min) {
+			min = Sprite.distance(source.getX()+source.width(), source.getY()/2, destination.getX()/2, destination.getY()/2);
+			res = Direction.RIGHT;
+		}
+		
+		return res;
+	}
 	
 	/**
 	 *  check if a squad has been selected or not
@@ -195,6 +294,10 @@ public class Squad implements Serializable {
 			Ship ship = it.next();
 			try {
 				if(ship.getDestination().isInside(ship)) {	//Case when it reach his destination
+<<<<<<< HEAD
+=======
+					GalaxyRenderer.getRESOURCES_CONTAINER().renderCollisionSound();
+>>>>>>> masterrace
 					ships.remove(ship);
 					it = ships.iterator();
 				}
@@ -211,6 +314,10 @@ public class Squad implements Serializable {
 		}
 	}
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> masterrace
 	/**
 	 *  updateImage of every ships of this squad
 	 */
@@ -375,6 +482,10 @@ public class Squad implements Serializable {
 	}
 
 
+	/**
+	 * Get the ruler of the squad (by getting the ruler of the first element of the squad's ship array)
+	 * @return the ruler
+	 */
 	public User getRuler() {
 		try {
 			return ships.get(0).getRuler();

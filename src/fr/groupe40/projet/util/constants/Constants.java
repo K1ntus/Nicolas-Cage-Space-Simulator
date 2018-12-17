@@ -3,57 +3,92 @@ package fr.groupe40.projet.util.constants;
 import javafx.scene.paint.Color;
 
 /**
- *  contains every constants to manage this project
+ * Contains many unclassed constants to manage this project
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
  */
 public final class Constants {
-	/**Deprecated	*/
-	@Deprecated
-	public static final String name_player2 = "IA 1";
-	@Deprecated
-	public static final double PI = 3.1415926535898;
-	@Deprecated
-	public static final boolean limit_ai_squads_number = true;	//If ai should have a limited number of squads at the same time
-	@Deprecated
-	public static final int max_squads_for_ai = 2;	//max number of squads from an ai player at the same time. -1 to disable this limit
+	public static Difficulty difficulty = Difficulty.PRIMARQUE;
 	
+	/**
+	 * String message to send when the player lost the current game
+	 * Put as constant to be easily changed for langage
+	 */
+	public static final String message_game_over = "You Lose !";
 
-	public static final String message_game_over = "Vous avez perdu !";
-	public static final String message_winner = "Vous avez gagne !";
-
-	//4 ship types, attributed to a specific amount of ships
-	/*	Type of Squads */
-	@Deprecated
-	public static final int size_typeShips1 = 1;	
-	@Deprecated
-	public static final int size_typeShips2 = 5;
-	@Deprecated
-	public static final int size_typeShips3 = 25;
-	@Deprecated
-	public static final int size_typeShips4 = 50;
-
-	/*	Color	*/
-	public static final Color color_neutral = Color.DARKGRAY;
-	public static final Color color_player = Color.LIGHTSEAGREEN;
-	public static final Color color_ai = Color.RED;
-	public static final Color color_default = Color.WHITE;
+	/**
+	 * String message to send when the player win the current game
+	 * Put as constant to be easily changed for langage
+	 */
+	public static final String message_winner = "You Won !";
+	
 
 	/*	file */
 	//public static final String path_save = "/saves/";
-	public static final String path_save = "";
-	public static final String fileName_save = "01";
+	/**
+	 * Path for the save file, currently in the local eclipse workspace/jar position
+	 */
+	public static final String path_save = "/saves";
+	
+	/**
+	 * The save extension
+	 */
+	public static final String fileName_extension = "save";
 	
 	/* Event */
+	/**
+	 * The troops decrementing value when a planet
+	 * got the sickness event
+	 */
 	public static final int planet_sickness_value = 2;
+	
+	/**
+	 * The maximum numbers of pirate ships that appears per event
+	 */
 	public static final int pirate_assault_max_nb_ships = 10;
 
+	/**
+	 * If we're enabling event
+	 */
 	public static final boolean events_enabled = true;
+	
+	/**
+	 * If a sun is enabled
+	 */
 	public static final boolean sun_enabled = true;
-	public static final boolean main_theme_enabled = true;
+	
+	/**
+	 * Enable main_theme music + auto-play at startup
+	 */
+	public static boolean main_theme_enabled = true;
 	
 	/* AI */
+	/**
+	 * Enable/Disable AI
+	 */
 	public static final boolean ai_enabled = true;
+
+	
+	/*	Color	*/
+	/**
+	 * Planet color for the neutral user
+	 */
+	public static final Color color_neutral = Color.DARKGRAY;
+
+	/**
+	 * Planet color for the human
+	 */
+	public static final Color color_player = Color.LIGHTSEAGREEN;
+
+	/**
+	 * Planet color for the ai
+	 */
+	public static final Color color_ai = Color.RED;
+
+	/**
+	 * Default color (unused)
+	 */
+	public static final Color color_default = Color.WHITE;
 	
 }

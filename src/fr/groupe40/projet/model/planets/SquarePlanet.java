@@ -13,15 +13,29 @@ import fr.groupe40.projet.model.Sprite;
  */
 public class SquarePlanet extends Planet  implements Serializable{
 	private static final long serialVersionUID = -7344260544964758721L;
+	/**
+	 * Construct a squared planet, herits from Planet & Sprites
+	 * @param path Img path
+	 * @param ruler The initial ruler of this planet
+	 * @param x top-left position of the planet
+	 * @param y top-left position of the planet
+	 */
 	public SquarePlanet(String path, User ruler, int x, int y) {
 		super(path, ruler, x, y);
 	}
+	
 
 	/**
 	 *  Check if a pair of pos is inside another
+<<<<<<< HEAD
 	 * @param x
 	 * @param y
 	 * @return
+=======
+	 * @param x position of the second object
+	 * @param y position of the second object
+	 * @return true if inside, else false
+>>>>>>> masterrace
 	 */
 	@Override
 	public boolean isInside(double x, double y) {
