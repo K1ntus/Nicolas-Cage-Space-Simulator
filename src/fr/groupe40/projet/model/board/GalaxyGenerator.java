@@ -2,6 +2,7 @@ package fr.groupe40.projet.model.board;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
@@ -142,9 +143,33 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 				planets.get(2).setRuler(Players.ai_user);
 		}
 		
-		
+		ArrayList<Planet> planet_ai = new ArrayList<Planet>();
+		planet_ai.add(planets.get(2));
+		normalize_beginning_troups(planets.get(1), planet_ai);
 	}
 
+	private void normalize_beginning_troups(Planet planet_human, List<Planet> planet_ai) {
+		int max_troups_from_ai = -1;
+		for(Planet p : planet_ai) {
+			if(p.getTroups() > max_troups_from_ai)
+				max_troups_from_ai = p.getTroups();
+		}
+		
+		switch(Constants.difficulty) {
+		case INITIE:
+			planet_human.setTroups((int)(max_troups_from_ai*1.5));			
+			break;
+		case SPACE_MARINE:
+			planet_human.setTroups((int)(max_troups_from_ai*1));			
+			break;
+		case PRAETOR:
+			planet_human.setTroups((int)(max_troups_from_ai*0.75));			
+			break;
+		case PRIMARQUE:
+			planet_human.setTroups((int)(max_troups_from_ai*0.5));			
+			break;
+		}
+	}
 	/**
 	 *  Test the valid position of a planet compare to each others.
 	 *  

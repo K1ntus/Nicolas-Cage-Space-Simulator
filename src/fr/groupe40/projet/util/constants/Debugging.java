@@ -31,13 +31,15 @@ public final class Debugging {
 	@Deprecated
 	public static final int error_lower_y = -2;
 	/*	**************	*/
-	
+
 	/**
 	 * Enable some print to be done to check informations
 	 * Enabling it display the time used for each game board initialization
 	 * Display which planet you have selected, ...
 	 */
 	public static final boolean DEBUG = false;
+
+	public static final boolean DEBUG_TIMER = true;
 	
 	@Deprecated
 	public static final boolean DEBUG_TROUPS = false;

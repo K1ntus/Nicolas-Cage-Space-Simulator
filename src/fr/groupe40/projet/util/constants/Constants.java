@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
  *
  */
 public final class Constants {
+	public static Difficulty difficulty = Difficulty.PRIMARQUE;
+	
 	/**
 	 * String message to send when the player lost the current game
 	 * Put as constant to be easily changed for langage
@@ -36,7 +38,7 @@ public final class Constants {
 	
 	/* Event */
 	/**
-	 * The troups decrementing value when a planet
+	 * The troops decrementing value when a planet
 	 * got the sickness event
 	 */
 	public static final int planet_sickness_value = 2;
@@ -62,8 +64,12 @@ public final class Constants {
 	public static boolean main_theme_enabled = true;
 	
 	/* AI */
+	/**
+	 * Enable/Disable AI
+	 */
 	public static final boolean ai_enabled = true;
 
+	
 	/*	Color	*/
 	/**
 	 * Planet color for the neutral user

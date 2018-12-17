@@ -204,7 +204,7 @@ public class Game extends Application {
 			        	gg = new GalaxyGenerator();
 
 						long endTime = System.currentTimeMillis();
-						if(Debugging.DEBUG) 
+						if(Debugging.DEBUG || Debugging.DEBUG_TIMER) 
 							System.out.println("Pre-Init done in " + (endTime - startTime) +" ms");
 						
 						
@@ -270,7 +270,7 @@ public class Game extends Application {
 
 				
 				long endTime = System.currentTimeMillis();
-				if(Debugging.DEBUG)
+				if(Debugging.DEBUG || Debugging.DEBUG_TIMER)
 					System.out.println("Init done in " + (endTime - startTime) +" ms");
 			}
 			
@@ -426,7 +426,7 @@ public class Game extends Application {
 				System.out.println("OS type is windows");
 			stage.initStyle(StageStyle.UNDECORATED);
 		}else {
-			if(Debugging.DEBUG)
+			if(Debugging.DEBUG || Debugging.DEBUG_TIMER)
 				System.out.println("Non windows OS");
 		}
 		
