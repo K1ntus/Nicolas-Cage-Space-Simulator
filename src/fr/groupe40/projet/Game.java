@@ -314,6 +314,7 @@ public class Game extends Application {
 				if(game_tick % Ticks.tick_per_main_theme_check == 0)
 					soundHandler.run();
 								
+				//Just for fun, LOL
 				if(game_tick % Ticks.tick_per_garbage_check == 0)
 					System.gc();
 				
@@ -467,7 +468,7 @@ public class Game extends Application {
 					}
 
 					long endTime = System.currentTimeMillis();
-					if(Debugging.DEBUG) 
+					if(Debugging.DEBUG || Debugging.DEBUG_TIMER) 
 						System.out.println("Saving done in " + (endTime - startTime) +" ms");
 
 					saver.setBox_opened(false);
@@ -486,7 +487,7 @@ public class Game extends Application {
 					}
 					
 					long endTime = System.currentTimeMillis();
-					if(Debugging.DEBUG) 
+					if(Debugging.DEBUG || Debugging.DEBUG_TIMER) 
 						System.out.println("Loading done in " + (endTime - startTime) +" ms");
 
 					saver.setBox_opened(false);
@@ -512,7 +513,7 @@ public class Game extends Application {
 		};
 
 		long endTime = System.currentTimeMillis();
-		if(Debugging.DEBUG)
+		if(Debugging.DEBUG || Debugging.DEBUG_TIMER)
 			System.out.println("Game window done in " + (endTime - startTime) +" ms");
 	}
 	

@@ -9,6 +9,7 @@ import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
@@ -181,7 +182,8 @@ public class Galaxy implements Serializable{
 	 */
 	public boolean userHasLost(User u) {	
 		if(u.isLost()) {	//if user already registered has loser
-			System.out.println("ai: "+u.toString()+" has lost");
+			if(Debugging.DEBUG)
+				System.out.println("ai: "+u.toString()+" has lost");
 			return true;
 		}
 		

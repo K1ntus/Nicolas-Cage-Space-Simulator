@@ -14,7 +14,7 @@ public final class Generation {
 	public static final double right_margin_size = 50;
 
 	/*	Generation parameters */
-	public static int nb_planets_tentatives = 10;	//<-> max planets available	//Exponential complexity
+	public static int nb_planets_tentatives = 20;	//<-> max planets available	//Exponential complexity
 	public static final int min_numbers_of_planets = 3;
 	public static final int minimal_distance_between_planets = 200;	//Distance in pixels required between each planets
 	
@@ -23,9 +23,9 @@ public final class Generation {
 	//public static final int nb_squads = 50;
 	
 	/*	Graphics	*/
-	public static double size_squads = 15.0;	//size in pixels of a "squad"
-	public static double size_minimal_planets = 5*15.0;	//minimal size of a planet in pixel ((4*size squad)
-	public static double size_maximal_planets = 8*15.0;
-	public static double size_sun = 10*15.0;
+	public static double size_squads = 10.0;	//size in pixels of a "squad"
+	public static double size_minimal_planets = 5*size_squads;	//minimal size of a planet in pixel ((4*size squad)
+	public static double size_maximal_planets = 8*size_squads;
+	public static double size_sun = 10*size_squads;
 
 }
