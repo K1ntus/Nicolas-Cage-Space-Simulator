@@ -147,7 +147,10 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		}
 		
 		ArrayList<Planet> planet_ai = new ArrayList<Planet>();
-		planet_ai.add(planets.get(2));
+		for(Planet p : planets) {
+			if (p.getRuler().getFaction() == Players.ai_faction)
+				planet_ai.add(p);
+		}
 		
 		normalize_beginning_troups(planets.get(1), planet_ai);
 	}
