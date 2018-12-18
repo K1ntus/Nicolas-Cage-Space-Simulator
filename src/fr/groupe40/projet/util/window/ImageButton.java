@@ -28,6 +28,11 @@ public class ImageButton extends Button {
     	this.init();
     }
 
+    /**
+     * Create a button from two image path string.
+     * @param normal The path to the image that will be displayed when the button isnt active
+     * @param pressed The path of the image that will be displayed when its active (ie mouse over it, ...)
+     */
     public ImageButton(String normal, String pressed) {
     	NORMAL_IMAGE = ImageManager.getImageByPath_dynamic(normal, 167, 0);	//167 bcz current width of the buttons
     	PRESSED_IMAGE = ImageManager.getImageByPath_dynamic(pressed, 167, 0);
@@ -38,8 +43,10 @@ public class ImageButton extends Button {
         this.init();
     }
 
-    public void init() {   
-     	
+    /**
+     * Initialize the image switching
+     */
+    private void init() {   
         this.setOnMousePressed(new EventHandler<MouseEvent>() {
 
             public void handle(MouseEvent evt) {
@@ -58,7 +65,13 @@ public class ImageButton extends Button {
         super.setGraphic(iv);
     }
     
-    
+    /**
+     * Get the button's imageView
+     * @deprecated do not use this function, it will not even work
+     * @param path the button image
+     * @return the button imageview
+     */
+    @Deprecated
     public static ImageView get_image_view_for_button(String path) {
     	return new ImageView(ImageManager.getImageByPath_dynamic(path, 167, 0));	//167 bcz current width of the buttons
     	

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.constants.PlanetsGarrison;
 import fr.groupe40.projet.util.constants.Players;
 
 /**
@@ -87,7 +88,7 @@ public class User implements Serializable{
 	
 	/* AI handler */
 	/**
-	 *  send fleet automatization for ai user
+	 *  send fleet automatically for ai user
 	 * @param source the source planet
 	 * @param destination the destination planet
 	 * @return the squad that has been send, else null
@@ -99,7 +100,7 @@ public class User implements Serializable{
 		if(u_dest.id == id) {
 			return null;
 		}
-		if(troups_destination < source.getTroups()) {
+		if(troups_destination < source.getTroups() || source.getTroups() >= PlanetsGarrison.max_troups - 5) {
 			Squad s = new Squad(50, source, destination);
 			return s;
 		}

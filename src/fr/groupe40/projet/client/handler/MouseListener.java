@@ -3,6 +3,7 @@ package fr.groupe40.projet.client.handler;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Players;
@@ -111,8 +112,8 @@ public class MouseListener {
 	 * Manage the mouse drop action
 	 * @return the event to handle on the scene
 	 */
+	@TODO(comment="find a better complexity")
 	private EventHandler<MouseEvent> init_mouse_dragged(){
-		//TODO Complexity upgrade
 		EventHandler<MouseEvent> mouseDraggedEvent = new EventHandler<MouseEvent>() {
 	        @Override
 	        public void handle(MouseEvent mouseEvent){

@@ -4,6 +4,7 @@ import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Debugging;
 import fr.groupe40.projet.util.constants.Players;
@@ -20,8 +21,8 @@ final class Revolt {
 	 *  begin the revolt event
 	 * @param galaxy
 	 */
+	@TODO(comment="find a better complexity")
 	protected static void start(Galaxy galaxy) {
-		//TODO Complexity upgrade
 		boolean ai = false, user = false;
 		for(Planet src: galaxy.getPlanets()) {
 			User u = src.getRuler();

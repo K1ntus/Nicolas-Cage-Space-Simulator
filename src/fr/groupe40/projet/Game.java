@@ -39,6 +39,7 @@ import javafx.util.Duration;
  * @author Sarah Portejoie
  *
  */
+@TODO(comment="Create a specific class for window management")
 public class Game extends Application {
 	public static void main(String[] args) {
 		File dir = new File(Constants.path_save);
@@ -319,11 +320,6 @@ public class Game extends Application {
 				
 				if(game_tick % Ticks.tick_per_main_theme_check == 0)
 					soundHandler.run();
-								
-				//Just for fun, LOL
-				if(game_tick % Ticks.tick_per_garbage_check == 0)
-					System.gc();
-				
 				
 				if(galaxy.isGame_is_over()) {
 					if(galaxy.userHasLost(Players.human_user)) {	//The user has lost
@@ -462,11 +458,9 @@ public class Game extends Application {
 					System.out.println("Saving game ...");
 					long startTime = System.currentTimeMillis();
 					
-					//OPEN POPUP ?
 					try {
 						saver.save_game(stage);
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 

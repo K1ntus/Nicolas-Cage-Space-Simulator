@@ -2,6 +2,10 @@ package fr.groupe40.projet.util.constants;
 
 import fr.groupe40.projet.util.annot.WorkInProgress;
 
+/**
+ * Contains every path to resource file that is used
+ * And the volume value for few audio
+ */
 public final class Resources {
 	
 	/*	Square Planets */
@@ -19,6 +23,9 @@ public final class Resources {
 	/*	Sun Image Path	*/
 	public static final String path_img_sun = "images/sun.png";
 	
+
+	/*	******************	*/
+	
 	/* Ships images
 	 * To be edited in 'Squads' class
 	 */
@@ -30,23 +37,17 @@ public final class Resources {
 	public static final String path_img_event_pirate_ships = "images/ships/pirate.png";
 	public static final String path_img_AI_ships = "images/ships/ai.png";
 	
+
+	/*	******************	*/
+	
 	/* Background	*/
 	public static final String path_img_game_background = "images/background.jpg";
 	public static final String path_img_menu_background = "images/main_menu.gif";
 	public static final String path_img_menu_title =  "images/title.png";
+
+
+	/*	******************	*/
 	
-	/*	GUI	*/
-	@Deprecated
-	public static final String path_img_gui_percent_background = "images/gui/background_progressbar.png";
-	@Deprecated
-	public static final String path_img_gui_percent = "images/gui/progress_bar.png";
-	@Deprecated
-	public static final String path_img_gui_logo = "images/gui/logo.png";
-	//public static final String path_img_loading = "images/gui/loading.gif";
-
-	@Deprecated
-	public static final String path_gfx_ship_explosion = "images/fx/blast.gif";
-
 	public static final String path_sound_main_theme = "sounds/musics/main_theme.mp3";
 	public static final String path_sound_cage_bees = "sounds/musics/NCage_bees.mp3";
 	public static final String path_sound_cage_train = "sounds/musics/NCage_train.mp3";
@@ -57,6 +58,9 @@ public final class Resources {
 	public static final String path_sound_play = "sounds/play_sound.mp3";
 	public static final String path_sound_quit = "sounds/exit_sound.mp3";
 	public static final String path_sound_settings = "sounds/settings_sound.mp3";
+	
+
+	/*	******************	*/
 	
 	//GUI
 	@WorkInProgress
@@ -73,13 +77,19 @@ public final class Resources {
 	@WorkInProgress
 	public static final String path_img_gui_exit_selected = "images/gui/exit_selected.jpg";
 	
+
+	/*	******************	*/
+	
+	//Explosion of the ship
+	@Deprecated
+	@WorkInProgress(comment="not working, gif getting overwrite each tick per the background rendering")
+	public static final String path_gfx_ship_explosion = "images/fx/blast.gif";
+	
 	
 	
 	/*	******************	*/
+	
 	public static final double main_theme_volume = 0.1; //Between 0 (cut the music) and 1
 	public static final double ship_explosion_volume = 0.5;
 	public static final double sun_explosion_volume = 0.25;
-
-
-
 }

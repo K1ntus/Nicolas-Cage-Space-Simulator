@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Generation;
 import fr.groupe40.projet.util.constants.Players;
@@ -13,14 +14,22 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
-//TODO COMMENTS
+/**
+ * Just a game board renderer
+ */
 public final class GalaxyRenderer {
 
 	/**
 	 * Contains few image data for better memory (but cost more memory)
 	 */
+	@TODO(comment="set it public")
 	private static ResourcesContainer RESOURCES_CONTAINER = new ResourcesContainer();
 	
+	/**
+	 * Run the rendering in the graphicsContext
+	 * @param galaxy the game board to render
+	 * @param gc the graphicscontext to edit
+	 */
 	protected static void run(Galaxy galaxy, GraphicsContext gc) {
 		GalaxyRenderer.renderBackground(gc);
 		GalaxyRenderer.renderPlanets(galaxy, gc);
@@ -137,7 +146,7 @@ public final class GalaxyRenderer {
 	}
 
 	/**
-	 * @return the rESOURCES_CONTAINER
+	 * @return the RESOURCES_CONTAINER
 	 */
 	public static ResourcesContainer getRESOURCES_CONTAINER() {
 		return RESOURCES_CONTAINER;
@@ -146,8 +155,8 @@ public final class GalaxyRenderer {
 	/**
 	 * @param rESOURCES_CONTAINER the rESOURCES_CONTAINER to set
 	 */
-	public static void setRESOURCES_CONTAINER(ResourcesContainer rESOURCES_CONTAINER) {
-		RESOURCES_CONTAINER = rESOURCES_CONTAINER;
+	public static void setRESOURCES_CONTAINER(ResourcesContainer resources_container) {
+		RESOURCES_CONTAINER = resources_container;
 	}
 	
 	

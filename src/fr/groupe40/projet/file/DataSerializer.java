@@ -1,6 +1,5 @@
 package fr.groupe40.projet.file;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,6 +15,7 @@ import fr.groupe40.projet.model.board.Galaxy;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Players;
 import javafx.scene.canvas.GraphicsContext;
@@ -42,8 +42,11 @@ public class DataSerializer {
 	 */
 	private ObjectOutputStream oos;
 	
-	private Desktop desktop = Desktop.getDesktop();
-	
+	/**
+	 * Is true if any loading/saving window is opened
+	 * Like that, we can know when we had to set the game 
+	 * in pause 
+	 */
 	private boolean box_opened = false;
 	
 	/**
@@ -122,6 +125,7 @@ public class DataSerializer {
 	 * @return the galaxy loaded from the save file
 	 * @throws Exception 
 	 */
+	@TODO(comment="error if the file loaded is still invalid")
 	public Galaxy load_game(GraphicsContext gc, Stage stage) throws Exception {
 		box_opened = true;
 		

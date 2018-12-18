@@ -179,7 +179,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 *  
 	 *  Please, do not use this function anymore
 	 *  Really high complexity for the job he's doing
-	 * @deprecated use isFarEnought function
+	 * @deprecated use isFarEnought function instead of this one
 	 * @param p The planet we are trying to generate
 	 * @return false if not able to generate this planet, else true
 	 */

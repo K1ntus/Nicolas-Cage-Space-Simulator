@@ -90,7 +90,4 @@ public class RoundPlanet extends Planet implements Serializable{
 		return "RoundPlanet <" + this.getX() + ", " + this.getY() + "> - Ruled by id: " +this.getRuler().getId();
 	}
 
-
-
-
 }

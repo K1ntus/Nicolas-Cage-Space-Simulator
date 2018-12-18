@@ -1,8 +1,30 @@
 package fr.groupe40.projet.util.constants;
 
+import fr.groupe40.projet.util.annot.TODO;
+
+/**
+ * Few constants about garrison
+ *
+ */
 public final class PlanetsGarrison {
+	/**
+	 * Maximal troop available when the game got initialized
+	 */
 	public static final int max_initDefense = 15;//The initial troups in a planet at the generation of the world
+	
+	/**
+	 * Minimal number of troups before getting ruled
+	 */
 	public static final int min_troups = 1;	//minimal troups in a planet
+	
+	/**
+	 * Maximal number of troops available in a planet
+	 */
+	@TODO(comment="Make it variable a constant * ratio (with ratio depending of the planet width or something like that ?")
 	public static final int max_troups = 100;	//minimal troups in a planet
-	public static final int sun_troups = 20;
+	
+	/**
+	 * The troup of the sun 'planet'
+	 */
+	public static final int sun_troups = 200;
 }
