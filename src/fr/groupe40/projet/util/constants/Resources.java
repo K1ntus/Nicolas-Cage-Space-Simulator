@@ -49,8 +49,6 @@ public final class Resources {
 	/*	******************	*/
 	
 	public static final String path_sound_main_theme = "sounds/musics/main_theme.mp3";
-	public static final String path_sound_cage_bees = "sounds/musics/NCage_bees.mp3";
-	public static final String path_sound_cage_train = "sounds/musics/NCage_train.mp3";
 	
 	public static final String path_sound_explosion = "sounds/explosion.mp3";
 	public static final String path_sound_sun_explosion = "sounds/sun_explosion.mp3";
