@@ -1,12 +1,10 @@
 package fr.groupe40.projet.junit;
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Squad;
+import fr.groupe40.projet.util.constants.Resources;
 import junit.framework.TestCase;
 
 /**
@@ -54,9 +52,10 @@ public class TestOnUser extends TestCase{
 	@Test
 	public void testsendFleetAI() {
 		User u = new User(-1, 0);
+		User u2 = new User(0,0);
 		SquarePlanet p = new SquarePlanet(null, u, 100, 100);
 		p.setTroups(25);
-		SquarePlanet p2 = new SquarePlanet(null, null, 100, 100);
+		SquarePlanet p2 = new SquarePlanet(Resources.path_img_square_basic, u2, 100, 100);
 		Squad s = u.sendFleetAI(p, p2);
 		assert s != null;
 	}
