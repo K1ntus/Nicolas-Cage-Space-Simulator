@@ -230,7 +230,6 @@ public class Game extends Application {
 					e.printStackTrace();
 				}
 			
-			
 			}
 			
 			/**
