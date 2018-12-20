@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Sarah Portejoie
  *
  */
-public class GameBasic extends Application {
+public class Game extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
