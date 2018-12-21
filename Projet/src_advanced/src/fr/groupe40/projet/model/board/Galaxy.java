@@ -127,6 +127,7 @@ public class Galaxy implements Serializable{
 				return false;
 			}
 		}
+		System.out.println("user has won");
 		return true;
 	}
 	
@@ -162,6 +163,7 @@ public class Galaxy implements Serializable{
 	 */
 	public void updateGarrison() {
 		if(planets.get(0).getTroups() <= Constants.min_troups+1 && planets.get(0).getRuler().getId() == Constants.sun_id) {
+			System.out.println(planets.get(0).toString());
 
 	    	AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
 

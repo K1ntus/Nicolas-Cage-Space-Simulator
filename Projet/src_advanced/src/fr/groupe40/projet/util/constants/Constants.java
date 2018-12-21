@@ -124,7 +124,7 @@ public final class Constants {
 	/**
 	 * sun id
 	 */
-	public static final int sun_id = -3;
+	public static final int sun_id = -667;
 	
 	/**
 	 * Neutral user constant

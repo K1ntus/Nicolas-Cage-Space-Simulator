@@ -22,81 +22,79 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-
 /**
- *  Class managing the saving/loading of the game
+ * Class managing the saving/loading of the game
+ * 
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
  */
 public class DataSerializer {
-	
+
 	/**
-	 *  the object containing all the data to save
+	 * the object containing all the data to save
 	 */
 	private Galaxy data;
-	
+
 	/**
-	 *  variable that handle the object saving in file
+	 * variable that handle the object saving in file
 	 */
 	private ObjectOutputStream oos;
-	
+
 	/**
-	 * Is true if any loading/saving window is opened
-	 * Like that, we can know when we had to set the game 
-	 * in pause 
+	 * Is true if any loading/saving window is opened Like that, we can know when we
+	 * had to set the game in pause
 	 */
 	private boolean box_opened = false;
-	
+
 	/**
-	 *  create the structure containing the data and the fileName
+	 * create the structure containing the data and the fileName
+	 * 
 	 * @param name save fileName
 	 * @param data game data
 	 */
 	public DataSerializer(Galaxy data) {
-		this.data = data;		
+		this.data = data;
 	}
-	
+
 	/**
-	 *  Save the current game state in a file
+	 * Save the current game state in a file
+	 * 
 	 * @return true if the game has been saved, else false
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean save_game(Stage stage) throws Exception {
 		box_opened = true;
-		
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save game");
-		fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension)
-				//new ExtensionFilter("All Files", "*.*")
-			);
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Save Files", "*." + Constants.fileName_extension)
+		// new ExtensionFilter("All Files", "*.*")
+		);
 		String currentPath = Paths.get(Constants.path_save).toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
 		File file_raw = fileChooser.showSaveDialog(stage);
 		FileOutputStream file = null;
 
 		try {
-			if(file_raw != null)
+			if (file_raw != null)
 				file = new FileOutputStream(file_raw);
 			else
-				file = new FileOutputStream(currentPath + "/default."+Constants.fileName_extension);
+				file = new FileOutputStream(currentPath + "/default." + Constants.fileName_extension);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		
-		if(file == null)
+
+		if (file == null)
 			throw new Exception("ErrorSavingGame");
 
-		
-		/*	**************	*/
-		
-		
+		/* ************** */
+
 		try {
 			oos = new ObjectOutputStream(file);
-			
+
 			oos.writeObject(data);
-			
+
 			oos.flush();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -106,7 +104,7 @@ public class DataSerializer {
 			return false;
 		} finally {
 			try {
-				if(oos != null) {
+				if (oos != null) {
 					oos.flush();
 					oos.close();
 				}
@@ -116,54 +114,52 @@ public class DataSerializer {
 			}
 		}
 		return true;
-		
+
 	}
-	
+
 	/**
-	 *  Load a game from a save and apply it to the current game start
+	 * Load a game from a save and apply it to the current game start
+	 * 
 	 * @return the galaxy loaded from the save file
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	@TODO(comment="error if the file loaded is still invalid")
+	@TODO(comment = "error if the file loaded is still invalid")
 	public Galaxy load_game(GraphicsContext gc, Stage stage) throws Exception {
 		box_opened = true;
-		
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Load Game");
 		String currentPath = Paths.get(Constants.path_save).toAbsolutePath().normalize().toString();
 		fileChooser.setInitialDirectory(new File(currentPath));
-		fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("Save Files", "*."+Constants.fileName_extension)
-				//new ExtensionFilter("All Files", "*.*")
-			);
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Save Files", "*." + Constants.fileName_extension)
+		// new ExtensionFilter("All Files", "*.*")
+		);
 		File file_raw = fileChooser.showOpenDialog(stage);
 		FileInputStream file = null;
 
 		try {
-			if(file_raw != null)
+			if (file_raw != null)
 				file = new FileInputStream(file_raw);
 			else
 				throw new Exception("FileNotFoundException");
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		
-		if(file == null)
-			throw new Exception("SaveNotFound");
-		
 
-		/*	**************	*/
-		
-		
+		if (file == null)
+			throw new Exception("SaveNotFound");
+
+		/* ************** */
+
 		Galaxy loaded = new Galaxy(gc);
 		try {
-			
+
 			ObjectInputStream ois = new ObjectInputStream(file);
-			
+
 			loaded = (Galaxy) ois.readObject();
-			
+
 			ois.close();
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("Unable to load game");
 			e.printStackTrace();
@@ -173,82 +169,43 @@ public class DataSerializer {
 		} catch (ClassNotFoundException e) {
 			System.out.println("Unable to load game");
 			e.printStackTrace();
-		}	
+		}
 		Galaxy res = new Galaxy(loaded, gc);
 		return res;
 	}
+
 	/**
-	 *  Reload the game to apply the loading
+	 * Reload the game to apply the loading
+	 * 
 	 * @param g Galaxy to be reloaded
 	 */
 	public void reload_image_and_data(Galaxy g) {
 
-		for(Squad s : g.getSquads()) {
+		for (Squad s : g.getSquads()) {
 			ArrayList<Ship> ships = s.getShips();
 			try {
-				User u = ships.get(0).getRuler();	//Get the ruler of the first ship of the squad
-				if (u.getId() < 0) {
-					switch(u.getId()) {
-					case Constants.event_id:
-						s.update_ruler(Constants.event_user);
-						break;
-					case Constants.sun_id:
-						s.update_ruler(Constants.sun_user);
-						break;
-					case Constants.pirate_id:
-						s.update_ruler(Constants.pirate_user);
-						break;
-					default:
-						s.update_ruler(Constants.ai_user);
-						break;
-					}
-				}else if (u.getFaction() == Constants.human_faction) {
+				User u = ships.get(0).getRuler(); // Get the ruler of the first ship of the squad
+				 if (u.getFaction() == Constants.human_faction) {
 					s.update_ruler(Constants.human_user);
-				}else {
-					s.update_ruler(Constants.neutral_user);
 				}
 			} catch (IndexOutOfBoundsException e) {
-				continue;	//Every ships of the squad has reached destination, will be automatically removed by the game updater
+				continue; // Every ships of the squad has reached destination, will be automatically
+							// removed by the game updater
 			}
-			
+
 			s.updateImage();
 		}
-		
-		for(Planet p : g.getPlanets()) {		
-					
-			switch(p.getRuler().getId()) {
-				case Constants.event_id:
-					//System.out.println("** event user");
-					p.setRuler(Constants.event_user);
-					break;
-				case Constants.sun_id:
-					//System.out.println("** sun");
-					p.setRuler(Constants.sun_user);
-					break;
-				case Constants.pirate_id:
-					//System.out.println("** pirate user");
-					p.setRuler(Constants.pirate_user);
-					break;
-				case Constants.human_faction:
-					//System.out.println("** human user");
-					p.setRuler(Constants.human_user);
-					break;
-				case Constants.neutral_faction:
-					//System.out.println("** neutral user");
-					p.setRuler(Constants.neutral_user);
-					break;
-				default:
-					//System.out.println("** ai user");
-					p.setRuler(Constants.ai_user);
-					break;
+
+		for (Planet p : g.getPlanets()) {
+			User u = p.getRuler();
+			 if (u.getFaction() == Constants.human_faction) {
+				p.setRuler(Constants.human_user);
 			}
 
-			
 			p.updateImage();
 		}
-		
-	}
 
+	}
 
 	/**
 	 * @return the box_opened
