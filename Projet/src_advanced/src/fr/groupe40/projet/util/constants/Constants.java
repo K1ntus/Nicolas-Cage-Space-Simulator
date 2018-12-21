@@ -260,7 +260,7 @@ public final class Constants {
 	/**
 	 * Enable main_theme music + auto-play at startup
 	 */
-	public static boolean main_theme_enabled = false;
+	public static boolean main_theme_enabled = true;
 	
 	/* AI */
 	public static final int ai_number = 5;
@@ -268,7 +268,7 @@ public final class Constants {
 	/**
 	 * Enable/Disable AI
 	 */
-	public static final boolean ai_enabled = false;
+	public static final boolean ai_enabled = true;
 
 	
 	/*	Color	*/

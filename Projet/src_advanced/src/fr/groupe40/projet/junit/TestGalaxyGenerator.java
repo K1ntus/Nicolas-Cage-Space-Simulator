@@ -18,6 +18,7 @@ import junit.framework.TestCase;
  * @author Sarah Portejoie
  *
  */
+@SuppressWarnings("unused")
 public class TestGalaxyGenerator extends TestCase{
 
 	

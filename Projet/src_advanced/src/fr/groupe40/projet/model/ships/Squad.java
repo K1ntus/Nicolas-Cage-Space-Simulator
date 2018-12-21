@@ -211,7 +211,7 @@ public class Squad implements Serializable {
 
 		return (summonX*Constants.size_squads + (source.getX() - Constants.size_squads));
 	}
-	
+
 	/**
 	 * Return the nearby side of his destination
 	 * @return enum type destination
@@ -220,22 +220,22 @@ public class Squad implements Serializable {
 		double min = Constants.width;
 		Direction res = Direction.BOTTOM;
 		
-		if(Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2) < min) {
+		if(Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2) <= min) {
 			min = Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2);
 			res = Direction.TOP;
 		}
 
-		if(Sprite.distance(source.getX()/2, source.getY()+source.height(), destination.getX()/2, destination.getY()/2) < min) {
+		if(Sprite.distance(source.getX()/2, source.getY()+source.height(), destination.getX()/2, destination.getY()/2) <= min) {
 			min = Sprite.distance(source.getX()/2, source.getY()+source.height(), destination.getX()/2, destination.getY()/2);
 			res = Direction.BOTTOM;
 		}
 
-		if(Sprite.distance(source.getX(), source.getY()/2, destination.getX()/2, destination.getY()/2) < min) {
+		if(Sprite.distance(source.getX(), source.getY()/2, destination.getX()/2, destination.getY()/2) <= min) {
 			min = Sprite.distance(source.getX(), source.getY()/2, destination.getX()/2, destination.getY()/2);
 			res = Direction.LEFT;
 		}
 
-		if(Sprite.distance(source.getX()+source.width(), source.getY()/2, destination.getX()/2, destination.getY()/2) < min) {
+		if(Sprite.distance(source.getX()+source.width(), source.getY()/2, destination.getX()/2, destination.getY()/2) <= min) {
 			min = Sprite.distance(source.getX()+source.width(), source.getY()/2, destination.getX()/2, destination.getY()/2);
 			res = Direction.RIGHT;
 		}

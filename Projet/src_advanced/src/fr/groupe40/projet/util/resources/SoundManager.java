@@ -69,7 +69,6 @@ public class SoundManager {
 	    	res.setVolume(volume);
 			return res;
 		} catch (NullPointerException e) {
-			System.out.println("Unable to load sounds: "+ path);
 			return null;
 		}   	
     	

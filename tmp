@@ -1,0 +1,88 @@
+
+	/**
+	 * Describes the path ships have to follow
+	 */
+	private void pathFinding(Map map) {
+		// if destination planet and origin planet are the same
+		if (this.origin.getX() == this.destination.getPosX() && this.origin.getY() == this.destination.getPosY()) {
+			this.path.clear();
+			return;
+		}
+
+		// otherwise create a path
+		this.path.clear(); // empty path
+		// get start and end position
+		Point2D originPos = this.origin;
+		Point2D destPos = new Point2D(this.destination.getPosX(), this.destination.getPosY());
+		double angle_decallage1 = 0.999;
+		double angle_decallage2 = 1.001;
+		// distance between origin and destination
+
+		// create road
+		// initial point
+		Point2D nextPosition = new Point2D(originPos);
+		this.path.add(new Point2D(nextPosition));
+		
+		// create path
+		while(!destination.isInside(nextPosition)) {
+
+			double angle = angleBetweenTwoDots(destPos, nextPosition);
+			// compute next position
+			
+			nextPosition = new Point2D(this.path.getLast());
+			if(destination.getPosY() < nextPosition.getY()) {
+				nextPosition.setY(nextPosition.getY() - speed * (angle));
+			}else {
+				nextPosition.setY(speed * (angle) + nextPosition.getY());
+			}
+			
+			if(destination.getPosX() < nextPosition.getX()) {
+				nextPosition.setX(nextPosition.getX() - speed * (1-angle));
+			}else {
+				nextPosition.setX(speed * (1-angle) + nextPosition.getX());
+			}
+			
+			
+			
+			Planet planet_with_collision = null;
+			for(Planet p : map.getPlanetList()) {
+				if (collision(p, nextPosition)) {
+					planet_with_collision = p;
+				}
+				
+			}
+			if(planet_with_collision == null) {
+				this.path.add(nextPosition);
+				continue;				
+			}
+			
+			while(planet_with_collision.isInside(nextPosition)) {
+
+				originPos = nextPosition;
+				
+				if(planet_with_collision.getPosY() < destination.getPosY()+2*this.getSize()) {
+					nextPosition.setY(nextPosition.getY() * angle_decallage1);							
+				}else {
+					nextPosition.setY(nextPosition.getY() * angle_decallage2);	
+				}
+				
+				if(planet_with_collision.getPosX() < destination.getPosX()+2*this.getSize()) {
+					nextPosition.setY(nextPosition.getY() * angle_decallage1);
+				}else {
+					nextPosition.setY(nextPosition.getY() * angle_decallage2);	
+				}
+			}
+			this.path.add(nextPosition);
+			
+			
+		}
+
+	}
+
+	public static double angleBetweenTwoDots(Point2D destination, Point2D current_pos) {
+		double hypot = destination.distance(current_pos);
+		double adjacent = Math.abs(destination.getX() - current_pos.getX());
+
+		return Math.toDegrees(Math.cos(adjacent/hypot))/90;
+
+	}

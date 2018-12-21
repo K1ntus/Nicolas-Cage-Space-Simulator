@@ -342,9 +342,13 @@ public class Ship extends Sprite implements Serializable {
 		double hyp = Sprite.distance(destination.getX()+destination.width()/2, destination.getY()+destination.height()/2, this.getX()+this.width()/2, this.getY()+this.height()/2);
 		double adjacent_side = Math.abs((destination.getX() + destination.width() / 2) - this.getX());
 
-		double angle = Math.toDegrees(Math.cos(adjacent_side / hyp));
-		
-		return angle/90;
+		return Math.toDegrees(Math.cos(adjacent_side / hyp)) / 90;
+	}
+	private double angle_to_follow(Planet destination) {
+		double hyp = Sprite.distance(destination.getX()+destination.width()/2, destination.getY()+destination.height()/2, this.getX()+this.width()/2, this.getY()+this.height()/2);
+		double adjacent_side = Math.abs((destination.getX() + destination.width() / 2) - this.getX());
+
+		return Math.toDegrees(Math.cos(adjacent_side / hyp)) / 90;
 	}
 
 	/**
@@ -358,8 +362,7 @@ public class Ship extends Sprite implements Serializable {
 	 */
 	public void no_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
-
-		double angle = destination_angle();
+		double angle = angle_to_follow(this.destination);
 		
 		if (x < centre_x) {
 			if(x+speed > centre_x)
