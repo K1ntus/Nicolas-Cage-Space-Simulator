@@ -123,7 +123,9 @@ public class Galaxy implements Serializable{
 	
 	private boolean userHasWon() {
 		for(Planet p : planets) {
-			if(!p.getRuler().equals(Constants.human_user) || !p.getRuler().equals(Constants.neutral_user) || !p.getRuler().equals(Constants.sun_user)) {
+			if(!p.getRuler().equals(Constants.human_user) 
+					&& !p.getRuler().equals(Constants.neutral_user) 
+					&& !p.getRuler().equals(Constants.sun_user)) {
 				return false;
 			}
 		}
@@ -202,17 +204,14 @@ public class Galaxy implements Serializable{
 		int id = u.getId();
 		
 		for(Planet p : planets) { //if this user still have at least ONE planet, then doesnt has lost
-			int ruler_id = p.getRuler().getId();
-			if(ruler_id == id) {
+			if(p.getRuler().getId() == id) {
 				return false;
 			}
 		}
 		
 		for(Squad s : squads) {		//if this user still have at least ONE squad, then doesnt has lost	
 			try {
-				User ruler = s.getRuler();
-				int ruler_id = ruler.getId();
-				if(ruler_id == id) 
+				if(s.getRuler().getId() == id) 
 					return false;
 				continue;
 			}catch(NullPointerException e) {
@@ -220,6 +219,7 @@ public class Galaxy implements Serializable{
 			}
 		}
 		
+		System.out.println(u.toString() + " has lost");
 		u.setLost(true);
 		return true;
 	}

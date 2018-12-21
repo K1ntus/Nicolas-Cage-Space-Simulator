@@ -80,7 +80,6 @@ public final class Constants {
 	 * Display which planet you have selected, ...
 	 */
 	public static final boolean DEBUG = false;
-
 	public static final boolean DEBUG_TIMER = true;
 	
 
