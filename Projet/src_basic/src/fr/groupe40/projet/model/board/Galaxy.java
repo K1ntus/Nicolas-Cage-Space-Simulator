@@ -138,6 +138,11 @@ public class Galaxy implements Serializable{
 			renderWinner(gc);		
 			game_is_over = true;
 		}
+
+		if(userHasLost(Constants.human_user)) {
+			renderDefeat(gc);
+			game_is_over = true;
+		}
 	}
 	
 	/*	AI	*/
