@@ -220,7 +220,7 @@ public class Squad implements Serializable {
 		
 		if(Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2) < min) {
 			min = Sprite.distance(source.getX()/2, source.getY(), destination.getX()/2, destination.getY()/2);
-			res = Direction.LEFT;
+			res = Direction.TOP;
 		}
 
 		if(Sprite.distance(source.getX()/2, source.getY()+source.height(), destination.getX()/2, destination.getY()/2) < min) {
@@ -230,7 +230,7 @@ public class Squad implements Serializable {
 
 		if(Sprite.distance(source.getX(), source.getY()/2, destination.getX()/2, destination.getY()/2) < min) {
 			min = Sprite.distance(source.getX(), source.getY()/2, destination.getX()/2, destination.getY()/2);
-			res = Direction.TOP;
+			res = Direction.LEFT;
 		}
 
 		if(Sprite.distance(source.getX()+source.width(), source.getY()/2, destination.getX()/2, destination.getY()/2) < min) {

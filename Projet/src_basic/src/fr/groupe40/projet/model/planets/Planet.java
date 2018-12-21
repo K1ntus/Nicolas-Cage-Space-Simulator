@@ -41,7 +41,7 @@ public abstract class Planet extends Sprite {
 	private boolean selected;
 
 	/**
-	 *  Constructor of a planet
+	 * Constructor of a planet
 	 * @param path the string image path
 	 * @param ruler the beginning ruler of this planet
 	 * @param x top left x position
@@ -54,7 +54,7 @@ public abstract class Planet extends Sprite {
 		this.setY(y);
 	}
 	/**
-	 *  Constructor of a planet
+	 * Constructor of a planet
 	 * @param path the string image path
 	 * @param ruler the beginning ruler of this planet
 	 * @param x top left x position

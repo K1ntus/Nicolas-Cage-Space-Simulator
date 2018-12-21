@@ -106,8 +106,7 @@ public final class GalaxyRenderer {
 		try {
 			gc.setFill(arr[id].getColor());
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("id: " + id);
-			System.out.println("size: " + arr.length);
+
 		}
 
 	}

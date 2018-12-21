@@ -339,12 +339,12 @@ public class Ship extends Sprite implements Serializable {
 	 * @return angle in degrees
 	 */
 	public double destination_angle() {
-		double hyp = this.distance(destination);
+		double hyp = Sprite.distance(destination.getX()+destination.width()/2, destination.getY()+destination.height()/2, this.getX()+this.width()/2, this.getY()+this.height()/2);
 		double adjacent_side = Math.abs((destination.getX() + destination.width() / 2) - this.getX());
 
 		double angle = Math.toDegrees(Math.cos(adjacent_side / hyp));
-
-		return angle;
+		
+		return angle/90;
 	}
 
 	/**
@@ -358,34 +358,35 @@ public class Ship extends Sprite implements Serializable {
 	 */
 	public void no_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
-		double angle = 1;
+
+		double angle = destination_angle();
 		
 		if (x < centre_x) {
 			if(x+speed > centre_x)
 				deltaX = 0;
 			else
-				deltaX = speed * angle;
+				deltaX = speed;
 		} else if (x > centre_x){
 			if(x-speed < centre_x)
 				deltaX = 0;
 			else
-				deltaX = -speed * angle;
+				deltaX = -speed;
 		} 
 
 		if (y < centre_y) {
 			if(y+speed >= centre_y)
 				deltaY = 0;
 			else
-				deltaY = speed * angle;
+				deltaY = speed;
 		} else if (y > centre_y){
 			if(y-speed <= centre_y)
 				deltaY = 0;
 			else
-				deltaY = -speed * angle;
+				deltaY = -speed;
 		} 
 
-		this.setY(y+deltaY);
-		this.setX(x+deltaX);
+		this.setY(y+deltaY * (angle));
+		this.setX(x+deltaX * (1-angle));
 	}
 
 	/**

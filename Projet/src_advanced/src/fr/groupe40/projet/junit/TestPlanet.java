@@ -1,5 +1,4 @@
 package fr.groupe40.projet.junit;
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 

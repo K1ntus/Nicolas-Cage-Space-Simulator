@@ -209,11 +209,6 @@ public final class Constants {
 	 */
 	public static final long tick_per_main_theme_check = 500;
 	
-	/**
-	 * @deprecated do not use anymore
-	 */
-	@Deprecated
-	public static final long tick_per_garbage_check = 15000;
 	
 	/**
 	 * String message to send when the player lost the current game
@@ -255,7 +250,7 @@ public final class Constants {
 	/**
 	 * If we're enabling event
 	 */
-	public static final boolean events_enabled = true;
+	public static final boolean events_enabled = false;
 	
 	/**
 	 * If a sun is enabled
@@ -268,11 +263,12 @@ public final class Constants {
 	public static boolean main_theme_enabled = false;
 	
 	/* AI */
-	public static final int ai_number = 100;
+	public static final int ai_number = 5;
+	
 	/**
 	 * Enable/Disable AI
 	 */
-	public static final boolean ai_enabled = true;
+	public static final boolean ai_enabled = false;
 
 	
 	/*	Color	*/
@@ -295,5 +291,6 @@ public final class Constants {
 	 * Default color (unused)
 	 */
 	public static final Color color_default = Color.WHITE;
+
 	
 }

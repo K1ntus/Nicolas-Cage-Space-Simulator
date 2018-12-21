@@ -1,10 +1,10 @@
 package fr.groupe40.projet.junit;
+
 import org.junit.Test;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.ships.Squad;
-import fr.groupe40.projet.util.constants.Resources;
 import junit.framework.TestCase;
 
 /**

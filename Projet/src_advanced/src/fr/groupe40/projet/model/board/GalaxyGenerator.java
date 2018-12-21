@@ -94,13 +94,17 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	private String getRandomSquarePlanetImgPath() {
 		double rand = Math.random();
 
-		if (rand < 0.25)
+		if (rand < 0.5)
 			return Resources.path_img_round_planet2;
+		else
+			return Resources.path_img_round_planet1;
+		/*
 		else if (rand < 0.5)
 			return Resources.path_img_round_doge;
 		else if (rand < 0.75)
 			return Resources.path_img_round_smoke;
 		return Resources.path_img_round_kfc_planet;
+		*/
 	}
 
 	/**
@@ -146,9 +150,10 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 			System.out.println("Impossible de generer un terrain minimal");
 			return false;
 		} else { //We set 2 planets, one to the player, one to an ai
-			planets.get(1).setRuler(Constants.human_user);
-			planets.get(1).setImg_path(Resources.path_img_planet_human);
-			planets.get(1).updateImage();
+				planets.get(1).setRuler(Constants.human_user);
+				planets.get(1).setImg_path(Resources.path_img_planet_human);
+				planets.get(1).updateImage();	
+				
 			if (Constants.ai_enabled) {
 				planets.get(2).setRuler(Constants.ai_user);
 				

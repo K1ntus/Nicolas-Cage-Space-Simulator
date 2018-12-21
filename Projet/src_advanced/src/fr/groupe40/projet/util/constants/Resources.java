@@ -15,10 +15,7 @@ public final class Resources {
 	/* Round Planets	*/
 	public static final String path_img_round_planet1 = "images/planets/rounds/1.png";
 	public static final String path_img_round_planet2 = "images/planets/rounds/2.png";
-	public static final String path_img_round_doge = "images/planets/rounds/doge.png";
 	public static final String path_img_planet_human = "images/planets/special/earth.png";
-	public static final String path_img_round_smoke = "images/planets/rounds/smoke.png";
-	public static final String path_img_round_kfc_planet = "images/planets/rounds/kfc.png";
 
 	/*	Sun Image Path	*/
 	public static final String path_img_sun = "images/sun.png";
