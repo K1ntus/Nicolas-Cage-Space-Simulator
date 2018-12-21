@@ -249,7 +249,7 @@ public final class Constants {
 	/**
 	 * If we're enabling event
 	 */
-	public static final boolean events_enabled = false;
+	public static final boolean events_enabled = true;
 	
 	/**
 	 * If a sun is enabled
