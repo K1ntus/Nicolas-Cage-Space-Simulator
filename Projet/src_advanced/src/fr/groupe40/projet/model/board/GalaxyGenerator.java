@@ -150,6 +150,8 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 
 			while (p.updatePlanetePosition() != -1) {
 				if (isFarEnough(p, p.width() / 2 + Constants.minimal_distance_between_planets)) {
+					if(planets.size() == 1 && Constants.sun_enabled)	//Only the sun has been generated
+						p = new RoundPlanet(p);
 					planets.add(p);
 					break;
 				}
@@ -163,7 +165,8 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		} else { //We set 2 planets, one to the player, one to an ai
 				planets.get(1).setRuler(Constants.human_user);
 				planets.get(1).setImg_path(Resources.path_img_planet_human);
-				planets.get(1).updateImage();	
+				planets.get(1).updateImage();
+				
 				
 			if (Constants.ai_enabled) {
 				planets.get(2).setRuler(Constants.ai_user);

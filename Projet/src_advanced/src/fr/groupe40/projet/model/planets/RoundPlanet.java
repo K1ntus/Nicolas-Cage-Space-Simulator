@@ -16,7 +16,7 @@ public class RoundPlanet extends Planet implements Serializable{
 	private static final long serialVersionUID = -7903551302927756905L;
 
 	/**
-	 * Construct a squared planet, herits from Planet & Sprites
+	 * Construct a squared planet, inherits from Planet & Sprites
 	 * @param pathImgPlanets Img path
 	 * @param user The initial ruler of this planet
 	 * @param x top-left position of the planet
@@ -26,9 +26,17 @@ public class RoundPlanet extends Planet implements Serializable{
 		super(pathImgPlanets, user, x, y);
 	}
 	
+	/**
+	 * Cast from any type of planet to round planet
+	 * @param p the planet to cast from
+	 */
+	public RoundPlanet(Planet p) {
+		super(p.getImg_path(), p.getRuler(), (int) p.getX(), (int) p.getY());
+	}
+
 
 	/**
-	 *  Check if a pair of pos is inside another
+	 *  Check if a pair of positions is inside this planet
 	 * @param x position of the second object
 	 * @param y position of the second object
 	 * @return true if inside, else false
