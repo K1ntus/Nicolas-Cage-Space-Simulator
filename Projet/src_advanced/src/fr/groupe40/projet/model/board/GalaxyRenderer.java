@@ -22,7 +22,7 @@ public final class GalaxyRenderer {
 	 * Contains few image data for better memory (but cost more memory)
 	 */
 	@TODO(comment = "set it public")
-	private static ResourcesContainer RESOURCES_CONTAINER = new ResourcesContainer();
+	private static ResourcesContainer RESOURCES_CONTAINER = ResourcesContainer.getInstance();
 
 	/**
 	 * Run the rendering in the graphicsContext

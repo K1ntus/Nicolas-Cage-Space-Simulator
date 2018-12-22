@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.groupe40.projet.client.User;
+import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.model.ships.Squad;
@@ -201,27 +202,23 @@ public class Galaxy implements Serializable{
 			return true;
 		}
 		
-		int id = u.getId();
+		boolean res = true;
 		
-		for(Planet p : planets) { //if this user still have at least ONE planet, then doesnt has lost
-			if(p.getRuler().getId() == id) {
-				return false;
-			}
-		}
-		
-		for(Squad s : squads) {		//if this user still have at least ONE squad, then doesnt has lost	
-			try {
-				if(s.getRuler().getId() == id) 
-					return false;
-				continue;
-			}catch(NullPointerException e) {
-				continue;
-			}
-		}
+		res = user_owned_something(planets, u) && user_owned_something(squads, u);
 		
 		System.out.println(u.toString() + " has lost");
 		u.setLost(true);
-		return true;
+		return res;
+	}
+	
+	private boolean user_owned_something(List<?> list, User u) {
+		for(int i = 0; i < list.size(); i++) {
+			if(((Sprite) list.get(i)).getRuler().equals(u)) {
+				return true;
+			}
+		}
+		return false;
+		
 	}
 	
 	public void resetEveryUsersLostState() {
