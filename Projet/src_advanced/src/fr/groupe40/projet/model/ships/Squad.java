@@ -10,7 +10,6 @@ import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.model.planets.Planet;
-import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.constants.Resources;
@@ -121,7 +120,7 @@ public class Squad implements Serializable {
 			}
 			double x, y;
 			
-			if(source.getClass().getName() == "SquarePlanet") {	//Planet is a square
+			//if(source.getClass().getName() == "SquarePlanet") {	//Planet is a square
 				switch(summoningSide()) {
 					case TOP:
 						x = this.horizontalSummoning();
@@ -145,10 +144,10 @@ public class Squad implements Serializable {
 						break;
 				}
 				
-			} else {	//Planet is a circle
-				x = this.decollageX(source)*0.999;
-				y = this.decollageY(source)*1.001;							
-			}
+			//} else {	//Planet is a circle
+			//	x = this.decollageX(source)*0.999;
+			//	y = this.decollageY(source)*1.001;							
+			//}
 			
 			
 			ships.add(
