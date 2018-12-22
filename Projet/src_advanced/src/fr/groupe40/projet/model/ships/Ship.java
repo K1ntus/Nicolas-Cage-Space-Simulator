@@ -161,18 +161,34 @@ public class Ship extends Sprite implements Serializable {
 			break;
 		case TOP:
 			top_collision_mover(x, y, centre_x, centre_y, speed);
+			
+			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
+				System.out.println("collision inc after a top prevention!");
+			}
 			// System.out.println("Top collision");
 			break;
 		case BOTTOM:
 			bottom_collision_mover(x, y, centre_x, centre_y, speed);
+			
+			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
+				System.out.println("collision inc after a bottom prevention!");
+			}
 			// System.out.println("Bottom collision");
 			break;
 		case LEFT:
 			left_collision_mover(x, y, centre_x, centre_y, speed);
+			
+			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
+				System.out.println("collision inc after a left prevention!");
+			}
 			// System.out.println("Right collision");
 			break;
 		case RIGHT:
 			right_collision_mover(x, y, centre_x, centre_y, speed);
+			
+			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
+				System.out.println("collision inc after a right prevention!");
+			}
 			// System.out.println("Left collision");
 			break;
 		default:
@@ -335,15 +351,9 @@ public class Ship extends Sprite implements Serializable {
 
 	/**
 	 * calculate the angle between a ship and his destination
-	 * 
-	 * @return angle in degrees
+	 * @param destination the destination planet
+	 * @return the angle in degrees
 	 */
-	public double destination_angle() {
-		double hyp = Sprite.distance(destination.getX()+destination.width()/2, destination.getY()+destination.height()/2, this.getX()+this.width()/2, this.getY()+this.height()/2);
-		double adjacent_side = Math.abs((destination.getX() + destination.width() / 2) - this.getX());
-
-		return Math.toDegrees(Math.cos(adjacent_side / hyp)) / 90;
-	}
 	private double angle_to_follow(Planet destination) {
 		double hyp = Sprite.distance(destination.getX()+destination.width()/2, destination.getY()+destination.height()/2, this.getX()+this.width()/2, this.getY()+this.height()/2);
 		double adjacent_side = Math.abs((destination.getX() + destination.width() / 2) - this.getX());

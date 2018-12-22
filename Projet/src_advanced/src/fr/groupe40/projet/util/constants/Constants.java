@@ -259,7 +259,7 @@ public final class Constants {
 	/**
 	 * Enable main_theme music + auto-play at startup
 	 */
-	public static boolean main_theme_enabled = true;
+	public static final boolean main_theme_enabled = true;
 	
 	/* AI */
 	public static final int ai_number = 5;

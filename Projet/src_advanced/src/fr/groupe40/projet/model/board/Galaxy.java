@@ -169,7 +169,8 @@ public class Galaxy implements Serializable{
 
 	    	AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
 
-	    	sun_explosion_sound.play(); 
+	    	if(sun_explosion_sound != null)
+	    		sun_explosion_sound.play(); 
 			Sun.sun_destroyed(planets, squads, gc);
 			planets.remove(0);
 		}

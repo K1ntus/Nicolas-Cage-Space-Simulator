@@ -32,8 +32,9 @@ public class SoundManager {
 	 */
     private SoundManager(boolean launch_music) {
     	this.main_theme = SoundManager.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
-		if(Constants.main_theme_enabled && launch_music && this.main_theme != null && Resources.sounds_enabled)
-    		main_theme.play();
+		if(Constants.main_theme_enabled && launch_music && this.main_theme != null)
+			if(Resources.sounds_enabled)
+				main_theme.play();
 		
 
 	}
@@ -49,9 +50,9 @@ public class SoundManager {
     	
     	//main_theme.setVolume(Resources.main_theme_volume);
     	
-    	if(main_theme.isPlaying() || !Resources.sounds_enabled){
+    	if(main_theme.isPlaying()){
     		//DO nothing, music is already playing
-    	} else if (main_theme.isPlaying() && !Constants.main_theme_enabled) {
+    	} else if (!Constants.main_theme_enabled) {
     		System.out.println("stopping");
     		main_theme.stop();
     	} else {
