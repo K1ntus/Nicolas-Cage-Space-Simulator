@@ -3,6 +3,7 @@ package fr.groupe40.projet;
 import java.io.File;
 
 import fr.groupe40.projet.client.handler.InteractionHandler;
+import fr.groupe40.projet.client.window.LoaderScreen;
 import fr.groupe40.projet.client.window.MainMenu;
 import fr.groupe40.projet.client.window.SettingsMenu;
 import fr.groupe40.projet.events.Events;
@@ -43,6 +44,21 @@ public class Game extends Application {
 
 		launch(args);
 	}
+	  @Override
+	  public void init() throws Exception {
+		  root = new Group();
+		  
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.0));
+	      
+	      soundHandler = SoundManager.getInstance();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.25));
+	      
+	      main_menu = new MainMenu();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.67));
+	      
+	      setting_menu = new SettingsMenu();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.100));
+	  }
 
 	/**
 	 * manage the user input, currently, only the mouse is managed there
@@ -52,7 +68,7 @@ public class Game extends Application {
 	/**
 	 * manage the background game sound + methods to simplify sounds usage
 	 */
-	private SoundManager soundHandler = SoundManager.getInstance();
+	private SoundManager soundHandler;
 
 	/**
 	 * Board object containing every sprites, etc
@@ -62,12 +78,12 @@ public class Game extends Application {
 	/**
 	 * Main menu
 	 */
-	private MainMenu main_menu = new MainMenu();
+	private MainMenu main_menu;
 
 	/**
 	 * Setting menu
 	 */
-	private SettingsMenu setting_menu = new SettingsMenu();
+	private SettingsMenu setting_menu;
 
 	/**
 	 * Graphic handler of the game
@@ -106,7 +122,7 @@ public class Game extends Application {
 	/**
 	 * Javafx root
 	 */
-	Group root = new Group();
+	Group root;
 
 	/**
 	 * The scene for the setting part

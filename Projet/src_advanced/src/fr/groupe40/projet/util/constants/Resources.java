@@ -84,7 +84,23 @@ public final class Resources {
 	
 	/*	******************	*/
 	
+	/**
+	 * the volume of the main theme played
+	 */
 	public static final double main_theme_volume = 0.1; //Between 0 (cut the music) and 1
+	
+	/**
+	 * the volume of the audioclip when a ship reach his destination
+	 */
 	public static final double ship_explosion_volume = 0.5;
+	
+	/**
+	 * the volume of the audiclip when the sun explodes
+	 */
 	public static final double sun_explosion_volume = 0.25;
+	
+	/**
+	 * Enable/Disable every game sound
+	 */
+	public static final boolean sounds_enabled = false;
 }

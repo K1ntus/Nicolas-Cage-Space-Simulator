@@ -27,10 +27,8 @@ public final class GalaxyRenderer {
 	/**
 	 * Run the rendering in the graphicsContext
 	 * 
-	 * @param galaxy
-	 *            the game board to render
-	 * @param gc
-	 *            the graphicscontext to edit
+	 * @param galaxy the game board to render
+	 * @param gc  the graphicscontext to edit
 	 */
 	protected static void run(Galaxy galaxy, GraphicsContext gc) {
 		GalaxyRenderer.renderBackground(gc);
@@ -178,8 +176,7 @@ public final class GalaxyRenderer {
 	}
 
 	/**
-	 * @param rESOURCES_CONTAINER
-	 *            the rESOURCES_CONTAINER to set
+	 * @param resources_container the resources_container to set
 	 */
 	public static void setRESOURCES_CONTAINER(ResourcesContainer resources_container) {
 		RESOURCES_CONTAINER = resources_container;
