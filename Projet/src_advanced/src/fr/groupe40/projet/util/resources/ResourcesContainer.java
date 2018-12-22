@@ -1,6 +1,5 @@
 package fr.groupe40.projet.util.resources;
 
-import fr.groupe40.projet.util.annot.WorkInProgress;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.image.Image;
@@ -37,18 +36,10 @@ public class ResourcesContainer {
 	 */
 	private Image game_pirate_ships;
 
-	@WorkInProgress(comment = "Menu image bouton")
-	public static Image gui_play_unselected;
-	@WorkInProgress(comment = "Menu image bouton")
-	public static Image gui_play_selected;
-	@WorkInProgress(comment = "Menu image bouton")
-	public static Image gui_setting_unselected;
-	@WorkInProgress(comment = "Menu image bouton")
-	public static Image gui_setting_selected;
-	@WorkInProgress(comment = "Menu image bouton")
-	public static Image gui_exit_unselected;
-	@WorkInProgress(comment = "Menu image bouton")
-	public static Image gui_exit_selected;
+	/**
+	 * Singleton to force the usage of only ONE resource container type
+	 */
+	private static ResourcesContainer instance = null;
 	
 	/**
 	 * contain the sound of a ship collision with his destination
@@ -73,7 +64,7 @@ public class ResourcesContainer {
 	/**
 	 * Load and Save every stable pictures and sounds that could be used in the game
 	 */
-	public ResourcesContainer(){
+	private ResourcesContainer(){
 		init_backgrounds();
 		init_ships_image();
 		init_sounds_fx();
@@ -99,17 +90,16 @@ public class ResourcesContainer {
 		sound_ship_explosion = SoundManager.getAudioByPath_dynamic(Resources.path_sound_explosion, Resources.ship_explosion_volume);
 	}
 	
-	@WorkInProgress(comment = "Menu image bouton")
-	private void init_gui_buttons() {
-		double button_width = 167;
-		gui_play_unselected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_play_unselected), button_width, 0);
-		gui_play_selected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_play_selected), button_width, 0);
-		gui_setting_unselected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_settings_unselected), button_width, 0);
-		gui_setting_selected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_settings_selected), button_width, 0);
-		gui_exit_unselected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_exit_unselected), button_width, 0);
-		gui_exit_selected = ImageManager.getImageByPath_dynamic(ImageManager.getRessourcePathByName(Resources.path_img_gui_exit_selected), button_width, 0);		
+	/**
+	 * Get the instance of this class, or create a new one if there's none and return it
+	 * @return the singleton ResourcesContainer
+	 */
+	public static ResourcesContainer getInstance() {
+		if(instance == null)
+			instance = new ResourcesContainer();
+		return instance;
 	}
-
+	
 	/**
 	 * @return the game_background
 	 */

@@ -108,6 +108,7 @@ public final class Constants {
 	
 	/*	Graphics	*/
 	
+	
 	/**
 	 * Size of a ship in pixels
 	 */

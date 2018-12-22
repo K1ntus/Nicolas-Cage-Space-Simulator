@@ -228,9 +228,9 @@ public abstract class Sprite implements Serializable {
 	
 	/**
 	 *  Check if a pair of pos is inside another
-	 * @param x	the x-top corner
-	 * @param y the y-top corner
-	 * @return true if inside else false
+	 * @param x
+	 * @param y
+	 * @return
 	 */
 	public abstract boolean isInside(double x, double y);
 	

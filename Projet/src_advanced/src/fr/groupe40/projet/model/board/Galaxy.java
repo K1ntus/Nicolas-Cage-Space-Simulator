@@ -40,7 +40,7 @@ public class Galaxy implements Serializable{
 	/**
 	 *  board generator
 	 */
-	private GalaxyGenerator generator = new GalaxyGenerator();
+	private GalaxyGenerator generator = GalaxyGenerator.getInstance();
 	
 	/**
 	 *  graphical environment
@@ -223,6 +223,7 @@ public class Galaxy implements Serializable{
 		u.setLost(true);
 		return true;
 	}
+	
 	
 	public void resetEveryUsersLostState() {
 		Constants.ai_user.setLost(false);

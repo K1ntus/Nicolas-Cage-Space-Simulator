@@ -1,8 +1,8 @@
 package fr.groupe40.projet.client.window;
 
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Difficulty;
+import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
 import fr.groupe40.projet.util.window.GridElement;

@@ -22,12 +22,17 @@ public class SoundManager {
 	private AudioClip main_theme;
 
 	/**
+	 * Singleton to force the usage of only ONE music manager
+	 */
+	private static SoundManager instance = null;
+
+	/**
 	 * Instanciate the music object, and launch or not the main_theme automatically
 	 * @param launch_music Auto-launch main theme if true, else false
 	 */
-    public SoundManager(boolean launch_music) {
+    private SoundManager(boolean launch_music) {
     	this.main_theme = SoundManager.generateAudioClip(Resources.path_sound_main_theme, Resources.main_theme_volume);
-		if(Constants.main_theme_enabled && launch_music && this.main_theme != null)
+		if(Constants.main_theme_enabled && launch_music && this.main_theme != null && Resources.sounds_enabled)
     		main_theme.play();
 		
 
@@ -44,7 +49,7 @@ public class SoundManager {
     	
     	//main_theme.setVolume(Resources.main_theme_volume);
     	
-    	if(main_theme.isPlaying()){
+    	if(main_theme.isPlaying() || !Resources.sounds_enabled){
     		//DO nothing, music is already playing
     	} else if (main_theme.isPlaying() && !Constants.main_theme_enabled) {
     		System.out.println("stopping");
@@ -64,6 +69,9 @@ public class SoundManager {
      * @return the audioclip
      */
     public static AudioClip generateAudioClip(String path, double volume) {
+    	if(!Resources.sounds_enabled)
+    		return null;
+    	
 		try {
 	    	AudioClip res = new AudioClip(ImageManager.getRessourcePathByName(path));
 	    	res.setVolume(volume);
@@ -86,6 +94,9 @@ public class SoundManager {
 	 * @return the image loaded
 	 */
 	public static AudioClip getAudioByPath_dynamic(String path, double volume) {
+    	if(!Resources.sounds_enabled)
+    		return null;
+    	
 		final Service<AudioClip> imageLoadingService = new Service<AudioClip>(){
 
 			  @Override
@@ -112,4 +123,14 @@ public class SoundManager {
 			else
 		 		return generateAudioClip(path, volume);
 	}
+
+	/**
+	 * @return the instance
+	 */
+	public static SoundManager getInstance() {
+		if(instance == null)
+			instance = new SoundManager(true);
+		return instance;
+	}
+
 }

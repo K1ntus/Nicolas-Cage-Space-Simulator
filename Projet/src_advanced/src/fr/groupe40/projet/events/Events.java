@@ -13,6 +13,14 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class Events {
 	
+	private static Events instance = null;
+	
+	public static Events getInstance(Galaxy galaxy, GraphicsContext gc, boolean pirate, boolean revolt) {
+		if(instance == null)
+			instance = new Events(galaxy, gc, pirate, revolt);
+		return instance;
+	}
+	
 	/**
 	 *  contains every available event
 	 * @author jordan
@@ -50,7 +58,7 @@ public class Events {
 	 * @param pirate
 	 * @param revolt
 	 */
-	public Events(Galaxy galaxy, GraphicsContext gc, boolean pirate, boolean revolt) {
+	private Events(Galaxy galaxy, GraphicsContext gc, boolean pirate, boolean revolt) {
 		this.galaxy = galaxy;
 		this.gc = gc;
 		
@@ -60,6 +68,7 @@ public class Events {
 		if(revolt)
 			event_available.add(events.REVOLT);
 	}
+
 
 	/**
 	 *  Pick a random event in the event list and return it

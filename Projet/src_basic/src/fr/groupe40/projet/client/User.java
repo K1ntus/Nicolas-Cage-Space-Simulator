@@ -42,7 +42,7 @@ public class User implements Serializable{
 	 *  this user has lost or not
 	 */
 	private boolean lost;
-
+	
 	/**
 	 *  Create a new user from a faction and an id
 	 * @param faction the faction of this user
@@ -51,10 +51,9 @@ public class User implements Serializable{
 	public User(int faction, int id) {
 		this.faction = faction;
 		this.id = id;
-		this.lost = false;
+		setLost(false);
 		percent_of_troups_to_send = 100;
 	}
-	
 	
 	/**
 	 *  Create a user only from his id
@@ -73,7 +72,7 @@ public class User implements Serializable{
 		}
 		percent_of_troups_to_send = 100;
 
-		this.lost = false;
+		setLost(false);
 		source = null;
 		destination = null;
 	}

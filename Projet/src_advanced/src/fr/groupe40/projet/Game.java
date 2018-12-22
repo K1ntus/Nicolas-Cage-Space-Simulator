@@ -43,6 +43,23 @@ public class Game extends Application {
 
 		launch(args);
 	}
+	/*
+	  @Override
+	  public void init() throws Exception {
+		  root = new Group();
+		  
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.0));
+	      
+	      soundHandler = SoundManager.getInstance();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.25));
+	      
+	      main_menu = new MainMenu();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.67));
+	      
+	      setting_menu = new SettingsMenu();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.100));
+	  }
+	  */
 
 	/**
 	 * manage the user input, currently, only the mouse is managed there
@@ -52,7 +69,7 @@ public class Game extends Application {
 	/**
 	 * manage the background game sound + methods to simplify sounds usage
 	 */
-	private SoundManager soundHandler = new SoundManager(true);;
+	private SoundManager soundHandler = SoundManager.getInstance();
 
 	/**
 	 * Board object containing every sprites, etc
@@ -201,7 +218,7 @@ public class Game extends Application {
 					public void run() {
 						game_pre_init_running = true;
 
-						gg = new GalaxyGenerator();
+						gg = GalaxyGenerator.getInstance();
 						long endTime = System.currentTimeMillis();
 						if (Constants.DEBUG || Constants.DEBUG_TIMER)
 							System.out.println("Pre-Init done in " + (endTime - startTime) + " ms");
@@ -217,8 +234,9 @@ public class Game extends Application {
 					}
 				});
 
-				pre_init_thread.setPriority(pre_init_thread.getPriority());
+				pre_init_thread.setPriority(1);
 				pre_init_thread.setDaemon(true);
+				
 				try {
 					pre_init_thread.start();
 					pre_init_thread.join(2000);
@@ -242,13 +260,11 @@ public class Game extends Application {
 
 				game_init_running = true;
 
-				if (gg == null)
-					gg = new GalaxyGenerator();
 				galaxy = new Galaxy(gc, gg);
 				saver = new DataSerializer(galaxy);
 
 				if (Constants.events_enabled)
-					eventManager = new Events(galaxy, gc, true, true);
+					eventManager = Events.getInstance(galaxy, gc, true, true);
 
 				gc = canvas_game.getGraphicsContext2D();
 				galaxy.setGraphicsContext(gc);
@@ -271,6 +287,7 @@ public class Game extends Application {
 				stage.setScene(scene_game);
 				stage.show();
 
+				GalaxyGenerator.resetInstance();
 				game_init_done = true;
 				game_init_running = false;
 

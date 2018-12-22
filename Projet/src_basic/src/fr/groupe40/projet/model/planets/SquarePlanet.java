@@ -18,7 +18,7 @@ public class SquarePlanet extends Planet  implements Serializable{
 	}
 
 	/**
-	 * Check if a pair of pos is inside another
+	 *  Check if a pair of pos is inside another
 	 * @param x
 	 * @param y
 	 * @return
@@ -33,7 +33,7 @@ public class SquarePlanet extends Planet  implements Serializable{
 	}
 
 	/**
-	 * Check if a rectangle is inside another
+	 *  Check if a rectangle is inside another
 	 * @param x	the x-top corner
 	 * @param y the y-top corner
 	 * @param width the width of the rectangle
@@ -54,7 +54,7 @@ public class SquarePlanet extends Planet  implements Serializable{
 	}
 
 	/**
-	 * Check if a sprite directly intersect another one
+	 *  Check if a sprite directly intersect another one
 	 * @param s the sprite to compare with
 	 * @return true if the sprite is inside, else false
 	 */
