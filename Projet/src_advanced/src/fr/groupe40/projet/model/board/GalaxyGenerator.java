@@ -89,7 +89,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * @return the path of this resource
 	 */
 	@TODO(comment = "replace this function by a random picker from a collection")
-	private String getRandomRoundPlanetImgPath() {
+	private String getRandomSquarePlanetImgPath() {
 		double rand = Math.random();
 
 		if (rand < 0.5)
@@ -103,7 +103,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * @return the path of this resource
 	 */
 	@TODO(comment = "replace this function by a random picker from a collection")
-	private String getRandomSquarePlanetImgPath() {
+	private String getRandomRoundPlanetImgPath() {
 		double rand = Math.random();
 
 		if (rand < 0.5)

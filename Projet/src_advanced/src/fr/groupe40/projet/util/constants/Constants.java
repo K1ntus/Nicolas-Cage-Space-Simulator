@@ -79,7 +79,7 @@ public final class Constants {
 	 * Enabling it display the time used for each game board initialization
 	 * Display which planet you have selected, ...
 	 */
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	public static final boolean DEBUG_TIMER = true;
 	
 
