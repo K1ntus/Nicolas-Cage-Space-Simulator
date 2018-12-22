@@ -202,24 +202,29 @@ public class Galaxy implements Serializable{
 			return true;
 		}
 		
-		boolean res = true;
+		int id = u.getId();
 		
-		res = user_owned_something(planets, u) && user_owned_something(squads, u);
+		for(Planet p : planets) { //if this user still have at least ONE planet, then doesnt has lost
+			if(p.getRuler().getId() == id) {
+				return false;
+			}
+		}
+		
+		for(Squad s : squads) {		//if this user still have at least ONE squad, then doesnt has lost	
+			try {
+				if(s.getRuler().getId() == id) 
+					return false;
+				continue;
+			}catch(NullPointerException e) {
+				continue;
+			}
+		}
 		
 		System.out.println(u.toString() + " has lost");
 		u.setLost(true);
-		return res;
+		return true;
 	}
 	
-	private boolean user_owned_something(List<?> list, User u) {
-		for(int i = 0; i < list.size(); i++) {
-			if(((Sprite) list.get(i)).getRuler().equals(u)) {
-				return true;
-			}
-		}
-		return false;
-		
-	}
 	
 	public void resetEveryUsersLostState() {
 		Constants.ai_user.setLost(false);
