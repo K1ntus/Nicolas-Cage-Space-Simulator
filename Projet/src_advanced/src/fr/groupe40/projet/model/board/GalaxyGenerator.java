@@ -29,11 +29,13 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
 
 	public static int first_free_id = Constants.ai_faction - 4;
+	
+	private static GalaxyGenerator instance = null;
 
 	/**
 	 * Create and Generate the board
 	 */
-	public GalaxyGenerator() {
+	private GalaxyGenerator() {
 		try {
 			this.call();
 		} catch (Exception e) {
@@ -42,6 +44,16 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 			System.out.println("******************************");
 			e.printStackTrace();
 		}
+	}
+	
+	public static GalaxyGenerator getInstance() {
+		if(instance == null)
+			instance = new GalaxyGenerator();
+		return instance;
+	}
+	
+	public static void resetInstance() {
+		instance = null;
 	}
 
 	@Override

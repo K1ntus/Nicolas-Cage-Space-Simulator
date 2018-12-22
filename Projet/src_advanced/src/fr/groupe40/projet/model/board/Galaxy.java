@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.model.ships.Squad;
@@ -41,7 +40,7 @@ public class Galaxy implements Serializable{
 	/**
 	 *  board generator
 	 */
-	private GalaxyGenerator generator = new GalaxyGenerator();
+	private GalaxyGenerator generator = GalaxyGenerator.getInstance();
 	
 	/**
 	 *  graphical environment

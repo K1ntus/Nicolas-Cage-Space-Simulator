@@ -1,6 +1,5 @@
 package fr.groupe40.projet.util.resources;
 
-import fr.groupe40.projet.util.annot.WorkInProgress;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
 import javafx.scene.image.Image;

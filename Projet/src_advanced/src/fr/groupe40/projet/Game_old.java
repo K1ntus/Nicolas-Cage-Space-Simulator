@@ -52,7 +52,7 @@ public class Game_old extends Application {
 	/**
 	 * manage the background game sound + methods to simplify sounds usage
 	 */
-	private SoundManager soundHandler = new SoundManager(true);;
+	private SoundManager soundHandler = SoundManager.getInstance();
 
 	/**
 	 * Board object containing every sprites, etc
