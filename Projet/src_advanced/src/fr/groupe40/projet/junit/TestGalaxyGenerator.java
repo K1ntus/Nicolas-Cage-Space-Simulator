@@ -28,7 +28,7 @@ public class TestGalaxyGenerator extends TestCase{
 	 */
 	@Test
 	public void testGalaxyGenerator() {
-		GalaxyGenerator g = new GalaxyGenerator();
+		GalaxyGenerator g = GalaxyGenerator.getInstance();
 		assert null != g.getPlanets();
 	}
 	
@@ -38,7 +38,7 @@ public class TestGalaxyGenerator extends TestCase{
 	 */
 	@Test
 	public void testGenerateSun() {		
-		GalaxyGenerator g = new GalaxyGenerator();
+		GalaxyGenerator g = GalaxyGenerator.getInstance();
 		boolean b = false;
 		Planet sun = new Sun(null, Constants.width/2, Constants.height/2);
 		ArrayList<Planet> planets = g.getPlanets();
@@ -55,7 +55,7 @@ public class TestGalaxyGenerator extends TestCase{
 	@Test
 	@WorkInProgress(comment="indirect way to test it without using private methods")
 	public void testIsFarEnough() {
-		GalaxyGenerator g = new GalaxyGenerator();
+		GalaxyGenerator g = GalaxyGenerator.getInstance();
 		RoundPlanet p = new RoundPlanet(null, null, 10, 10);
 		//boolean b = g.isFarEnough(p, 20);
 		//assert b == true;
@@ -69,7 +69,7 @@ public class TestGalaxyGenerator extends TestCase{
 	@Test
 	@WorkInProgress(comment="indirect way to test it without using private methods")
 	public void testGetRandomSquarePlanetImgPath() {
-		GalaxyGenerator g = new GalaxyGenerator();
+		GalaxyGenerator g = GalaxyGenerator.getInstance();
 		//assert null != g.getRandomSquarePlanetImgPath();
 		assert _assumption();
 	}
@@ -80,7 +80,7 @@ public class TestGalaxyGenerator extends TestCase{
 	@Test
 	@WorkInProgress(comment="indirect way to test it without using private methods")
 	public void testGetRandomRoundPlanetImgPath() {
-		GalaxyGenerator g = new GalaxyGenerator();
+		GalaxyGenerator g = GalaxyGenerator.getInstance();
 		//assert null != g.getRandomRoundPlanetImgPath();
 		assert _assumption();
 	}

@@ -18,7 +18,7 @@ import javafx.scene.canvas.GraphicsContext;
  * @author Sarah Portejoie
  *
  */
-public class Sun extends Planet implements Serializable{
+public class Sun extends RoundPlanet implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -29,62 +29,6 @@ public class Sun extends Planet implements Serializable{
 	 */
 	public Sun(String pathImgPlanets, int x, int y) {
 		super(pathImgPlanets, Constants.sun_user, x, y, Constants.size_sun);
-	}
-
-	/**
-	 *  Check if a rectangle is inside another
-	 * @param x	the x-top corner
-	 * @param y the y-top corner
-	 * @param width the width of the rectangle
-	 * @param height the height of the rectangle
-	 * @return true if inside else false
-	 */
-	@Override
-	public boolean isInside(double x, double y, double width, double height) {
-		double x2 = this.getX(), y2 = this.getY(), width2 = this.width(), height2 = this.height();
-		if(x > x2+width2 || x+width < x2) {
-			return false;
-		}
-		
-		if(y > y2+height2 || y+height < y2) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 *  Check if a pair of pos is inside another
-	 * @param x position of the second object
-	 * @param y position of the second object
-	 * @return true if inside, else false
-	 */
-	@Override
-	public boolean isInside(double x, double y) {
-		if(isInside(x, y, 0, 0) && this.getRuler().equals(Constants.sun_user)) {
-			if(Constants.DEBUG) {
-				System.out.println("Vous avez clique sur le soleil");
-			}
-			return true;
-		}
-		return false;
-			
-	}
-
-	/**
-	 *  Check if a sprite directly intersect another one
-	 * @param s the sprite to compare with
-	 * @return true if the sprite is inside, else false
-	 */
-	@Override
-	public boolean isInside(Sprite s) {
-		double x = this.getX(), y = this.getY();
-		double width = this.width(), height = this.height();
-		
-		double x2 = s.getX(), y2 = s.getY();
-		double width2 = s.width(), height2 = s.height();
-		
-		return ((x >= x2 && x <= x2 + width2) || (x2 >= x && x2 <= x + width))
-				&& ((y >= y2 && y <= y2+ height2) || (y2 >= y && y2 <= y + height));
 	}
 
 

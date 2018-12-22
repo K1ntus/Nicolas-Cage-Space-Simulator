@@ -35,6 +35,12 @@ public class RoundPlanet extends Planet implements Serializable{
 	}
 
 
+	public RoundPlanet(String img_path, User ruler, int x, int y, double size) {
+		super(img_path, ruler, x, y);
+		this.setHeight(size);
+		this.setWidth(size);
+	}
+
 	/**
 	 *  Check if a pair of positions is inside this planet
 	 * @param x position of the second object
