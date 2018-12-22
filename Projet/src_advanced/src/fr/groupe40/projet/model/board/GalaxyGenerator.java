@@ -108,8 +108,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 
 		if (rand < 0.5)
 			return Resources.path_img_round_planet2;
-		else
-			return Resources.path_img_round_planet1;
+		return Resources.path_img_round_planet1;
 		/*
 		else if (rand < 0.5)
 			return Resources.path_img_round_doge;
