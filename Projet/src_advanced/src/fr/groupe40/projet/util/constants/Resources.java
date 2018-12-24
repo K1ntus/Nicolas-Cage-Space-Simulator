@@ -13,9 +13,9 @@ public final class Resources {
 	public static final String path_img_square_time_night = "images/planets/square/time_square_night.png";
 
 	/* Round Planets	*/
-	public static final String path_img_round_planet1 = "images/planets/rounds/1.png";
-	public static final String path_img_round_planet2 = "images/planets/rounds/2.png";
-	public static final String path_img_planet_human = "images/planets/special/earth.png";
+	public static final String path_img_round_planet1 = "images/planets/rounds/p2.png";
+	public static final String path_img_round_planet2 = "images/planets/rounds/p3.png";
+	public static final String path_img_planet_human = "images/planets/special/pink.png";
 
 	/*	Sun Image Path	*/
 	public static final String path_img_sun = "images/sun.png";
@@ -31,8 +31,8 @@ public final class Resources {
 	//public static final String path_img_event_ships = "images/ships/salt.png";
 	public static final String path_img_event_ships = "images/ships/tenders.png";
 	
-	public static final String path_img_event_pirate_ships = "images/ships/pirate.png";
-	public static final String path_img_AI_ships = "images/ships/ai.png";
+	public static final String path_img_event_pirate_ships = "images/ships/cute.png";
+	public static final String path_img_AI_ships = "images/ships/alien.png";
 	
 
 	/*	******************	*/
