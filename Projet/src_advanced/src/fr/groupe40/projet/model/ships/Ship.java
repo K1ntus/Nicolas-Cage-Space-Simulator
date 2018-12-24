@@ -209,25 +209,26 @@ public class Ship extends Sprite implements Serializable {
 		double width = this.width();
 		double height = this.height();
 		Direction res = NO_COLLISION;
+		double speed_test_vector = speed;
 
 		for (Planet p : planets) {
 			if (p.equals(destination)) {
 				continue;
 			}
 
-			if (p.isInside(x - speed, y, width, height)) {
+			if (p.isInside(x - speed_test_vector, y, width, height)) {
 				collision = p;
 				return Direction.RIGHT;
-			} else if (p.isInside(x + speed, y, width, height)) {
+			} else if (p.isInside(x + speed_test_vector, y, width, height)) {
 				collision = p;
 				return Direction.LEFT;
 
-			} else if (p.isInside(x - speed, y - speed, width, height)
-					|| p.isInside(x + speed, y - speed, width, height)) {
+			} else if (p.isInside(x - speed_test_vector, y - speed_test_vector, width, height)
+					|| p.isInside(x + speed_test_vector, y - speed_test_vector, width, height)) {
 				collision = p;
 				return Direction.BOTTOM;
-			} else if (p.isInside(x - speed, y + speed, width, height)
-					|| p.isInside(x + speed, y + speed, width, height)) {
+			} else if (p.isInside(x - speed_test_vector, y + speed_test_vector, width, height)
+					|| p.isInside(x + speed_test_vector, y + speed_test_vector, width, height)) {
 				collision = p;
 				return Direction.TOP;
 
@@ -259,9 +260,9 @@ public class Ship extends Sprite implements Serializable {
 			deltaX = -speed;
 
 		if (destination.getY() < y)
-			deltaY = -speed;
+			deltaY = +speed;
 
-		this.setX(x + deltaX);
+		this.setX(x + deltaX);		
 		this.setY(y + deltaY);
 	}
 
@@ -287,7 +288,7 @@ public class Ship extends Sprite implements Serializable {
 			deltaX = -speed;
 
 		if (destination.getY() > y)
-			deltaY = speed;
+			deltaY = +speed;
 
 		this.setX(x + deltaX);
 		this.setY(y + deltaY);
@@ -315,9 +316,10 @@ public class Ship extends Sprite implements Serializable {
 			deltaY = -speed;
 
 		if (destination.getX() < x)
-			deltaX = -speed;
+			deltaX = +speed;
 
 		this.setX(x + deltaX);
+		
 		this.setY(y + deltaY);
 	}
 
@@ -343,7 +345,7 @@ public class Ship extends Sprite implements Serializable {
 			deltaY = -speed;
 
 		if (destination.getX() > x)
-			deltaX = speed;
+			deltaX = +speed;
 
 		this.setX(x + deltaX);
 		this.setY(y + deltaY);

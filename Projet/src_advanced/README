@@ -138,8 +138,9 @@ When one ship reach is destination, few situations can happens :
 *  **Ships**
 	* Sometimes, they do not really lift-off from the good planet side. Could be fixed by checking more point of each side, but it's increasing complexity so ...
 	* Path of the ships aren't smooth. Look A* algorithm, or work with angle (some stuffs about that not finished yet)
+		** Angle half working
 * **Planets**
-	* Need work to change the isInside() checking for others than SquaredPlanets
+	* Need to rework collision handler for round planets
 * **Waiting**
 	* Find a way to make some loading screen (We did some trials using gif, without success), but there's may be the progressbar tools from javafx that could be used 
 * The game exit if no playable could be generated, instead of another Constants try.
