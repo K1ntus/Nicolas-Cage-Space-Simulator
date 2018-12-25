@@ -28,7 +28,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 */
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
 
-	public static int first_free_id = Constants.ai_faction - 4;
+	public static int first_free_id = Constants.ai_faction +1;
 	
 	private static GalaxyGenerator instance = null;
 
