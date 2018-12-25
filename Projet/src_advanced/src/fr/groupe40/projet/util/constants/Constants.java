@@ -135,12 +135,6 @@ public final class Constants {
 	public static final User neutral_user = new User(neutral_faction, neutral_id);
 	
 	/**
-	 * ai user constant, should be managed with collection 
-	 * to handle multiple ai players
-	 */
-	public static final User ai_user = new User(ai_faction, 1);
-	
-	/**
 	 * Human user constant
 	 */
 	public static final User human_user = new User(human_faction, human_id);

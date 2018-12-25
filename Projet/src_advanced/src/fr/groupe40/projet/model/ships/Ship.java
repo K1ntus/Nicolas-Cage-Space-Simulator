@@ -63,6 +63,7 @@ public class Ship extends Sprite implements Serializable {
 		this.setY(y_init);
 		this.ship_type = ship_type;
 		this.collision = source;
+		this.updateImage();
 	}
 
 	@Override

@@ -227,7 +227,6 @@ public class Galaxy implements Serializable{
 	
 	
 	public void resetEveryUsersLostState() {
-		Constants.ai_user.setLost(false);
 		Constants.human_user.setLost(false);
 	}
 	
