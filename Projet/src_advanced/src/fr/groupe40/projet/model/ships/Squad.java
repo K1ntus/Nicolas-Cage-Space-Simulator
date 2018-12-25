@@ -120,7 +120,7 @@ public class Squad implements Serializable {
 			}
 			double x, y;
 			
-			//if(source.getClass().getName() == "SquarePlanet") {	//Planet is a square
+			if(source.getClass().getName() == "SquarePlanet") {	//Planet is a square
 				switch(summoningSide()) {
 					case TOP:
 						x = this.horizontalSummoning();
@@ -144,11 +144,11 @@ public class Squad implements Serializable {
 						break;
 				}
 				
-			//} else {	//Planet is a circle
-			//	x = this.decollageX(source)*0.999;
-			//	y = this.decollageY(source)*1.001;							
-			//}
-			
+		} else {	//Planet is a circle
+			Planet p = this.getSource();
+			x = this.decollageXRound(p);
+			y = this.decollageYRound(p);					
+		}
 			
 			ships.add(
 				new Ship(
@@ -376,6 +376,45 @@ public class Squad implements Serializable {
 			return (source.width() + source.getY() + 1);		
 	}
 
+	/**
+	 *  Calculate the x Position for lift-off
+	 * @param source the source Round planet
+	 * @return abscissa position
+	 */
+	private double decollageXRound(Planet source) {
+		if(summonX*Constants.size_squads + source.getX() < source.getPerimeter()) {
+			summonX += 1;
+			
+			
+		} else if (summonX*Constants.size_squads + source.getX() >= source.getPerimeter()) {
+			summonX = 1;
+			summoning = false;			
+		}
+		double angle = (summonX * Constants.size_squads) * Math.PI / 180;
+		
+		return (source.getX() + 2 * source.getRadius() * Math.cos(angle));
+	}
+	
+	
+	/**
+	 *  Calculate the x Position for lift-off
+	 * @param source the source Round planet
+	 * @return abscissa position
+	 */
+	private double decollageYRound(Planet source) {
+		if(summonX*Constants.size_squads + source.getX() < source.getPerimeter()) {
+			summonX += 1;
+			
+			
+		} else if (summonX*Constants.size_squads + source.getX() >= source.getPerimeter()) {
+			summonX = 1;
+			summoning = false;			
+		}
+		double angle = (summonX * Constants.size_squads) * Math.PI / 180;
+		
+		return (source.getY() + 2 * source.getRadius() * Math.cos(angle));
+	}
+	
 	/**
 	 * @return the ships
 	 */

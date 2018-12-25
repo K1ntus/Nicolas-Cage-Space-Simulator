@@ -40,7 +40,16 @@ public class RoundPlanet extends Planet implements Serializable{
 		this.setHeight(size);
 		this.setWidth(size);
 	}
-
+	
+	public double getRadius() {
+		return (this.height() / 2);
+	}
+	
+	public double getPerimeter() {
+		return 2 * Math.PI * this.height();
+	}
+	
+	
 	/**
 	 *  Check if a pair of positions is inside this planet
 	 * @param x position of the second object

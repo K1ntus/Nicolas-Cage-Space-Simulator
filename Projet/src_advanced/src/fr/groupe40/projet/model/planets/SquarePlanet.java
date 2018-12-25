@@ -84,6 +84,17 @@ public class SquarePlanet extends Planet  implements Serializable{
 				&& ((y >= y2 && y <= y2+ height2) || (y2 >= y && y2 <= y + height));
 	}
 	
+	
+
+	public double getPerimeter() {
+		return 0;
+	}
+	
+	
+	public double getRadius() {
+		return 0;
+	}
+	
 	public String toString() {
 		return "SquaredPlanet <" + this.getX() + ", " + this.getY() + "> - Ruled by id: " +this.getRuler().getId();
 	}
