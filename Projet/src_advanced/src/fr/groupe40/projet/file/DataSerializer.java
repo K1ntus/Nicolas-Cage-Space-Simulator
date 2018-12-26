@@ -170,7 +170,6 @@ public class DataSerializer {
 			System.out.println("Unable to load game");
 			e.printStackTrace();
 		}
-		reload_image_and_data(loaded);
 		Galaxy res = new Galaxy(loaded, gc);
 		return res;
 	}

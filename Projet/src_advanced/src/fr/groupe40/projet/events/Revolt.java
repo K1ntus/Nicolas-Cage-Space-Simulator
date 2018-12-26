@@ -42,7 +42,7 @@ final class Revolt {
 			}
 			
 			if(Constants.ai_enabled)
-				if(u.getId() > 0 && !ai) {
+				if(u.equals(Constants.ai_user) && !ai) {
 					ai = true;
 					
 					for(Planet dest: galaxy.getPlanets()) {

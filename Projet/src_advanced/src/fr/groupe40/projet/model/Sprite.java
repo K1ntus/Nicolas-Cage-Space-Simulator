@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.resources.ImageManager;
@@ -91,9 +90,6 @@ public abstract class Sprite implements Serializable {
 	 *  Update the image linked to a sprite
 	 */
 	public void updateImage() {
-		if(!(this instanceof Planet)) {
-			
-		}
 		try {
 			switch(img_path) {
 			case Resources.path_img_human_ships:
