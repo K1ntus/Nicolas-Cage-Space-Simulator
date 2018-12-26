@@ -101,7 +101,7 @@ public final class GalaxyRenderer {
 
 	private static void renderAIGarrison(Planet p, GraphicsContext gc) {
 		// ID 0 = -4
-		int id = p.getRuler().getId() - 1;
+		int id = p.getRuler().getId() - 2;
 		ColorAI[] arr = ColorAI.values();
 		try {
 			gc.setFill(arr[id].getColor());
