@@ -133,8 +133,7 @@ public class SettingsMenu {
 	 * Source: https://examples.javacodegeeks.com/desktop-java/javafx/listview-javafx/javafx-listview-example/#intro_code
 	 */
 	private void difficulty_selector() {
-        Label difficultyLabel = new Label("Select Difficulty: ");
-		ObservableList<String> difficultyList = FXCollections.<String>observableArrayList("Initie", "Space Marine", "Praetor", "Primarque");
+		ObservableList<String> difficultyList = FXCollections.<String>observableArrayList("Difficultée","-------------","Initie", "Space Marine", "Praetor", "Primarque");
 
         // Create the ListView for the seasons
         ListView<String> difficulties = new ListView<>(difficultyList);
@@ -166,7 +165,7 @@ public class SettingsMenu {
 		// Set Spacing to 10 pixels
 		difficulty_selection.setSpacing(25);
 		// Add the Label and the List to the VBox
-		difficulty_selection.getChildren().addAll(difficultyLabel, difficulties);
+		difficulty_selection.getChildren().addAll(difficulties);
 
 		//grid.add((difficultyLabel), 7, 2);
 		grid.add((difficulty_selection), 3, 10);
