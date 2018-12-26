@@ -41,8 +41,9 @@ public class RoundPlanet extends Planet implements Serializable{
 		this.setWidth(size);
 	}
 
+
 	/**
-	 *  Check if a pair of positions is inside this planet
+	 *  Check if a pair of pos is inside another
 	 * @param x position of the second object
 	 * @param y position of the second object
 	 * @return true if inside, else false
@@ -54,8 +55,6 @@ public class RoundPlanet extends Planet implements Serializable{
 				System.out.println("Vous avez clique sur une planete avec "+this.getTroups());
 				System.out.println("Celle ci appartient a l'ID: "+ this.getRuler().getId());
 				System.out.println("et de type: "+ this.getRuler().getFaction());
-				System.out.println(this.toString());
-				System.out.println("***************************");
 			}
 			return true;
 		}
@@ -73,13 +72,15 @@ public class RoundPlanet extends Planet implements Serializable{
 	 */
 	@Override
 	public boolean isInside(double x, double y, double width, double height) {
+		double x2 = this.getX(), y2 = this.getY(), width2 = this.width(), height2 = this.height();
+		if(x > x2+width2 || x+width < x2) {
+			return false;
+		}
 		
-		double distance = Math.min(
-				Math.min(this.distance(x, y), this.distance(x+width, y+height)),
-				Math.min(this.distance(x+width, y), this.distance(x, y+height)));
-		if(distance <= this.width()/2)
-			return true;
-		return false;
+		if(y > y2+height2 || y+height < y2) {
+			return false;
+		}
+		return true;
 	}
 
 	/**

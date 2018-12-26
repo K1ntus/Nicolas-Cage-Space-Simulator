@@ -208,7 +208,20 @@ public class Ship extends Sprite implements Serializable {
 	public Direction whereis_collision(double x, double y, double speed, List<Planet> planets) {
 		double width = this.width();
 		double height = this.height();
+		
+		double centre_x = destination.getX()/2;
+		double centre_y = destination.getY()/2;
+
+		double deltaX = 0, deltaY = 0;
+		double angle = angle_to_follow(this.destination);
+		
+		deltaX = speed;
+
+		deltaY = speed;
+		
+		
 		Direction res = NO_COLLISION;
+		
 		double speed_test_vector = speed;
 
 		for (Planet p : planets) {
@@ -216,19 +229,22 @@ public class Ship extends Sprite implements Serializable {
 				continue;
 			}
 
-			if (p.isInside(x - speed_test_vector, y, width, height)) {
+			if (p.isInside(x + deltaX, y, width, height)) {
 				collision = p;
 				return Direction.RIGHT;
-			} else if (p.isInside(x + speed_test_vector, y, width, height)) {
+			} else if ((p.isInside(x + deltaX, y, width, height)
+					|| (p.isInside(x - deltaX, y, width, height) ))
+					&& !(p.isInside(x, y + deltaY, width, height) || (p.isInside(x, y + deltaY, width, height)) )
+							) {
 				collision = p;
 				return Direction.LEFT;
 
-			} else if (p.isInside(x - speed_test_vector, y - speed_test_vector, width, height)
-					|| p.isInside(x + speed_test_vector, y - speed_test_vector, width, height)) {
+			} else if (p.isInside(x + deltaX, y + deltaY, width, height)
+					|| p.isInside(x + deltaX, y + deltaY, width, height)) {
 				collision = p;
 				return Direction.BOTTOM;
-			} else if (p.isInside(x - speed_test_vector, y + speed_test_vector, width, height)
-					|| p.isInside(x + speed_test_vector, y + speed_test_vector, width, height)) {
+			} else if (p.isInside(x + deltaX, y + deltaY, width, height)
+					|| p.isInside(x + deltaX, y + deltaY, width, height)) {
 				collision = p;
 				return Direction.TOP;
 
@@ -319,7 +335,6 @@ public class Ship extends Sprite implements Serializable {
 			deltaX = +speed;
 
 		this.setX(x + deltaX);
-		
 		this.setY(y + deltaY);
 	}
 
