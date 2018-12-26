@@ -256,14 +256,7 @@ public abstract class Planet extends Sprite {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-	/**
-	 * @return the perimeter
-	 */
-	public abstract double getPerimeter();
 	
-	
-	/**
-	 * @return the radius
-	 */
-	public abstract double getRadius();
+
+
 }
