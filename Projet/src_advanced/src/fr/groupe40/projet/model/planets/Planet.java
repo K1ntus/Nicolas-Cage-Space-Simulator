@@ -116,8 +116,8 @@ public abstract class Planet extends Sprite {
 		produce_rate =  (int) (Math.random() * (Constants.max_ship_produce - Constants.min_ship_produce) +1);
 		
 		ships_type = new ShipType();
-		
-		this.updateImage();
+		if(this.getImg_path() != null)
+			this.updateImage();
 	}
 	
 	/**

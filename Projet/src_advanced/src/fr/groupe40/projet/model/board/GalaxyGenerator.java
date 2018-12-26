@@ -125,7 +125,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		double rand = Math.random();
 
 		if (rand < 0.5)
-			return new RoundPlanet(getRandomRoundPlanetImgPath(), new User(Constants.neutral_user),
+			return new RoundPlanet(null, new User(Constants.neutral_user),
 					(int) (Constants.left_margin_size + Constants.size_squads), 0);
 		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Constants.neutral_user),
 				(int) (Constants.left_margin_size + Constants.size_squads), 0);
@@ -151,6 +151,11 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 				if (isFarEnough(p, p.width() / 2 + Constants.minimal_distance_between_planets)) {
 					if (planets.size() == 1 && Constants.sun_enabled) // Only the sun has been generated
 						p = new RoundPlanet(p);
+					if(p.getClass().getName() == "RoundPlanet")
+						p.setImg_path(getRandomRoundPlanetImgPath());
+					else
+						p.setImg_path(getRandomSquarePlanetImgPath());
+					p.updateImage();
 					planets.add(p);
 					break;
 				}

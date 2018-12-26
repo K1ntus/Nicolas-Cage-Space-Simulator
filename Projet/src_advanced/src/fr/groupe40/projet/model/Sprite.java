@@ -10,7 +10,6 @@ import fr.groupe40.projet.util.resources.ImageManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-
 /**
  * 
  * @author Jordane Masson
@@ -19,60 +18,61 @@ import javafx.scene.image.Image;
  */
 public abstract class Sprite implements Serializable {
 	private static final long serialVersionUID = 361050239890707789L;
-	
+
 	/**
-	 *  his image to display
+	 * his image to display
 	 */
-	private transient Image image;	//unserializable
-	
+	private transient Image image; // unserializable
+
 	/**
-	 *  his img path
+	 * his img path
 	 */
 	private String img_path;
-	
+
 	/**
-	 *  his width & height
+	 * his width & height
 	 */
 	private double width, height;
-	
+
 	/**
-	 *  x and y position
+	 * x and y position
 	 */
 	private double x, y;
-	
+
 	/**
-	 *  maximal x and y position
+	 * maximal x and y position
 	 */
 	private double maxX, maxY;
-	
+
 	/**
-	 *  minimal x and y position
+	 * minimal x and y position
 	 */
 	private double minX, minY;
 
 	/**
-	 *  the ruler of this sprites (Planets, Ship, ...)
+	 * the ruler of this sprites (Planets, Ship, ...)
 	 */
 	private User ruler;
 
 	/**
-	 *  Create a sprite from an image path, a ruler and if its a planets or not
-	 * @param path Path to the image file
-	 * @param ruler Ruler of this sprite
+	 * Create a sprite from an image path, a ruler and if its a planets or not
+	 * 
+	 * @param path     Path to the image file
+	 * @param ruler    Ruler of this sprite
 	 * @param isPlanet Its a planet or not
 	 */
 	public Sprite(String path, User ruler, boolean isPlanet) {
 		this.img_path = path;
-		
+
 		width = Constants.size_squads;
 		maxX = (Constants.width - width);
 		maxY = (Constants.height - height);
 
 		this.ruler = ruler;
-		
-		if(isPlanet) {
-			width = Math.random() * Constants.size_maximal_planets  + Constants.size_minimal_planets;
-			if(width > Constants.size_maximal_planets)
+
+		if (isPlanet) {
+			width = Math.random() * Constants.size_maximal_planets + Constants.size_minimal_planets;
+			if (width > Constants.size_maximal_planets)
 				width = Constants.size_maximal_planets;
 
 			maxX = (Constants.width - width - Constants.right_margin_size);
@@ -81,37 +81,37 @@ public abstract class Sprite implements Serializable {
 
 		minY = Constants.top_margin_size - height;
 		minX = Constants.left_margin_size - width;
-		height = width;			
-		
-		updateImage();
+		height = width;
+
+		if (this.img_path != null)
+			updateImage();
 	}
 
 	/**
-	 *  Update the image linked to a sprite
+	 * Update the image linked to a sprite
 	 */
 	public void updateImage() {
-		try {
-			switch(img_path) {
-			case Resources.path_img_human_ships:
+		if(this.getClass().getName() == "Ship") {
+			if (ruler.getFaction() == Constants.human_faction)
 				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_human_ships();
-				break;
-			case Resources.path_img_AI_ships:
-				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_ai_ships();
-				break;
-			case Resources.path_img_event_pirate_ships:
+			else if (ruler.getId() == Constants.pirate_id)
 				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_pirate_ships();
-				break;
-			default:
+			else if (ruler.getFaction() == Constants.ai_faction)
+				ImageManager.getRessourcePathByName(Resources.path_img_AI_ships);
+			else {
+				System.out.println("called for img: " + this.img_path);
 				image = ImageManager.getImageByPath(this.img_path, width);
-				break;
 			}
-		} catch(NullPointerException e) {
-			//No image
+			
+			return;
 		}
+
+		image = ImageManager.getImageByPath(this.img_path, width);		
 	}
-	
+
 	/**
-	 *  Set the x and y position of a sprite
+	 * Set the x and y position of a sprite
+	 * 
 	 * @param x New x position
 	 * @param y New y position
 	 */
@@ -119,21 +119,23 @@ public abstract class Sprite implements Serializable {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
-	 *  Return the distance between a sprite and a 2d coord.
-	 * @param x 
+	 * Return the distance between a sprite and a 2d coord.
+	 * 
+	 * @param x
 	 * @param y
 	 * @return Distance between those 2 positions
 	 */
 	public double distance(double x, double y) {
-		double center_x = this.x + width/2;
-		double center_y = this.y + height/2;
-		return distance(x,y, center_x, center_y);
+		double center_x = this.x + width / 2;
+		double center_y = this.y + height / 2;
+		return distance(x, y, center_x, center_y);
 	}
-	
+
 	/**
-	 *  Return the distance between 2 dots
+	 * Return the distance between 2 dots
+	 * 
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -141,29 +143,29 @@ public abstract class Sprite implements Serializable {
 	 * @return A distance
 	 */
 	public static double distance(double x1, double y1, double x2, double y2) {
-		double res = Math.hypot(x1-x2, y1-y2); 
+		double res = Math.hypot(x1 - x2, y1 - y2);
 		return res;
 	}
-	
+
 	/**
-	 *  Calculate the distance between 2 sprites
+	 * Calculate the distance between 2 sprites
+	 * 
 	 * @param p Second sprite to compare with
 	 * @return The distance
 	 */
 	public double distance(Sprite p) {
 		return distance(p.x, p.y);
 	}
-	
+
 	/**
-	 *  Verify if a sprite is not out of bounds
+	 * Verify if a sprite is not out of bounds
 	 */
 	public void validatePosition() {
 		if (x + width >= maxX) {
 			x = maxX - width;
 		} else if (x <= minX) {
 			x = minX;
-		}
-		else if (x < 0) {
+		} else if (x < 0) {
 			x = 0;
 		}
 
@@ -171,13 +173,14 @@ public abstract class Sprite implements Serializable {
 			y = maxY - height - Constants.bottom_margin_size;
 		} else if (y <= minY) {
 			y = minY;
-		}else if (y < 0) {
+		} else if (y < 0) {
 			y = 0;
 		}
 	}
-	
+
 	/**
-	 *  Check if a rectangle intersect a circle
+	 * Check if a rectangle intersect a circle
+	 * 
 	 * @param x_left
 	 * @param y_top
 	 * @param x_right
@@ -186,95 +189,94 @@ public abstract class Sprite implements Serializable {
 	 */
 	public final boolean intersectCircle(double x_left, double y_top, double x_right, double y_bottom, double radius) {
 
-		double circle_x = this.x + this.width/2;
-		double circle_y = this.y + this.height/2;
+		double circle_x = this.x + this.width / 2;
+		double circle_y = this.y + this.height / 2;
 		double circle_left = circle_x - radius;
 		double circle_top = circle_y - radius;
 		double circle_right = circle_x + radius;
 		double circle_bottom = circle_y + radius;
-		
-		//Reject if corner are clearly out of the circle
-		if(x_right < circle_left && x_left > circle_right || y_bottom < circle_top && y_top > circle_bottom) {
+
+		// Reject if corner are clearly out of the circle
+		if (x_right < circle_left && x_left > circle_right || y_bottom < circle_top && y_top > circle_bottom) {
 			return true;
 		}
-		//check if center of circle is inside rectangle
-		if(x_left <= circle_x && circle_x <= x_right && y_top <= circle_y && circle_y <= y_bottom) {
-			//System.out.println("**Circle is inside rectangle");
+		// check if center of circle is inside rectangle
+		if (x_left <= circle_x && circle_x <= x_right && y_top <= circle_y && circle_y <= y_bottom) {
+			// System.out.println("**Circle is inside rectangle");
 			return true;
 		}
-		        		
-		//Check every point of the 'rectangle'
-		//High consumption
-		for(double x1 = x_left; x1 < x_right; x1++) {
-			for(double y1 = y_top; y1 < y_bottom; y1++) {
-				if(Math.hypot(x1 - circle_x, y1 - circle_y) <= radius) {
+
+		// Check every point of the 'rectangle'
+		// High consumption
+		for (double x1 = x_left; x1 < x_right; x1++) {
+			for (double y1 = y_top; y1 < y_bottom; y1++) {
+				if (Math.hypot(x1 - circle_x, y1 - circle_y) <= radius) {
 					return true;
 				}
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
-	 *  Check if a sprite intersect another circle from a sprite
-	 * In fact, we're generating a circle around a sprite to check the distance between each others
+	 * Check if a sprite intersect another circle from a sprite In fact, we're
+	 * generating a circle around a sprite to check the distance between each others
+	 * 
 	 * @param p a sprite
 	 * @return true if the sprite is in the circle else false
 	 */
 	public boolean intersectCircle(Sprite p, double radius) {
-		return intersectCircle(
-				p.getX(),
-				p.getY(),
-				p.getX()+p.width, 
-				p.getY()+p.height,
-				radius
-			);
+		return intersectCircle(p.getX(), p.getY(), p.getX() + p.width, p.getY() + p.height, radius);
 	}
 
 	/**
-	 *  Check if a rectangle is inside another
-	 * @param x	the x-top corner
-	 * @param y the y-top corner
-	 * @param width the width of the rectangle
+	 * Check if a rectangle is inside another
+	 * 
+	 * @param x      the x-top corner
+	 * @param y      the y-top corner
+	 * @param width  the width of the rectangle
 	 * @param height the height of the rectangle
 	 * @return true if inside else false
 	 */
 	public abstract boolean isInside(double x, double y, double width, double height);
-	
+
 	/**
-	 *  Check if a pair of pos is inside another
+	 * Check if a pair of pos is inside another
+	 * 
 	 * @param x position of the second object
 	 * @param y position of the second object
 	 * @return true if inside, else false
 	 */
 	public abstract boolean isInside(double x, double y);
-	
+
 	/**
-	 *  Check if a sprite directly intersect another one
+	 * Check if a sprite directly intersect another one
+	 * 
 	 * @param s the sprite to compare with
 	 * @return true if the sprite is inside, else false
 	 */
 	public abstract boolean isInside(Sprite s);
-	
 
 	/**
-	 *  check if two sprite are equals, should be abstract
+	 * check if two sprite are equals, should be abstract
+	 * 
 	 * @param s the sprite to compare with
 	 * @return true if both are the same
 	 */
 	public boolean equals(Sprite s) {
 		User user1 = this.getRuler();
 		User user2 = s.getRuler();
-		
+
 		if (!user1.equals(user2) || this.x != s.x || this.y != s.y) {
 			return false;
 		}
 		return false;
 	}
-	
+
 	/**
-	 *  Set the position of a sprite then validate his position
+	 * Set the position of a sprite then validate his position
+	 * 
 	 * @param x
 	 * @param y
 	 */
@@ -285,18 +287,18 @@ public abstract class Sprite implements Serializable {
 	}
 
 	/**
-	 *  Render the image of this sprite
+	 * Render the image of this sprite
+	 * 
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
 		gc.drawImage(image, x, y);
 	}
 
-	
 	/* Getter & Setter */
 
 	/**
-	 *  convert the object to string with his 2D position
+	 * convert the object to string with his 2D position
 	 */
 	public String toString() {
 		return "Sprite<" + x + ", " + y + ">";
@@ -315,6 +317,7 @@ public abstract class Sprite implements Serializable {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+
 	public void setImage(String img_path) {
 		this.image = new Image(img_path, width, height, false, false);
 	}
