@@ -1,8 +1,8 @@
 package fr.groupe40.projet.client.window;
 
 import fr.groupe40.projet.model.board.GalaxyRenderer;
-import fr.groupe40.projet.util.constants.Difficulty;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Difficulty;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
 import fr.groupe40.projet.util.window.GridElement;
@@ -18,7 +18,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;

@@ -140,7 +140,7 @@ When one ship reach is destination, few situations can happens :
 	* Path of the ships aren't smooth. Look A* algorithm, or work with angle (some stuffs about that not finished yet)
 		** Angle half working
 * **Planets**
-	* Need to rework collision handler for round planets
+	* Need to rework collision handler for round planets, and for any other possible shape of planets, ofc.
 * **Waiting**
 	* Find a way to make some loading screen (We did some trials using gif, without success), but there's may be the progressbar tools from javafx that could be used 
 * The game exit if no playable could be generated, instead of another Constants try.
