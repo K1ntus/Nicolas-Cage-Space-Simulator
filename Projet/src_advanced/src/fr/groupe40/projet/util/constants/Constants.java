@@ -109,7 +109,7 @@ public final class Constants {
 	/**
 	 * Constants about players faction
 	 */
-	public static final int neutral_faction = 0, human_faction = 1, ai_faction = -1;
+	public static final int neutral_faction = -1, human_faction = 0, ai_faction = 1;
 
 	/**
 	 * Pirate id

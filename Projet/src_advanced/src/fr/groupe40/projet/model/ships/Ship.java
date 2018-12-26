@@ -163,7 +163,7 @@ public class Ship extends Sprite implements Serializable {
 			top_collision_mover(x, y, centre_x, centre_y, speed);
 			
 			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a top prevention!");
+				//System.out.println("collision inc after a top prevention!");
 			}
 			// System.out.println("Top collision");
 			break;
@@ -171,7 +171,7 @@ public class Ship extends Sprite implements Serializable {
 			bottom_collision_mover(x, y, centre_x, centre_y, speed);
 			
 			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a bottom prevention!");
+				//System.out.println("collision inc after a bottom prevention!");
 			}
 			// System.out.println("Bottom collision");
 			break;
@@ -179,7 +179,7 @@ public class Ship extends Sprite implements Serializable {
 			left_collision_mover(x, y, centre_x, centre_y, speed);
 			
 			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a left prevention!");
+				//System.out.println("collision inc after a left prevention!");
 			}
 			// System.out.println("Right collision");
 			break;
@@ -187,7 +187,7 @@ public class Ship extends Sprite implements Serializable {
 			right_collision_mover(x, y, centre_x, centre_y, speed);
 			
 			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a right prevention!");
+				//System.out.println("collision inc after a right prevention!");
 			}
 			// System.out.println("Left collision");
 			break;

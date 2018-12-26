@@ -28,9 +28,7 @@ final class Revolt {
 			if(u.equals(Constants.human_user) && !user) {
 				user = true;
 				for(Planet dest: galaxy.getPlanets()) {
-					int id1 = dest.getRuler().getId();
-					int id2 = u.getId();
-					if(!src.equals(dest) && (id1 == id2)) {
+					if(!src.equals(dest) && u.equals(dest.getRuler())) {
 						launch_fleet(galaxy, src, dest);
 
 						if(Constants.DEBUG)
@@ -42,7 +40,7 @@ final class Revolt {
 			}
 			
 			if(Constants.ai_enabled)
-				if(u.equals(Constants.ai_user) && !ai) {
+				if(u.getFaction() == Constants.ai_faction && !ai) {
 					ai = true;
 					
 					for(Planet dest: galaxy.getPlanets()) {

@@ -5,9 +5,9 @@ import javafx.scene.paint.Color;
 public enum ColorAI {
 	AI_0 (Color.RED),
 	AI_1 (Color.INDIGO),
-	AI_2(Color.GOLD);
-	
-	
+	AI_2 (Color.GOLD),
+	AI_3 (Color.TOMATO),
+	AI_4 (Color.LEMONCHIFFON);
 	
 	
 	private final Color color;

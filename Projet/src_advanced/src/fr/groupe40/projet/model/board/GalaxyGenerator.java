@@ -28,8 +28,8 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 */
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
 
-	public static int first_free_id = Constants.ai_faction +1;
-	
+	public static int first_free_id = Constants.ai_faction + 1;
+
 	private static GalaxyGenerator instance = null;
 
 	/**
@@ -45,13 +45,13 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static GalaxyGenerator getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new GalaxyGenerator();
 		return instance;
 	}
-	
+
 	public static void resetInstance() {
 		instance = null;
 	}
@@ -61,7 +61,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		if (Constants.sun_enabled)
 			generateSun();
 		boolean state = generatePlanets();
-		if(state)
+		if (state)
 			return planets;
 		else
 			return null;
@@ -110,12 +110,10 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 			return Resources.path_img_round_planet2;
 		return Resources.path_img_round_planet1;
 		/*
-		else if (rand < 0.5)
-			return Resources.path_img_round_doge;
-		else if (rand < 0.75)
-			return Resources.path_img_round_smoke;
-		return Resources.path_img_round_kfc_planet;
-		*/
+		 * else if (rand < 0.5) return Resources.path_img_round_doge; else if (rand <
+		 * 0.75) return Resources.path_img_round_smoke; return
+		 * Resources.path_img_round_kfc_planet;
+		 */
 	}
 
 	/**
@@ -135,6 +133,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 
 	/**
 	 * Generate the planets for the galaxy initialization
+	 * 
 	 * @return true if the generation worked, else false
 	 */
 	public boolean generatePlanets() {
@@ -150,7 +149,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 
 			while (p.updatePlanetePosition() != -1) {
 				if (isFarEnough(p, p.width() / 2 + Constants.minimal_distance_between_planets)) {
-					if(planets.size() == 1 && Constants.sun_enabled)	//Only the sun has been generated
+					if (planets.size() == 1 && Constants.sun_enabled) // Only the sun has been generated
 						p = new RoundPlanet(p);
 					planets.add(p);
 					break;
@@ -159,31 +158,25 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 
 		}
 
-		if (planets.size() < Constants.min_numbers_of_planets) { //Summoned when there's less planet than this value (usually 3 if sun, else set to 2)
+		if (planets.size() < Constants.min_numbers_of_planets) { // Summoned when there's less planet than this value
+																	// (usually 3 if sun, else set to 2)
 			System.out.println("Impossible de generer un terrain minimal");
 			return false;
-		} else { //We set 2 planets, one to the player, one to an ai
-				planets.get(1).setRuler(Constants.human_user);
-				planets.get(1).setImg_path(Resources.path_img_planet_human);
-				planets.get(1).updateImage();
-				
-				
+		} else { // We set 2 planets, one to the player, one to an ai
+			planets.get(1).setRuler(Constants.human_user);
+			planets.get(1).setImg_path(Resources.path_img_planet_human);
+			planets.get(1).updateImage();
+
+			/*
+			 * Loop to set planets to AI user
+			 */
 			if (Constants.ai_enabled) {
-				planets.get(2).setRuler(Constants.ai_user);
-				
-				/*
-				 * Loop to set planets to AI user
-				 */
-				for (int i = 0; i < Constants.ai_number - 1; i++) // -1 because one is generated outside of this loop
-					if (i >= ColorAI.values().length)
+				for (int i = 1; i < Constants.ai_number - 1 && i < ColorAI.values().length; i++)
+					try {
+						planets.get(1 + i).setRuler(new User());
+					} catch (IndexOutOfBoundsException e) {
+						// Not enough planets to handle every ai
 						break;
-					else {
-						try {
-							planets.get(3 + i).setRuler(new User());
-						} catch (IndexOutOfBoundsException e) {
-							//Not enought planets to handle every ai
-							break;
-						}
 					}
 			}
 		}
@@ -199,10 +192,10 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	}
 
 	/**
-	 * Set the troops for the human player.
-	 * Depend of the difficulty
+	 * Set the troops for the human player. Depend of the difficulty
+	 * 
 	 * @param planet_human the planet to change troops
-	 * @param planet_ai an array list with every planets ruled by an ai
+	 * @param planet_ai    an array list with every planets ruled by an ai
 	 */
 	private void normalize_beginning_troups(Planet planet_human, List<Planet> planet_ai) {
 		int max_troups_from_ai = -1;
@@ -234,8 +227,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * he's doing
 	 * 
 	 * @deprecated use isFarEnought function instead of this one
-	 * @param p
-	 *            The planet we are trying to generate
+	 * @param p The planet we are trying to generate
 	 * @return false if not able to generate this planet, else true
 	 */
 	@SuppressWarnings("unused")
@@ -268,7 +260,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * Check if the planet passed in parameters is far enough from every others
 	 * planets (ie. distance < radius)
 	 * 
-	 * @param p The planet to check
+	 * @param p      The planet to check
 	 * @param radius the minimal distance between each planets
 	 * @return true if its ok, else false
 	 */
@@ -295,8 +287,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	}
 
 	/**
-	 * @param planets
-	 *            the planets to set
+	 * @param planets the planets to set
 	 */
 	public void setPlanets(ArrayList<Planet> planets) {
 		this.planets = planets;

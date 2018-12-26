@@ -143,7 +143,7 @@ public class Galaxy implements Serializable{
 		for(Planet p : planets) {
 			User ruler = p.getRuler();
 			
-			if(ruler.getId() < 0 && ruler.getFaction() == Constants.ai_faction) {	//0 = neutral, >0 human, <0 bot
+			if(ruler.getFaction() == Constants.ai_faction) {
 				source = p;
 				
 				for(Planet p2 : planets) {	//Check again the planets list
