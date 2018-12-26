@@ -161,35 +161,15 @@ public class Ship extends Sprite implements Serializable {
 			break;
 		case TOP:
 			top_collision_mover(x, y, centre_x, centre_y, speed);
-			
-			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a top prevention!");
-			}
-			// System.out.println("Top collision");
 			break;
 		case BOTTOM:
 			bottom_collision_mover(x, y, centre_x, centre_y, speed);
-			
-			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a bottom prevention!");
-			}
-			// System.out.println("Bottom collision");
 			break;
 		case LEFT:
 			left_collision_mover(x, y, centre_x, centre_y, speed);
-			
-			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a left prevention!");
-			}
-			// System.out.println("Right collision");
 			break;
 		case RIGHT:
 			right_collision_mover(x, y, centre_x, centre_y, speed);
-			
-			if(whereis_collision(this.getX(), this.getY(), this.getSpeed(), planets)!= Direction.NO_COLLISION) {
-				System.out.println("collision inc after a right prevention!");
-			}
-			// System.out.println("Left collision");
 			break;
 		default:
 			break;
