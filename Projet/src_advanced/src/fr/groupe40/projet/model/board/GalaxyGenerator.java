@@ -5,10 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.groupe40.projet.client.User;
-import fr.groupe40.projet.model.planets.PlanetFactory;
 import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.planets.PlanetFactory;
 import fr.groupe40.projet.model.planets.RoundPlanet;
-import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.ColorAI;
 import fr.groupe40.projet.util.constants.Constants;
@@ -28,8 +27,14 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 */
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
 
+	/**
+	 * First id available for the next ai
+	 */
 	public static int first_free_id = Constants.ai_faction;
 
+	/**
+	 * Singleton instance
+	 */
 	private static GalaxyGenerator instance = null;
 
 	/**
@@ -46,16 +51,26 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		}
 	}
 
+	/**
+	 * Get the singleton instance
+	 * @return
+	 */
 	public static GalaxyGenerator getInstance() {
 		if (instance == null)
 			instance = new GalaxyGenerator();
 		return instance;
 	}
 
+	/**
+	 * Reset the singleton instance
+	 */
 	public static void resetInstance() {
 		instance = null;
 	}
 
+	/**
+	 * Call when this object is created. Generate the planets and users list
+	 */
 	@Override
 	protected ArrayList<Planet> call() throws Exception {
 		if (Constants.sun_enabled)
@@ -66,8 +81,6 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		else
 			return null;
 	}
-
-	/* Sun Constants */
 
 	/**
 	 * Generate a sun in the center of the board

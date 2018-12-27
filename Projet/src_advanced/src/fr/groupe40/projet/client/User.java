@@ -45,7 +45,6 @@ public class User implements Serializable{
 	/**
 	 * Constructor for new ai player
 	 */
-	//@WorkInProgress(comment="AI cosntructor")
 	public User() {
 		this.faction = Constants.ai_faction;
 		this.lost = false;

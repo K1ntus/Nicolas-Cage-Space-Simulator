@@ -137,6 +137,9 @@ public class SoundManager {
 		return instance;
 	}
 	
+	/**
+	 * Destroy the current instance
+	 */
 	public static void destroy() {
 		instance = null;
 	}

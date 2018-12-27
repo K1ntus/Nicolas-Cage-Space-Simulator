@@ -141,7 +141,6 @@ public class Galaxy implements Serializable {
 			}
 		}
 
-		System.out.println("user has won");
 		return true;
 	}
 
