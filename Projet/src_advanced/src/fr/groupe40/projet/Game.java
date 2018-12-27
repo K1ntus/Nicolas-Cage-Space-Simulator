@@ -362,7 +362,6 @@ public class Game extends Application {
 						System.out.println("Partie terminee\n" + "Generating new board ...");
 
 					galaxy.resetEveryUsersLostState();
-					GalaxyGenerator.first_free_id = Constants.ai_faction - 4;
 					game_init_done = false;
 					game_pre_init_done = false;
 

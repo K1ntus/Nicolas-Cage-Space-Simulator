@@ -240,8 +240,12 @@ public class Galaxy implements Serializable {
 	}
 
 	public void resetEveryUsersLostState() {
-		Constants.ai_user.setLost(false);
 		Constants.human_user.setLost(false);
+		Constants.event_user.setLost(false);
+		Constants.sun_user.setLost(false);
+		Constants.neutral_user.setLost(false);
+		Constants.pirate_user.setLost(false);
+		GalaxyGenerator.first_free_id = Constants.ai_faction;
 	}
 
 	/* Client handler */

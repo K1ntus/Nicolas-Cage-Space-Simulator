@@ -73,7 +73,7 @@ public class Squad implements Serializable {
 		this.ruler = src.getRuler();
 		
 
-		if (ruler.equals(Constants.ai_user)) {
+		if (ruler.getFaction() == Constants.ai_faction) {
 			img_path = Resources.path_img_AI_ships;
 		} else if (ruler.equals(Constants.event_user)) {
 			img_path = Resources.path_img_event_ships;
@@ -319,7 +319,7 @@ public class Squad implements Serializable {
 			try {
 			if(destination.getRuler() == Constants.human_user)
 				s.setImg_path(Resources.path_img_human_ships);
-			else if(destination.getRuler() == Constants.ai_user)
+			else if(destination.getRuler().getFaction() == Constants.ai_faction)
 				s.setImg_path(Resources.path_img_AI_ships);
 			
 			}catch(NullPointerException e) {

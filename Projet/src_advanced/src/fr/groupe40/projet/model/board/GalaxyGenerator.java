@@ -28,7 +28,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 */
 	private ArrayList<Planet> planets = new ArrayList<Planet>();
 
-	public static int first_free_id = Constants.ai_faction + 1;
+	public static int first_free_id = Constants.ai_faction;
 
 	private static GalaxyGenerator instance = null;
 
@@ -210,18 +210,18 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		}
 
 		switch (Constants.difficulty) {
-		case INITIE:
-			planet_human.setTroups((int) (max_troups_from_ai * 1.5));
-			break;
-		case SPACE_MARINE:
-			planet_human.setTroups((int) (max_troups_from_ai * 1));
-			break;
-		case PRAETOR:
-			planet_human.setTroups((int) (max_troups_from_ai * 0.75));
-			break;
-		case PRIMARQUE:
-			planet_human.setTroups((int) (max_troups_from_ai * 0.5));
-			break;
+			case INITIE:
+				planet_human.setTroups((int) (max_troups_from_ai * 1.5));
+				break;
+			case SPACE_MARINE:
+				planet_human.setTroups((int) (max_troups_from_ai * 1));
+				break;
+			case PRAETOR:
+				planet_human.setTroups((int) (max_troups_from_ai * 0.75));
+				break;
+			case PRIMARQUE:
+				planet_human.setTroups((int) (max_troups_from_ai * 0.5));
+				break;
 		}
 	}
 

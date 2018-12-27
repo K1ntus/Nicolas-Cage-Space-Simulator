@@ -27,10 +27,8 @@ public final class GalaxyRenderer {
 	/**
 	 * Run the rendering in the graphicsContext
 	 * 
-	 * @param galaxy
-	 *            the game board to render
-	 * @param gc
-	 *            the graphicscontext to edit
+	 * @param galaxy the game board to render
+	 * @param gc     the graphicscontext to edit
 	 */
 	protected static void run(Galaxy galaxy, GraphicsContext gc) {
 		GalaxyRenderer.renderBackground(gc);
@@ -80,13 +78,8 @@ public final class GalaxyRenderer {
 				gc.setFill(Constants.color_player);
 				break;
 			case Constants.ai_faction:
-				if (p.getRuler().getId() == -1) {
-					gc.setFill(Constants.color_ai);
-					break;
-				} else {
-					renderAIGarrison(p, gc);
-					break;
-				}
+				renderAIGarrison(p, gc);
+				break;
 			case Constants.neutral_faction:
 				gc.setFill(Constants.color_neutral);
 				break;
@@ -139,8 +132,7 @@ public final class GalaxyRenderer {
 	/**
 	 * render in case of defeat
 	 * 
-	 * @param gc
-	 *            the Graphics Context
+	 * @param gc the Graphics Context
 	 */
 	public static void renderDefeat(GraphicsContext gc) {
 		gc.setFill(Constants.color_default);
@@ -156,8 +148,7 @@ public final class GalaxyRenderer {
 	/**
 	 * render in case of victory
 	 * 
-	 * @param gc
-	 *            the Graphics Context
+	 * @param gc the Graphics Context
 	 */
 	public static void renderWinner(GraphicsContext gc) {
 		gc.setFill(Constants.color_default);
@@ -178,8 +169,7 @@ public final class GalaxyRenderer {
 	}
 
 	/**
-	 * @param rESOURCES_CONTAINER
-	 *            the rESOURCES_CONTAINER to set
+	 * @param rESOURCES_CONTAINER the rESOURCES_CONTAINER to set
 	 */
 	public static void setRESOURCES_CONTAINER(ResourcesContainer resources_container) {
 		RESOURCES_CONTAINER = resources_container;
