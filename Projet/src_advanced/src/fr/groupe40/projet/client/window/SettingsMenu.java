@@ -5,6 +5,7 @@ import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Difficulty;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows;
+import fr.groupe40.projet.util.resources.SoundManager;
 import fr.groupe40.projet.util.window.GridElement;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,6 +19,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -38,10 +40,15 @@ public class SettingsMenu {
 	private GridPane grid = new GridPane();
 
 	/**
-	 * Text field to enter the maximum tentatives of planets to generate
+	 * Manage the combobox for sound activation/desactivation
+	 */
+	private CheckBox soundEnabled_combobox;
+
+	/**
+	 * Text field to enter the maximum tries of planets to generate
 	 * And the gui_size in pixels of a ship (every others shapes get upgraded by that)
 	 */
-	private TextField max_numbers_of_planets, gui_size;
+	private TextField max_numbers_of_planets;
 	
 	/**
 	 * TextField to enter the integer value for the minimal & maximal ships speed on board
@@ -86,14 +93,19 @@ public class SettingsMenu {
 		Button btn_exit = GridElement.add_button_to_gridpane(Windows.button_close, 4, 11, grid);
 
 		// Constants parameters
-		GridElement.add_label_to_gridpane("Maximal number of planets", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 2, grid);
+		GridElement.add_label_to_gridpane("Maximal number of planets", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 3, grid);
 		max_numbers_of_planets = new TextField();
-		grid.add(max_numbers_of_planets, 3, 2);
+		grid.add(max_numbers_of_planets, 3, 3);
+		
+		GridElement.add_label_to_gridpane("Enable sound", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 2, grid);
+		soundEnabled_combobox = new CheckBox();
+		if(Resources.sounds_enabled)
+			soundEnabled_combobox.setSelected(true);
+		else
+			soundEnabled_combobox.setSelected(false);
+		grid.add(soundEnabled_combobox, 3, 2);
 		
 
-		GridElement.add_label_to_gridpane("Gui size (pixels)", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 3, grid);
-		gui_size = new TextField();
-		grid.add(gui_size, 3, 3);
 
 		// Ships parameters
 		GridElement.add_label_to_gridpane("Minimal ship speed", new Font("Arial", 30), Color.ANTIQUEWHITE, 2, 5, grid);
@@ -175,7 +187,8 @@ public class SettingsMenu {
 	 */
 	private void handleApplyButton() {
 		try {
-			GalaxyRenderer.getRESOURCES_CONTAINER().getPlay_button_sound().play();
+			if(Resources.sounds_enabled)
+				GalaxyRenderer.getRESOURCES_CONTAINER().getPlay_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}
@@ -192,19 +205,20 @@ public class SettingsMenu {
 				Constants.max_ship_speed = ship_max_speed;
 			}
 		}
-		if ((gui_size.getText() != null && !gui_size.getText().isEmpty())) {
-			double gui_size_value = Double.parseDouble(gui_size.getText());
-			if (gui_size_value > 1) {
-				Constants.size_squads = gui_size_value;
-				Constants.size_minimal_planets = 5 * gui_size_value;
-				Constants.size_maximal_planets = 8 * gui_size_value;
-				Constants.size_sun = 10 * gui_size_value;
-			}
-		}
+		
+		
 		if ((max_numbers_of_planets.getText() != null && !max_numbers_of_planets.getText().isEmpty())) {
 			int max_numbers_of_planets_value = Integer.parseInt(max_numbers_of_planets.getText());
 			if (max_numbers_of_planets_value > Constants.min_numbers_of_planets && max_numbers_of_planets_value < 25)
 				Constants.nb_planets_tentatives = max_numbers_of_planets_value;
+		}
+		
+		
+		if ((soundEnabled_combobox.isSelected() || soundEnabled_combobox.isIndeterminate())) {
+			Resources.sounds_enabled = true;
+		} else {
+			Resources.sounds_enabled = false;
+			SoundManager.destroy();
 		}
 
 		this.applied = true;

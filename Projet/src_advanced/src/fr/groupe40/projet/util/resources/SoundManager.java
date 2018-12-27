@@ -43,8 +43,14 @@ public class SoundManager {
      *  Launch the main theme, if the theme isnt playing, auto-relaunch it
      */
     public void run() {
-    	if(main_theme == null || !Constants.main_theme_enabled) { 
+    	if(main_theme == null) { 
     		System.out.println("Unable to load main-theme music");
+    		return;
+    	}
+    	
+    	if(!Constants.main_theme_enabled || !Resources.sounds_enabled) {
+    		if(main_theme.isPlaying())
+    			main_theme.stop();
     		return;
     	}
     	

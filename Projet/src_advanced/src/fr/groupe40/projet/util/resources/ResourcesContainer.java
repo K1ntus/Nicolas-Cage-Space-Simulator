@@ -179,7 +179,7 @@ public class ResourcesContainer {
 	 */
 	public void renderCollisionSound() {
 		
-		if(sound_ship_explosion == null) {
+		if(sound_ship_explosion == null && !Resources.sounds_enabled) {
 			return;
 		}
 		sound_ship_explosion.play();

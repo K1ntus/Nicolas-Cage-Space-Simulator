@@ -392,6 +392,13 @@ public class Game extends Application {
 
 				game_init_done = false;
 				game_pre_init_done = false;
+				
+				if(!Resources.sounds_enabled) {
+					soundHandler.run();
+					SoundManager.destroy();
+				} else {
+					soundHandler = SoundManager.getInstance();
+				}
 
 				stage.setScene(scene_main_menu);
 				stage.show();

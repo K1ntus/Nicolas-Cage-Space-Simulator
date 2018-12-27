@@ -156,7 +156,8 @@ public class MainMenu {
 	private void handlePlayButton() {
 		play_game = true;
 		try {
-			GalaxyRenderer.getRESOURCES_CONTAINER().getPlay_button_sound().play();
+			if(Resources.sounds_enabled)
+				GalaxyRenderer.getRESOURCES_CONTAINER().getPlay_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}
@@ -176,7 +177,8 @@ public class MainMenu {
 	 */
 	private void handleSettingButton() {
 		try {
-			GalaxyRenderer.getRESOURCES_CONTAINER().getSettings_button_sound().play();
+			if(Resources.sounds_enabled)
+				GalaxyRenderer.getRESOURCES_CONTAINER().getSettings_button_sound().play();
 		} catch(NullPointerException e) {
 			
 		}

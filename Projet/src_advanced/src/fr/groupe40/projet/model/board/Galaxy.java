@@ -183,7 +183,7 @@ public class Galaxy implements Serializable {
 			AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion,
 					Resources.sun_explosion_volume);
 
-			if (sun_explosion_sound != null)
+			if (sun_explosion_sound != null && Resources.sounds_enabled)
 				sun_explosion_sound.play();
 			Sun.sun_destroyed(planets, squads, gc);
 			planets.remove(0);
@@ -245,6 +245,7 @@ public class Galaxy implements Serializable {
 		Constants.sun_user.setLost(false);
 		Constants.neutral_user.setLost(false);
 		Constants.pirate_user.setLost(false);
+		
 		GalaxyGenerator.first_free_id = Constants.ai_faction;
 	}
 
@@ -259,10 +260,10 @@ public class Galaxy implements Serializable {
 		int percent = u.getPercent_of_troups_to_send();
 
 		switch (direction) {
-		case DOWN:// lower
+		case DOWN:	//Lower
 			u.setPercent_of_troups_to_send(percent - 5);
 			break;
-		case UP:// greater
+		case UP:	//Greater
 			u.setPercent_of_troups_to_send(percent + 5);
 			break;
 		default:
