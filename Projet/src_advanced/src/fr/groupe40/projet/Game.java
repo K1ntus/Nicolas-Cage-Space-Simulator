@@ -40,7 +40,7 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		File dir = new File(Constants.path_save);
 		dir.mkdir();
-
+		
 		launch(args);
 	}
 	/*
