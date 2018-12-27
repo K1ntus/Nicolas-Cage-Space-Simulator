@@ -89,7 +89,7 @@ public final class Constants {
 	public static final int max_initDefense = 15;//The initial troops in a planet at the Constants of the world
 	
 	/**
-	 * Minimal number of troups before getting ruled
+	 * Minimal number of troops before getting ruled
 	 */
 	public static final int min_troups = 1;	//minimal troops in a planet
 	

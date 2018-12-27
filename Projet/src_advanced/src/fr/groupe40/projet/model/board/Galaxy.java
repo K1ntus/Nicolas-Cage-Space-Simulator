@@ -19,49 +19,51 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- *  'Board' class. It contains the data of the game as ships, planets, ...
+ * 'Board' class. It contains the data of the game as ships, planets, ...
+ * 
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
  */
-public class Galaxy implements Serializable{
+public class Galaxy implements Serializable {
 	private static final long serialVersionUID = 3668540725184418675L;
 
 	/**
-	 *  Array with every planet of the board
+	 * Array with every planet of the board
 	 */
-	private ArrayList <Planet> planets;
+	private ArrayList<Planet> planets;
 
 	/**
-	 *  Array with every squads of the board
+	 * Array with every squads of the board
 	 */
-	private ArrayList <Squad> squads;
+	private ArrayList<Squad> squads;
 
 	/**
-	 *  board generator
+	 * board generator
 	 */
 	private GalaxyGenerator generator = GalaxyGenerator.getInstance();
-	
+
 	/**
-	 *  graphical environment
+	 * graphical environment
 	 */
 	private transient GraphicsContext gc;
-	
+
 	/**
-	 *  state of the game
+	 * state of the game
 	 */
 	private boolean game_is_over = false;
 
 	/**
-	 *  Generate a game board with every parameters randomized
+	 * Generate a game board with every parameters randomized
 	 */
 	public Galaxy(GraphicsContext gc) {
 		this.squads = new ArrayList<Squad>();
 		this.generator = null;
 		this.gc = gc;
 	}
+
 	/**
-	 *  Generate a game board with every parameters randomized
+	 * Generate a game board with every parameters randomized
 	 */
 	public Galaxy(GraphicsContext gc, GalaxyGenerator gg) {
 		this.squads = new ArrayList<Squad>();
@@ -71,7 +73,8 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 *  Generate a game board from another
+	 * Generate a game board from another
+	 * 
 	 * @param g The game board to copy from
 	 */
 	public Galaxy(Galaxy g, GraphicsContext gc) {
@@ -82,75 +85,85 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 *  Generate a game board from an array of squads and planets
+	 * Generate a game board from an array of squads and planets
+	 * 
 	 * @param planets Planets that we want to have
-	 * @param squads Squads already present
+	 * @param squads  Squads already present
 	 */
 	public Galaxy(List<Planet> planets, List<Squad> squads, GraphicsContext gc) {
 		this.squads = (ArrayList<Squad>) squads;
 		this.planets = generator.getPlanets();
 		this.generator = null;
 		this.gc = gc;
-		
+
 	}
-	
+
 	/* Render & Game Update */
 	/**
 	 * Main rendering function
+	 * 
 	 * @param gc
 	 */
 	public void render(GraphicsContext gc) {
 		GalaxyRenderer.run(this, gc);
 	}
-	
+
 	/**
-	 *  Main update function, manage AI, squads and hasLost
+	 * Main update function, manage AI, squads and hasLost
 	 */
 	public void updateSquadPosition() {
-		for(Squad s : squads) {
-			if(s==null) {	squads.remove(s);	continue;}
-			s.update_all_positions(planets);			
+		for (Squad s : squads) {
+			if (s == null) {
+				squads.remove(s);
+				continue;
+			}
+			s.update_all_positions(planets);
 		}
 
-		if(userHasLost(Constants.human_user)) {
+		if (userHasLost(Constants.human_user)) {
 			game_is_over = true;
 		}
-		if(userHasWon()) {
+		if (userHasWon()) {
 			game_is_over = true;
 		}
-		
 	}
-	
+
+	/**
+	 * Check if the human player has won
+	 * 
+	 * @return true if the human has wn
+	 */
 	private boolean userHasWon() {
-		for(Planet p : planets) {
-			if(!p.getRuler().equals(Constants.human_user) 
-					&& !p.getRuler().equals(Constants.neutral_user) 
+		for (Planet p : planets) {
+			if (!p.getRuler().equals(Constants.human_user) && !p.getRuler().equals(Constants.neutral_user)
 					&& !p.getRuler().equals(Constants.sun_user)) {
 				return false;
 			}
 		}
+
 		System.out.println("user has won");
 		return true;
 	}
-	
-	/*	AI	*/
+
+	/* AI */
 	/**
-	 *  Manage the AI to send fleets
+	 * Manage the AI to send fleets
 	 */
 	public void updateAI() {
 		Planet source, destination;
-		
-		for(Planet p : planets) {
+
+		for (Planet p : planets) {
 			User ruler = p.getRuler();
-			
-			if(ruler.getFaction() == Constants.ai_faction) {
+
+			if (ruler.getFaction() == Constants.ai_faction) {
 				source = p;
-				
-				for(Planet p2 : planets) {	//Check again the planets list
+
+				for (Planet p2 : planets) { // Check again the planets list
 					destination = p2;
-					if(p2.getTroups() < source.getTroups() || source.getTroups() >= Constants.max_troups-Constants.max_troups/4) {
+					if (p2.getTroups() < source.getTroups()
+							|| source.getTroups() >= Constants.max_troups - Constants.max_troups / 4) {
 						Squad s = ruler.sendFleetAI(source, destination);
-						if(s != null)
+						if (s != null)
 							squads.add(s);
 						break;
 					}
@@ -161,114 +174,116 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 *  update the garrison value of each planets
+	 * update the garrison value of each planets
 	 */
 	public void updateGarrison() {
-		if(planets.get(0).getTroups() <= Constants.min_troups+1 && planets.get(0).getRuler().getId() == Constants.sun_id) {
-			System.out.println(planets.get(0).toString());
+		if (planets.get(0).getTroups() <= Constants.min_troups + 1
+			&& planets.get(0).getRuler().getId() == Constants.sun_id) {
 
-	    	AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion, Resources.sun_explosion_volume);
+			AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion,
+					Resources.sun_explosion_volume);
 
-	    	if(sun_explosion_sound != null)
-	    		sun_explosion_sound.play(); 
+			if (sun_explosion_sound != null)
+				sun_explosion_sound.play();
 			Sun.sun_destroyed(planets, squads, gc);
 			planets.remove(0);
 		}
-		
-		for(Planet p : planets)
-			p.updateGarrison();	
+
+		for (Planet p : planets)
+			p.updateGarrison();
 	}
 
 	/**
-	 *  send all a new wave if need for each squads
+	 * send all a new wave if need for each squads
 	 */
 	public void updateWavesSending() {
-		for(Squad s : squads) {
+		for (Squad s : squads) {
 			s.sendFleet();
 		}
-		
+
 	}
-	
+
 	/* Defeat handler */
 	/**
-	 *  Check if an user has lost
+	 * Check if an user has lost
+	 * 
 	 * @param u the user to check
 	 * @return true if he has last, else false
 	 */
-	public boolean userHasLost(User u) {	
-		if(u.isLost()) {	//if user already registered has loser
-			if(Constants.DEBUG)
-				System.out.println("ai: "+u.toString()+" has lost");
+	public boolean userHasLost(User u) {
+		if (u.isLost()) { // if user already registered has loser
+			if (Constants.DEBUG)
+				System.out.println("ai: " + u.toString() + " has lost");
 			return true;
 		}
-		
+
 		int id = u.getId();
-		
-		for(Planet p : planets) { //if this user still have at least ONE planet, then doesnt has lost
-			if(p.getRuler().getId() == id) {
+
+		for (Planet p : planets) { // if this user still have at least ONE planet, then doesnt has lost
+			if (p.getRuler().getId() == id) {
 				return false;
 			}
 		}
-		
-		for(Squad s : squads) {		//if this user still have at least ONE squad, then doesnt has lost	
+
+		for (Squad s : squads) { // if this user still have at least ONE squad, then doesnt has lost
 			try {
-				if(s.getRuler().getId() == id) 
+				if (s.getRuler().getId() == id)
 					return false;
 				continue;
-			}catch(NullPointerException e) {
+			} catch (NullPointerException e) {
 				continue;
 			}
 		}
 		
-		System.out.println(u.toString() + " has lost");
 		u.setLost(true);
 		return true;
 	}
-	
-	
+
 	public void resetEveryUsersLostState() {
 		Constants.ai_user.setLost(false);
 		Constants.human_user.setLost(false);
 	}
-	
-	
+
 	/* Client handler */
 	/**
-	 *  handle the scrolls event to change the percent of a fleet to send
+	 * handle the scrolls event to change the percent of a fleet to send
+	 * 
 	 * @param action The scroll action (up or down case)
 	 */
 	public void clientScrollHandler(Direction direction) {
 		User u = Constants.human_user;
 		int percent = u.getPercent_of_troups_to_send();
-		
-		switch(direction) {
-			case DOWN://lower
-				u.setPercent_of_troups_to_send(percent - 5); break;
-			case UP://greater
-				u.setPercent_of_troups_to_send(percent + 5); break;
-			default:
-				break;
+
+		switch (direction) {
+		case DOWN:// lower
+			u.setPercent_of_troups_to_send(percent - 5);
+			break;
+		case UP:// greater
+			u.setPercent_of_troups_to_send(percent + 5);
+			break;
+		default:
+			break;
 		}
 	}
-	
 
-	
 	/* init the font type */
 	/**
-	 *  Init the default font style of the graphics context
+	 * Init the default font style of the graphics context
+	 * 
 	 * @param gc
 	 */
 	public void initFont(GraphicsContext gc) {
 		gc.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
 		gc.setFill(Constants.color_default);
 		gc.setStroke(Color.RED);
-		gc.setLineWidth(1);		
+		gc.setLineWidth(1);
 	}
-	
+
 	/* Getter & Setter */
 
 	/**
-	 *  Set the list containing every squads by another one
+	 * Set the list containing every squads by another one
+	 * 
 	 * @param planets
 	 */
 	public ArrayList<Squad> getSquads() {
@@ -276,7 +291,8 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 *  Return the list containing every squads on board
+	 * Return the list containing every squads on board
+	 * 
 	 * @return
 	 */
 	public void setSquads(ArrayList<Squad> squads) {
@@ -284,21 +300,22 @@ public class Galaxy implements Serializable{
 	}
 
 	/**
-	 *  Set the list containing every planet by another one
+	 * Set the list containing every planet by another one
+	 * 
 	 * @param planets
 	 */
 	public void setPlanets(ArrayList<Planet> planets) {
 		this.planets = planets;
 	}
-	
+
 	/**
-	 *  Return the list containing every planets on board
+	 * Return the list containing every planets on board
+	 * 
 	 * @return
 	 */
 	public ArrayList<Planet> getPlanets() {
 		return planets;
 	}
-	
 
 	/**
 	 * @return the game_is_over
@@ -328,5 +345,4 @@ public class Galaxy implements Serializable{
 		this.gc = gc;
 	}
 
-	
 }

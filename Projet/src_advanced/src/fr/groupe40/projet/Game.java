@@ -12,6 +12,7 @@ import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
 import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.Constants;
+import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.constants.Windows.WindowType;
 import fr.groupe40.projet.util.resources.SoundManager;
 import javafx.animation.AnimationTimer;
@@ -145,6 +146,12 @@ public class Game extends Application {
 	 * 'main' method
 	 */
 	public void start(Stage stage) {
+		if(!Resources.sounds_enabled) {
+			soundHandler = null;
+			SoundManager.destroy();
+			System.gc();
+		}
+		
 		init_window(stage);
 
 		/* Rendering, game initialization, etc */
@@ -334,7 +341,7 @@ public class Game extends Application {
 					if (Constants.events_enabled)
 						eventManager.event_randomizer();
 
-				if (game_tick % Constants.tick_per_main_theme_check == 0)
+				if (game_tick % Constants.tick_per_main_theme_check == 0 && Resources.sounds_enabled)
 					soundHandler.run();
 
 				if (galaxy.isGame_is_over()) {

@@ -102,5 +102,5 @@ public final class Resources {
 	/**
 	 * Enable/Disable every game sound
 	 */
-	public static final boolean sounds_enabled = false;
+	public static final boolean sounds_enabled = true;
 }
