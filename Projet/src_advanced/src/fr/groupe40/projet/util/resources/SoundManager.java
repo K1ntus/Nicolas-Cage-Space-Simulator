@@ -62,9 +62,6 @@ public class SoundManager {
     		System.out.println("stopping");
     		main_theme.stop();
     	} else {
-   		 //Replay the music
-    		System.out.println("replay");
-    		main_theme.stop();
     		main_theme.play(); 
     	}
     }
