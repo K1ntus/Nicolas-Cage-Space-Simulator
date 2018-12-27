@@ -193,10 +193,11 @@ public class MainMenu {
         //dialog.initOwner(primaryStage);
         VBox dialogVbox = new VBox(20);
         dialogVbox.getChildren().add(new Text("Commandes:\n"
-        		+ "* Deplacer des troupes: Drag&Drop\n"
-        		+ "** Les vaisseaux peuvent etre rediriges\n\n"
-        		+ "* Modifier le pourcentage de troupe a envoyer: \n"
-        		+ "   ->Molette\n\n"
+        		+ "* Déplacer des troupes: Cliqué-déposé "
+        		+ "vers la \n planète d'arrivée\n"
+        		+ "** Les vaisseaux peuvent être redirigés\n\n"
+        		+ "* Modifier le pourcentage de troupe à envoyer: \n"
+        		+ " ->Molette\n\n"
         		+ "* Sauvegarde: F5\n"
         		+ "* Chargement: F6\n"));
         Scene dialogScene = new Scene(dialogVbox, 300, 200);
