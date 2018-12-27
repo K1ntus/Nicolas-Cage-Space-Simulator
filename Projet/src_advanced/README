@@ -130,7 +130,6 @@ When one ship reach is destination, few situations can happens :
 
 ## Known Bugs ##
 * **Board Constants**
-	* A problem when you are generating the game board which others gui size than default can happens because the generator do not find any convenient board 'ie. at least 2 planets)
 	* ~~Constants time can take a long time because of his exponential complexity. Check for another algorithm, probably just check the distance between the center of each others planets~~
 		* **Should be OK. Need more tests.**
 * **Display**
@@ -140,7 +139,7 @@ When one ship reach is destination, few situations can happens :
 	* Path of the ships aren't smooth. Look A* algorithm, or work with angle (some stuffs about that not finished yet)
 		** Angle half working
 * **Planets**
-	* Need to rework collision handler for round planets, and for any other possible shape of planets, ofc.
+	* Need to rework collision handler for round planets, and for any other possible shape of planets, ofc.The collision algorithm should be rework for that
 * **Waiting**
 	* Find a way to make some loading screen (We did some trials using gif, without success), but there's may be the progressbar tools from javafx that could be used 
 * The game exit if no playable could be generated, instead of another Constants try.
@@ -151,6 +150,7 @@ When one ship reach is destination, few situations can happens :
 * **More event**
 * **Players**
 	* Handle multiple faction. Currently just using 'constants', the User class should be ok like that, and just few things had to be corrected for that.
+		** Should be working
 * Make this goddamn display of gif on board (explosion when a ship reach his destination) and loading gif.
 * ~~Choose the path and name of the file for saving/loading using a FileManager.~~
 	* **Done**.

@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.groupe40.projet.client.User;
+import fr.groupe40.projet.model.planets.PlanetFactory;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.planets.RoundPlanet;
-import fr.groupe40.projet.model.planets.SquarePlanet;
 import fr.groupe40.projet.model.planets.Sun;
 import fr.groupe40.projet.util.annot.TODO;
 import fr.groupe40.projet.util.constants.ColorAI;
@@ -73,11 +73,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * Generate a sun in the center of the board
 	 */
 	public void generateSun() {
-		Planet sun = new Sun(Resources.path_img_sun, Constants.width / 2, Constants.height / 2);
-		sun.updateImage();
-		sun.setX(sun.getX() - sun.width() / 2);
-		sun.setY(sun.getY() - sun.width() / 2);
-		sun.setTroups(Constants.sun_troups);
+		Planet sun = PlanetFactory.getPlanet(PlanetFactory.TYPE_SUN);
 		planets.add(sun);
 	}
 
@@ -89,7 +85,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * @return the path of this resource
 	 */
 	@TODO(comment = "replace this function by a random picker from a collection")
-	private String getRandomSquarePlanetImgPath() {
+	private static String getRandomSquarePlanetImgPath() {
 		double rand = Math.random();
 
 		if (rand < 0.5)
@@ -103,7 +99,7 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 	 * @return the path of this resource
 	 */
 	@TODO(comment = "replace this function by a random picker from a collection")
-	private String getRandomRoundPlanetImgPath() {
+	private static String getRandomRoundPlanetImgPath() {
 		double rand = Math.random();
 
 		if (rand < 0.5)
@@ -125,10 +121,8 @@ public class GalaxyGenerator extends Task<ArrayList<Planet>> {
 		double rand = Math.random();
 
 		if (rand < 0.5)
-			return new RoundPlanet(null, new User(Constants.neutral_user),
-					(int) (Constants.left_margin_size + Constants.size_squads), 0);
-		return new SquarePlanet(getRandomSquarePlanetImgPath(), new User(Constants.neutral_user),
-				(int) (Constants.left_margin_size + Constants.size_squads), 0);
+			return PlanetFactory.getPlanet(PlanetFactory.TYPE_SQUARE);
+		return PlanetFactory.getPlanet(PlanetFactory.TYPE_ROUND);
 	}
 
 	/**
