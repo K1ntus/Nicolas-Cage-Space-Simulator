@@ -1,6 +1,7 @@
 package fr.groupe40.projet;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import fr.groupe40.projet.client.handler.InteractionHandler;
 import fr.groupe40.projet.client.window.MainMenu;
@@ -366,6 +367,7 @@ public class Game extends Application {
 					game_pre_init_done = false;
 
 					game_tick = 0;
+					
 				}
 			}
 
