@@ -30,7 +30,16 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
- * Main class. Currently managing users interactions and display
+ * Main class. Currently managing users interactions and display.
+ * 
+ * More in depth, this class consists on the generation of the displayed window,
+ * visible for the user. In fact, this class also manage the sounds of this
+ * application, the game update using ticks or first-step of initialization of
+ * the board.
+ * 
+ * @see Galaxy
+ * @see SoundManager
+ * @see Game#clock_updater(Stage)
  * 
  * @author Jordane Masson
  * @author Sarah Portejoie
@@ -401,10 +410,11 @@ public class Game extends Application {
 			/**
 			 * Manage each ticks and the differents screens displayed.
 			 * 
-			 * When the user just launched the executable file, the main_menu window type is displayed.
-			 * The pre_init hasnt been done, so it's directly occurs.
+			 * When the user just launched the executable file, the main_menu window type is
+			 * displayed. The pre_init hasnt been done, so it's directly occurs.
 			 * 
-			 * Depending of his interaction with the differents button, he will be redirected to others window type.
+			 * Depending of his interaction with the differents button, he will be
+			 * redirected to others window type.
 			 * 
 			 * @see WindowType
 			 * @see pre_init()

@@ -10,9 +10,22 @@ import javafx.scene.media.AudioClip;
 
 
 /**
- * Offers many sounds tweaks and manage the background music
+ * Offers many sounds tweaks and manage the background music.
+ * 
+ * This class store the main_theme audio to reduce RAM consumption. This class also offers few static function to manage the loading of audio file.
+ * The default loading will use another processus to do that (Service + Task) and reduce the overload for the main thread.
+ * 
+ * This class also manage the background music, and the automatic replay of this one when it's over.
+ * 
+ * Following the Design pattern of the Singleton, to prevent the usage of multiple occurence of this class.
+ * 
+ * @see SoundManager#generateAudioClip(String, double)
+ * @see SoundManager#getAudioByPath_dynamic(String, double)
+ * @see SoundManager#run()
+ * 
  * @author Jordane Masson
  * @author Sarah Portejoie
+ *
  */
 public class SoundManager {
 
@@ -94,7 +107,7 @@ public class SoundManager {
 	/**
 	 * Load an AudioClip using another processus
 	 * @param path the sound path
-	 * @param the volume of the AudioClip (Should be between 0 & 1, recommend 0.5 by default)
+	 * @param volume the volume of the AudioClip (Should be between 0 & 1, recommend 0.5 by default)
 	 * @return the image loaded
 	 */
 	public static AudioClip getAudioByPath_dynamic(String path, double volume) {

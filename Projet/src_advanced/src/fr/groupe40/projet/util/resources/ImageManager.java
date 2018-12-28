@@ -9,8 +9,19 @@ import javafx.scene.image.Image;
 
 /**
  * Manage image loading, and offer an image loading from threads
+ * 
+ * This class offers few algorithms to load images file to reduce the main thread calculation charge, but also to offers easiest ways. 
+ * This class also offers few static function to manage the loading of image file.
+ * The default loading will use another processus to do that (Service + Task) and reduce the overload for the main thread.
+ * 
+ * Following the Design pattern of the Singleton, to prevent the usage of multiple occurence of this class.
+ * 
+ * @see ImageManager#getImageByPath(String, double)
+ * @see ImageManager#getImageByPath_dynamic(String, double, double)
+ * 
  * @author Jordane Masson
  * @author Sarah Portejoie
+ *
  */
 public final class ImageManager {
 
