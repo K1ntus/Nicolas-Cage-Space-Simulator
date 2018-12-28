@@ -1,4 +1,5 @@
 
+
 # Nicolas Cage Space Simulator #
 
 
@@ -32,11 +33,11 @@ If you want a specific version, feel free to check the different release tag.
 
 * ***Console way***
 ```
-  $ java -jar ./NCSS.jar
+  $ java -jar ./<jar_name>.jar
 ```
 *  **or** make it ***executable***
 ```
-  $ chmod +x NCSS
+  $ chmod +x <jar_name>.jar
 ```
 Then, just double-click it in your favorite file manager
 
@@ -131,31 +132,29 @@ When one ship reach is destination, few situations can happens :
 ## Known Bugs ##
 * **Board Constants**
 	* ~~Constants time can take a long time because of his exponential complexity. Check for another algorithm, probably just check the distance between the center of each others planets~~
-		* **Should be OK. Need more tests.**
 * **Display**
 	* Currently unable to display animated image (like GIF) while playing because it's getting override by the background rendering. May be looking for thread running frames per frame, or superposition of canvas.
 *  **Ships**
-	* Sometimes, they do not really lift-off from the good planet side. Could be fixed by checking more point of each side, but it's increasing complexity so ...
-	* Path of the ships aren't smooth. Look A* algorithm, or work with angle (some stuffs about that not finished yet)
-		** Angle half working
+	* ~~Sometimes, they do not really lift-off from the good planet side. Could be fixed by checking more point of each side, but it's increasing complexity so ...~~
+	* Path of the ships aren't totally smooth. Look for A* algorithm, or work with angle (some stuffs using them, can be upgraded)
 * **Planets**
-	* Need to rework collision handler for round planets, and for any other possible shape of planets, ofc.The collision algorithm should be rework for that
+	* Need to rework collision handler for round planets, and for any other possible shape of planets, ofc. The collision algorithm should be rework for that
 * **Waiting**
 	* Find a way to make some loading screen (We did some trials using gif, without success), but there's may be the progressbar tools from javafx that could be used 
-* The game exit if no playable could be generated, instead of another Constants try.
+* ~~The game exit if no playable could be generated, instead of another Constants try.~~
 
 ## Upgrade's Road-Map ##
 * **Update**
-	* Set-up an auto-update functionality (easy by using a bootstrap, then injecting the Game .jar into this one when it's up-to-date)
+	* Set-up an auto-update functionality (easy by using a java bootstrap, then injecting the Game .jar into this one when it's up-to-date)
 * **More event**
 * **Players**
-	* Handle multiple faction. Currently just using 'constants', the User class should be ok like that, and just few things had to be corrected for that.
-		** Should be working
+	* ~~Handle multiple faction. Currently just using 'constants', the User class should be ok like that, and just few things had to be corrected for that.~~
 * Make this goddamn display of gif on board (explosion when a ship reach his destination) and loading gif.
 * ~~Choose the path and name of the file for saving/loading using a FileManager.~~
-	* **Done**.
 * **Achievement & Statistics**
-	* Implement a system of achievement, and win/losses ratio for example.
+	* Implement a system of achievement, and win/losses ratio for example. 
+* Improved setting menu
+	* Add more settings editable directly In-game, like the number of AI, the human color, ...
 
 ## Credits ##
 
@@ -165,10 +164,10 @@ When one ship reach is destination, few situations can happens :
 
 * **Nicolas Cage** giving us inspiration and motivation.
 
-* We don't have any right or sponsoring with CFC and the planet displayed there, or the tenders ships.
+* We don't have any right or sponsoring with CFC for the planet sprite, or the tenders ships.
 
 * We're sorry for not being able to find the original author of the Main Menu background animation.
 
 ## Documentation ##
 
-  * A complete javadoc can be generated from the source code.
+  * A complete javadoc can be generated from the source 

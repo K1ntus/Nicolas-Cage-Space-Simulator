@@ -41,9 +41,26 @@ public class Game extends Application {
 	public static void main(String[] args) {
 		File dir = new File(Constants.path_save);
 		dir.mkdir();
-
+		
 		launch(args);
 	}
+	/*
+	  @Override
+	  public void init() throws Exception {
+		  root = new Group();
+		  
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.0));
+	      
+	      soundHandler = SoundManager.getInstance();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.25));
+	      
+	      main_menu = new MainMenu();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.67));
+	      
+	      setting_menu = new SettingsMenu();
+	      notifyPreloader(new LoaderScreen.ProgressNotification(0.100));
+	  }
+	  */
 
 	/**
 	 * manage the user input, currently, only the mouse is managed there
@@ -129,12 +146,12 @@ public class Game extends Application {
 	 * 'main' method
 	 */
 	public void start(Stage stage) {
-		if (!Resources.sounds_enabled) {
+		if(!Resources.sounds_enabled) {
 			soundHandler = null;
 			SoundManager.destroy();
 			System.gc();
 		}
-
+		
 		init_window(stage);
 
 		/* Rendering, game initialization, etc */
@@ -151,10 +168,10 @@ public class Game extends Application {
 	}
 
 	/**
-	 * Function that handle the game Constants, ticks update, manage rendering &
-	 * windows displayed
+	 * Function that handle the game Constants, ticks update, etc ...
 	 * 
-	 * @param stage the program main stage
+	 * @param stage
+	 *            the program main stage
 	 */
 	@TODO(comment = "Fix his complexity and create a specific updating class")
 	private void clock_updater(Stage stage) {
@@ -195,13 +212,7 @@ public class Game extends Application {
 			private GalaxyGenerator gg;
 
 			/**
-			 * Pre-initialize the game board with few elements, to split the calculation
-			 * charge at different times. It'll run only if no other instance of this
-			 * function is currently is running. This function will pre-load few things for
-			 * the creation of the galaxy (ie. the game board) like the GalaxyGenerator
-			 * inside a thread.
-			 * 
-			 * @see GalaxyGenerator
+			 * Pre-initialize the game board with few elements
 			 */
 			private void pre_init() {
 				if (game_pre_init_running) {
@@ -232,7 +243,7 @@ public class Game extends Application {
 
 				pre_init_thread.setPriority(1);
 				pre_init_thread.setDaemon(true);
-
+				
 				try {
 					pre_init_thread.start();
 					pre_init_thread.join(2000);
@@ -247,14 +258,7 @@ public class Game extends Application {
 			}
 
 			/**
-			 * Initialize the game board. We generate the game board with the
-			 * GalaxyGenerator loaded in the pre-init. We also define the interactionHandler
-			 * (ie. mouse, ... handler for the game) and create few others object like the
-			 * event manager.
-			 * 
-			 * @see #pre_init()
-			 * @see Galaxy
-			 * @see Events
+			 * Initialize the game board
 			 */
 			private void init() {
 				if (game_init_running)
@@ -300,9 +304,7 @@ public class Game extends Application {
 			}
 
 			/**
-			 * Tick updater. Manage the whole game ticks, like when to update the planet
-			 * garrison, check for the ai management, when to summon events, if the user has
-			 * won or lost ...
+			 * Tick updater
 			 */
 			private void run() {
 				if (saver.isBox_opened()) {
@@ -320,6 +322,11 @@ public class Game extends Application {
 
 				galaxy.render(gc);
 				galaxy.updateSquadPosition();
+
+				/*
+				 * if(game_tick % Ticks.tick_per_squad_position_update == 0)
+				 * galaxy.updateSquadPosition();
+				 */
 
 				if (game_tick % Constants.tick_per_produce == 0)
 					galaxy.updateGarrison();
@@ -359,7 +366,7 @@ public class Game extends Application {
 					game_pre_init_done = false;
 
 					game_tick = 0;
-
+					
 				}
 			}
 
@@ -386,8 +393,8 @@ public class Game extends Application {
 
 				game_init_done = false;
 				game_pre_init_done = false;
-
-				if (!Resources.sounds_enabled) {
+				
+				if(!Resources.sounds_enabled) {
 					soundHandler.run();
 					SoundManager.destroy();
 				} else {
@@ -399,17 +406,7 @@ public class Game extends Application {
 			}
 
 			/**
-			 * Manage each ticks and the differents screens displayed.
-			 * 
-			 * When the user just launched the executable file, the main_menu window type is displayed.
-			 * The pre_init hasnt been done, so it's directly occurs.
-			 * 
-			 * Depending of his interaction with the differents button, he will be redirected to others window type.
-			 * 
-			 * @see WindowType
-			 * @see pre_init()
-			 * @see init()
-			 * @see run()
+			 * Manage each ticks and the differents screens displayed
 			 */
 			public void handle(long arg0) {
 				if (window_type == WindowType.GAME) {
@@ -445,7 +442,8 @@ public class Game extends Application {
 	/**
 	 * Initialize the first properties of the game window
 	 * 
-	 * @param stage the application stage
+	 * @param stage
+	 *            the application stage
 	 */
 	private void init_window(Stage stage) {
 		long startTime = System.currentTimeMillis();
