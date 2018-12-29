@@ -19,7 +19,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- * 'Board' class. It contains the data of the game as ships, planets, ...
+ * 'Board' class. It contains the data of the game as ships, planets...
+ * 
+ * This class contains every major elements to support this game. First, the
+ * list of planets and of squads are saved into ArrayList. We also get an
+ * instance of the GalaxyGenerator singleton to initialize the Planets array at
+ * the beginning of a new game.
+ * 
+ * This class directly manage the AI, but also each game update that can be
+ * summoned (like the garrison, ships positions, ...). It's also calculate if a
+ * game is over by defeat (resp. win) of the user if he has lost every ships and
+ * planets (resp. is the last player alive in game)
+ * 
+ * @see GalaxyGenerator
+ * 
  * 
  * @author Jordane Masson
  * @author Sarah Portejoie
@@ -177,7 +190,7 @@ public class Galaxy implements Serializable {
 	 */
 	public void updateGarrison() {
 		if (planets.get(0).getTroups() <= Constants.min_troups + 1
-			&& planets.get(0).getRuler().getId() == Constants.sun_id) {
+				&& planets.get(0).getRuler().getId() == Constants.sun_id) {
 
 			AudioClip sun_explosion_sound = SoundManager.generateAudioClip(Resources.path_sound_sun_explosion,
 					Resources.sun_explosion_volume);
@@ -233,7 +246,7 @@ public class Galaxy implements Serializable {
 				continue;
 			}
 		}
-		
+
 		u.setLost(true);
 		return true;
 	}
@@ -244,7 +257,7 @@ public class Galaxy implements Serializable {
 		Constants.sun_user.setLost(false);
 		Constants.neutral_user.setLost(false);
 		Constants.pirate_user.setLost(false);
-		
+
 		GalaxyGenerator.first_free_id = Constants.ai_faction;
 	}
 
@@ -259,10 +272,10 @@ public class Galaxy implements Serializable {
 		int percent = u.getPercent_of_troups_to_send();
 
 		switch (direction) {
-		case DOWN:	//Lower
+		case DOWN: // Lower
 			u.setPercent_of_troups_to_send(percent - 5);
 			break;
-		case UP:	//Greater
+		case UP: // Greater
 			u.setPercent_of_troups_to_send(percent + 5);
 			break;
 		default:

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import fr.groupe40.projet.client.User;
 import fr.groupe40.projet.model.board.GalaxyRenderer;
+import fr.groupe40.projet.model.planets.Planet;
+import fr.groupe40.projet.model.ships.Ship;
 import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Resources;
 import fr.groupe40.projet.util.resources.ImageManager;
@@ -11,6 +13,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
+ * This class define is the base of every displayed object during the game
+ * (except the background image and text). </br>
+ * </br>
+ * Indeed, as each displayed elements has a ruler, and a image, this class
+ * contains it, but didnt had to be instanciable. Our implementation chose that
+ * to reduce useless code, but also prevent wrong usage of the sprite class.
+ * 
+ * @see Planet
+ * @see Ship
+ * 
  * 
  * @author Jordane Masson
  * @author Sarah Portejoie
@@ -91,7 +103,7 @@ public abstract class Sprite implements Serializable {
 	 * Update the image linked to a sprite
 	 */
 	public void updateImage() {
-		if(this.getClass().getName() == "Ship") {
+		if (this.getClass().getName() == "Ship") {
 			if (ruler.getFaction() == Constants.human_faction)
 				image = GalaxyRenderer.getRESOURCES_CONTAINER().getGame_human_ships();
 			else if (ruler.getId() == Constants.pirate_id)
@@ -102,11 +114,11 @@ public abstract class Sprite implements Serializable {
 				System.out.println("called for img: " + this.img_path);
 				image = ImageManager.getImageByPath(this.img_path, width);
 			}
-			
+
 			return;
 		}
 
-		image = ImageManager.getImageByPath(this.img_path, width);		
+		image = ImageManager.getImageByPath(this.img_path, width);
 	}
 
 	/**

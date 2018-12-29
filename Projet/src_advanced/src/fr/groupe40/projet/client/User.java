@@ -2,12 +2,25 @@ package fr.groupe40.projet.client;
 
 import java.io.Serializable;
 
+import fr.groupe40.projet.model.Sprite;
 import fr.groupe40.projet.model.board.GalaxyGenerator;
 import fr.groupe40.projet.model.planets.Planet;
 import fr.groupe40.projet.model.ships.Squad;
 import fr.groupe40.projet.util.constants.Constants;
 
 /**
+ * This class consists to define a user into the game, there are 3 types of 'typical' users :
+ * AI, neutral, and human
+ * </br>
+ * There's also few special user type, like pirate's one, or the sun's ruler.
+ * 
+ * Constants value about the <i>ID</i> and the <i>Faction</i> are defined into the constants class.
+ * 
+ * Each planet and fleet (ie. Sprite by extension) is defined by a user. 
+ * It is represented by a faction and an ID (-1, 0, 1).
+ * 
+ * @see Sprite
+ * @see Constants
  * 
  * @author Jordane Masson
  * @author Sarah Portejoie

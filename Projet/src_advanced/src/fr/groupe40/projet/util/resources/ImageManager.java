@@ -22,7 +22,7 @@ import javafx.scene.image.Image;
  * @author Jordane Masson
  * @author Sarah Portejoie
  *
- */
+ */ 
 public final class ImageManager {
 
 	/**

@@ -13,8 +13,17 @@ import fr.groupe40.projet.util.constants.Constants;
 import fr.groupe40.projet.util.constants.Direction;
 import fr.groupe40.projet.util.resources.ImageManager;
 
+
 /**
- * Ship of a squad, contains the destination, src, ...
+ * This class is meant to define the object Ship into the game.</br>
+ * A ship always has a source and a destination planet.</br>
+ * </br>
+ * It is also possible to know if this ship has reached or not his destination,
+ * and which planet is on his way to the planet destination.</br>
+ * In the class Ship you can find the path finding algorithm, allowing the
+ * different troops to avoid collision with other planets.
+ * 
+ * @see Ship#calc_next_position(List)
  * 
  * @author Jordane Masson
  * @author Sarah Portejoie
@@ -121,14 +130,14 @@ public class Ship extends Sprite implements Serializable {
 
 						difference = Math.abs(difference);
 						if (difference >= Constants.max_troups) { // Sum > 100, we lower the amount to stay at the
-																		// limit
+																	// limit
 							destination.setTroups(Constants.max_troups);
 						} else { // Else, reinforcement
 							destination.setTroups(difference + 1);
 						}
 					}
 				}
-			} else if (this.getRuler().equals(destination.getRuler())){ // Same faction
+			} else if (this.getRuler().equals(destination.getRuler())) { // Same faction
 				int sum = 1 + destination.getTroups(); // Sum of defense + squad
 				if (sum >= Constants.max_troups) { // Sum > 100, we lower the amount to stay at the limit
 					destination.setTroups(Constants.max_troups);
@@ -331,11 +340,14 @@ public class Ship extends Sprite implements Serializable {
 
 	/**
 	 * calculate the angle between a ship and his destination
+	 * 
 	 * @param destination the destination planet
 	 * @return the angle in degrees
 	 */
 	private double angle_to_follow(Planet destination) {
-		double hyp = Sprite.distance(destination.getX()+destination.width()/2, destination.getY()+destination.height()/2, this.getX()+this.width()/2, this.getY()+this.height()/2);
+		double hyp = Sprite.distance(destination.getX() + destination.width() / 2,
+				destination.getY() + destination.height() / 2, this.getX() + this.width() / 2,
+				this.getY() + this.height() / 2);
 		double adjacent_side = Math.abs((destination.getX() + destination.width() / 2) - this.getX());
 
 		return Math.toDegrees(Math.cos(adjacent_side / hyp)) / 90;
@@ -353,33 +365,33 @@ public class Ship extends Sprite implements Serializable {
 	public void no_collision_mover(double x, double y, double centre_x, double centre_y, double speed) {
 		double deltaX = 0, deltaY = 0;
 		double angle = angle_to_follow(this.destination);
-		
+
 		if (x < centre_x) {
-			if(x+speed > centre_x)
+			if (x + speed > centre_x)
 				deltaX = 0;
 			else
 				deltaX = speed;
-		} else if (x > centre_x){
-			if(x-speed < centre_x)
+		} else if (x > centre_x) {
+			if (x - speed < centre_x)
 				deltaX = 0;
 			else
 				deltaX = -speed;
-		} 
+		}
 
 		if (y < centre_y) {
-			if(y+speed >= centre_y)
+			if (y + speed >= centre_y)
 				deltaY = 0;
 			else
 				deltaY = speed;
-		} else if (y > centre_y){
-			if(y-speed <= centre_y)
+		} else if (y > centre_y) {
+			if (y - speed <= centre_y)
 				deltaY = 0;
 			else
 				deltaY = -speed;
-		} 
+		}
 
-		this.setY(y+deltaY * (angle));
-		this.setX(x+deltaX * (1-angle));
+		this.setY(y + deltaY * (angle));
+		this.setX(x + deltaX * (1 - angle));
 	}
 
 	/**
@@ -398,10 +410,10 @@ public class Ship extends Sprite implements Serializable {
 	/**
 	 * prepare his removal from the squad list
 	 */
-	@TODO(comment="Render the ship explosion")
+	@TODO(comment = "Render the ship explosion")
 	public void remove() {
 		this.setRuler(Constants.neutral_user);
-		//this.setImage(Resources.path_gfx_ship_explosion);
+		// this.setImage(Resources.path_gfx_ship_explosion);
 		this.reached = true;
 	}
 
